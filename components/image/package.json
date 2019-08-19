@@ -2,32 +2,21 @@
   "name": "@arc-test-org/image",
   "version": "1.0.0",
   "description": "Thumbor and lazy loading Image component",
-  "keywords": [
-    "Images",
-    "SDK"
-  ],
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/engine-theme-sdk#readme",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "main": "lib/image.js",
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "lib": "lib"
   },
   "files": [
     "lib"
   ],
   "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WPMedia/engine-theme-sdk.git"
+    "access": "restricted"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
-  "bugs": {
-    "url": "https://github.com/WPMedia/engine-theme-sdk/issues"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
   }
 }
