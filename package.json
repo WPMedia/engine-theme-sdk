@@ -16,5 +16,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@arc-test-org/image": "file:components/image"
+  }
 }
