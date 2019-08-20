@@ -2,7 +2,7 @@
 
 This is the lerna-managed monorepo for the components that make up the Engine Theme SDK.
 
-This monorepo is a collection of packages for blocks and SDK components, but they are all versioned separately for now so that they can be patched separately.
+This monorepo is a collection of packages for SDK components, but they are all versioned separately for now so that they can be patched separately.
 
 ## Instructions
 
@@ -13,56 +13,54 @@ Lerna requires some setup and know-how, so be sure to read the instructions belo
 Lerna can be run with `npx` from the root repo directory once we've cloned it:
 
 ```sh
-$ git clone git@github.com:WPMedia/fusion-news-theme-blocks.git
-$ cd fusion-news-theme-blocks
+$ git clone git@github.com:WPMedia/engine-theme-sdk.git
+$ cd engine-theme-sdk
 $ npx lerna list
 # lerna prints a list of all packages in our monorepo
 ```
 
 ### Creating a new package
 
-#### New block
+#### New SDK Component
 
-If we wanted to create a new block for our theme called `new-footer-block` the command we'd run with lerna would look something like this.
+If we wanted to create a new component for our theme called `image` the command we'd run with lerna would look something like this.
 
 ```sh
-npx lerna create @arc-test-org/new-footer-block blocks/new-footer-block
+npx lerna create @arc-test-org/image components/image
 ```
 
-The CLI will go through a bunch of questions, can accept all of them for now because we're going to replace most of what it'll generate. In fact the above command can be run with a `--yes` arg to just accept the default for each prompt automatically.
+The CLI will go through a bunch of questions, can accept all of them for now because we're going to alter some of what it'll generate. In fact the above command can be run with a `--yes` arg to just accept the default for each prompt automatically.
 
-From there we need to update our `package.json` for our new block since the lerna-generated `package.json` is almost entirely useless for blocks. For example, the generated `package.json` includes several references to a `lib` directory. We do not typically have such a directory for blocks.
-
-The structure of blocks is largely incompatible with what lerna generates in this init process, we'll want our `package.json` to look something like this:
+From there we need to update our `package.json` for our new component. We'll want our `package.json` to look something like this:
 
 ```json
 {
-  "name": "@arc-test-org/header-nav-block",
+  "name": "@arc-test-org/image",
   "version": "0.0.0",
-  "description": "Fusion News Theme header nav block",
-  "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "description": "Thumbor and lazy loading Image component",
+  "author": "Brent Miller <brent.miller@washport.com>",
+  "homepage": "https://github.com/WPMedia/engine-theme-sdk#readme",
   "license": "UNLICENSED",
-  "main": "index.js",
+  "main": "lib/image.js",
+  "directories": {
+    "lib": "lib"
+  },
   "files": [
-    "features",
-    "chains",
-    "layouts"
+    "lib"
   ],
   "publishConfig": {
     "access": "restricted"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
+    "lint": "eslint --ext js --ext jsx lib"
   }
 }
 ```
 
-Note three things here:
+Couple things to note here:
 
 1. The initial version is set to `0.0.0`. This is because on your initial commit you are going to choose the first version you want to publish. Otherwise, it will default to `1.0.0` and then you'll need to bump up the package version no matter what once you publish.
-2. The `files` consists of three directories: `features`, `chains`, and `layouts`. These are the three types of components blocks currently support. You'll want to delete the `lib` and `__tests__` directories from your repo as well as the `files` list.
 3. There is a `lint` script in the `scripts`. This script is run with `npx lerna run lint` at the root although it can also be run with `npm run lint` if the package root is your working directory.
 
 ### Installing `node_modules`
