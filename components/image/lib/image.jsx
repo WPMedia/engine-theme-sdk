@@ -1,7 +1,7 @@
 /* eslint react/destructuring-assignment: "off", no-param-reassign: "off" */
 import React, { Component } from 'react';
 import Static from 'fusion:static';
-import buildThmborURL from './thumbor-image-url';
+import buildThumborURL from './thumbor-image-url';
 
 /**
  * Image component that has basic Thumbor and lazy loading support.
@@ -80,12 +80,12 @@ class Image extends Component {
                     className="lazy"
                     onError={this.addDefaultSrc}
                     src={this.addDefaultSrc}
-                    data-src={buildThmborURL(url, smallWidth,
+                    data-src={buildThumborURL(url, smallWidth,
                         smallHeight)}
                     data-srcset={`
-          ${buildThmborURL(url, mediumWidth,
+          ${buildThumborURL(url, mediumWidth,
                         mediumHeight)} 1000w, 
-          ${buildThmborURL(url, largeWidth,
+          ${buildThumborURL(url, largeWidth,
                         largeHeight)} 2000w
           `}
                     alt={alt}
