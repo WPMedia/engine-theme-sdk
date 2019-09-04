@@ -1,0 +1,26 @@
+{
+  "name": "@arc-test-org/lightbox",
+  "version": "1.0.3",
+  "description": "A11y compliant lightbox for images, video, etc.  Based on https://github.com/treyhuffine/lightbox-react",
+  "author": "Brent Miller <brent.miller@washport.com>",
+  "homepage": "https://github.com/WPMedia/engine-theme-sdk#readme",
+  "license": "UNLICENSED",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "is-react": "^1.3.3",
+    "react-modal": "^3.8.1"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx lib"
+  }
+}

@@ -14,9 +14,11 @@
     "eslint-plugin-react": "^7.14.3",
     "lerna": "^3.16.4",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "prop-types": "^15.7.2"
   },
   "dependencies": {
-    "@arc-test-org/image": "file:components/image"
+    "@arc-test-org/image": "file:components/image",
+    "@arc-test-org/lightbox": "file:components/lightbox"
   }
 }
