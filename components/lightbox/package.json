@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/lightbox",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A11y compliant lightbox for images, video, etc.  Based on https://github.com/treyhuffine/lightbox-react",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/engine-theme-sdk#readme",
