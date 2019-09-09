@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/image",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Thumbor and lazy loading Image component",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/engine-theme-sdk#readme",
