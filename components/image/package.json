@@ -5,7 +5,7 @@
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/engine-theme-sdk#readme",
   "license": "UNLICENSED",
-  "main": "lib/image.js",
+  "main": "lib/index.jsx",
   "directories": {
     "lib": "lib"
   },
