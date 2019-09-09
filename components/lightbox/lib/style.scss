@@ -1,5 +1,5 @@
 $color_1: #fff;
-$background_color_1: rgba(0, 0, 0, 0.85);
+$background_color_1: rgba(0, 0, 0, 1.0);
 $background_color_2: rgba(0, 0, 0, 0.5);
 $background_color_3: #fff;
 
@@ -43,7 +43,7 @@ $background_color_3: #fff;
 
 .ril__inner {
   position: absolute;
-  top: 0;
+  top: 50px;
   left: 0;
   right: 0;
   bottom: 0;
