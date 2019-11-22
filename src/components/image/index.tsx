@@ -3,6 +3,18 @@ import React, { Component } from 'react';
 import Static from 'fusion:static';
 import buildThumborURL from './thumbor-image-url';
 
+interface ImageProps {
+    deployment(string): string;
+    url: string;
+    alt: string;
+    smallWidth: number;
+    smallHeight: number;
+    mediumWidth: number;
+    mediumHeight: number;
+    largeWidth: number;
+    largeHeight: number;
+}
+
 /**
  * Image component that has basic Thumbor and lazy loading support.
  *
@@ -36,7 +48,7 @@ import buildThumborURL from './thumbor-image-url';
  * @param {number} largeWidth - Width of the image to crop to for the large break point
  * @param {number} largeHeight - Height of the image to crop to for the large break point
  */
-class Image extends Component {
+class Image extends Component<ImageProps> {
     getDefaultImagePath() {
         const { deployment } = this.props;
         return deployment('/pf/resources/images/default_feed_image.jpg');
@@ -79,7 +91,7 @@ class Image extends Component {
                 <img
                     className="lazy"
                     onError={this.addDefaultSrc}
-                    src={this.addDefaultSrc}
+                    src={this.getDefaultImagePath()}
                     data-src={buildThumborURL(url, smallWidth,
                         smallHeight)}
                     data-srcset={`

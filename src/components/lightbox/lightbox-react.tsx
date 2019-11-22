@@ -24,19 +24,129 @@ import {
   SOURCE_POINTER,
   MIN_SWIPE_DISTANCE,
 } from './constant';
-import './style.scss';
+import '../styles/style.scss';
 import closeIcon from './icons/x.svg';
 import prevIcon from './icons/left_arrow.svg';
 import nextIcon from './icons/right_arrow.svg';
 import zoomInIcon from './icons/zoom_in.svg';
 import zoomOutIcon from './icons/zoom_out.svg';
+import Lightbox from '.';
 
-class ReactImageLightbox extends Component {
+interface ParsedCursorEvent {
+  id: string;
+  source: number;
+  x: number;
+  y: number;
+}
+
+interface LightboxProps {
+  animationDisabled: boolean;
+  animationDuration: number;
+  imagePadding: number;
+  enableZoom: boolean;
+  clickOutsideToClose: boolean;
+  keyRepeatKeyupBonus: number;
+  keyRepeatLimit: number;
+  prevSrc: string;
+  nextSrc: string;
+  imageLoadErrorMessage: string;
+  imageCrossOrigin: '' | 'anonymous' | 'use-credentials';
+  wrapperClassName: string;
+  prevLabel: string;
+  nextLabel: string;
+  imageCaption?: HTMLElement;
+  showImageCaption: boolean;
+  animationOnKeyInput: boolean;
+  zoomInLabel: string;
+  zoomOutLabel: string;
+  closeLabel: string;
+  imageTitle: HTMLElement | string;
+  discourageDownloads: boolean;
+  toolbarButtons: HTMLButtonElement[];
+  reactModalStyle: {
+    overlay: object,
+    content: object,
+  };
+  reactModalProps: object;
+  onImageLoad(src: string, type: string, inMemoryImage: any): void;
+  onImageLoadError(src: string, type: string, error: any): void;
+  onCloseRequest(any): void;
+  onMovePrevRequest(any): void;
+  onMoveNextRequest(any): void;
+  onAfterOpen(): void;
+}
+
+interface LightboxState {
+  isClosing: boolean;
+  shouldAnimate: boolean;
+  zoomLevel: number;
+  offsetX: number;
+  offsetY: number;
+  loadErrorStatus: any;
+}
+
+class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
+  timeouts: number[];
+  currentAction: number;
+  eventsSource: number;
+  pointerList: ParsedCursorEvent[];
+  preventInnerClose: boolean;
+  keyPressed: boolean;
+  preventInnerCloseTimeout?: number;
+  imageCache: {
+    [index: string]: {
+      loaded: boolean;
+      width: number;
+      height: number;
+    }
+  };
+  lastKeyDownTime: number;
+  resizeTimeout?: number;
+  wheelActionTimeout?: number;
+  resetScrollTimeout?: number;
+  scrollX: number;
+  scrollY: number;
+  moveStartX: number;
+  moveStartY: number;
+  moveStartOffsetX: number;
+  moveStartOffsetY: number;
+  swipeStartX: number;
+  swipeStartY: number;
+  swipeEndX: number;
+  swipeEndY: number;
+  pinchTouchList?: {
+    id: string;
+    x: number;
+    y: number;
+  }[];
+  pinchDistance: number;
+  keyCounter: number;
+  moveRequested: boolean;
+  didUnmount: boolean;
+  windowContext: Window | Window & typeof globalThis;
+  listeners: {
+    resize(): void;
+    mouseup(ParsedCursorEvent): void;
+    touchend(ParsedCursorEvent): void;
+    touchcancel(ParsedCursorEvent): void;
+    pointerdown(ParsedCursorEvent): void;
+    pointermove(ParsedCursorEvent): void;
+    pointerup(ParsedCursorEvent): void;
+    pointercancel(ParsedCursorEvent): void;
+  }
+  outerEl: HTMLElement;
+  caption: HTMLDivElement;
+  zoomInBtn: HTMLButtonElement;
+  zoomOutBtn: HTMLButtonElement;
+  
+  public static propTypes: object;
+  public static defaultProps: object;
+
   static isTargetMatchImage(target) {
     return target && /ril-image-current/.test(target.className);
   }
 
-  static parseMouseEvent(mouseEvent) {
+  static parseMouseEvent(mouseEvent): ParsedCursorEvent {
     return {
       id: 'mouse',
       source: SOURCE_MOUSE,
@@ -45,7 +155,7 @@ class ReactImageLightbox extends Component {
     };
   }
 
-  static parseTouchPointer(touchPointer) {
+  static parseTouchPointer(touchPointer): ParsedCursorEvent {
     return {
       id: touchPointer.identifier,
       source: SOURCE_TOUCH,
@@ -54,7 +164,7 @@ class ReactImageLightbox extends Component {
     };
   }
 
-  static parsePointerEvent(pointerEvent) {
+  static parsePointerEvent(pointerEvent): ParsedCursorEvent {
     return {
       id: pointerEvent.pointerId,
       source: SOURCE_POINTER,
@@ -66,7 +176,7 @@ class ReactImageLightbox extends Component {
   // Request to transition to the previous image
   static getTransform({
     x = 0, y = 0, zoom = 1, width, targetWidth,
-  }) {
+  }: {x?: number, y?: number, zoom?: number, width?: number, targetWidth?: number}) {
     let nextX = x;
     const windowWidth = getWindowWidth();
     if (width > windowWidth) {
@@ -271,7 +381,7 @@ class ReactImageLightbox extends Component {
   }
 
   setTimeout(func, time) {
-    const id = setTimeout(() => {
+    const id = window.setTimeout(() => {
       this.timeouts = this.timeouts.filter(tid => tid !== id);
       func();
     }, time);
@@ -293,7 +403,7 @@ class ReactImageLightbox extends Component {
   // Get info for the best suited image to display with the given srcType
   getBestImageForType(srcType) {
     let imageSrc = this.props[srcType];
-    let fitSizes = {};
+    let fitSizes: {height?: number, width?: number} = {};
 
     if (this.isImageLoaded(imageSrc)) {
       // Use full-size image if available
@@ -323,7 +433,7 @@ class ReactImageLightbox extends Component {
   }
 
   // Get sizing for when an image is larger than the window
-  getFitSizes(width, height, stretch) {
+  getFitSizes(width, height, stretch = false): {height?: number, width?: number} {
     const boxSize = this.getLightboxRect();
     let maxHeight = boxSize.height - this.props.imagePadding * 2;
     let maxWidth = boxSize.width - this.props.imagePadding * 2;
@@ -446,7 +556,7 @@ class ReactImageLightbox extends Component {
   }
 
   // Change zoom level
-  changeZoom(zoomLevel, clientX, clientY) {
+  changeZoom(zoomLevel, clientX?, clientY?) {
     // Ignore if zoom disabled
     if (!this.props.enableZoom) {
       return;
@@ -710,7 +820,7 @@ class ReactImageLightbox extends Component {
     this.pointerList = this.pointerList.filter(({ source }) => source === this.eventsSource);
   }
 
-  handleMouseDown(event) {
+  handleMouseDown(event: React.MouseEvent) {
     if (
       this.shouldHandleEvent(SOURCE_MOUSE)
       && ReactImageLightbox.isTargetMatchImage(event.target)
@@ -858,13 +968,13 @@ class ReactImageLightbox extends Component {
   handleEnd(event) {
     switch (this.currentAction) {
       case ACTION_MOVE:
-        this.handleMoveEnd(event);
+        this.handleMoveEnd();
         break;
       case ACTION_SWIPE:
         this.handleSwipeEnd(event);
         break;
       case ACTION_PINCH:
-        this.handlePinchEnd(event);
+        this.handlePinchEnd();
         break;
       default:
         break;
@@ -960,10 +1070,10 @@ class ReactImageLightbox extends Component {
 
     if (xDiff > 0 && this.props.prevSrc) {
       event.preventDefault();
-      this.requestMovePrev();
+      this.requestMovePrev(event);
     } else if (xDiff < 0 && this.props.nextSrc) {
       event.preventDefault();
-      this.requestMoveNext();
+      this.requestMoveNext(event);
     }
   }
 
@@ -1072,7 +1182,7 @@ class ReactImageLightbox extends Component {
       return;
     }
 
-    const inMemoryImage = new global.Image();
+    const inMemoryImage = new Image();
 
     if (this.props.imageCrossOrigin) {
       inMemoryImage.crossOrigin = this.props.imageCrossOrigin;
@@ -1168,6 +1278,7 @@ class ReactImageLightbox extends Component {
       zoomLevel: MIN_ZOOM_LEVEL,
       offsetX: 0,
       offsetY: 0,
+      shouldAnimate: false,
     };
 
     // Enable animated states
@@ -1246,7 +1357,11 @@ class ReactImageLightbox extends Component {
       }
       const bestImageInfo = this.getBestImageForType(srcType);
 
-      const imageStyle = {
+      const imageStyle: {
+        transform: string,
+        cursor?: string,
+        backgroundImage?: string,
+      } = {
         ...transitionStyle,
         ...ReactImageLightbox.getTransform({
           ...transforms,
@@ -1436,7 +1551,7 @@ class ReactImageLightbox extends Component {
         }}
         style={modalStyle}
         contentLabel={translate('Lightbox')}
-        appElement={typeof global.window !== 'undefined' ? global.window.document.body : undefined}
+        appElement={typeof window !== 'undefined' ? window.document.body : undefined}
         {...reactModalProps}
       >
         <div // eslint-disable-line jsx-a11y/no-static-element-interactions
@@ -1457,7 +1572,7 @@ class ReactImageLightbox extends Component {
           onMouseDown={this.handleMouseDown}
           onTouchStart={this.handleTouchStart}
           onTouchMove={this.handleTouchMove}
-          tabIndex="-1" // Enables key handlers on div
+          tabIndex={-1} // Enables key handlers on div
           onKeyDown={this.handleKeyInput}
           onKeyUp={this.handleKeyInput}
         >
