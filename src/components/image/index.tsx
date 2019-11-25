@@ -4,15 +4,15 @@ import Static from 'fusion:static';
 import buildThumborURL from './thumbor-image-url';
 
 interface ImageProps {
-    deployment(string): string;
-    url: string;
-    alt: string;
-    smallWidth: number;
-    smallHeight: number;
-    mediumWidth: number;
-    mediumHeight: number;
-    largeWidth: number;
-    largeHeight: number;
+  deployment(string): string;
+  url: string;
+  alt: string;
+  smallWidth: number;
+  smallHeight: number;
+  mediumWidth: number;
+  mediumHeight: number;
+  largeWidth: number;
+  largeHeight: number;
 }
 
 /**
@@ -49,62 +49,62 @@ interface ImageProps {
  * @param {number} largeHeight - Height of the image to crop to for the large break point
  */
 class Image extends Component<ImageProps> {
-    getDefaultImagePath() {
-        const { deployment } = this.props;
-        return deployment('/pf/resources/images/default_feed_image.jpg');
+  getDefaultImagePath(): string {
+    const { deployment } = this.props;
+    return deployment('/pf/resources/images/default_feed_image.jpg');
+  }
+
+  addDefaultSrc(elm): void {
+    elm.target.src = this.getDefaultImagePath(); // eslint-disable-line no-param-reassign
+  }
+
+  render(): React.ReactNode {
+    const {
+      url,
+      alt,
+      smallWidth,
+      smallHeight,
+      mediumWidth,
+      mediumHeight,
+      largeWidth,
+      largeHeight,
+    } = this.props;
+
+    /**
+     * If we are running on development AND we are using
+     * the default image, it won't be able to get sent over to Thumbor for
+     * processing and it will fail.
+     */
+    if (url.indexOf('/pf/') !== -1) {
+      return (
+        <Static id={url}>
+          <img
+            className="lazy"
+            src={url}
+            alt={alt}
+          />
+        </Static>
+      );
     }
-
-    addDefaultSrc(elm) {
-        elm.target.src = this.getDefaultImagePath(); // eslint-disable-line no-param-reassign
-    }
-
-    render() {
-        const {
-            url,
-            alt,
-            smallWidth,
-            smallHeight,
-            mediumWidth,
-            mediumHeight,
-            largeWidth,
-            largeHeight,
-        } = this.props;
-
-        /**
-         * If we are running on development AND we are using
-         * the default image, it won't be able to get sent over to Thumbor for
-         * processing and it will fail.
-         */
-        if (url.indexOf('/pf/') !== -1) {
-            return (
-                <Static id={url}>
-                    <img
-                        className="lazy"
-                        src={url}
-                        alt={alt}
-                    />
-                </Static>
-            );
-        }
-        return (
-            <Static id={url}>
-                <img
-                    className="lazy"
-                    onError={this.addDefaultSrc}
-                    src={this.getDefaultImagePath()}
-                    data-src={buildThumborURL(url, smallWidth,
-                        smallHeight)}
-                    data-srcset={`
+    return (
+      <Static id={url}>
+        <img
+          className="lazy"
+          onError={this.addDefaultSrc}
+          src={this.getDefaultImagePath()}
+          data-src={buildThumborURL(url, smallWidth,
+            smallHeight)}
+          data-srcset={`
           ${buildThumborURL(url, mediumWidth,
-                        mediumHeight)} 1000w, 
+            mediumHeight)} 1000w, 
           ${buildThumborURL(url, largeWidth,
-                        largeHeight)} 2000w
+              largeHeight)} 2000w
           `}
-                    alt={alt}
-                />
-            </Static>
-        );
-    }
+          alt={alt}
+        />
+      </Static>
+    );
+  }
 }
 
 export default Image;
