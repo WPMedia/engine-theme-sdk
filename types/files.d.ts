@@ -1,9 +1,9 @@
 declare module '*.svg' {
-    let _file: any;
-    export = _file;
+    const svgFile;
+    export default svgFile;
 }
 
 declare module '*.scss' {
-    let _file:  any;
-    export default  _file;
+    const scssFile;
+    export default scssFile;
 }

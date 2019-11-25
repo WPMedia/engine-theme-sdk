@@ -14,8 +14,9 @@
     "build:cjs": "BABEL_ENV=commonjs babel src --extensions='.ts,.tsx' --out-dir dist/cjs --copy-files",
     "build:es": "BABEL_ENV=es babel src --extensions='.ts,.tsx' --out-dir dist/es --copy-files",
     "build:dts": "tsc",
-    "test": "jest",
-    "lint": "eslint . --ext .ts,.js,.tsx,.jsx"
+    "test": "jest --passWithNoTests",
+    "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
+    "prepublish": "npm run lint && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.3.0",
+    "jest": "^24.9.0",
     "typescript": "^3.7.2"
   },
   "dependencies": {

@@ -1,3 +1,4 @@
-/// <reference path="../types/files.d.ts"/>
-/// <reference path="../types/fusion.d.ts"/>
+import '../types/files.d.ts';
+import '../types/fusion.d.ts';
+
 export * from './components';

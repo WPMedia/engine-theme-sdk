@@ -1,7 +1,7 @@
 /**
  * Placeholder for future translate functionality
  */
-export function translate(str, replaceStrings = null) {
+export function translate(str, replaceStrings = null): string {
   if (!str) {
     return '';
   }
@@ -16,23 +16,25 @@ export function translate(str, replaceStrings = null) {
   return translated;
 }
 
-export function getWindowWidth() {
+export function getWindowWidth(): number {
   return typeof window !== 'undefined' ? window.innerWidth : 0;
 }
 
-export function getWindowHeight() {
+export function getWindowHeight(): number {
   return typeof window !== 'undefined' ? window.innerHeight : 0;
 }
 
 // Get the highest window context that isn't cross-origin
 // (When in an iframe)
-export function getHighestSafeWindowContext(self: (Window | Window & typeof globalThis) = window.self) {
+export function getHighestSafeWindowContext(
+  self: Window = window.self,
+): Window {
   // If we reached the top level, return self
   if (self === window.top) {
     return self;
   }
 
-  const getOrigin = href => href.match(/(.*\/\/.*?)(\/|$)/)[1];
+  const getOrigin = (href: string): string => href.match(/(.*\/\/.*?)(\/|$)/)[1];
 
   // If parent is the same origin, we can move up one context
   // Reference: https://stackoverflow.com/a/21965342/1601953

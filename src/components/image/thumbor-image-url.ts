@@ -1,6 +1,6 @@
 import { resizerURL, resizerKey } from 'fusion:environment';
 
-const buildThumborURL = (url: string, displayWidth: number, displayHeight: number) => {
+const buildThumborURL = (url: string, displayWidth: number, displayHeight: number): string => {
   if (typeof window === 'undefined') {
     const Thumbor = require('thumbor-lite'); // eslint-disable-line global-require,@typescript-eslint/no-var-requires
     const thumbor = new Thumbor(resizerKey, resizerURL);
