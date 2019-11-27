@@ -18,7 +18,8 @@
       "moduleResolution": "node",
       "resolveJsonModule": true,
       "jsx": "preserve",
-      "outDir": "dist/es"
+      "outDir": "dist/es",
+      "isolatedModules": true
     },
     "exclude": [
       "node_modules",
