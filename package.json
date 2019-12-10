@@ -16,7 +16,7 @@
     "build:dts": "tsc",
     "test": "jest",
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "preversion": "npm run lint && npm test"
   },
   "repository": {
