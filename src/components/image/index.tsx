@@ -1,10 +1,10 @@
 /* eslint react/destructuring-assignment: "off", no-param-reassign: "off" */
-import React, { Component } from 'react';
+import React from 'react';
+import { useAppContext } from 'fusion:context';
 import Static from 'fusion:static';
 import buildThumborURL from './thumbor-image-url';
 
 interface ImageProps {
-  deployment(string): string;
   url: string;
   alt: string;
   smallWidth: number;
@@ -48,63 +48,48 @@ interface ImageProps {
  * @param {number} largeWidth - Width of the image to crop to for the large break point
  * @param {number} largeHeight - Height of the image to crop to for the large break point
  */
-class Image extends Component<ImageProps> {
-  getDefaultImagePath(): string {
-    const { deployment } = this.props;
-    return deployment('/pf/resources/images/default_feed_image.jpg');
-  }
+const Image: React.FC<ImageProps> = ({
+  url,
+  alt,
+  smallWidth,
+  smallHeight,
+  mediumWidth,
+  mediumHeight,
+  largeWidth,
+  largeHeight,
+}) => {
+  const { deployment = (img: string): string => img } = useAppContext();
 
-  addDefaultSrc(elm): void {
-    elm.target.src = this.getDefaultImagePath(); // eslint-disable-line no-param-reassign
-  }
+  const getDefaultImagePath = (): string => deployment('/pf/resources/images/default_feed_image.jpg');
 
-  render(): React.ReactNode {
-    const {
-      url,
-      alt,
-      smallWidth,
-      smallHeight,
-      mediumWidth,
-      mediumHeight,
-      largeWidth,
-      largeHeight,
-    } = this.props;
-
-    /**
-     * If we are running on development AND we are using
-     * the default image, it won't be able to get sent over to Thumbor for
-     * processing and it will fail.
-     */
-    if (url.indexOf('/pf/') !== -1) {
-      return (
-        <Static id={url}>
-          <img
-            className="lazy"
-            src={url}
-            alt={alt}
-          />
-        </Static>
-      );
-    }
+  if (url.indexOf('/pf/') !== -1) {
     return (
       <Static id={url}>
         <img
           className="lazy"
-          onError={this.addDefaultSrc}
-          src={this.getDefaultImagePath()}
-          data-src={buildThumborURL(url, smallWidth,
-            smallHeight)}
-          data-srcset={`
-          ${buildThumborURL(url, mediumWidth,
-            mediumHeight)} 1000w, 
-          ${buildThumborURL(url, largeWidth,
-              largeHeight)} 2000w
-          `}
+          src={url}
           alt={alt}
         />
       </Static>
     );
   }
-}
+  return (
+    <Static id={url}>
+      <img
+        className="lazy"
+        src={getDefaultImagePath()}
+        data-src={buildThumborURL(url, smallWidth,
+          smallHeight)}
+        data-srcset={`
+        ${buildThumborURL(url, mediumWidth,
+          mediumHeight)} 1000w, 
+        ${buildThumborURL(url, largeWidth,
+            largeHeight)} 2000w
+        `}
+        alt={alt}
+      />
+    </Static>
+  );
+};
 
 export default Image;
