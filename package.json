@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/engine-theme-sdk",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "SDK components for the Fusion News theme",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -14,9 +14,10 @@
     "build:cjs": "BABEL_ENV=commonjs babel src --extensions='.ts,.tsx' --out-dir dist/cjs --copy-files",
     "build:es": "BABEL_ENV=es babel src --extensions='.ts,.tsx' --out-dir dist/es --copy-files",
     "build:dts": "tsc",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
-    "prepublish": "npm run lint && npm run test && npm run build"
+    "prepublish": "npm run build",
+    "preversion": "npm run lint && npm test"
   },
   "repository": {
     "type": "git",
@@ -31,24 +32,33 @@
   "devDependencies": {
     "@babel/cli": "^7.7.0",
     "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
     "@babel/plugin-transform-modules-commonjs": "^7.7.0",
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-react": "^7.7.0",
     "@babel/preset-typescript": "^7.7.2",
     "@types/babel__core": "^7.1.3",
+    "@types/enzyme": "^3.10.3",
+    "@types/jest": "^24.0.23",
     "@types/node": "^12.12.11",
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.3.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
+    "jest-enzyme": "^7.1.2",
     "typescript": "^3.7.2"
   },
   "dependencies": {
@@ -58,6 +68,20 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-modal": "^3.11.1",
+    "react-swipeable": "^5.5.0",
     "thumbor-lite": "^0.1.6"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./jest/testSetupFile.js",
+      "./node_modules/jest-enzyme/lib/index.js"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(css|less|scss)$": "identity-obj-proxy"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/dist"
+    ]
   }
 }
