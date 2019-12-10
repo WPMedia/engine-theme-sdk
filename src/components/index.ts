@@ -1,4 +1,11 @@
-export * from './Gallery';
-export * from './Image';
-export * from './ImageMetadata';
-export * from './Lightbox';
+import Gallery from './Gallery';
+import Image from './Image';
+import ImageMetadata from './ImageMetadata';
+import Lightbox from './Lightbox';
+
+export {
+  Gallery,
+  Image,
+  ImageMetadata,
+  Lightbox,
+};
