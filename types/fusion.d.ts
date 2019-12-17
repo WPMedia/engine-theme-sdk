@@ -7,6 +7,8 @@ declare module 'fusion:static' {
 
 declare module 'fusion:context';
 
+declare module 'fusion:themes';
+
 declare const Fusion: {
     deployment?: string;
 };

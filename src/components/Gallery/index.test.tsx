@@ -8,6 +8,10 @@ jest.mock('fusion:context', () => ({
   useAppContext: jest.fn(() => ({})),
 }));
 
+jest.mock('fusion:themes', () => (): object => ({
+  'primary-font-color': 'white',
+}));
+
 const mockGallery = [
   // permutation with everything
   {
