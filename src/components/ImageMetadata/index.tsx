@@ -20,6 +20,10 @@ interface ImageMetadataProps {
 
 const MetadataParagraph = styled.p<{ primaryFont: string }>`
   font-family: ${(props): string => props.primaryFont};
+
+  > * {
+    font-family: ${(props): string => props.primaryFont};
+  }
 `;
 
 const ImageMetadata: React.FC<ImageMetadataProps> = ({
