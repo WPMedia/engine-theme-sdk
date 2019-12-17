@@ -2,7 +2,25 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ImageMetadata from '.';
 
+jest.mock('fusion:themes', () => (): object => ({
+  'primary-font-family': 'futura',
+}));
+
+jest.mock('fusion:context', () => ({
+  useAppContext: jest.fn(() => ({
+    arcSite: 'the-paper',
+  })),
+}));
+
 describe('the ImageMetadata component', () => {
+  it('should render a styled p with the color correctly passed in', () => {
+    const wrapper = shallow(<ImageMetadata
+      subtitle="ffff"
+    />);
+    expect(wrapper.name()).toBe('styled.p');
+    expect(wrapper.prop('primaryFont')).toBe('futura');
+  });
+
   describe('when nothing is passed in for props', () => {
     it('should render nothing', () => {
       const wrapper = shallow(<ImageMetadata />);
