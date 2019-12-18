@@ -7,6 +7,7 @@ module.exports = {
   },
   rules: {
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
+    'import/extensions': ['error', 'ignorePackages', { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' } ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.test.js', '**/*.test.jsx', '**/*.test.ts', '**/*.test.tsx', 'jest/*.js'] }],
     'import/no-unresolved': [2, { ignore: ['react', '^fusion:.+$'] }],
     'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
