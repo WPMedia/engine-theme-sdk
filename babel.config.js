@@ -19,6 +19,7 @@ module.exports = (api) => {
   }
 
   return {
+    sourceType: 'unambiguous',
     presets: [
       [
         '@babel/preset-typescript',
