@@ -1,6 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 module.exports = (api) => {
-  const plugins = [];
+  const plugins = [
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        useESModules: api.env('es'),
+      },
+    ],
+  ];
 
   if (api.env('commonjs') || api.env('test')) {
     plugins.push([
@@ -12,7 +19,6 @@ module.exports = (api) => {
   }
 
   return {
-    sourceType: 'unambiguous',
     presets: [
       [
         '@babel/preset-typescript',

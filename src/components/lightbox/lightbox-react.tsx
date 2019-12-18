@@ -391,13 +391,11 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
     nextLabel: 'Next image',
     nextSrc: null,
     nextSrcThumbnail: null,
-    /* eslint-disable @typescript-eslint/no-empty-function */
     onAfterOpen: (): void => {},
     onImageLoadError: (): void => {},
     onImageLoad: (): void => {},
     onMoveNextRequest: (): void => {},
     onMovePrevRequest: (): void => {},
-    /* eslint-enable @typescript-eslint/no-empty-function */
     prevLabel: 'Previous image',
     prevSrc: null,
     prevSrcThumbnail: null,
