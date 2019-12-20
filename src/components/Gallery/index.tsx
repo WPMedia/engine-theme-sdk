@@ -96,9 +96,11 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
           {galleryElements.length}
           <button type="button" onClick={(): void => prevHandler()}>
             <ChevronLeft fill={greyFill} />
+            <span className="sr-only">Move Left</span>
           </button>
           <button type="button" onClick={(): void => nextHandler()}>
             <ChevronRight fill={greyFill} />
+            <span className="sr-only">Move Right</span>
           </button>
         </div>
       </div>
@@ -128,9 +130,11 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
         ))}
         <button type="button" className="prev-button" onClick={(): void => prevHandler()}>
           <ChevronLeft fill="white" />
+          <span className="sr-only">Move Left</span>
         </button>
         <button type="button" className="next-button" onClick={(): void => nextHandler()}>
           <ChevronRight fill="white" />
+          <span className="sr-only">Move Right</span>
         </button>
       </div>
       {
