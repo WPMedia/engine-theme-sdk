@@ -3,6 +3,13 @@
   width: 100%;
   overflow: hidden;
 
+  p{
+    font-size: 0.875rem;
+    color: #7F8C8D;
+    margin: 8px 0;
+    line-height: 1rem;
+  }
+
   button {
     background: none;
     border: none;
@@ -14,7 +21,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     .playback-controls {
       button > span {
         margin: 0 30px 0 4px;
@@ -26,13 +33,13 @@
         margin-left: 12px;
       }
     }
-  
+
     .playback-controls, .image-change-controls {
       flex: 0 0 auto;
       line-height: 1;
       margin: 6px 0;
       width: auto;
-  
+
       > button {
         display: flex;
         align-items: center;
@@ -41,13 +48,13 @@
           height: 1rem;
           width: 1rem;
         }
-  
+
         > * {
           flex: auto;
           line-height: 1;
         }
       }
-  
+
       &, > button > span {
         display: inline-flex;
         align-items: center;
