@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/engine-theme-sdk",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
