@@ -1,12 +1,10 @@
-@import '~@arc-test-org/news-theme-css/scss/breakpoints';
-
 .news-theme-gallery {
   display: block;
   width: 100%;
   overflow: hidden;
-  margin:0 0 map-get($spacers, 'md');
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-    margin:0 0 map-get($spacers, 'lg');
+  margin:0 0 24px;
+  @media screen and (min-width: 768px){
+    margin:0 0 32px;
   }
 
   p.image-metadata{

@@ -72,8 +72,7 @@
     "react-modal": "^3.11.1",
     "react-swipeable": "^5.5.0",
     "styled-components": "^4.4.1",
-    "thumbor-lite": "^0.1.6",
-    "@arc-test-org/news-theme-css": "^1.2.0"
+    "thumbor-lite": "^0.1.6"
   },
   "jest": {
     "setupFilesAfterEnv": [
