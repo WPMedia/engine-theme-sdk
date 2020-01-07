@@ -2,11 +2,13 @@
 import React, { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import Image from '../Image';
+import Lightbox from '../Lightbox/index'
 import ImageMetadata from '../ImageMetadata';
 import ChevronLeft from './images/ChevronLeft';
 import ChevronRight from './images/ChevronRight';
 import FullScreen from './images/FullScreen';
 import PlayButton from './images/PlayButton';
+
 
 import './gallery.scss';
 
@@ -34,8 +36,18 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
   const [page, setPage] = useState(0);
   const [slide, setSlide] = useState({
     isSliding: false,
-    delta: 0,
+    delta: 0
   });
+  const [isOpen, setIsOpen] = useState(false);
+  const [isAutoPlay, setIsAutoPlay] = useState(false);
+
+  const fullScreen = (): void => {
+    setIsOpen(true)
+  };
+
+  const exitFullScreen = (): void => {
+    setIsOpen(false);
+  };
 
   const prevHandler = (): void => {
     if (page <= 0) {
@@ -81,7 +93,7 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
     <div className="news-theme-gallery">
       <div className="controls-container">
         <div className="playback-controls">
-          <button type="button">
+          <button type="button" onClick={(): void => fullScreen()}>
             <FullScreen fill={greyFill} />
             <span>Full Screen</span>
           </button>
@@ -146,6 +158,28 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
           />
         )
       }
+
+      {isOpen && (
+          <Lightbox
+              mainSrc={galleryElements[page].url}
+              nextSrc={galleryElements[(page + 1) % galleryElements.length].url}
+              prevSrc={galleryElements[(page + galleryElements.length - 1) % galleryElements.length].url}
+              onCloseRequest={(): void => exitFullScreen()}
+              onMovePrevRequest={() => prevHandler() }
+              onMoveNextRequest={() => nextHandler()}
+              imagePadding={32}
+              showImageCaption={true}
+          >      {
+            galleryElements[page] && (
+                <ImageMetadata
+                    subtitle={galleryElements[page].subtitle}
+                    caption={galleryElements[page].caption}
+                    credits={galleryElements[page].credits}
+                />
+            )
+          }
+          </Lightbox>
+      )}
     </div>
   );
 };

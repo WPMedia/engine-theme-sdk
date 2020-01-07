@@ -1905,7 +1905,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
             </ul>
           </div>
 
-          {this.props.imageCaption && this.props.showImageCaption && (
+          { (this.props.imageCaption || this.props.children) && this.props.showImageCaption && (
             // eslint-disable-next-line jsx-a11y/no-static-element-interactions
             <div // Image caption
               onWheel={this.handleCaptionMousewheel}
@@ -1916,7 +1916,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
               }}
             >
               <div className="ril-caption-content ril__captionContent">
-                {this.props.imageCaption}
+                {this.props.children || this.props.imageCaption}
               </div>
             </div>
           )}

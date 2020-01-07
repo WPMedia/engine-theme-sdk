@@ -158,7 +158,7 @@ $background_color_3: #fff;
   left: 0;
   right: 0;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   bottom: 0;
   max-height: 150px;
   overflow: auto;
@@ -179,6 +179,10 @@ $background_color_3: #fff;
   padding: 10px 20px;
   color: $color_1;
   font-size: .80em;
+
+  .image-metadata, .image-metadata .title {
+    color: white;
+  }
 }
 
 .ril__toolbarSide {
