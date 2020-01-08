@@ -16,7 +16,7 @@
     "build:es": "BABEL_ENV=es babel src --extensions='.ts,.tsx' --out-dir dist/es --copy-files",
     "build:dts": "tsc",
     "test": "jest",
-    "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
+    "lint": "eslint . --ext .ts,.js,.tsx,.jsx --fix",
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint && npm test"
   },

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import Image from '../Image';
 import Lightbox from '../Lightbox/index';
@@ -63,21 +63,19 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
     setPage(page + 1);
   };
 
-  const lightboxHandler = (page, operation): string => {
+  const lightboxHandler = (pageNo, operation): string => {
     const nodeList = galleryRef.current.querySelectorAll('img');
-    if(nodeList && nodeList.length){
-      const array = [ ...nodeList ];
-      if(operation === 'next'){
-        return array[(page + 1) % array.length].dataset.lightbox
-      }else if(operation === 'prev'){
-        return array[(page + array.length - 1) % array.length].dataset.lightbox
-      }else{
-        //main operation
-        return array[page].dataset.lightbox
+    if (nodeList && nodeList.length) {
+      const array = [...nodeList];
+      if (operation === 'next') {
+        return array[(pageNo + 1) % array.length].dataset.lightbox;
+      } if (operation === 'prev') {
+        return array[(pageNo + array.length - 1) % array.length].dataset.lightbox;
       }
-    }else{
-      return '';
+      // main operation
+      return array[pageNo].dataset.lightbox;
     }
+    return '';
   };
 
   const handlers = useSwipeable({
