@@ -13,6 +13,8 @@ interface ImageProps {
   mediumHeight: number;
   largeWidth: number;
   largeHeight: number;
+  lightBoxWidth: number;
+  lightBoxHeight: number;
 }
 
 /**
@@ -47,6 +49,8 @@ interface ImageProps {
  * @param {number} mediumHeight - Height of the image to crop to for the medium break point
  * @param {number} largeWidth - Width of the image to crop to for the large break point
  * @param {number} largeHeight - Height of the image to crop to for the large break point
+ * @param {number} lightBoxWidth - Width of the image to crop to for the large break point
+ * @param {number} lightBoxHeight - Height of the image to crop to for the large break point
  */
 const Image: React.FC<ImageProps> = ({
   url,
@@ -57,10 +61,13 @@ const Image: React.FC<ImageProps> = ({
   mediumHeight,
   largeWidth,
   largeHeight,
+  lightBoxWidth,
+  lightBoxHeight
 }) => {
   const { deployment = (img: string): string => img } = useAppContext();
 
-  const getDefaultImagePath = (): string => deployment('/pf/resources/images/default_feed_image.jpg');
+  //This is just a 800x600 black image
+  const defaultImagePath = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAJYCAQAAAAwf0r7AAAGtUlEQVR42u3VoQEAAAjDsO3/o8Fi8ckJNW0mAPBWAwHAQAAwEAAMBAADAQADAcBAADAQAAwEAAMBAAMBwEAAMBAADAQAAwEAAwHAQAAwEAAMBAADAQADAcBAADAQAAwEAAMBAAMBwEAAMBAADAQAAwEAAwHAQAAwEAAMBAADAQADAcBAADAQAAwEAAwEAAMBwEAAMBAADAQADAQAAwHAQAAwEAAMBAAMBAADAcBAADAQAAwEAAwEAAMBwEAAMBAADAQADAQAAwHAQAAwEAAMBAAMBAADAcBAADAQAAwEAAwEAAMBwEAAMBAADMRAADAQAAwEAAMBwEAAwEAAMBAADAQAAwHAQADAQAAwEAAMBAADAcBAAMBAADAQAAwEAAMBwEAAwEAAMBAADAQAAwHAQADAQAAwEAAMBAADAcBAAMBAADAQAAwEAAMBwEAAwEAAMBAADAQAAwEAAwHAQAAwEAAMBAADAQADAcBAADAQAAwEAAMBAAMBwEAAMBAADAQAAwEAAwHAQAAwEAAMBAADAQADAcBAADAQAAwEAAMBAAMBwEAAMBAADAQAAwEAAwHAQAAwEAAMBAADEQEAAwHAQAAwEAAMBAAMBAADAcBAADAQAAwEAAwEAAMBwEAAMBAADAQADAQAAwHAQAAwEAAMBAAMBAADAcBAADAQAAwEAAwEAAMBwEAAMBAADAQADAQAAwHAQAAwEAAMBAAMBAADAcBAADAQADAQAAwEAAMBwEAAMBAAMBAADAQAAwHAQAAwEAAwEAAMBAADAcBAADAQADAQAAwEAAMBwEAAMBAAMBAADAQAAwHAQAAwEAAwEAAMBAADAcBAADAQADAQAAwEAAMBwEAAMBAAMBAADAQAAwHAQADAQAAwEAAMBAADAcBAAMBAADAQAAwEAAMBwEAAwEAAMBAADAQAAwHAQADAQAAwEAAMBAADAcBAAMBAADAQAAwEAAMBwEAAwEAAMBAADAQAAwHAQADAQAAwEAAMBAADAcBADAQAAwHAQAAwEAAMBAAMBAADAcBAADAQAAwEAAwEAAMBwEAAMBAADAQADAQAAwHAQAAwEAAMBAAMBAADAcBAADAQAAwEAAwEAAMBwEAAMBAADAQADAQAAwHAQAAwEAAMBAAMBAADAcBAADAQADAQAAwEAAMBwEAAMBAAMBAADAQAAwHAQAAwEAAwEAAMBAADAcBAADAQADAQAAwEAAMBwEAAMBAAMBAADAQAAwHAQAAwEAAwEAAMBAADAcBAADAQADAQAAwEAAMBwEAAMBADAcBAADAQAAwEAAMBAAMBwEAAMBAADAQAAwEAAwHAQAAwEAAMBAADAQADAcBAADAQAAwEAAMBAAMBwEAAMBAADAQAAwEAAwHAQAAwEAAMBAADAQADAcBAADAQAAwEAAMBAAMBwEAAMBAADAQADAQAAwHAQAAwEAAMBAAMBAADAcBAADAQAAwEAAwEAAMBwEAAMBAADAQADAQAAwHAQAAwEAAMBAAMBAADAcBAADAQAAwEAAwEAAMBwEAAMBAADAQADAQAAwHAQAAwEAAMRAQADAQAAwHAQAAwEAAwEAAMBAADAcBAADAQADAQAAwEAAMBwEAAMBAAMBAADAQAAwHAQAAwEAAwEAAMBAADAcBAADAQADAQAAwEAAMBwEAAMBAAMBAADAQAAwHAQAAwEAAwEAAMBAADAcBAAMBAADAQAAwEAAMBwEAAwEAAMBAADAQAAwHAQADAQAAwEAAMBAADAcBAAMBAADAQAAwEAAMBwEAAwEAAMBAADAQAAwHAQADAQAAwEAAMBAADAcBAAMBAADAQAAwEAAMBwEAAwEAAMBAADAQAAwEAAwHAQAAwEAAMBAADAQADAcBAADAQAAwEAAMBAAMBwEAAMBAADAQAAwEAAwHAQAAwEAAMBAADAQADAcBAADAQAAwEAAMBAAMBwEAAMBAADAQAAwEAAwHAQAAwEAAMBAADMRAADAQAAwHAQAAwEAAwEAAMBAADAcBAADAQADAQAAwEAAMBwEAAMBAAMBAADAQAAwHAQAAwEAAwEAAMBAADAcBAADAQADAQAAwEAAMBwEAAMBAAMBAADAQAAwHAQAAwEAAwEAAMBAADAcBAAMBAADAQAAwEAAMBwEAAwEAAMBAADAQAAwHAQADAQAAwEAAMBAADAcBAAMBAADAQAAwEAAMBwEAAwEAAMBAADAQAAwHAQADAQAAwEAAMBAADAcBAAMBAADAQAAwEAAMBwEAMBAADAcBAADAQAAwEAAwEAAMBwEAAMBAADAQArgVt0Vgf4loEWAAAAABJRU5ErkJggg==';
 
   if (url.indexOf('/pf/') !== -1) {
     return (
@@ -73,16 +80,38 @@ const Image: React.FC<ImageProps> = ({
       </Static>
     );
   }
+
+  if(lightBoxWidth !== null && lightBoxHeight !== null){
+    return (
+        <Static id={url}>
+          <img
+              className="lazy"
+              src={defaultImagePath}
+              data-lightbox={buildThumborURL(url, lightBoxWidth,
+                  lightBoxHeight)}
+              data-src={buildThumborURL(url, smallWidth,
+                  smallHeight)}
+              data-srcset={`
+        ${buildThumborURL(url, mediumWidth,
+                  mediumHeight)} 1000w,
+        ${buildThumborURL(url, largeWidth,
+                  largeHeight)} 2000w
+        `}
+              alt={alt}
+          />
+        </Static>
+    );
+  }
   return (
     <Static id={url}>
       <img
         className="lazy"
-        src={getDefaultImagePath()}
+        src={defaultImagePath}
         data-src={buildThumborURL(url, smallWidth,
           smallHeight)}
         data-srcset={`
         ${buildThumborURL(url, mediumWidth,
-          mediumHeight)} 1000w, 
+          mediumHeight)} 1000w,
         ${buildThumborURL(url, largeWidth,
             largeHeight)} 2000w
         `}

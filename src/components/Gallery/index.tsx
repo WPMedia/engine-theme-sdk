@@ -1,16 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React, {useRef, useState} from 'react';
 import { useSwipeable } from 'react-swipeable';
 import Image from '../Image';
-import Lightbox from '../Lightbox/index'
+import Lightbox from '../Lightbox/index';
 import ImageMetadata from '../ImageMetadata';
 import ChevronLeft from './images/ChevronLeft';
 import ChevronRight from './images/ChevronRight';
 import FullScreen from './images/FullScreen';
 import PlayButton from './images/PlayButton';
-
-
-import './gallery.scss';
 
 const greyFill = '#6B6B6B';
 
@@ -33,16 +30,17 @@ interface GalleryProps {
 }
 
 const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
+  const galleryRef = useRef(null);
   const [page, setPage] = useState(0);
   const [slide, setSlide] = useState({
     isSliding: false,
-    delta: 0
+    delta: 0,
   });
   const [isOpen, setIsOpen] = useState(false);
-  const [isAutoPlay, setIsAutoPlay] = useState(false);
+  // const [isAutoPlay, setIsAutoPlay] = useState(false);
 
   const fullScreen = (): void => {
-    setIsOpen(true)
+    setIsOpen(true);
   };
 
   const exitFullScreen = (): void => {
@@ -63,6 +61,23 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
     }
 
     setPage(page + 1);
+  };
+
+  const lightboxHandler = (page, operation): string => {
+    const nodeList = galleryRef.current.querySelectorAll('img');
+    if(nodeList && nodeList.length){
+      const array = [ ...nodeList ];
+      if(operation === 'next'){
+        return array[(page + 1) % array.length].dataset.lightbox
+      }else if(operation === 'prev'){
+        return array[(page + array.length - 1) % array.length].dataset.lightbox
+      }else{
+        //main operation
+        return array[page].dataset.lightbox
+      }
+    }else{
+      return '';
+    }
   };
 
   const handlers = useSwipeable({
@@ -90,7 +105,7 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
   });
 
   return (
-    <div className="news-theme-gallery">
+    <div className="news-theme-gallery" ref={galleryRef}>
       <div className="controls-container">
         <div className="playback-controls">
           <button type="button" onClick={(): void => fullScreen()}>
@@ -132,11 +147,13 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
               url={imgContent.url}
               alt={imgContent.alt_text}
               smallWidth={400}
-              smallHeight={225}
+              smallHeight={0}
               mediumWidth={600}
-              mediumHeight={338}
+              mediumHeight={0}
               largeWidth={800}
-              largeHeight={450}
+              largeHeight={0}
+              lightBoxWidth={1600}
+              lightBoxHeight={0}
             />
           </div>
         ))}
@@ -160,25 +177,26 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
       }
 
       {isOpen && (
-          <Lightbox
-              mainSrc={galleryElements[page].url}
-              nextSrc={galleryElements[(page + 1) % galleryElements.length].url}
-              prevSrc={galleryElements[(page + galleryElements.length - 1) % galleryElements.length].url}
-              onCloseRequest={(): void => exitFullScreen()}
-              onMovePrevRequest={() => prevHandler() }
-              onMoveNextRequest={() => nextHandler()}
-              imagePadding={32}
-              showImageCaption={true}
-          >      {
-            galleryElements[page] && (
-                <ImageMetadata
-                    subtitle={galleryElements[page].subtitle}
-                    caption={galleryElements[page].caption}
-                    credits={galleryElements[page].credits}
-                />
-            )
-          }
-          </Lightbox>
+      <Lightbox
+        mainSrc={lightboxHandler(page, 'main')}
+        nextSrc={lightboxHandler(page, 'next')}
+        prevSrc={lightboxHandler(page, 'prev')}
+        onCloseRequest={(): void => exitFullScreen()}
+        onMovePrevRequest={(): void => prevHandler()}
+        onMoveNextRequest={(): void => nextHandler()}
+        imagePadding={32}
+        showImageCaption
+      >
+        {
+        galleryElements[page] && (
+          <ImageMetadata
+            subtitle={galleryElements[page].subtitle}
+            caption={galleryElements[page].caption}
+            credits={galleryElements[page].credits}
+          />
+        )
+      }
+      </Lightbox>
       )}
     </div>
   );

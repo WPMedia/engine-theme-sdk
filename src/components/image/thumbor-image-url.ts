@@ -11,6 +11,8 @@ const buildThumborURL = (url: string, displayWidth: number, displayHeight: numbe
     return thumbor.setImagePath(imgSrc)
       .resize(displayWidth, displayHeight)
       .buildUrl();
+  }else{
+    console.debug(`Attemping to call buildThumborURL with window: width: ${displayWidth} height: ${displayHeight}`);
   }
   return '';
 };
