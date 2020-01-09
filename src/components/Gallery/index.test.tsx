@@ -370,11 +370,11 @@ describe('the gallery block', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
       wrapper.find('.image-wrapper').forEach((imageWrapper) => {
         expect(imageWrapper.find('Image').first().prop('smallWidth')).toBe(400);
-        expect(imageWrapper.find('Image').first().prop('smallHeight')).toBe(225);
+        expect(imageWrapper.find('Image').first().prop('smallHeight')).toBe(0);
         expect(imageWrapper.find('Image').first().prop('mediumWidth')).toBe(600);
-        expect(imageWrapper.find('Image').first().prop('mediumHeight')).toBe(338);
+        expect(imageWrapper.find('Image').first().prop('mediumHeight')).toBe(0);
         expect(imageWrapper.find('Image').first().prop('largeWidth')).toBe(800);
-        expect(imageWrapper.find('Image').first().prop('largeHeight')).toBe(450);
+        expect(imageWrapper.find('Image').first().prop('largeHeight')).toBe(0);
       });
     });
 

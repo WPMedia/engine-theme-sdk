@@ -73,6 +73,10 @@
     "thumbor-lite": "^0.1.6"
   },
   "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest",
+      "^.+\\.(svg)$": "./jest/fileTransform.js"
+    },
     "setupFilesAfterEnv": [
       "./jest/testSetupFile.js",
       "./node_modules/jest-enzyme/lib/index.js"
