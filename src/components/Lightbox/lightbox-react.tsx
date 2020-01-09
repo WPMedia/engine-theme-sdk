@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import isReact from 'is-react';
+import './style.scss';
 import {
   translate, getWindowWidth, getWindowHeight, getHighestSafeWindowContext,
 } from './util';
@@ -24,7 +25,6 @@ import {
   SOURCE_POINTER,
   MIN_SWIPE_DISTANCE,
 } from './constant';
-import './style.scss';
 import closeIcon from './icons/x.svg';
 import prevIcon from './icons/left_arrow.svg';
 import nextIcon from './icons/right_arrow.svg';
