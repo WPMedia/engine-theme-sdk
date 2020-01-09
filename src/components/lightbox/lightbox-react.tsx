@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import isReact from 'is-react';
-import './style.scss';
 import {
   translate, getWindowWidth, getWindowHeight, getHighestSafeWindowContext,
 } from './util';
