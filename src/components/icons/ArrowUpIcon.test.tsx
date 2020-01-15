@@ -33,12 +33,12 @@ describe('the ArrowUpIcon component', () => {
   });
 
   describe('the fill prop', () => {
-    it('should set the height of the svg element', () => {
+    it('should set the fill color of the svg element', () => {
       const wrapper = shallow(<ArrowUpIcon fill="#222222" />);
       expect(wrapper.find('path').prop('fill')).toEqual('#222222');
     });
 
-    it('should default to 24', () => {
+    it('should default to black', () => {
       const wrapper = shallow(<ArrowUpIcon />);
       expect(wrapper.find('path').prop('fill')).toEqual('#000');
     });
