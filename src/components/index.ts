@@ -1,11 +1,5 @@
-import Gallery from './Gallery';
-import Image from './Image';
-import ImageMetadata from './ImageMetadata';
-import Lightbox from './Lightbox';
-
-export {
-  Gallery,
-  Image,
-  ImageMetadata,
-  Lightbox,
-};
+export { default as Gallery } from './Gallery';
+export { default as Image } from './Image';
+export { default as ImageMetadata } from './ImageMetadata';
+export { default as Lightbox } from './Lightbox';
+export * from './icons';
