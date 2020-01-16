@@ -4,10 +4,10 @@ import { useSwipeable } from 'react-swipeable';
 import Image from '../Image';
 import Lightbox from '../Lightbox/index';
 import ImageMetadata from '../ImageMetadata';
-import ChevronLeft from './images/ChevronLeft';
-import ChevronRight from './images/ChevronRight';
-import FullScreen from './images/FullScreen';
-import PlayButton from './images/PlayButton';
+import ChevronLeftIcon from '../icons/ChevronLeftIcon';
+import ChevronRightIcon from '../icons/ChevronRightIcon';
+import FullscreenIcon from '../icons/FullscreenIcon';
+import PlayIcon from '../icons/PlayIcon';
 
 const greyFill = '#6B6B6B';
 
@@ -107,11 +107,11 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
       <div className="controls-container">
         <div className="playback-controls">
           <button type="button" onClick={(): void => fullScreen()}>
-            <FullScreen fill={greyFill} />
+            <FullscreenIcon fill={greyFill} />
             <span>Full Screen</span>
           </button>
           <button type="button">
-            <PlayButton fill={greyFill} />
+            <PlayIcon fill={greyFill} />
             <span>Autoplay</span>
           </button>
         </div>
@@ -120,11 +120,11 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
           &nbsp;of&nbsp;
           {galleryElements.length}
           <button type="button" onClick={(): void => prevHandler()}>
-            <ChevronLeft fill={greyFill} />
+            <ChevronLeftIcon fill={greyFill} />
             <span className="sr-only">Move Left</span>
           </button>
           <button type="button" onClick={(): void => nextHandler()}>
-            <ChevronRight fill={greyFill} />
+            <ChevronRightIcon fill={greyFill} />
             <span className="sr-only">Move Right</span>
           </button>
         </div>
@@ -156,11 +156,11 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
           </div>
         ))}
         <button type="button" className="prev-button" onClick={(): void => prevHandler()}>
-          <ChevronLeft fill="white" />
+          <ChevronLeftIcon width="100%" height="100%" fill="white" />
           <span className="sr-only">Move Left</span>
         </button>
         <button type="button" className="next-button" onClick={(): void => nextHandler()}>
-          <ChevronRight fill="white" />
+          <ChevronRightIcon width="100%" height="100%" fill="white" />
           <span className="sr-only">Move Right</span>
         </button>
       </div>
