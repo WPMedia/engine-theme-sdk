@@ -65,3 +65,5 @@ export { default as UnlockIcon } from './UnlockIcon';
 export { default as UserIcon } from './UserIcon';
 export { default as YoutubeAltIcon } from './YoutubeAltIcon';
 export { default as YoutubeIcon } from './YoutubeIcon';
+export { default as ZoomInIcon } from './ZoomInIcon';
+export { default as ZoomOutIcon } from './ZoomOutIcon';
