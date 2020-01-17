@@ -139,7 +139,7 @@ describe('the gallery block', () => {
   describe('the fullscreen button', () => {
     it('should be present with the "FullScreen" svg component with the correct fill', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
-      expect(wrapper.find('.playback-controls > button').at(0).childAt(0).name()).toBe('FullScreen');
+      expect(wrapper.find('.playback-controls > button').at(0).childAt(0).name()).toBe('FullscreenIcon');
       expect(wrapper.find('.playback-controls > button').at(0).childAt(0).prop('fill')).toBe('#6B6B6B');
       expect(wrapper.find('.playback-controls > button').at(0).childAt(1).name()).toBe('span');
       expect(wrapper.find('.playback-controls > button').at(0).childAt(1).text()).toBe('Full Screen');
@@ -149,7 +149,7 @@ describe('the gallery block', () => {
   describe('the fullscreen button', () => {
     it('should be present with the "PlayButton" svg component with the correct fill', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
-      expect(wrapper.find('.playback-controls > button').at(1).childAt(0).name()).toBe('PlayButton');
+      expect(wrapper.find('.playback-controls > button').at(1).childAt(0).name()).toBe('PlayIcon');
       expect(wrapper.find('.playback-controls > button').at(1).childAt(0).prop('fill')).toBe('#6B6B6B');
       expect(wrapper.find('.playback-controls > button').at(1).childAt(1).name()).toBe('span');
       expect(wrapper.find('.playback-controls > button').at(1).childAt(1).text()).toBe('Autoplay');
@@ -186,7 +186,7 @@ describe('the gallery block', () => {
   describe('the overlaid previous image button', () => {
     it('should be present with the "ChevronLeft" svg component with the correct fill', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
-      expect(wrapper.find('button.prev-button').at(0).childAt(0).name()).toBe('ChevronLeft');
+      expect(wrapper.find('button.prev-button').at(0).childAt(0).name()).toBe('ChevronLeftIcon');
       expect(wrapper.find('button.prev-button').at(0).childAt(0).prop('fill')).toBe('white');
     });
   });
@@ -194,7 +194,7 @@ describe('the gallery block', () => {
   describe('the overlaid next image button', () => {
     it('should be present with the "ChevronRight" svg component with the correct fill', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
-      expect(wrapper.find('button.next-button').at(0).childAt(0).name()).toBe('ChevronRight');
+      expect(wrapper.find('button.next-button').at(0).childAt(0).name()).toBe('ChevronRightIcon');
       expect(wrapper.find('button.next-button').at(0).childAt(0).prop('fill')).toBe('white');
     });
   });
