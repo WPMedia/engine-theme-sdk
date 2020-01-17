@@ -4,10 +4,12 @@ import { useSwipeable } from 'react-swipeable';
 import Image from '../Image';
 import Lightbox from '../Lightbox/index';
 import ImageMetadata from '../ImageMetadata';
-import ChevronLeftIcon from '../icons/ChevronLeftIcon';
-import ChevronRightIcon from '../icons/ChevronRightIcon';
-import FullscreenIcon from '../icons/FullscreenIcon';
-import PlayIcon from '../icons/PlayIcon';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  FullscreenIcon,
+  PlayIcon,
+} from '../icons';
 
 const greyFill = '#6B6B6B';
 
