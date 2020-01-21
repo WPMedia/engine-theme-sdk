@@ -1717,22 +1717,6 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
       x: -1 * boxSize.width,
     });
 
-    // const closeIconStyle = {
-    //   background: `url(${closeIcon}) no-repeat center rgba(0, 0, 0, 0.2)`
-    // };
-    // const prevIconStyle = {
-    //   background: `rgba(0, 0, 0, 0.2) url(${prevIcon}) no-repeat center`
-    // };
-    // const nextIconStyle = {
-    //   background: `rgba(0, 0, 0, 0.2) url(${nextIcon}) no-repeat center`
-    // };
-    // const zoomInIconStyle = {
-    //   background: `url(${zoomInIcon}) no-repeat center rgba(0, 0, 0, 0.2)`
-    // };
-    // const zoomOutIconStyle = {
-    //   background: `url(${zoomOutIcon}) no-repeat center rgba(0, 0, 0, 0.2)`
-    // };
-
     const modalStyle = {
       overlay: {
         zIndex: 1000,
