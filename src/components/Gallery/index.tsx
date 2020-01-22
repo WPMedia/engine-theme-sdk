@@ -4,13 +4,13 @@ import { useSwipeable } from 'react-swipeable';
 import Image from '../Image';
 import Lightbox from '../Lightbox/index';
 import ImageMetadata from '../ImageMetadata';
-import useInterval from "../setInterval";
+import useInterval from '../setInterval';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   FullscreenIcon,
   PlayIcon,
-  PauseIcon
+  PauseIcon,
 } from '../icons';
 
 const greyFill = '#6B6B6B';
@@ -70,18 +70,15 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
   useInterval(() => {
     if (page >= galleryElements.length - 1) {
       setAutoDuration(null);
-      return;
     } else {
       setPage(page + 1);
-      return;
     }
   }, autoDuration);
 
   const onPlayHandler = (): void => {
-    if (autoDuration){
+    if (autoDuration) {
       setAutoDuration(null);
-      return;
-    }else{
+    } else {
       if (page >= galleryElements.length - 1) {
         setPage(0);
       }
@@ -128,23 +125,23 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
     preventDefaultTouchmoveEvent: false,
   });
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const renderAutoPlayButton = () => {
     if (autoDuration) {
-      return(
-          <>
-            <PauseIcon fill={greyFill} />
-            <span>Pause autoplay</span>
-          </>
-      )
-    }else{
       return (
-          <>
-            <PlayIcon fill={greyFill} />
-            <span>Autoplay</span>
-          </>
-
-      )
+        <>
+          <PauseIcon fill={greyFill} />
+          <span>Pause autoplay</span>
+        </>
+      );
     }
+    return (
+      <>
+        <PlayIcon fill={greyFill} />
+        <span>Autoplay</span>
+      </>
+
+    );
   };
 
   return (
