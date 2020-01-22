@@ -4,7 +4,7 @@ import { useSwipeable } from 'react-swipeable';
 import Image from '../Image';
 import Lightbox from '../Lightbox/index';
 import ImageMetadata from '../ImageMetadata';
-import useInterval from '../setInterval';
+import useInterval from './setInterval';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
