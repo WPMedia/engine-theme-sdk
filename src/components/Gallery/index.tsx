@@ -200,11 +200,11 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
           </div>
         ))}
         <button type="button" className="prev-button" onClick={(): void => prevHandler()}>
-          <ChevronLeftIcon fill="white" />
+          <ChevronLeftIcon width="100%" height="100%" fill="white" />
           <span className="sr-only">Move Left</span>
         </button>
         <button type="button" className="next-button" onClick={(): void => nextHandler()}>
-          <ChevronRightIcon fill="white" />
+          <ChevronRightIcon width="100%" height="100%" fill="white" />
           <span className="sr-only">Move Right</span>
         </button>
       </div>

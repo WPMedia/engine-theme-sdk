@@ -24,11 +24,14 @@ import {
   SOURCE_POINTER,
   MIN_SWIPE_DISTANCE,
 } from './constant';
-import closeIcon from './icons/x.svg';
-import prevIcon from './icons/left_arrow.svg';
-import nextIcon from './icons/right_arrow.svg';
-import zoomInIcon from './icons/zoom_in.svg';
-import zoomOutIcon from './icons/zoom_out.svg';
+
+import {
+  ChevronRightIcon,
+  ChevronLeftIcon,
+  ZoomInIcon,
+  ZoomOutIcon,
+  CloseIcon,
+} from '../icons';
 
 interface ParsedCursorEvent {
   id: string;
@@ -1714,22 +1717,6 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
       x: -1 * boxSize.width,
     });
 
-    const closeIconStyle = {
-      background: `url(${closeIcon}) no-repeat center rgba(0, 0, 0, 0.2)`
-    };
-    const prevIconStyle = {
-      background: `rgba(0, 0, 0, 0.2) url(${prevIcon}) no-repeat center`
-    };
-    const nextIconStyle = {
-      background: `rgba(0, 0, 0, 0.2) url(${nextIcon}) no-repeat center`
-    };
-    const zoomInIconStyle = {
-      background: `url(${zoomInIcon}) no-repeat center rgba(0, 0, 0, 0.2)`
-    };
-    const zoomOutIconStyle = {
-      background: `url(${zoomOutIcon}) no-repeat center rgba(0, 0, 0, 0.2)`
-    };
-
     const modalStyle = {
       overlay: {
         zIndex: 1000,
@@ -1801,22 +1788,24 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
             <button // Move to previous image button
               type="button"
               className="ril-prev-button ril__navButtons ril__navButtonPrev"
-              style={prevIconStyle}
               key="prev"
               aria-label={this.props.prevLabel}
               onClick={!this.isAnimating() ? this.requestMovePrev : undefined} // Ignore clicks during animation
-            />
+            >
+              <ChevronLeftIcon width="100%" height="100%" fill="#fff" />
+            </button>
           )}
 
           {nextSrc && (
             <button // Move to next image button
               type="button"
               className="ril-next-button ril__navButtons ril__navButtonNext"
-              style={nextIconStyle}
               key="next"
               aria-label={this.props.nextLabel}
               onClick={!this.isAnimating() ? this.requestMoveNext : undefined} // Ignore clicks during animation
-            />
+            >
+              <ChevronRightIcon width="100%" height="100%" fill="#fff" />
+            </button>
           )}
 
           <div // Lightbox toolbar
@@ -1849,7 +1838,6 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                       'ril__zoomInButton',
                       ...(zoomLevel === MAX_ZOOM_LEVEL ? ['ril__builtinButtonDisabled'] : []),
                     ].join(' ')}
-                    style={zoomInIconStyle}
                     ref={(el): void => {
                       this.zoomInBtn = el;
                     }}
@@ -1859,7 +1847,9 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                         ? this.handleZoomInButtonClick
                         : undefined
                     }
-                  />
+                  >
+                    <ZoomInIcon width="100%" height="100%" fill="#fff" />
+                  </button>
                 </li>
               )}
 
@@ -1876,7 +1866,6 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                       'ril__zoomOutButton',
                       ...(zoomLevel === MIN_ZOOM_LEVEL ? ['ril__builtinButtonDisabled'] : []),
                     ].join(' ')}
-                    style={zoomOutIconStyle}
                     ref={(el): void => {
                       this.zoomOutBtn = el;
                     }}
@@ -1886,7 +1875,9 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                         ? this.handleZoomOutButtonClick
                         : undefined
                     }
-                  />
+                  >
+                    <ZoomOutIcon width="100%" height="100%" fill="#fff" />
+                  </button>
                 </li>
               )}
 
@@ -1897,9 +1888,10 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                   title={this.props.closeLabel}
                   aria-label={this.props.closeLabel}
                   className="ril-close ril-toolbar__item__child ril__toolbarItemChild ril__builtinButton ril__closeButton"
-                  style={closeIconStyle}
                   onClick={!this.isAnimating() ? this.requestClose : undefined} // Ignore clicks during animation
-                />
+                >
+                  <CloseIcon width="100%" height="100%" fill="#fff" />
+                </button>
               </li>
             </ul>
           </div>
