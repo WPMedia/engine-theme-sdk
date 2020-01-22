@@ -156,6 +156,31 @@ describe('the gallery block', () => {
     });
   });
 
+  describe('the Autoplay button', () => {
+    it('should accurately reflect the current state during autoplay', () => {
+      const wrapper = mount(<Gallery galleryElements={mockGallery} />);
+      const autoButtonWrapper = wrapper.find('.playback-controls > button').at(1);
+      expect(autoButtonWrapper.childAt(1).text()).toBe('Autoplay');
+      autoButtonWrapper.simulate('click');
+      expect(autoButtonWrapper.childAt(1).text()).toMatch(/Pause\sautoplay/);
+      autoButtonWrapper.simulate('click');
+      expect(autoButtonWrapper.childAt(1).text()).toMatch(/Autoplay/);
+    });
+  });
+
+  describe('During Autoplay', () => {
+    it('clicking the fullscreen button should cancel autoplay', () => {
+      const wrapper = mount(<Gallery galleryElements={mockGallery} />);
+      const fullScreenBtnWrapper = wrapper.find('.playback-controls > button').at(0);
+      const autoBtnWrapper = wrapper.find('.playback-controls > button').at(1);
+      expect(autoBtnWrapper.childAt(1).text()).toBe('Autoplay');
+      autoBtnWrapper.simulate('click');
+      expect(autoBtnWrapper.childAt(1).text()).toMatch(/Pause\sautoplay/);
+      fullScreenBtnWrapper.simulate('click');
+      expect(autoBtnWrapper.childAt(1).text()).toBe('Autoplay');
+    });
+  });
+
   describe('the page/image counter and nearby buttons', () => {
     it('should accurately reflect the current page and any updates', () => {
       const controlsWrapper = mount(<Gallery galleryElements={mockGallery} />).find('.image-change-controls');

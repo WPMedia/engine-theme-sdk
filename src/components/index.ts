@@ -1,3 +1,4 @@
+export {default as setInterval} from './setInterval';
 export { default as Gallery } from './Gallery';
 export { default as Image } from './Image';
 export { default as ImageMetadata } from './ImageMetadata';

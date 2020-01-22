@@ -29,6 +29,7 @@ module.exports = (api) => {
           ['@babel/plugin-proposal-decorators', {
             legacy: true,
           }],
+          ["@babel/plugin-proposal-class-properties", { }],
           ['module-resolver', {
             alias: {
               'fusion:themes': './jest/mocks/themes.js',

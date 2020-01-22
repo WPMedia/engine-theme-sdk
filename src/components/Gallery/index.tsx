@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import Image from '../Image';
 import Lightbox from '../Lightbox/index';
@@ -8,6 +8,9 @@ import ChevronLeft from './images/ChevronLeft';
 import ChevronRight from './images/ChevronRight';
 import FullScreen from './images/FullScreen';
 import PlayButton from './images/PlayButton';
+import PauseButton from './images/PauseButton';
+import useInterval from "../setInterval";
+
 
 const greyFill = '#6B6B6B';
 
@@ -37,9 +40,10 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
     delta: 0,
   });
   const [isOpen, setIsOpen] = useState(false);
-  // const [isAutoPlay, setIsAutoPlay] = useState(false);
+  const [autoDuration, setAutoDuration] = useState(null);
 
   const fullScreen = (): void => {
+    setAutoDuration(null);
     setIsOpen(true);
   };
 
@@ -59,8 +63,29 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
     if (page >= galleryElements.length - 1) {
       return;
     }
-
     setPage(page + 1);
+  };
+
+  useInterval(() => {
+    if (page >= galleryElements.length - 1) {
+      setAutoDuration(null);
+      return;
+    } else {
+      setPage(page + 1);
+      return;
+    }
+  }, autoDuration);
+
+  const onPlayHandler = (): void => {
+    if (autoDuration){
+      setAutoDuration(null);
+      return;
+    }else{
+      if (page >= galleryElements.length - 1) {
+        setPage(0);
+      }
+      setAutoDuration(4000);
+    }
   };
 
   const lightboxHandler = (pageNo, operation): string => {
@@ -102,6 +127,25 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
     preventDefaultTouchmoveEvent: false,
   });
 
+  const renderAutoPlayButton = () => {
+    if (autoDuration) {
+      return(
+          <>
+            <PauseButton fill={greyFill} />
+            <span>Pause autoplay</span>
+          </>
+      )
+    }else{
+      return (
+          <>
+            <PlayButton fill={greyFill} />
+            <span>Autoplay</span>
+          </>
+
+      )
+    }
+  };
+
   return (
     <div className="news-theme-gallery" ref={galleryRef}>
       <div className="controls-container">
@@ -110,9 +154,8 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
             <FullScreen fill={greyFill} />
             <span>Full Screen</span>
           </button>
-          <button type="button">
-            <PlayButton fill={greyFill} />
-            <span>Autoplay</span>
+          <button type="button" onClick={(): void => onPlayHandler()}>
+            {renderAutoPlayButton()}
           </button>
         </div>
         <div className="image-change-controls">
