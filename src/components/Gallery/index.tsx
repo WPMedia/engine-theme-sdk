@@ -125,25 +125,6 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
     preventDefaultTouchmoveEvent: false,
   });
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const renderAutoPlayButton = () => {
-    if (autoDuration) {
-      return (
-        <>
-          <PauseIcon fill={greyFill} />
-          <span>Pause autoplay</span>
-        </>
-      );
-    }
-    return (
-      <>
-        <PlayIcon fill={greyFill} />
-        <span>Autoplay</span>
-      </>
-
-    );
-  };
-
   return (
     <div className="news-theme-gallery" ref={galleryRef}>
       <div className="controls-container">
@@ -153,7 +134,17 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
             <span>Full Screen</span>
           </button>
           <button type="button" onClick={(): void => onPlayHandler()}>
-            {renderAutoPlayButton()}
+            {autoDuration ? (
+              <>
+                <PauseIcon fill={greyFill} />
+                <span>Pause autoplay</span>
+              </>
+            ) : (
+              <>
+                <PlayIcon fill={greyFill} />
+                <span>Autoplay</span>
+              </>
+            )}
           </button>
         </div>
         <div className="image-change-controls">
