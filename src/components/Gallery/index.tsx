@@ -4,11 +4,13 @@ import { useSwipeable } from 'react-swipeable';
 import Image from '../Image';
 import Lightbox from '../Lightbox/index';
 import ImageMetadata from '../ImageMetadata';
+import useInterval from './setInterval';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   FullscreenIcon,
   PlayIcon,
+  PauseIcon,
 } from '../icons';
 
 const greyFill = '#6B6B6B';
@@ -39,9 +41,10 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
     delta: 0,
   });
   const [isOpen, setIsOpen] = useState(false);
-  // const [isAutoPlay, setIsAutoPlay] = useState(false);
+  const [autoDuration, setAutoDuration] = useState(null);
 
   const fullScreen = (): void => {
+    setAutoDuration(null);
     setIsOpen(true);
   };
 
@@ -61,8 +64,26 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
     if (page >= galleryElements.length - 1) {
       return;
     }
-
     setPage(page + 1);
+  };
+
+  useInterval(() => {
+    if (page >= galleryElements.length - 1) {
+      setAutoDuration(null);
+    } else {
+      setPage(page + 1);
+    }
+  }, autoDuration);
+
+  const onPlayHandler = (): void => {
+    if (autoDuration) {
+      setAutoDuration(null);
+    } else {
+      if (page >= galleryElements.length - 1) {
+        setPage(0);
+      }
+      setAutoDuration(4000);
+    }
   };
 
   const lightboxHandler = (pageNo, operation): string => {
@@ -112,9 +133,18 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
             <FullscreenIcon fill={greyFill} />
             <span>Full Screen</span>
           </button>
-          <button type="button">
-            <PlayIcon fill={greyFill} />
-            <span>Autoplay</span>
+          <button type="button" onClick={(): void => onPlayHandler()}>
+            {autoDuration ? (
+              <>
+                <PauseIcon fill={greyFill} />
+                <span>Pause autoplay</span>
+              </>
+            ) : (
+              <>
+                <PlayIcon fill={greyFill} />
+                <span>Autoplay</span>
+              </>
+            )}
           </button>
         </div>
         <div className="image-change-controls">
