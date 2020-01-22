@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import Image from '../Image';
 import Lightbox from '../Lightbox/index';
