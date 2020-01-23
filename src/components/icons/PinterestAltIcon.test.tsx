@@ -57,7 +57,7 @@ describe('the PinterestAltIcon component', () => {
   });
 
   describe('the description prop', () => {
-    it('should set the title of the svg element', () => {
+    it('should set the description of the svg element', () => {
       const wrapper = shallow(<PinterestAltIcon description="this is an icon!" />);
       expect(wrapper.find('desc').text()).toEqual('this is an icon!');
     });
