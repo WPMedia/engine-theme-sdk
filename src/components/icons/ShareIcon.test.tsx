@@ -43,4 +43,28 @@ describe('the ShareIcon component', () => {
       expect(wrapper.find('path').prop('fill')).toEqual('#000');
     });
   });
+
+  describe('the title prop', () => {
+    it('should set the title of the svg element', () => {
+      const wrapper = shallow(<ShareIcon title="an icon!" />);
+      expect(wrapper.find('title').text()).toEqual('an icon!');
+    });
+
+    it('should default to an empty string', () => {
+      const wrapper = shallow(<ShareIcon />);
+      expect(wrapper.find('title').text()).toEqual('');
+    });
+  });
+
+  describe('the description prop', () => {
+    it('should set the title of the svg element', () => {
+      const wrapper = shallow(<ShareIcon description="this is an icon!" />);
+      expect(wrapper.find('desc').text()).toEqual('this is an icon!');
+    });
+
+    it('should default to an empty string', () => {
+      const wrapper = shallow(<ShareIcon />);
+      expect(wrapper.find('desc').text()).toEqual('');
+    });
+  });
 });
