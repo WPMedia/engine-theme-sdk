@@ -5,10 +5,10 @@ type IconProps = import('./types').default;
 const UserIcon: React.FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = '', description = '',
 }) => (
-  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg">
+  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <title>{title}</title>
     <desc>{description}</desc>
-    <path fill={fill} d="M12.301 11.63a5.314 5.314 0 100-10.63 5.314 5.314 0 000 10.63zm3.72 1.328h-.693a7.236 7.236 0 01-6.054 0h-.693A5.583 5.583 0 003 18.54v1.727c0 1.1.893 1.994 1.993 1.994H19.61c1.1 0 1.993-.893 1.993-1.994V18.54c0-3.08-2.5-5.58-5.58-5.58z" />
+    <path fill={fill} d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z" />
   </svg>
 );
 
