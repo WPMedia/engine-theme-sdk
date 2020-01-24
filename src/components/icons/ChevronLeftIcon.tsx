@@ -5,10 +5,10 @@ type IconProps = import('./types').default;
 const ChevronLeftIcon: React.FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = '', description = '',
 }) => (
-  <svg width={width} height={height} viewBox="2 2 20 20" xmlns="http://www.w3.org/2000/svg">
+  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
     <title>{title}</title>
     <desc>{description}</desc>
-    <path fill={fill} d="M6.292 11.361l8.07-8.07a.997.997 0 011.409 0l.941.942a.997.997 0 01.002 1.408l-6.396 6.425 6.396 6.426a.996.996 0 01-.002 1.407l-.941.941a.997.997 0 01-1.41 0l-8.07-8.07a.997.997 0 010-1.409z" />
+    <path fill={fill} d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z" />
   </svg>
 );
 

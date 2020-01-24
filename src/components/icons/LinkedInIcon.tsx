@@ -5,10 +5,10 @@ type IconProps = import('./types').default;
 const LinkedInIcon: React.FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = '', description = '',
 }) => (
-  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg">
+  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
     <title>{title}</title>
     <desc>{description}</desc>
-    <path fill={fill} d="M7.164 20.602H3.307V8.182h3.857v12.42zM5.234 6.49C4 6.489 3 5.467 3 4.234a2.233 2.233 0 014.467 0c0 1.233-1 2.255-2.234 2.255zm16.364 14.113H17.75v-6.046c0-1.44-.03-3.288-2.006-3.288-2.005 0-2.312 1.565-2.312 3.185v6.15H9.58V8.182h3.698v1.694h.054c.515-.976 1.773-2.006 3.65-2.006 3.903 0 4.62 2.57 4.62 5.909v6.822h-.004z" />
+    <path fill={fill} d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
   </svg>
 );
 
