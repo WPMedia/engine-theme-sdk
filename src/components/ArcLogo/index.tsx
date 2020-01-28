@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ArcLogo: React.FC<{ title?: string; description?: string }> = ({
-  title = '', description = '',
+  title = 'Arc Publishing logo', description = '',
 }) => (
   <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <title>{title}</title>
