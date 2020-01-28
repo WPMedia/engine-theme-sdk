@@ -3,7 +3,7 @@ import React from 'react';
 type IconProps = import('./types').default;
 
 const PauseIcon: React.FC<IconProps> = ({
-  width = 24, height = 24, fill = '#000', title = '', description = '',
+  width = 24, height = 24, fill = '#000', title = 'Pause button icon', description = '',
 }) => (
   <svg width={width} height={height} viewBox="2 1 22 22" xmlns="http://www.w3.org/2000/svg">
     <title>{title}</title>
