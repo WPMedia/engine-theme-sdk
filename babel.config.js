@@ -1,6 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 module.exports = (api) => {
-  const plugins = [];
+  const plugins = [
+    [
+      '@babel/plugin-proposal-class-properties',
+      {
+        loose: true,
+      },
+    ],
+  ];
 
   if (api.env('commonjs') || api.env('test')) {
     plugins.push([
@@ -29,7 +36,6 @@ module.exports = (api) => {
           ['@babel/plugin-proposal-decorators', {
             legacy: true,
           }],
-          ['@babel/plugin-proposal-class-properties', { }],
           ['module-resolver', {
             alias: {
               'fusion:themes': './jest/mocks/themes.js',
