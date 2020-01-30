@@ -52,7 +52,7 @@ describe('the UserIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<UserIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('User icon');
     });
   });
 

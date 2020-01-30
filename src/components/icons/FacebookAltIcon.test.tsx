@@ -52,7 +52,7 @@ describe('the FacebookAltIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<FacebookAltIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Facebook logo');
     });
   });
 

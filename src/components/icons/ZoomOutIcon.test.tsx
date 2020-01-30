@@ -52,7 +52,7 @@ describe('the ZoomOutIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<ZoomOutIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Zoom out');
     });
   });
 

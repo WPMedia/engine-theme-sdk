@@ -52,7 +52,7 @@ describe('the ChevronRightIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<ChevronRightIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Chevron pointing right');
     });
   });
 

@@ -52,7 +52,7 @@ describe('the SearchIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<SearchIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Search magnifying glass');
     });
   });
 

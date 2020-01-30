@@ -52,7 +52,7 @@ describe('the HamburgerMenuIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<HamburgerMenuIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Hamburger menu icon');
     });
   });
 

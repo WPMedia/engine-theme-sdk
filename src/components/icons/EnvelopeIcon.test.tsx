@@ -52,7 +52,7 @@ describe('the EnvelopeIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<EnvelopeIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Envelope');
     });
   });
 
