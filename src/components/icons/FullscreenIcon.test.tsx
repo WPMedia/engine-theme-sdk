@@ -52,7 +52,7 @@ describe('the FullscreenIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<FullscreenIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Fullscreen icon');
     });
   });
 

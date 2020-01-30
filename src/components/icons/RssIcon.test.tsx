@@ -52,7 +52,7 @@ describe('the RssIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<RssIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('RSS feed logo');
     });
   });
 

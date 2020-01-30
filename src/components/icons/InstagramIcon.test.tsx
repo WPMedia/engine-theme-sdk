@@ -52,7 +52,7 @@ describe('the InstagramIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<InstagramIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Instagram logo');
     });
   });
 

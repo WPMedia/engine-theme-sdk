@@ -52,7 +52,7 @@ describe('the LinkedInIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<LinkedInIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('LinkedIn logo');
     });
   });
 

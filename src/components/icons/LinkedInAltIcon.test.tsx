@@ -52,7 +52,7 @@ describe('the LinkedInAltIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<LinkedInAltIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('LinkedIn logo');
     });
   });
 

@@ -16,7 +16,7 @@ describe('the ArcLogo component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<ArcLogo />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Arc Publishing logo');
     });
   });
 

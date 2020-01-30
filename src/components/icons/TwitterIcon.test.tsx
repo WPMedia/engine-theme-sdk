@@ -52,7 +52,7 @@ describe('the TwitterIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<TwitterIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Twitter logo');
     });
   });
 

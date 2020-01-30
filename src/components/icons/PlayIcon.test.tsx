@@ -52,7 +52,7 @@ describe('the PlayIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<PlayIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Play button icon');
     });
   });
 

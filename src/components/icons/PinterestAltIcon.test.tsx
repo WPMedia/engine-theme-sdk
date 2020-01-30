@@ -52,7 +52,7 @@ describe('the PinterestAltIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<PinterestAltIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Pinterest logo');
     });
   });
 

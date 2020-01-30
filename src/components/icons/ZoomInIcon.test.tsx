@@ -52,7 +52,7 @@ describe('the ZoomInIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<ZoomInIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
+      expect(wrapper.find('title').text()).toEqual('Zoom in');
     });
   });
 
