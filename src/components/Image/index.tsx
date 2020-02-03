@@ -78,7 +78,7 @@ const Image: React.FC<ImageProps> = ({
     );
   }
 
-  if (lightBoxWidth && lightBoxHeight) {
+  if (lightBoxWidth !== null || lightBoxHeight !== null) {
     return (
       <Static id={url}>
         <img
