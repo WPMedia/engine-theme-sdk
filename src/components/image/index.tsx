@@ -65,11 +65,10 @@ const Image: React.FC<ImageProps> = ({
 }) => {
   // This is just a 800x600 black image
   const defaultImagePath = 'data:image/gif;base64,R0lGODdhIANYAqIAAAAAACYmJpGRkf///wAAAAAAAAAAAAAAACH5BAkAAAQALAAAAAAgA1gCAAP/KAHc/jDKSau9OOvNu/9gKI5kaZ5oqq5s675wrAWKbN94ru987//AoHBIhC2KyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mix/6PHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fPn0CDCh1KtKjRo0iTKl3KtKnTp1CjSp1KtarVq1izat3KtavXr2DDih1LtqzZs2jTql3Ltq3bt3Djyp1Lt67du3jz6t3Lt6/fv4ADCx5MuLDhw4gTK17MuLHjx5AjS55MubLly5gza97MubPnz6BDix5NurTp06hTq17NurXr17Bjy55Nu7bt27hz697Nu7fv38CDCx9OvLjx48iTK1/OvLnz59CjS59Ovbr169iza9/Ovbv37+DDix9Pvrz58+jTq1/Pvr379/Djy59Pv779+/jz69/Pv7////8ABijggAQWaOCBCCao4IIMNujggxBGKOGEFFZo4YUYZqjhhhx26OGHIIYo4ogklmjiiSimqOKKLLbo4oswxijjjDTWaOONOOao44489ujjj0AGKeSQRBZp5JFIJqnkkkw26eSTUEYp5ZRUVmnllVhmqeWWXHbp5ZdghinmmGSWaeaZaKap5ppstunmm3DGKeecdNZp55145qnnnnz26eefgAYq6KCEFmrooYgmquiijDbq6KOQRirppJRWaumlmGaq6aacdurpp6CGKuqopJZq6qmopqrqqqy26uqrsMYq66y01mrrrbjmquuuvPbq66/ABivssMQWa+yxyCar7LL/zDbr7LPQRivttNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuuuy26+678MYr77z01mvvvfjmq+++/Pbr778AByzwwAQXbPDBCCes8MIMN+zwwxBHLPHEFFds8cUYZ6zxxhx37PHHIIcs8sgkl2zyySinrPLKLLfs8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322GSXbfbZaKet9tpst+3223DHLffcdNdt991456333nz37fffgAcu+OCEF2744YgnrvjijDfu+OOQRy755JRXbvnlZphnrvnmnHfu+eeghy766KSXbvrpqKe+uqst+7667DHLvvstNdu++2456777rz37vvvwAcv/PDEF2/88cgnr/zyzDfv/PPQRy/99NRXb/312Gev/fbcd+/99+BnecTKNIyPMg0JAAA7';
-  const randomId = (): string => `image_${Math.random().toString(36).substr(2, 9)}`;
 
   if (url.indexOf('/pf/') !== -1) {
     return (
-      <Static id={randomId()}>
+      <Static id={url}>
         <img
           className="lazy"
           src={url}
@@ -81,7 +80,7 @@ const Image: React.FC<ImageProps> = ({
 
   if (lightBoxWidth !== null || lightBoxHeight !== null) {
     return (
-      <Static id={randomId()}>
+      <Static id={url}>
         <img
           className="lazy"
           src={defaultImagePath}
@@ -101,7 +100,7 @@ const Image: React.FC<ImageProps> = ({
     );
   }
   return (
-    <Static id={randomId()}>
+    <Static id={url}>
       <img
         className="lazy"
         src={defaultImagePath}
