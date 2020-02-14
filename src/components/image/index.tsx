@@ -1,6 +1,5 @@
 /* eslint react/destructuring-assignment: "off", no-param-reassign: "off" */
 import React from 'react';
-import Static from 'fusion:static';
 import buildThumborURL from './thumbor-image-url';
 
 interface ImageProps {
