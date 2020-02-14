@@ -68,53 +68,47 @@ const Image: React.FC<ImageProps> = ({
 
   if (url.indexOf('/pf/') !== -1) {
     return (
-      <Static id={url}>
-        <img
-          className="lazy"
-          src={url}
-          alt={alt}
-        />
-      </Static>
+      <img
+        className="lazy"
+        src={url}
+        alt={alt}
+      />
     );
   }
 
   if (lightBoxWidth !== null || lightBoxHeight !== null) {
     return (
-      <Static id={url}>
-        <img
-          className="lazy"
-          src={defaultImagePath}
-          data-lightbox={buildThumborURL(url, lightBoxWidth,
-            lightBoxHeight)}
-          data-src={buildThumborURL(url, smallWidth,
-            smallHeight)}
-          data-srcset={`
-        ${buildThumborURL(url, mediumWidth,
-            mediumHeight)} 1000w,
-        ${buildThumborURL(url, largeWidth,
-              largeHeight)} 2000w
-        `}
-          alt={alt}
-        />
-      </Static>
-    );
-  }
-  return (
-    <Static id={url}>
       <img
         className="lazy"
         src={defaultImagePath}
+        data-lightbox={buildThumborURL(url, lightBoxWidth,
+          lightBoxHeight)}
         data-src={buildThumborURL(url, smallWidth,
           smallHeight)}
         data-srcset={`
-        ${buildThumborURL(url, mediumWidth,
+      ${buildThumborURL(url, mediumWidth,
           mediumHeight)} 1000w,
-        ${buildThumborURL(url, largeWidth,
+      ${buildThumborURL(url, largeWidth,
             largeHeight)} 2000w
-        `}
+      `}
         alt={alt}
       />
-    </Static>
+    );
+  }
+  return (
+    <img
+      className="lazy"
+      src={defaultImagePath}
+      data-src={buildThumborURL(url, smallWidth,
+        smallHeight)}
+      data-srcset={`
+      ${buildThumborURL(url, mediumWidth,
+        mediumHeight)} 1000w,
+      ${buildThumborURL(url, largeWidth,
+          largeHeight)} 2000w
+      `}
+      alt={alt}
+    />
   );
 };
 
