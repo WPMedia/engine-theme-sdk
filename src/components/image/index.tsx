@@ -68,7 +68,6 @@ const Image: React.FC<ImageProps> = ({
   if (url.indexOf('/pf/') !== -1) {
     return (
       <img
-        className="lazy"
         src={url}
         alt={alt}
       />
@@ -78,13 +77,10 @@ const Image: React.FC<ImageProps> = ({
   if (lightBoxWidth !== null || lightBoxHeight !== null) {
     return (
       <img
-        className="lazy"
-        src={defaultImagePath}
+        src={buildThumborURL(url, smallWidth, smallHeight)}
         data-lightbox={buildThumborURL(url, lightBoxWidth,
           lightBoxHeight)}
-        data-src={buildThumborURL(url, smallWidth,
-          smallHeight)}
-        data-srcset={`
+        srcSet={`
       ${buildThumborURL(url, mediumWidth,
           mediumHeight)} 1000w,
       ${buildThumborURL(url, largeWidth,
@@ -96,11 +92,8 @@ const Image: React.FC<ImageProps> = ({
   }
   return (
     <img
-      className="lazy"
-      src={defaultImagePath}
-      data-src={buildThumborURL(url, smallWidth,
-        smallHeight)}
-      data-srcset={`
+      src={buildThumborURL(url, smallWidth, smallHeight)}
+      srcSet={`
       ${buildThumborURL(url, mediumWidth,
         mediumHeight)} 1000w,
       ${buildThumborURL(url, largeWidth,
