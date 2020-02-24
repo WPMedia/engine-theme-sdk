@@ -57,6 +57,7 @@ export { default as RssIcon } from './RssIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as ShareIcon } from './ShareIcon';
 export { default as SnapchatIcon } from './SnapchatIcon';
+export { default as SoundCloudIcon } from './SoundCloudIcon';
 export { default as SoundOffIcon } from './SoundOffIcon';
 export { default as SoundOnIcon } from './SoundOnIcon';
 export { default as StarHalfIcon } from './StarHalfIcon';
