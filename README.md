@@ -26,7 +26,7 @@ $ npx lerna list
 If we wanted to create a new block for our theme called `new-footer-block` the command we'd run with lerna would look something like this.
 
 ```sh
-npx lerna create @arc-test-org/new-footer-block blocks/new-footer-block
+npx lerna create @wpmedia/new-footer-block blocks/new-footer-block
 ```
 
 The CLI will go through a bunch of questions, can accept all of them for now because we're going to replace most of what it'll generate. In fact the above command can be run with a `--yes` arg to just accept the default for each prompt automatically.
@@ -37,7 +37,7 @@ The structure of blocks is largely incompatible with what lerna generates in thi
 
 ```json
 {
-  "name": "@arc-test-org/header-nav-block",
+  "name": "@wpmedia/header-nav-block",
   "version": "0.0.0",
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",

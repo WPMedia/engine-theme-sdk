@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/engine-theme-sdk",
+  "name": "@wpmedia/engine-theme-sdk",
   "version": "0.5.2",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
@@ -21,9 +21,13 @@
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "restricted"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WPMedia/engine-theme-sdk.git"
+    "url": "ssh://git@github.com/WPMedia/engine-theme-sdk.git"
   },
   "author": "",
   "license": "UNLICENSED",
