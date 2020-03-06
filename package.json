@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/engine-theme-sdk",
+  "name": "@wpmedia/engine-theme-sdk",
   "version": "0.5.2",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
@@ -23,6 +23,10 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "postinstall": "rm -rf node_modules/@types/react-native"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "restricted"
   },
   "repository": {
     "type": "git",
