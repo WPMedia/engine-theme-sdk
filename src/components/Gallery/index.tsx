@@ -1,10 +1,23 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
 import { useSwipeable } from 'react-swipeable';
+import rem from 'polished/lib/helpers/rem';
 import Image from '../Image';
 import Lightbox from '../Lightbox/index';
 import ImageMetadata from '../ImageMetadata';
 import useInterval from './setInterval';
+import {
+  GalleryDiv,
+  ControlContainer,
+  ControlsDiv,
+  ControlsButton,
+  PlaybackText,
+  ImageCountText,
+  CarouselContainer,
+  CarouselButton,
+  ImageWrapper,
+} from './styled';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -126,46 +139,47 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
   });
 
   return (
-    <div className="news-theme-gallery" ref={galleryRef}>
-      <div className="controls-container">
-        <div className="playback-controls">
-          <button type="button" onClick={(): void => fullScreen()}>
+    <GalleryDiv ref={galleryRef}>
+      <ControlsDiv>
+        <ControlContainer>
+          <ControlsButton type="button" onClick={(): void => fullScreen()}>
             <FullscreenIcon fill={greyFill} />
-            <span>Full Screen</span>
-          </button>
-          <button type="button" onClick={(): void => onPlayHandler()}>
+            <PlaybackText>Full Screen</PlaybackText>
+          </ControlsButton>
+          <ControlsButton type="button" onClick={(): void => onPlayHandler()}>
             {autoDuration ? (
               <>
                 <PauseIcon fill={greyFill} />
-                <span>Pause autoplay</span>
+                <PlaybackText>Pause autoplay</PlaybackText>
               </>
             ) : (
               <>
                 <PlayIcon fill={greyFill} />
-                <span>Autoplay</span>
+                <PlaybackText>Autoplay</PlaybackText>
               </>
             )}
-          </button>
-        </div>
-        <div className="image-change-controls">
-          {page + 1}
-          &nbsp;of&nbsp;
-          {galleryElements.length}
-          <button type="button" onClick={(): void => prevHandler()}>
+          </ControlsButton>
+        </ControlContainer>
+        <ControlContainer>
+          <ImageCountText>
+            {page + 1}
+            &nbsp;of&nbsp;
+            {galleryElements.length}
+          </ImageCountText>
+          <ControlsButton type="button" onClick={(): void => prevHandler()}>
             <ChevronLeftIcon fill={greyFill} />
             <span className="sr-only">Move Left</span>
-          </button>
-          <button type="button" onClick={(): void => nextHandler()}>
+          </ControlsButton>
+          <ControlsButton type="button" onClick={(): void => nextHandler()}>
             <ChevronRightIcon fill={greyFill} />
             <span className="sr-only">Move Right</span>
-          </button>
-        </div>
-      </div>
-      <div className="gallery-carousel-container" {...handlers}>
+          </ControlsButton>
+        </ControlContainer>
+      </ControlsDiv>
+      <CarouselContainer {...handlers}>
         { galleryElements.map((imgContent): React.ReactElement => (
-          <div
+          <ImageWrapper
             key={`gallery-image-${imgContent._id}`}
-            className="image-wrapper"
             style={{
               transform: slide.isSliding
                 ? `translate(calc(${-100 * page}% - ${slide.delta}px), 0)`
@@ -185,17 +199,17 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
               lightBoxWidth={1600}
               lightBoxHeight={0}
             />
-          </div>
+          </ImageWrapper>
         ))}
-        <button type="button" className="prev-button" onClick={(): void => prevHandler()}>
+        <CarouselButton type="button" className="prev-button" onClick={(): void => prevHandler()}>
           <ChevronLeftIcon width="100%" height="100%" fill="white" />
           <span className="sr-only">Move Left</span>
-        </button>
-        <button type="button" className="next-button" onClick={(): void => nextHandler()}>
+        </CarouselButton>
+        <CarouselButton type="button" className="next-button" onClick={(): void => nextHandler()}>
           <ChevronRightIcon width="100%" height="100%" fill="white" />
           <span className="sr-only">Move Right</span>
-        </button>
-      </div>
+        </CarouselButton>
+      </CarouselContainer>
       {
         galleryElements[page] && (
           <ImageMetadata
@@ -228,7 +242,7 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
       }
       </Lightbox>
       )}
-    </div>
+    </GalleryDiv>
   );
 };
 

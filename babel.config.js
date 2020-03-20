@@ -33,6 +33,7 @@ module.exports = (api) => {
     env: {
       test: {
         plugins: [
+          'babel-plugin-styled-components',
           ['@babel/plugin-proposal-decorators', {
             legacy: true,
           }],
