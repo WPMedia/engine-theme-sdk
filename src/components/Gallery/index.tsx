@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useRef, useState } from 'react';
-import styled from 'styled-components';
 import { useSwipeable } from 'react-swipeable';
-import rem from 'polished/lib/helpers/rem';
 import Image from '../Image';
 import Lightbox from '../Lightbox/index';
 import ImageMetadata from '../ImageMetadata';
