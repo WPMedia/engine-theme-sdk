@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { useAppContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 
-import './imagemetadata.scss';
-
 interface ImageAttribution {
   name?: string;
 }
@@ -20,9 +18,18 @@ interface ImageMetadataProps {
 
 const MetadataParagraph = styled.p<{ primaryFont: string }>`
   font-family: ${(props): string => props.primaryFont};
+  font-size: 14px;
+  color: #7F8C8D;
+  margin: 8px 0;
+  line-height: 16px;
 
   > * {
     font-family: ${(props): string => props.primaryFont};
+  }
+
+  .title {
+    color: #7F8C8D;
+    font-weight: bold;
   }
 `;
 

@@ -139,27 +139,49 @@ describe('the gallery block', () => {
   describe('the fullscreen button', () => {
     it('should be present with the "FullScreen" svg component with the correct fill', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
-      expect(wrapper.find('.playback-controls > button').at(0).childAt(0).name()).toBe('FullscreenIcon');
-      expect(wrapper.find('.playback-controls > button').at(0).childAt(0).prop('fill')).toBe('#6B6B6B');
-      expect(wrapper.find('.playback-controls > button').at(0).childAt(1).name()).toBe('span');
-      expect(wrapper.find('.playback-controls > button').at(0).childAt(1).text()).toBe('Full Screen');
+      expect(
+        wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(0).childAt(0)
+          .name(),
+      ).toBe('FullscreenIcon');
+      expect(
+        wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(0).childAt(0)
+          .prop('fill'),
+      ).toBe('#6B6B6B');
+      expect(
+        wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(0).childAt(1)
+          .name(),
+      ).toBe('styled__PlaybackText');
+      expect(
+        wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(0).childAt(1)
+          .text(),
+      ).toBe('Full Screen');
     });
   });
 
-  describe('the fullscreen button', () => {
+  describe('the autoplay button', () => {
     it('should be present with the "PlayButton" svg component with the correct fill', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
-      expect(wrapper.find('.playback-controls > button').at(1).childAt(0).name()).toBe('PlayIcon');
-      expect(wrapper.find('.playback-controls > button').at(1).childAt(0).prop('fill')).toBe('#6B6B6B');
-      expect(wrapper.find('.playback-controls > button').at(1).childAt(1).name()).toBe('span');
-      expect(wrapper.find('.playback-controls > button').at(1).childAt(1).text()).toBe('Autoplay');
+      expect(
+        wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(1).childAt(0)
+          .name(),
+      ).toBe('PlayIcon');
+      expect(
+        wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(1).childAt(0)
+          .prop('fill'),
+      ).toBe('#6B6B6B');
+      expect(
+        wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(1).childAt(1)
+          .name(),
+      ).toBe('styled__PlaybackText');
+      expect(
+        wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(1).childAt(1)
+          .text(),
+      ).toBe('Autoplay');
     });
-  });
 
-  describe('the Autoplay button', () => {
     it('should accurately reflect the current state during autoplay', () => {
       const wrapper = mount(<Gallery galleryElements={mockGallery} />);
-      const autoButtonWrapper = wrapper.find('.playback-controls > button').at(1);
+      const autoButtonWrapper = wrapper.find('styled__ControlContainer').find('button').at(1);
       expect(autoButtonWrapper.childAt(1).text()).toBe('Autoplay');
       autoButtonWrapper.simulate('click');
       expect(autoButtonWrapper.childAt(1).text()).toMatch(/Pause\sautoplay/);
@@ -171,8 +193,8 @@ describe('the gallery block', () => {
   describe('During Autoplay', () => {
     it('clicking the fullscreen button should cancel autoplay', () => {
       const wrapper = mount(<Gallery galleryElements={mockGallery} />);
-      const fullScreenBtnWrapper = wrapper.find('.playback-controls > button').at(0);
-      const autoBtnWrapper = wrapper.find('.playback-controls > button').at(1);
+      const fullScreenBtnWrapper = wrapper.find('styled__ControlContainer').find('button').at(0);
+      const autoBtnWrapper = wrapper.find('styled__ControlContainer').find('button').at(1);
       expect(autoBtnWrapper.childAt(1).text()).toBe('Autoplay');
       autoBtnWrapper.simulate('click');
       expect(autoBtnWrapper.childAt(1).text()).toMatch(/Pause\sautoplay/);
@@ -183,9 +205,9 @@ describe('the gallery block', () => {
 
   describe('the page/image counter and nearby buttons', () => {
     it('should accurately reflect the current page and any updates', () => {
-      const controlsWrapper = mount(<Gallery galleryElements={mockGallery} />).find('.image-change-controls');
-      const nextButtonWrapper = controlsWrapper.find('button').at(1);
-      const prevButtonWrapper = controlsWrapper.find('button').at(0);
+      const controlsWrapper = mount(<Gallery galleryElements={mockGallery} />).find('styled__ControlContainer').at(1);
+      const nextButtonWrapper = controlsWrapper.find('styled__ControlsButton').at(1);
+      const prevButtonWrapper = controlsWrapper.find('styled__ControlsButton').at(0);
       expect(controlsWrapper.text()).toMatch(/1\sof\s6/);
       nextButtonWrapper.simulate('click');
       expect(controlsWrapper.text()).toMatch(/2\sof\s6/);
@@ -197,7 +219,7 @@ describe('the gallery block', () => {
   describe('the page/image counter and overlaid buttons', () => {
     it('should accurately reflect the current page and any updates', () => {
       const wrapper = mount(<Gallery galleryElements={mockGallery} />);
-      const controlsWrapper = wrapper.find('.image-change-controls');
+      const controlsWrapper = wrapper.find('styled__ImageCountText');
       const nextButtonWrapper = wrapper.find('button.next-button').at(0);
       const prevButtonWrapper = wrapper.find('button.prev-button').at(0);
       expect(controlsWrapper.text()).toMatch(/1\sof\s6/);
@@ -210,7 +232,7 @@ describe('the gallery block', () => {
 
   describe('the overlaid previous image button', () => {
     it('should be present with the "ChevronLeft" svg component with the correct fill', () => {
-      const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
+      const wrapper = mount(<Gallery galleryElements={mockGallery} />);
       expect(wrapper.find('button.prev-button').at(0).childAt(0).name()).toBe('ChevronLeftIcon');
       expect(wrapper.find('button.prev-button').at(0).childAt(0).prop('fill')).toBe('white');
     });
@@ -218,7 +240,7 @@ describe('the gallery block', () => {
 
   describe('the overlaid next image button', () => {
     it('should be present with the "ChevronRight" svg component with the correct fill', () => {
-      const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
+      const wrapper = mount(<Gallery galleryElements={mockGallery} />);
       expect(wrapper.find('button.next-button').at(0).childAt(0).name()).toBe('ChevronRightIcon');
       expect(wrapper.find('button.next-button').at(0).childAt(0).prop('fill')).toBe('white');
     });
@@ -246,19 +268,19 @@ describe('the gallery block', () => {
     describe('when the user swipes left', () => {
       it('should update the page counter', () => {
         const wrapper = mount(<Gallery galleryElements={mockGallery} />, { attachTo: outerNode });
-        const carouselWrapper = wrapper.find('.gallery-carousel-container').first();
+        const carouselWrapper = wrapper.find('styled__CarouselContainer').first();
         const carouselNode = carouselWrapper.getDOMNode();
         act(() => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchstart', createTouchEvent({ x: 100, y: 10 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchmove', createTouchEvent({ x: 50, y: 20 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 10, y: 30 }, carouselNode)));
         });
-        expect(wrapper.find('.image-change-controls').text()).toMatch(/2\u00A0of\u00A06/);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch(/2\u00A0of\u00A06/);
       });
 
       it('should set the correct x offsets during the swipe', () => {
         const wrapper = mount(<Gallery galleryElements={mockGallery} />, { attachTo: outerNode });
-        const carouselWrapper = wrapper.find('.gallery-carousel-container').first();
+        const carouselWrapper = wrapper.find('styled__CarouselContainer').first();
         const carouselNode = carouselWrapper.getDOMNode();
         act(() => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchstart', createTouchEvent({ x: 100, y: 10 }, carouselNode)));
@@ -271,7 +293,7 @@ describe('the gallery block', () => {
 
       it('should set the x offsets to the correct values after the swipe', () => {
         const wrapper = mount(<Gallery galleryElements={mockGallery} />, { attachTo: outerNode });
-        const carouselWrapper = wrapper.find('.gallery-carousel-container').first();
+        const carouselWrapper = wrapper.find('styled__CarouselContainer').first();
         const carouselNode = carouselWrapper.getDOMNode();
         act(() => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchstart', createTouchEvent({ x: 100, y: 10 }, carouselNode)));
@@ -287,25 +309,25 @@ describe('the gallery block', () => {
     describe('when the user swipes right', () => {
       it('should update the page counter', () => {
         const wrapper = mount(<Gallery galleryElements={mockGallery} />, { attachTo: outerNode });
-        const carouselWrapper = wrapper.find('.gallery-carousel-container').first();
+        const carouselWrapper = wrapper.find('styled__CarouselContainer').first();
         const carouselNode = carouselWrapper.getDOMNode();
         act(() => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchstart', createTouchEvent({ x: 100, y: 10 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchmove', createTouchEvent({ x: 50, y: 10 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 10, y: 10 }, carouselNode)));
         });
-        expect(wrapper.find('.image-change-controls').text()).toMatch(/2\u00A0of\u00A06/);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch(/2\u00A0of\u00A06/);
         act(() => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchstart', createTouchEvent({ x: 10, y: 10 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchmove', createTouchEvent({ x: 50, y: 20 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 100, y: 30 }, carouselNode)));
         });
-        expect(wrapper.find('.image-change-controls').text()).toMatch(/1\u00A0of\u00A06/);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch(/1\u00A0of\u00A06/);
       });
 
       it('should set the correct x offsets during the swipe', () => {
         const wrapper = mount(<Gallery galleryElements={mockGallery} />, { attachTo: outerNode });
-        const carouselWrapper = wrapper.find('.gallery-carousel-container').first();
+        const carouselWrapper = wrapper.find('styled__CarouselContainer').first();
         const carouselNode = carouselWrapper.getDOMNode();
         act(() => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchstart', createTouchEvent({ x: 100, y: 10 }, carouselNode)));
@@ -315,13 +337,13 @@ describe('the gallery block', () => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchmove', createTouchEvent({ x: 50, y: 20 }, carouselNode)));
         });
         wrapper.update();
-        expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(calc(-100% - -40px), 0)')).toBe(true);
-        expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '0s')).toBe(true);
+        expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(calc(-100% - -40px), 0)')).toBe(true);
+        expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '0s')).toBe(true);
       });
 
       it('should set the x offsets to the correct values after the swipe', () => {
         const wrapper = mount(<Gallery galleryElements={mockGallery} />, { attachTo: outerNode });
-        const carouselWrapper = wrapper.find('.gallery-carousel-container').first();
+        const carouselWrapper = wrapper.find('styled__CarouselContainer').first();
         const carouselNode = carouselWrapper.getDOMNode();
         act(() => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchstart', createTouchEvent({ x: 100, y: 10 }, carouselNode)));
@@ -329,23 +351,23 @@ describe('the gallery block', () => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 10, y: 30 }, carouselNode)));
         });
         wrapper.update();
-        expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(-100%, 0)')).toBe(true);
-        expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
+        expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(-100%, 0)')).toBe(true);
+        expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
         act(() => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchstart', createTouchEvent({ x: 10, y: 10 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchmove', createTouchEvent({ x: 50, y: 20 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 100, y: 30 }, carouselNode)));
         });
         wrapper.update();
-        expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(0%, 0)')).toBe(true);
-        expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
+        expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(0%, 0)')).toBe(true);
+        expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
       });
     });
 
     describe('when the user swipes left at the end of the gallery', () => {
       it('should not advance forward', () => {
         const wrapper = mount(<Gallery galleryElements={mockGallery} />, { attachTo: outerNode });
-        const carouselWrapper = wrapper.find('.gallery-carousel-container').first();
+        const carouselWrapper = wrapper.find('styled__CarouselContainer').first();
         const carouselNode = carouselWrapper.getDOMNode();
 
         for (let i = 1; i < 6; i += 1) {
@@ -355,9 +377,9 @@ describe('the gallery block', () => {
             carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 10, y: 30 }, carouselNode)));
           });
           wrapper.update();
-          expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transform === `translate(${i * -100}%, 0)`)).toBe(true);
-          expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
-          expect(wrapper.find('.image-change-controls').text()).toMatch(new RegExp(`${i + 1}\u00A0of\u00A06`));
+          expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transform === `translate(${i * -100}%, 0)`)).toBe(true);
+          expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
+          expect(wrapper.find('styled__ImageCountText').text()).toMatch(new RegExp(`${i + 1}\u00A0of\u00A06`));
         }
 
         act(() => {
@@ -366,16 +388,16 @@ describe('the gallery block', () => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 10, y: 30 }, carouselNode)));
         });
         wrapper.update();
-        expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(-500%, 0)')).toBe(true);
-        expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
-        expect(wrapper.find('.image-change-controls').text()).toMatch(/6\u00A0of\u00A06/);
+        expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(-500%, 0)')).toBe(true);
+        expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch(/6\u00A0of\u00A06/);
       });
     });
 
     describe('when the user swipes right at the beginning of the gallery', () => {
       it('should not advance backward', () => {
         const wrapper = mount(<Gallery galleryElements={mockGallery} />, { attachTo: outerNode });
-        const carouselWrapper = wrapper.find('.gallery-carousel-container').first();
+        const carouselWrapper = wrapper.find('styled__CarouselContainer').first();
         const carouselNode = carouselWrapper.getDOMNode();
         act(() => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchstart', createTouchEvent({ x: 10, y: 10 }, carouselNode)));
@@ -383,9 +405,9 @@ describe('the gallery block', () => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 100, y: 30 }, carouselNode)));
         });
         wrapper.update();
-        expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(0%, 0)')).toBe(true);
-        expect(wrapper.find('.image-wrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
-        expect(wrapper.find('.image-change-controls').text()).toMatch(/1\u00A0of\u00A06/);
+        expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(0%, 0)')).toBe(true);
+        expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch(/1\u00A0of\u00A06/);
       });
     });
   });
@@ -393,7 +415,7 @@ describe('the gallery block', () => {
   describe('the Image child components', () => {
     it('should pass the correct dimensions', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
-      wrapper.find('.image-wrapper').forEach((imageWrapper) => {
+      wrapper.find('styled__ImageWrapper').forEach((imageWrapper) => {
         expect(imageWrapper.find('Image').first().prop('smallWidth')).toBe(400);
         expect(imageWrapper.find('Image').first().prop('smallHeight')).toBe(0);
         expect(imageWrapper.find('Image').first().prop('mediumWidth')).toBe(600);
@@ -405,14 +427,14 @@ describe('the gallery block', () => {
 
     it('should pass the correct url', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
-      wrapper.find('.image-wrapper').forEach((imageWrapper, index) => {
+      wrapper.find('styled__ImageWrapper').forEach((imageWrapper, index) => {
         expect(imageWrapper.find('Image').first().prop('url')).toStrictEqual(mockGallery[index].url);
       });
     });
 
     it('should pass the correct alt text', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} />);
-      wrapper.find('.image-wrapper').forEach((imageWrapper, index) => {
+      wrapper.find('styled__ImageWrapper').forEach((imageWrapper, index) => {
         expect(imageWrapper.find('Image').first().prop('alt')).toStrictEqual(mockGallery[index].alt_text);
       });
     });

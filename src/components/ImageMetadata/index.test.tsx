@@ -17,7 +17,7 @@ describe('the ImageMetadata component', () => {
     const wrapper = shallow(<ImageMetadata
       subtitle="ffff"
     />);
-    expect(wrapper.name()).toBe('styled.p');
+    expect(wrapper.name()).toBe('ImageMetadata__MetadataParagraph');
     expect(wrapper.prop('primaryFont')).toBe('futura');
   });
 
