@@ -1,54 +1,109 @@
-/* eslint react/destructuring-assignment: "off", no-param-reassign: "off" */
 import React from 'react';
+import styled from 'styled-components';
 import buildThumborURL from './thumbor-image-url';
 
 interface ImageProps {
   url: string;
-  alt: string;
+  alt?: string;
   smallWidth: number;
   smallHeight: number;
   mediumWidth: number;
   mediumHeight: number;
   largeWidth: number;
   largeHeight: number;
-  lightBoxWidth: number;
-  lightBoxHeight: number;
+  resizedImageOptions: {
+    [key: string]: string;
+  };
+  resizerURL: string;
+  breakpoints: {
+    small: number;
+    medium: number;
+    large: number;
+  };
+  // lightBoxWidth: number;
+  // lightBoxHeight: number;
 }
+
+interface SourceImageProps {
+  resizedImageOptions: {
+    [key: string]: string;
+  };
+  width: number;
+  height: number;
+  imageSourceWithoutProtocol: string;
+  resizerURL: string;
+  breakpointWidth: number;
+}
+
+/*
+
+resizedImageParams:
+158x105: "/ujptxhneNS8cZvB6srUPpZKgPUQ=filters:format(jpg):quality(70)/"
+158x119: "/7bAUFF-QZEKWmvsomIp5OLPrNDM=filters:format(jpg):quality(70)/"
+158x89: "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/"
+274x183: "/OH2BBp_JfX0uAQs32WXDiKrlqsE=filters:format(jpg):quality(70)/"
+274x206: "/ASc1uxs2dQ1VjMhwbiroZUeARFs=filters:format(jpg):quality(70)/"
+274x154: "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/"
+__proto__: Object
+url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
+alt: "This is a Free article for testing Mentor Medier’s paywall"
+smallWidth: 158
+smallHeight: 89
+mediumWidth: 274
+mediumHeight: 154
+largeWidth: 274
+largeHeight: 154
+resizerURL: undefined
+
+*/
+
+const StyledPicture = styled.picture`
+  > img {
+    max-width: max-content;
+  }
+`;
+
+
+const SourceHandler: React.FC<SourceImageProps> = (props) => {
+  const {
+    resizedImageOptions,
+    width,
+    height,
+    imageSourceWithoutProtocol,
+    resizerURL,
+    breakpointWidth,
+  } = props;
+
+  const interpolatedWidthHeight = `${width}x${height}`;
+
+  const targetImageKeyWithFilter = Object.prototype.hasOwnProperty.call(
+    resizedImageOptions, interpolatedWidthHeight,
+  )
+    ? resizedImageOptions[interpolatedWidthHeight]
+    : false;
+
+  return (
+    <>
+      {
+        targetImageKeyWithFilter
+        && (
+        <source
+          srcSet={buildThumborURL(resizedImageOptions[`${width}x${height}`], `${width}x${height}`, imageSourceWithoutProtocol, resizerURL)}
+          media={`screen and (min-width: ${breakpointWidth}px)`}
+        />
+        )
+    }
+    </>
+  );
+};
 
 /**
  * Image component that has basic Thumbor and lazy loading support.
  *
- * The Thumbor support assumes that the feature pack leveraging this component will have the
- * packaage "thumbor-lite" installed via NPM. The requirement for thumbor-lite is through a
- * dynamic require to enforce
- * its usaage server-side...See the file in this repository:
- * components/image/lib/thumbor-image-url.js
- *
- * Also, the lazy loading assumes that that the feature pack will have the
- * Yall library (https://github.com/malchata/yall.js)
- * installed in resources/js/yall.min.js along with an additional script to bootstrap the library.
- * For example, a script called
- * resources/js/image-lazy.js and basically has this one line of code:
- * document.addEventListener('DOMContentLoaded', yall).
- * These two scripts are then included in an output-type file like this:
- *
- * <script type="text/javascript" src={deployment(`${contextPath}/resources/js/yall.min.js`)} />
- * <script type="text/javascript" src={deployment(`${contextPath}/resources/js/image-lazy.js`)} />
- *
- * Note: This component needs to be extended to allow for Thumbor ratio and focal point values
- * that are set by the producer.
  *
  * @constructor
  * @param {string} URL - URL to the unoptimized image.
- * @param {string} alt - The author of the book.
- * @param {number} smallWidth - Width of the image to crop to for the small break point
- * @param {number} smallHeight - Height of the image to crop to for the small break point
- * @param {number} mediumWidth - Width of the image to crop to for the medium break point
- * @param {number} mediumHeight - Height of the image to crop to for the medium break point
- * @param {number} largeWidth - Width of the image to crop to for the large break point
- * @param {number} largeHeight - Height of the image to crop to for the large break point
- * @param {number} lightBoxWidth - Width of the image to crop to for the large break point
- * @param {number} lightBoxHeight - Height of the image to crop to for the large break point
+ * @param {string} alt - Description for image.
  */
 const Image: React.FC<ImageProps> = ({
   url,
@@ -59,49 +114,62 @@ const Image: React.FC<ImageProps> = ({
   mediumHeight,
   largeWidth,
   largeHeight,
-  lightBoxWidth,
-  lightBoxHeight,
+  resizedImageOptions,
+  resizerURL,
+  breakpoints,
+  // lightBoxWidth,
+  // lightBoxHeight,
 }) => {
-  // This is just a 800x600 black image
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const defaultImagePath = 'data:image/gif;base64,R0lGODdhIANYAqIAAAAAACYmJpGRkf///wAAAAAAAAAAAAAAACH5BAkAAAQALAAAAAAgA1gCAAP/KAHc/jDKSau9OOvNu/9gKI5kaZ5oqq5s675wrAWKbN94ru987//AoHBIhC2KyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mix/6PHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fPn0CDCh1KtKjRo0iTKl3KtKnTp1CjSp1KtarVq1izat3KtavXr2DDih1LtqzZs2jTql3Ltq3bt3Djyp1Lt67du3jz6t3Lt6/fv4ADCx5MuLDhw4gTK17MuLHjx5AjS55MubLly5gza97MubPnz6BDix5NurTp06hTq17NurXr17Bjy55Nu7bt27hz697Nu7fv38CDCx9OvLjx48iTK1/OvLnz59CjS59Ovbr169iza9/Ovbv37+DDix9Pvrz58+jTq1/Pvr379/Djy59Pv779+/jz69/Pv7////8ABijggAQWaOCBCCao4IIMNujggxBGKOGEFFZo4YUYZqjhhhx26OGHIIYo4ogklmjiiSimqOKKLLbo4oswxijjjDTWaOONOOao44489ujjj0AGKeSQRBZp5JFIJqnkkkw26eSTUEYp5ZRUVmnllVhmqeWWXHbp5ZdghinmmGSWaeaZaKap5ppstunmm3DGKeecdNZp55145qnnnnz26eefgAYq6KCEFmrooYgmquiijDbq6KOQRirppJRWaumlmGaq6aacdurpp6CGKuqopJZq6qmopqrqqqy26uqrsMYq66y01mrrrbjmquuuvPbq66/ABivssMQWa+yxyCar7LL/zDbr7LPQRivttNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuuuy26+678MYr77z01mvvvfjmq+++/Pbr778AByzwwAQXbPDBCCes8MIMN+zwwxBHLPHEFFds8cUYZ6zxxhx37PHHIIcs8sgkl2zyySinrPLKLLfs8sswxyzzzDTXbPPNOOes88489+zzz0AHLfTQRBdt9NFIJ6300kw37fTTUEct9dRUV2311VhnrfXWXHft9ddghy322GSXbfbZaKet9tpst+3223DHLffcdNdt991456333nz37fffgAcu+OCEF2744YgnrvjijDfu+OOQRy755JRXbvnlZphnrvnmnHfu+eeghy766KSXbvrpqKe+uqst+7667DHLvvstNdu++2456777rz37vvvwAcv/PDEF2/88cgnr/zyzDfv/PPQRy/99NRXb/312Gev/fbcd+/99+BnecTKNIyPMg0JAAA7';
+  const targetDimensionsPerBreakpoint = {
+    small: {
+      width: smallWidth,
+      height: smallHeight,
+    },
+    medium: {
+      width: mediumWidth,
+      height: mediumHeight,
+    },
+    large: {
+      width: largeWidth,
+      height: largeHeight,
+    },
+  };
 
-  if (url.indexOf('/pf/') !== -1) {
-    return (
-      <img
-        src={url}
-        alt={alt}
-      />
-    );
-  }
+  const { small, medium, large } = targetDimensionsPerBreakpoint;
 
-  if (lightBoxWidth !== null || lightBoxHeight !== null) {
-    return (
-      <img
-        src={buildThumborURL(url, smallWidth, smallHeight)}
-        data-lightbox={buildThumborURL(url, lightBoxWidth,
-          lightBoxHeight)}
-        srcSet={`
-      ${buildThumborURL(url, mediumWidth,
-          mediumHeight)} 1000w,
-      ${buildThumborURL(url, largeWidth,
-            largeHeight)} 2000w
-      `}
-        alt={alt}
-      />
-    );
-  }
+  const imageSourceWithoutProtocol = url.replace('https://', '');
+
+  const { small: smallBreakpoint, medium: mediumBreakpoint, large: largeBreakpoint } = breakpoints;
+
   return (
-    <img
-      src={buildThumborURL(url, smallWidth, smallHeight)}
-      srcSet={`
-      ${buildThumborURL(url, mediumWidth,
-        mediumHeight)} 1000w,
-      ${buildThumborURL(url, largeWidth,
-          largeHeight)} 2000w
-      `}
-      alt={alt}
-    />
+    <StyledPicture>
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={small.width}
+        height={small.height}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={smallBreakpoint}
+      />
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={medium.width}
+        height={medium.height}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={mediumBreakpoint}
+
+      />
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={large.width}
+        height={large.height}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={largeBreakpoint}
+      />
+      <img alt={alt} src={buildThumborURL(resizedImageOptions[`${large.width}x${large.height}`], `${large.width}x${large.height}`, imageSourceWithoutProtocol, resizerURL)} />
+    </StyledPicture>
   );
 };
 
