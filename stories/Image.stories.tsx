@@ -1,7 +1,5 @@
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf, addParameters } from '@storybook/react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   INITIAL_VIEWPORTS,
 } from '@storybook/addon-viewport';
