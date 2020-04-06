@@ -41,6 +41,15 @@ interface GalleryProps {
       by?: ImageAttribution[];
       affiliation?: ImageAttribution[];
     };
+    resizedImageOptions: {
+      [key: string]: string;
+    };
+    resizerURL: string;
+    breakpoints: {
+      small: number;
+      medium: number;
+      large: number;
+    };
   }[];
 }
 
@@ -196,6 +205,9 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
               largeHeight={0}
               lightBoxWidth={1600}
               lightBoxHeight={0}
+              resizedImageOptions={imgContent.resizedImageOptions}
+              breakpoints={imgContent.breakpoints}
+              resizerURL={imgContent.resizerURL}
             />
           </ImageWrapper>
         ))}
