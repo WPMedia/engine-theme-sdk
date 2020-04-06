@@ -20,8 +20,8 @@ interface ImageProps {
     medium: number;
     large: number;
   };
-  // lightBoxWidth: number;
-  // lightBoxHeight: number;
+  lightBoxWidth?: number;
+  lightBoxHeight?: number;
 }
 
 interface SourceImageProps {
@@ -34,28 +34,6 @@ interface SourceImageProps {
   resizerURL: string;
   breakpointWidth: number;
 }
-
-/*
-
-resizedImageParams:
-158x105: "/ujptxhneNS8cZvB6srUPpZKgPUQ=filters:format(jpg):quality(70)/"
-158x119: "/7bAUFF-QZEKWmvsomIp5OLPrNDM=filters:format(jpg):quality(70)/"
-158x89: "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/"
-274x183: "/OH2BBp_JfX0uAQs32WXDiKrlqsE=filters:format(jpg):quality(70)/"
-274x206: "/ASc1uxs2dQ1VjMhwbiroZUeARFs=filters:format(jpg):quality(70)/"
-274x154: "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/"
-__proto__: Object
-url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
-alt: "This is a Free article for testing Mentor Medier’s paywall"
-smallWidth: 158
-smallHeight: 89
-mediumWidth: 274
-mediumHeight: 154
-largeWidth: 274
-largeHeight: 154
-resizerURL: undefined
-
-*/
 
 const StyledPicture = styled.picture`
   > img {
@@ -117,8 +95,8 @@ const Image: React.FC<ImageProps> = ({
   resizedImageOptions,
   resizerURL,
   breakpoints,
-  // lightBoxWidth,
-  // lightBoxHeight,
+  lightBoxWidth,
+  lightBoxHeight,
 }) => {
   const targetDimensionsPerBreakpoint = {
     small: {
@@ -168,7 +146,23 @@ const Image: React.FC<ImageProps> = ({
         resizerURL={resizerURL}
         breakpointWidth={largeBreakpoint}
       />
-      <img alt={alt} src={buildThumborURL(resizedImageOptions[`${large.width}x${large.height}`], `${large.width}x${large.height}`, imageSourceWithoutProtocol, resizerURL)} />
+      {
+        typeof lightBoxWidth === "undefined" || typeof lightBoxHeight === "undefined" ? 
+          (
+            <img 
+              alt={alt} 
+              src={buildThumborURL(resizedImageOptions[`${large.width}x${large.height}`], `${large.width}x${large.height}`, imageSourceWithoutProtocol, resizerURL)} 
+            />
+          ) :
+          (
+            <img 
+              alt={alt} 
+              src={buildThumborURL(resizedImageOptions[`${large.width}x${large.height}`], `${large.width}x${large.height}`, imageSourceWithoutProtocol, resizerURL)} 
+              // lightbox component reads from this data attribute
+              data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
+            />
+          )
+      }
     </StyledPicture>
   );
 };

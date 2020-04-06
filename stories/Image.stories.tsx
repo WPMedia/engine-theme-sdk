@@ -60,4 +60,21 @@ storiesOf('Image', module)
       resizerURL={resizerURL}
       breakpoints={breakpoints}
     />
+  ))
+  .add('with widths and heights and lightbox', () => (
+    <Image
+      url={rawURL}
+      alt={alt}
+      smallWidth={smallWidth}
+      smallHeight={smallHeight}
+      mediumWidth={mediumWidth}
+      mediumHeight={mediumHeight}
+      largeWidth={largeWidth}
+      largeHeight={largeHeight}
+      lightBoxWidth={largeWidth}
+      lightBoxHeight={largeHeight}
+      resizedImageOptions={resizedParams}
+      resizerURL={resizerURL}
+      breakpoints={breakpoints}
+    />
   ));
