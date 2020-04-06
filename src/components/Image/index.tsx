@@ -98,23 +98,6 @@ const Image: React.FC<ImageProps> = ({
   lightBoxWidth,
   lightBoxHeight,
 }) => {
-  const targetDimensionsPerBreakpoint = {
-    small: {
-      width: smallWidth,
-      height: smallHeight,
-    },
-    medium: {
-      width: mediumWidth,
-      height: mediumHeight,
-    },
-    large: {
-      width: largeWidth,
-      height: largeHeight,
-    },
-  };
-
-  const { small, medium, large } = targetDimensionsPerBreakpoint;
-
   const imageSourceWithoutProtocol = url.replace('https://', '');
 
   const { small: smallBreakpoint, medium: mediumBreakpoint, large: largeBreakpoint } = breakpoints;
@@ -123,16 +106,16 @@ const Image: React.FC<ImageProps> = ({
     <StyledPicture>
       <SourceHandler
         resizedImageOptions={resizedImageOptions}
-        width={small.width}
-        height={small.height}
+        width={smallWidth}
+        height={smallHeight}
         imageSourceWithoutProtocol={imageSourceWithoutProtocol}
         resizerURL={resizerURL}
         breakpointWidth={smallBreakpoint}
       />
       <SourceHandler
         resizedImageOptions={resizedImageOptions}
-        width={medium.width}
-        height={medium.height}
+        width={mediumWidth}
+        height={mediumHeight}
         imageSourceWithoutProtocol={imageSourceWithoutProtocol}
         resizerURL={resizerURL}
         breakpointWidth={mediumBreakpoint}
@@ -140,24 +123,24 @@ const Image: React.FC<ImageProps> = ({
       />
       <SourceHandler
         resizedImageOptions={resizedImageOptions}
-        width={large.width}
-        height={large.height}
+        width={largeWidth}
+        height={largeHeight}
         imageSourceWithoutProtocol={imageSourceWithoutProtocol}
         resizerURL={resizerURL}
         breakpointWidth={largeBreakpoint}
       />
       {
-        typeof lightBoxWidth === "undefined" || typeof lightBoxHeight === "undefined" ? 
-          (
-            <img 
-              alt={alt} 
-              src={buildThumborURL(resizedImageOptions[`${large.width}x${large.height}`], `${large.width}x${large.height}`, imageSourceWithoutProtocol, resizerURL)} 
+        typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
+          ? (
+            <img
+              alt={alt}
+              src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
             />
-          ) :
-          (
-            <img 
-              alt={alt} 
-              src={buildThumborURL(resizedImageOptions[`${large.width}x${large.height}`], `${large.width}x${large.height}`, imageSourceWithoutProtocol, resizerURL)} 
+          )
+          : (
+            <img
+              alt={alt}
+              src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
               // lightbox component reads from this data attribute
               data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
             />
