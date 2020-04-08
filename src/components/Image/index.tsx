@@ -75,14 +75,6 @@ const SourceHandler: React.FC<SourceImageProps> = (props) => {
   );
 };
 
-/**
- * Image component that has basic Thumbor and lazy loading support.
- *
- *
- * @constructor
- * @param {string} URL - URL to the unoptimized image.
- * @param {string} alt - Description for image.
- */
 const Image: React.FC<ImageProps> = ({
   url,
   alt,
