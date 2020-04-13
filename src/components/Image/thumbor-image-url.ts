@@ -4,10 +4,10 @@ const buildThumborURL = (
   imageSourceWithoutProtocol: string,
   resizerURL: string,
 ): string => {
-  if (typeof targetImageKeyWithFilter === 'undefined' || resizerURL.length === 0) {
+  if (typeof targetImageKeyWithFilter === 'undefined' || resizerURL.length <= 1) {
     return '';
   }
-  const [targetImageKey = '', imageFilter = ''] = targetImageKeyWithFilter.split('=');
+  const [targetImageKey, imageFilter = ''] = targetImageKeyWithFilter.split('=');
 
   return `${resizerURL}${targetImageKey}=/${targetDimension}/${imageFilter}${imageSourceWithoutProtocol}`;
 };
