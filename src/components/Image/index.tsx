@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import buildThumborURL from './thumbor-image-url';
+import SourceHandler from './SourceHandler';
 
 interface ImageProps {
   url: string;
@@ -24,56 +25,11 @@ interface ImageProps {
   lightBoxHeight?: number;
 }
 
-interface SourceImageProps {
-  resizedImageOptions: {
-    [key: string]: string | undefined;
-  };
-  width: number;
-  height: number;
-  imageSourceWithoutProtocol: string;
-  resizerURL: string;
-  breakpointWidth: number;
-}
-
 const StyledPicture = styled.picture`
   > img {
     max-width: max-content;
   }
 `;
-
-
-const SourceHandler: React.FC<SourceImageProps> = (props) => {
-  const {
-    resizedImageOptions,
-    width,
-    height,
-    imageSourceWithoutProtocol,
-    resizerURL,
-    breakpointWidth,
-  } = props;
-
-  const interpolatedWidthHeight = `${width}x${height}`;
-
-  const targetImageKeyWithFilter = Object.prototype.hasOwnProperty.call(
-    resizedImageOptions, interpolatedWidthHeight,
-  )
-    ? resizedImageOptions[interpolatedWidthHeight]
-    : false;
-
-  return (
-    <>
-      {
-        targetImageKeyWithFilter
-        && (
-        <source
-          srcSet={buildThumborURL(resizedImageOptions[`${width}x${height}`], `${width}x${height}`, imageSourceWithoutProtocol, resizerURL)}
-          media={`screen and (min-width: ${breakpointWidth}px)`}
-        />
-        )
-    }
-    </>
-  );
-};
 
 const Image: React.FC<ImageProps> = ({
   url,
