@@ -75,4 +75,55 @@ storiesOf('Image', module)
       resizerURL={resizerURL}
       breakpoints={breakpoints}
     />
+  ))
+  .add('without resizer url, should show alt tag', () => (
+    <Image
+      url={rawURL}
+      alt={alt}
+      smallWidth={smallWidth}
+      smallHeight={smallHeight}
+      mediumWidth={mediumWidth}
+      mediumHeight={mediumHeight}
+      largeWidth={largeWidth}
+      largeHeight={largeHeight}
+      lightBoxWidth={largeWidth}
+      lightBoxHeight={largeHeight}
+      resizedImageOptions={resizedParams}
+      resizerURL=""
+      breakpoints={breakpoints}
+    />
+  ))
+  .add('without breakpoints, should show default breakpoints', () => (
+    <Image
+      url={rawURL}
+      alt={alt}
+      smallWidth={smallWidth}
+      smallHeight={smallHeight}
+      mediumWidth={mediumWidth}
+      mediumHeight={mediumHeight}
+      largeWidth={largeWidth}
+      largeHeight={largeHeight}
+      lightBoxWidth={largeWidth}
+      lightBoxHeight={largeHeight}
+      resizedImageOptions={resizedParams}
+      resizerURL={resizerURL}
+      breakpoints={{}}
+    />
+  ))
+  .add('if no resized params passed in, should show alt tag, not default url', () => (
+    <Image
+      url={rawURL}
+      alt={alt}
+      smallWidth={smallWidth}
+      smallHeight={smallHeight}
+      mediumWidth={mediumWidth}
+      mediumHeight={mediumHeight}
+      largeWidth={largeWidth}
+      largeHeight={largeHeight}
+      lightBoxWidth={largeWidth}
+      lightBoxHeight={largeHeight}
+      resizedImageOptions={{}}
+      resizerURL={resizerURL}
+      breakpoints={breakpoints}
+    />
   ));

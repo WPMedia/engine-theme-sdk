@@ -16,9 +16,9 @@ interface ImageProps {
   };
   resizerURL: string;
   breakpoints: {
-    small: number;
-    medium: number;
-    large: number;
+    small?: number | undefined;
+    medium?: number | undefined;
+    large?: number | undefined;
   };
   lightBoxWidth?: number;
   lightBoxHeight?: number;
@@ -26,7 +26,7 @@ interface ImageProps {
 
 interface SourceImageProps {
   resizedImageOptions: {
-    [key: string]: string;
+    [key: string]: string | undefined;
   };
   width: number;
   height: number;
@@ -92,7 +92,15 @@ const Image: React.FC<ImageProps> = ({
 }) => {
   const imageSourceWithoutProtocol = url.replace('https://', '');
 
-  const { small: smallBreakpoint, medium: mediumBreakpoint, large: largeBreakpoint } = breakpoints;
+  const {
+    small: smallBreakpoint = 420,
+    medium: mediumBreakpoint = 768,
+    large: largeBreakpoint = 99,
+  } = breakpoints;
+
+  if (typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
+    return (<img src="" alt={alt} />);
+  }
 
   return (
     <StyledPicture>
