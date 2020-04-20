@@ -27,7 +27,7 @@ describe('image component', () => {
   const rawURL = 'https://fake.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg';
   const alt = 'Picture of a lovely park with no people in it';
 
-  it('returns an empty src if no image providied', () => {
+  it('returns an raw url src if no params provided for now', () => {
     const wrapper = shallow(<Image
       url={rawURL}
       alt={alt}
@@ -44,7 +44,7 @@ describe('image component', () => {
       breakpoints={breakpoints}
     />);
     const { src, alt: altProperty } = wrapper.find('img').props();
-    expect(src).toBe('');
+    expect(src).toBe('https://fake.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg');
     expect(altProperty).toBe(alt);
   });
   it('returns various breakpoints with the widths', () => {
