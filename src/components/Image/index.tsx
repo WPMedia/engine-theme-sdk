@@ -60,7 +60,7 @@ const Image: React.FC<ImageProps> = ({
     console.log(props, 'did not render correct on client-side render');
     return (
       <img
-        src={url}
+        src=""
         alt={alt}
         width={largeWidth}
         height={largeHeight}
