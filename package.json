@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -48,6 +48,7 @@
     "@babel/preset-typescript": "^7.7.2",
     "@storybook/addon-actions": "^5.3.14",
     "@storybook/addon-links": "^5.3.14",
+    "@storybook/addon-viewport": "^5.3.18",
     "@storybook/addons": "^5.3.14",
     "@storybook/react": "^5.3.14",
     "@types/babel__core": "^7.1.3",
