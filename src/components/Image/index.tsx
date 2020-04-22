@@ -16,7 +16,7 @@ interface ImageProps {
     [key: string]: string;
   };
   resizerURL: string;
-  breakpoints: {
+  breakpoints?: {
     small?: number | undefined;
     medium?: number | undefined;
     large?: number | undefined;
@@ -52,10 +52,10 @@ const Image: React.FC<ImageProps> = ({
     small: smallBreakpoint = 0,
     medium: mediumBreakpoint = 768,
     large: largeBreakpoint = 996,
-  } = breakpoints;
+  } = breakpoints || {};
 
   // if url passed in directly without resized params
-  if (typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
+  if (typeof resizedImageOptions === 'undefined' || typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
     return (
       <img
         src={url}
