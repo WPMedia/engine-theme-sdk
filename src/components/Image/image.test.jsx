@@ -44,7 +44,7 @@ describe('image component', () => {
       breakpoints={breakpoints}
     />);
     const { src, alt: altProperty } = wrapper.find('img').props();
-    expect(src).toBe('https://fake.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg');
+    expect(src).toBe('');
     expect(altProperty).toBe(alt);
   });
   it('returns various breakpoints with the widths', () => {
