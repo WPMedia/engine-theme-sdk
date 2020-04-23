@@ -20,13 +20,6 @@ const mockGallery = [
     alt_text: 'aaa alt aaa',
     subtitle: 'aaa sub aaa',
     caption: 'aaa caption aaa',
-    breakpoints: {
-      small: 0,
-      medium: 0,
-      large: 0,
-    },
-    resizerURL: '',
-    resizedImageOptions: {},
     credits: {
       by: [
         {
@@ -46,13 +39,6 @@ const mockGallery = [
     url: 'http://www.bbb.bbb/bbb.jpg',
     alt_text: 'bbb alt bbb',
     caption: 'bbb caption bbb',
-    breakpoints: {
-      small: 0,
-      medium: 0,
-      large: 0,
-    },
-    resizerURL: '',
-    resizedImageOptions: {},
     credits: {
       by: [
         {
@@ -72,13 +58,6 @@ const mockGallery = [
     url: 'http://www.ccc.ccc/ccc.jpg',
     alt_text: 'ccc alt ccc',
     subtitle: 'ccc sub ccc',
-    breakpoints: {
-      small: 0,
-      medium: 0,
-      large: 0,
-    },
-    resizerURL: '',
-    resizedImageOptions: {},
     credits: {
       by: [
         {
@@ -99,13 +78,6 @@ const mockGallery = [
     alt_text: 'ddd alt ddd',
     subtitle: 'ddd sub ddd',
     caption: 'ddd caption ddd',
-    breakpoints: {
-      small: 0,
-      medium: 0,
-      large: 0,
-    },
-    resizerURL: '',
-    resizedImageOptions: {},
     credits: {
       affiliation: [
         {
@@ -121,13 +93,6 @@ const mockGallery = [
     alt_text: 'eee alt eee',
     subtitle: 'eee sub eee',
     caption: 'eee caption eee',
-    breakpoints: {
-      small: 0,
-      medium: 0,
-      large: 0,
-    },
-    resizerURL: '',
-    resizedImageOptions: {},
     credits: {
       by: [
         {
@@ -143,13 +108,6 @@ const mockGallery = [
     alt_text: 'fff alt fff',
     subtitle: 'fff sub fff',
     caption: 'fff caption fff',
-    breakpoints: {
-      small: 0,
-      medium: 0,
-      large: 0,
-    },
-    resizerURL: '',
-    resizedImageOptions: {},
   },
 ];
 
