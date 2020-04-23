@@ -56,8 +56,6 @@ const Image: React.FC<ImageProps> = ({
 
   // if url passed in directly without resized params
   if (typeof resizedImageOptions === 'undefined' || typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
-    // eslint-disable-next-line no-console
-    console.log(props, 'did not render correct on client-side render');
     return (
       <img
         src=""
