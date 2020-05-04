@@ -45,7 +45,7 @@ const Image: React.FC<ImageProps> = ({
   breakpoints,
   lightBoxWidth,
   lightBoxHeight,
-}, props) => {
+}) => {
   const imageSourceWithoutProtocol = url.replace('https://', '');
 
   const {
