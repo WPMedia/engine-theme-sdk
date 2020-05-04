@@ -37,7 +37,7 @@ const SourceHandler: React.FC<SourceImageProps> = (props) => {
   return (
     <>
       <source
-        srcSet={buildThumborURL(resizedImageOptions[`${width}x${height}`], `${width}x${height}`, imageSourceWithoutProtocol, resizerURL)}
+        src={buildThumborURL(resizedImageOptions[`${width}x${height}`], `${width}x${height}`, imageSourceWithoutProtocol, resizerURL)}
         media={`screen and (min-width: ${breakpointWidth}px)`}
       />
     </>
