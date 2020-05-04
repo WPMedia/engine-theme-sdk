@@ -13,6 +13,7 @@ interface ImageProps {
   largeHeight: number;
   lightBoxWidth: number;
   lightBoxHeight: number;
+  respectAspectRatio?: boolean;
 }
 
 /**
@@ -49,6 +50,7 @@ interface ImageProps {
  * @param {number} largeHeight - Height of the image to crop to for the large break point
  * @param {number} lightBoxWidth - Width of the image to crop to for the large break point
  * @param {number} lightBoxHeight - Height of the image to crop to for the large break point
+ * @param {boolean} respectAspectRatio - If t, fit in. If f (default), resizes aspect ratio
  */
 const Image: React.FC<ImageProps> = ({
   url,
@@ -61,6 +63,7 @@ const Image: React.FC<ImageProps> = ({
   largeHeight,
   lightBoxWidth,
   lightBoxHeight,
+  respectAspectRatio = false,
 }) => {
   if (url.indexOf('/pf/') !== -1) {
     return (
@@ -74,14 +77,14 @@ const Image: React.FC<ImageProps> = ({
   if (lightBoxWidth !== null || lightBoxHeight !== null) {
     return (
       <img
-        src={buildThumborURL(url, smallWidth, smallHeight)}
+        src={buildThumborURL(url, smallWidth, smallHeight, respectAspectRatio)}
         data-lightbox={buildThumborURL(url, lightBoxWidth,
-          lightBoxHeight)}
+          lightBoxHeight, respectAspectRatio)}
         srcSet={`
       ${buildThumborURL(url, mediumWidth,
-          mediumHeight)} 1000w,
+          mediumHeight, respectAspectRatio)} 1000w,
       ${buildThumborURL(url, largeWidth,
-            largeHeight)} 2000w
+            largeHeight, respectAspectRatio)} 2000w
       `}
         alt={alt}
       />
@@ -89,12 +92,12 @@ const Image: React.FC<ImageProps> = ({
   }
   return (
     <img
-      src={buildThumborURL(url, smallWidth, smallHeight)}
+      src={buildThumborURL(url, smallWidth, smallHeight, respectAspectRatio)}
       srcSet={`
       ${buildThumborURL(url, mediumWidth,
-        mediumHeight)} 1000w,
+        mediumHeight, respectAspectRatio)} 1000w,
       ${buildThumborURL(url, largeWidth,
-          largeHeight)} 2000w
+          largeHeight, respectAspectRatio)} 2000w
       `}
       alt={alt}
     />
