@@ -7,8 +7,12 @@ const buildThumborURL = (url: string, displayWidth: number, displayHeight: numbe
     .replace(' ', '%20');
   if (imgSrc.includes('?')) imgSrc.replace('?', '%3F');
 
+  // https://thumbor.readthedocs.io/en/latest/filling.html?highlight=fill#filling
+  // fitIn will respect the aspect ratio of the photo and fit it into dsipaly
+  // fitin https://thumbor.readthedocs.io/en/latest/usage.html?highlight=fit#fit-in
   return thumbor.setImagePath(imgSrc)
-    .resize(displayWidth, displayHeight)
+    .fitIn(displayWidth, displayHeight)
+    .filter('fill(white)')
     .buildUrl();
 };
 
