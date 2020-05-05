@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 interface CustomMetaData {
-  metaName: string;
-  metaValue: string;
+    metaName: string;
+    metaValue: string;
 }
 
 const getCustomMetaData = (metaHTMLString: string): Array<CustomMetaData> => {
@@ -36,35 +36,35 @@ const generateCustomMetaTags = (metaData, MetaTag, MetaTags): ReactElement => {
 };
 
 interface Props {
-  MetaTag: Function;
-  MetaTags: Function;
-  metaValue: Function;
-  getImgURL: Function;
-  getImgAlt: Function;
-  globalContent?: {
-    description?: {
-      basic: string;
+    MetaTag: Function;
+    MetaTags: Function;
+    metaValue: Function;
+    getImgURL: Function;
+    getImgAlt: Function;
+    globalContent?: {
+        description?: {
+            basic: string;
+        };
+        headlines?: {
+            basic?: string;
+        };
+        taxonomy?: {
+            seo_keywords?: Array<string>;
+            tags?: Array<{
+                slug?: string;
+            }>;
+        };
+        authors?: Array<{
+            bio?: string;
+            byline?: string;
+        }>;
+        Payload?: Array<{
+            description?: string;
+            name?: string;
+        }>;
     };
-    headlines?: {
-      basic?: string;
-    };
-    taxonomy?: {
-      seo_keywords?: Array<string>;
-      tags?: Array<{
-        slug?: string;
-      }>;
-    };
-    authors?: Array<{
-      bio?: string;
-      byline?: string;
-    }>;
-    Payload?: Array<{
-      description?: string;
-      name?: string;
-    }>;
-  };
-  websiteName: string;
-  twitterSite: string;
+    websiteName: string;
+    twitterSite: string;
 }
 
 const MetaData: React.FC<Props> = ({
@@ -133,18 +133,18 @@ const MetaData: React.FC<Props> = ({
       storyMetaDataTags = (
         <>
           { metaData.description
-            && <meta name="description" content={metaData.description} />}
+                        && <meta name="description" content={metaData.description} />}
           { metaData.keywords
             && <meta name="keywords" content={metaData.keywords} />}
 
           <meta property="og:title" content={metaData.ogTitle} />
 
           { metaData.ogImage
-            && <meta property="og:image" content={metaData.ogImage} />}
+                && <meta property="og:image" content={metaData.ogImage} />}
           { metaData.ogImageAlt
-            && <meta property="og:image:alt" content={metaData.ogImageAlt} />}
+                    && <meta property="og:image:alt" content={metaData.ogImageAlt} />}
           {pageType === 'article' && (
-            <meta name="robots" content="noarchive" />
+          <meta name="robots" content="noarchive" />
           )}
         </>
       );
@@ -164,9 +164,9 @@ const MetaData: React.FC<Props> = ({
     authorMetaDataTags = (
       <>
         {
-            metaData.description
-            && <meta name="description" content={metaData.description} />
-          }
+                    metaData.description
+                    && <meta name="description" content={metaData.description} />
+    }
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
@@ -194,7 +194,7 @@ const MetaData: React.FC<Props> = ({
     tagMetaDataTags = (
       <>
         { metaData.description
-          && <meta name="description" content={metaData.description} />}
+                    && <meta name="description" content={metaData.description} />}
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
@@ -203,9 +203,9 @@ const MetaData: React.FC<Props> = ({
   const twitterTags = (
     <>
       { metaData.ogSiteName
-        && <meta property="og:site_name" content={metaData.ogSiteName} />}
+                && <meta property="og:site_name" content={metaData.ogSiteName} />}
       { metaData.twitterSite
-        && <meta property="twitter:site" content={metaData.twitterSite} />}
+    && <meta property="twitter:site" content={metaData.twitterSite} />}
       { metaData.twitterCard
         && <meta property="twitter:card" content={metaData.twitterCard} />}
     </>
