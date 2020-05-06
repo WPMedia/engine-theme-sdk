@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "1.2.0",
+  "version": "1.2.5-beta.1",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -90,7 +90,8 @@
     "react-modal": "^3.11.1",
     "react-swipeable": "^5.5.0",
     "styled-components": "^4.4.1",
-    "thumbor-lite": "^0.1.6"
+    "thumbor-lite": "^0.1.6",
+    "dom-parser": "^0.1.6"
   },
   "jest": {
     "transform": {
