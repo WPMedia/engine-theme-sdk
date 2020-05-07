@@ -37,7 +37,8 @@ const SourceHandler: React.FC<SourceImageProps> = (props) => {
   return (
     <>
       <source
-        src={buildThumborURL(resizedImageOptions[`${width}x${height}`], `${width}x${height}`, imageSourceWithoutProtocol, resizerURL)}
+        // using src with picture tag parent is deprecated via console info warning
+        srcSet={buildThumborURL(resizedImageOptions[`${width}x${height}`], `${width}x${height}`, imageSourceWithoutProtocol, resizerURL)}
         media={`screen and (min-width: ${breakpointWidth}px)`}
       />
     </>
