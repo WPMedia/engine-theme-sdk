@@ -31,6 +31,22 @@ const StyledPicture = styled.picture`
   }
 `;
 
+/**
+* @constructor
+* @param {string} URL - URL to the unoptimized image. This will never be served.
+* @param {string} alt - Will display describing image if not present, ortherwise for a11y.
+* @param {number} smallWidth - Width of the image to crop to for the small break point
+* @param {number} smallHeight - Height of the image to crop to for the small break point
+* @param {number} mediumWidth - Width of the image to crop to for the medium break point
+* @param {number} mediumHeight - Height of the image to crop to for the medium break point
+* @param {number} largeWidth - Width of the image to crop to for the large break point
+* @param {number} largeHeight - Height of the image to crop to for the large break point
+* @param {number} lightBoxWidth - Width of the image to crop to for the lightbox
+* @param {number} lightBoxHeight - Height of the image to crop to for the lightbox
+* @param {object} resizedImageOptions - Dimensions and thumbor signature and filters
+* @param {string} resizerURL - Link to the assigned resizer url for generating resized url
+* @param {object} breakpoints - Widths to determine small, med, and large breakpoints used
+*/
 const Image: React.FC<ImageProps> = ({
   url,
   alt,
@@ -49,6 +65,7 @@ const Image: React.FC<ImageProps> = ({
   const imageSourceWithoutProtocol = url.replace('https://', '');
 
   const {
+    // breakpoints default to mobile, tablet, larger screen
     small: smallBreakpoint = 0,
     medium: mediumBreakpoint = 768,
     large: largeBreakpoint = 996,
