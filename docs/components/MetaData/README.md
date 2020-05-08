@@ -1,16 +1,16 @@
-#MetaData
+# MetaData
 
-##Description:
+## Description:
 The MetaData component is to be used only with-in output-type components. 
 It handles the rendering of the title tags and all meta tags with the 
 exception of the viewport meta tag.
 
-##Usage
+## Usage
 
 To import into an output-type component:
 `import { MetaData } from '@wpmedia/engine-theme-sdk';`
 
-###Props:
+### Props:
 
 - MetaTag (required): The MetaTag function that is passed into an output type.
 - MetaTags (required): The MetaTags function that is passed into an output type.
@@ -20,7 +20,7 @@ in the `fusion:context` module.
 - websiteName (optional): The name of the website.
 - twitterSite (optional): The corresponding twitter site name.
 
-##Note
+## Note
 This component should be placed high in the `<head>` section of the 
 output-type see example below for ideal positioning:
 
