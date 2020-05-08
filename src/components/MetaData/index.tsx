@@ -39,11 +39,9 @@ interface Props {
     MetaTag: Function;
     MetaTags: Function;
     metaValue: Function;
-    getImgURL: Function;
-    getImgAlt: Function;
     globalContent?: {
         description?: {
-            basic: string;
+            basic?: string;
         };
         headlines?: {
             basic?: string;
@@ -62,13 +60,13 @@ interface Props {
             description?: string;
             name?: string;
         }>;
-    };
-    websiteName: string;
-    twitterSite: string;
+    } | null;
+    websiteName?: string | null;
+    twitterSite?: string | null;
 }
 
 const MetaData: React.FC<Props> = ({
-  MetaTag, MetaTags, metaValue, getImgURL, getImgAlt, globalContent: gc, websiteName, twitterSite,
+  MetaTag, MetaTags, metaValue, globalContent: gc, websiteName, twitterSite,
 }) => {
   const pageType = metaValue('page-type') || '';
 
@@ -77,6 +75,8 @@ const MetaData: React.FC<Props> = ({
   let authorMetaDataTags = null;
   let searchMetaDataTags = null;
 
+  // eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
+  const { getImgURL, getImgAlt } = require('./promoImageHelper');
   const metaData = {
     description: null,
     keywords: null,
@@ -99,7 +99,6 @@ const MetaData: React.FC<Props> = ({
         description = gc.description.basic;
         headline = gc.headlines.basic;
       }
-
       if (metaValue('title')) {
         metaData.title = `${metaValue('title')} – ${websiteName}`;
       } else if (headline) {
@@ -150,7 +149,7 @@ const MetaData: React.FC<Props> = ({
       );
     }
   } else if (pageType === 'author') {
-    const author = (gc.authors && gc.authors.length) ? gc.authors[0] : {};
+    const author = (gc && gc.authors && gc.authors.length) ? gc.authors[0] : {};
     metaData.description = metaValue('description') || author.bio || null;
     metaData.ogTitle = metaValue('og:title') || author.byline || '';
     if (metaData.ogTitle === '') {
@@ -180,7 +179,7 @@ const MetaData: React.FC<Props> = ({
       </>
     );
   } else if (pageType === 'tag') {
-    const payload = (gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
+    const payload = (gc && gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
     metaData.description = metaValue('description') || payload.description || null;
     metaData.ogTitle = metaValue('og:title') || payload.name || '';
     if (metaData.ogTitle === '') {
