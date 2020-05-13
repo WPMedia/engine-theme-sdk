@@ -31,6 +31,7 @@ interface ImageAttribution {
 }
 
 interface GalleryProps {
+  resizerURL?: string;
   galleryElements?: {
     _id: string;
     url: string;
@@ -41,10 +42,18 @@ interface GalleryProps {
       by?: ImageAttribution[];
       affiliation?: ImageAttribution[];
     };
+    resized_params: {
+      [key: string]: string;
+    };
+    breakpoints: {
+      small: number;
+      medium: number;
+      large: number;
+    };
   }[];
 }
 
-const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
+const Gallery: React.FC<GalleryProps> = ({ galleryElements, resizerURL = '' }) => {
   const galleryRef = useRef(null);
   const [page, setPage] = useState(0);
   const [slide, setSlide] = useState({
@@ -196,6 +205,9 @@ const Gallery: React.FC<GalleryProps> = ({ galleryElements }) => {
               largeHeight={0}
               lightBoxWidth={1600}
               lightBoxHeight={0}
+              resizedImageOptions={imgContent.resized_params}
+              breakpoints={imgContent.breakpoints || {}}
+              resizerURL={resizerURL}
             />
           </ImageWrapper>
         ))}
