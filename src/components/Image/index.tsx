@@ -62,6 +62,13 @@ const Image: React.FC<ImageProps> = ({
   lightBoxWidth,
   lightBoxHeight,
 }) => {
+  if (typeof url === 'undefined') {
+    // todo: remove log for prod
+    // eslint-disable-next-line no-console
+    console.error(`no image url found from alt: ${alt}`);
+    return null;
+  }
+
   const imageSourceWithoutProtocol = url.replace('https://', '');
 
   const {
@@ -73,8 +80,12 @@ const Image: React.FC<ImageProps> = ({
 
   // if url passed in directly without resized params
   if (typeof resizedImageOptions === 'undefined' || typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
+    // todo: remove for prod
+    console.error(`no resized options found for url: ${url}.`);
+    console.error('Please use resized options to save money on serving bigger images than necessary. Consider using resizer content source block or adding the resizer block to content source transform.');
     return (
       <img
+        // will not serve image raw
         src=""
         alt={alt}
         width={largeWidth}
