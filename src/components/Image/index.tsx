@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import styled from 'styled-components';
 import buildThumborURL from './thumbor-image-url';
@@ -64,7 +65,6 @@ const Image: React.FC<ImageProps> = ({
 }) => {
   if (typeof url === 'undefined') {
     // todo: remove log for prod
-    // eslint-disable-next-line no-console
     console.error(`no image url found from alt: ${alt}`);
     return null;
   }
