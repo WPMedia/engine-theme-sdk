@@ -64,8 +64,6 @@ const Image: React.FC<ImageProps> = ({
   lightBoxHeight,
 }) => {
   if (typeof url === 'undefined') {
-    // todo: remove log for prod
-    console.error(`no image url found from alt: ${alt}`);
     return null;
   }
 
