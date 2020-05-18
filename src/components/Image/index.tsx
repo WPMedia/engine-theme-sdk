@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import styled from 'styled-components';
 import buildThumborURL from './thumbor-image-url';
@@ -62,6 +63,10 @@ const Image: React.FC<ImageProps> = ({
   lightBoxWidth,
   lightBoxHeight,
 }) => {
+  if (typeof url === 'undefined') {
+    return null;
+  }
+
   const imageSourceWithoutProtocol = url.replace('https://', '');
 
   const {
@@ -73,8 +78,12 @@ const Image: React.FC<ImageProps> = ({
 
   // if url passed in directly without resized params
   if (typeof resizedImageOptions === 'undefined' || typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
+    // todo: remove for prod
+    console.error(`no resized options found for url: ${url}.`);
+    console.error('Please use resized options to save money on serving bigger images than necessary. Consider using resizer content source block or adding the resizer block to content source transform.');
     return (
       <img
+        // will not serve image raw
         src=""
         alt={alt}
         width={largeWidth}
