@@ -26,9 +26,14 @@ interface ImageProps {
   lightBoxHeight?: number;
 }
 
+/*
+  this prevents stretching past its container
+  to prevent stretching past max width,
+  use max-width: max-content;
+*/
 const StyledPicture = styled.picture`
   > img {
-    max-width: max-content;
+    max-width: 100%;
   }
 `;
 
