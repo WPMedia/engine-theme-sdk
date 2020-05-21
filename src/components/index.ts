@@ -4,4 +4,5 @@ export { default as Image } from './Image';
 export { default as ImageMetadata } from './ImageMetadata';
 export { default as Lightbox } from './Lightbox';
 export { default as MetaData } from './MetaData';
+export { default as EventEmitter } from './EventEmitter';
 export * from './icons';
