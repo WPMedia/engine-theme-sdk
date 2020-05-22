@@ -75,6 +75,10 @@ interface GalleryProps {
       large: number;
     };
   }[];
+  expandPhrase?: string;
+  autoplayPhrase?: string;
+  pausePhrase?: string;
+  pageCountPhrase?: (current: number, total: number) => string;
 }
 
 const Gallery: React.FC<GalleryProps> = ({
@@ -82,6 +86,10 @@ const Gallery: React.FC<GalleryProps> = ({
   resizerURL = '',
   ansId = '',
   ansHeadline = '',
+  expandPhrase,
+  autoplayPhrase,
+  pausePhrase,
+  pageCountPhrase,
 }) => {
   const galleryRef = useRef(null);
   const [page, setPage] = useState(0);
@@ -223,27 +231,29 @@ const Gallery: React.FC<GalleryProps> = ({
         <ControlContainer>
           <ControlsButton type="button" onClick={(): void => fullScreen()}>
             <FullscreenIcon fill={greyFill} />
-            <PlaybackText>Full Screen</PlaybackText>
+            <PlaybackText>{expandPhrase || 'Expand'}</PlaybackText>
           </ControlsButton>
           <ControlsButton type="button" onClick={(): void => onPlayHandler()}>
             {autoDuration ? (
               <>
                 <PauseIcon fill={greyFill} />
-                <PlaybackText>Pause autoplay</PlaybackText>
+                <PlaybackText>{pausePhrase || 'Pause autoplay'}</PlaybackText>
               </>
             ) : (
               <>
                 <PlayIcon fill={greyFill} />
-                <PlaybackText>Autoplay</PlaybackText>
+                <PlaybackText>{autoplayPhrase || 'Autoplay'}</PlaybackText>
               </>
             )}
           </ControlsButton>
         </ControlContainer>
         <ControlContainer>
           <ImageCountText>
-            {page + 1}
-            &nbsp;of&nbsp;
-            {galleryElements.length}
+            {
+              pageCountPhrase
+                ? pageCountPhrase(page + 1, galleryElements.length)
+                : `${page + 1} of ${galleryElements.length}`
+            }
           </ImageCountText>
           <ControlsButton type="button" onClick={(): void => prevHandler()}>
             <ChevronLeftIcon fill={greyFill} />
