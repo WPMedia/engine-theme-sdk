@@ -93,9 +93,7 @@
     "styled-components": "^4.4.1",
     "thumbor-lite": "^0.1.6",
     "dom-parser": "^0.1.6",
-    "date-fns": "^2.13.0",
-    "date-fns-timezone": "^0.1.4",
-    "date-fns-tz": "^1.0.10"
+    "timezone": "^1.0.23"
   },
   "jest": {
     "transform": {

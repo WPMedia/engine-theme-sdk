@@ -1,27 +1,23 @@
-import { format } from 'date-fns';
-import { convertToLocalTime } from 'date-fns-timezone';
-import { enUS, sv } from 'date-fns/locale';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const tz = require('timezone')(require('timezone/zones'), require('timezone/en_US.js'), require('timezone/sv_SE.js'));
 
 const localizeDate = (date,
-  dateFormat = 'LLLL d, yyyy',
+  dateFormat = '%B %d, %Y',
   language = 'en',
-  timeZone = 'GMT'): string => {
+  timeZone = 'America/New_York'): string => {
   if (!date) return '';
 
   let locale = null;
   switch (language) {
     case 'sv':
-      locale = sv;
+      locale = 'sv_SE';
       break;
     default:
-      locale = enUS;
+      locale = 'en_US';
   }
-  const d = convertToLocalTime(date, { timeZone });
-  return format(
-    d,
-    dateFormat,
-    { locale },
-  );
+  // Convert to UTC date
+  const utc = tz(date);
+  return tz(utc, dateFormat, locale, timeZone);
 };
 
 export default localizeDate;
