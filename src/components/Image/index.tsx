@@ -81,6 +81,24 @@ const Image: React.FC<ImageProps> = ({
     large: largeBreakpoint = 996,
   } = breakpoints || {};
 
+  // listen for resources relative urls
+  // todo: implement resizer for relative urls
+  // /pf/ is not a convention in all places,
+  // but /resources/ is definitely where the local image will be
+  if (url.includes('/resources/')) {
+    return (
+      <StyledPicture>
+        <img
+          src={url}
+          alt={alt}
+          // for fallback width and height
+          width={smallWidth}
+          height={smallHeight}
+        />
+      </StyledPicture>
+    );
+  }
+
   // if url passed in directly without resized params
   if (typeof resizedImageOptions === 'undefined' || typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
     // todo: remove for prod
