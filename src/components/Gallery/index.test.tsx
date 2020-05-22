@@ -194,7 +194,7 @@ describe('the gallery block', () => {
       expect(
         wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(0).childAt(1)
           .text(),
-      ).toBe('Full Screen');
+      ).toBe('Expand');
     });
   });
 
@@ -315,7 +315,7 @@ describe('the gallery block', () => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchmove', createTouchEvent({ x: 50, y: 20 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 10, y: 30 }, carouselNode)));
         });
-        expect(wrapper.find('styled__ImageCountText').text()).toMatch(/2\u00A0of\u00A06/);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch('2 of 6');
       });
 
       it('should set the correct x offsets during the swipe', () => {
@@ -356,13 +356,13 @@ describe('the gallery block', () => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchmove', createTouchEvent({ x: 50, y: 10 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 10, y: 10 }, carouselNode)));
         });
-        expect(wrapper.find('styled__ImageCountText').text()).toMatch(/2\u00A0of\u00A06/);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch('2 of 6');
         act(() => {
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchstart', createTouchEvent({ x: 10, y: 10 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchmove', createTouchEvent({ x: 50, y: 20 }, carouselNode)));
           carouselWrapper.getDOMNode().dispatchEvent(new TouchEvent('touchend', createTouchEvent({ x: 100, y: 30 }, carouselNode)));
         });
-        expect(wrapper.find('styled__ImageCountText').text()).toMatch(/1\u00A0of\u00A06/);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch('1 of 6');
       });
 
       it('should set the correct x offsets during the swipe', () => {
@@ -419,7 +419,7 @@ describe('the gallery block', () => {
           wrapper.update();
           expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transform === `translate(${i * -100}%, 0)`)).toBe(true);
           expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
-          expect(wrapper.find('styled__ImageCountText').text()).toMatch(new RegExp(`${i + 1}\u00A0of\u00A06`));
+          expect(wrapper.find('styled__ImageCountText').text()).toMatch(`${i + 1} of 6`);
         }
 
         act(() => {
@@ -430,7 +430,7 @@ describe('the gallery block', () => {
         wrapper.update();
         expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(-500%, 0)')).toBe(true);
         expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
-        expect(wrapper.find('styled__ImageCountText').text()).toMatch(/6\u00A0of\u00A06/);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch('6 of 6');
       });
     });
 
@@ -447,7 +447,7 @@ describe('the gallery block', () => {
         wrapper.update();
         expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transform === 'translate(0%, 0)')).toBe(true);
         expect(wrapper.find('styled__ImageWrapper').everyWhere((wrap) => wrap.prop('style').transitionDuration === '1s')).toBe(true);
-        expect(wrapper.find('styled__ImageCountText').text()).toMatch(/1\u00A0of\u00A06/);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch('1 of 6');
       });
     });
   });
@@ -520,6 +520,74 @@ describe('the gallery block', () => {
             },
           ],
         },
+      });
+    });
+  });
+
+  describe('the "expandPhrase" prop', () => {
+    describe('when the prop is provided', () => {
+      it('should set the phrase text to the passed in string', () => {
+        const wrapper = mount(<Gallery galleryElements={mockGallery} expandPhrase="Bygga ut" />);
+        expect(wrapper.find('styled__ControlsButton').at(0).find('styled__PlaybackText').text()).toEqual('Bygga ut');
+      });
+    });
+
+    describe('when the prop is NOT provided', () => {
+      it('should set the phrase text to the default string', () => {
+        const wrapper = mount(<Gallery galleryElements={mockGallery} />);
+        expect(wrapper.find('styled__ControlsButton').at(0).find('styled__PlaybackText').text()).toEqual('Expand');
+      });
+    });
+  });
+
+  describe('the "autoplayPhrase" prop', () => {
+    describe('when the prop is provided', () => {
+      it('should set the phrase text to the passed in string', () => {
+        const wrapper = mount(<Gallery galleryElements={mockGallery} autoplayPhrase="Autospela" />);
+        expect(wrapper.find('styled__ControlsButton').at(1).find('styled__PlaybackText').text()).toEqual('Autospela');
+      });
+    });
+
+    describe('when the prop is NOT provided', () => {
+      it('should set the phrase text to the default string', () => {
+        const wrapper = mount(<Gallery galleryElements={mockGallery} />);
+        expect(wrapper.find('styled__ControlsButton').at(1).find('styled__PlaybackText').text()).toEqual('Autoplay');
+      });
+    });
+  });
+
+  describe('the "pausePhrase" prop', () => {
+    describe('when the prop is provided', () => {
+      it('should set the phrase text to the passed in string', () => {
+        const wrapper = mount(<Gallery galleryElements={mockGallery} pausePhrase="Pausa" />);
+        const autoButtonWrapper = wrapper.find('styled__ControlContainer').find('button').at(1);
+        autoButtonWrapper.simulate('click');
+        expect(wrapper.find('styled__ControlsButton').at(1).find('styled__PlaybackText').text()).toEqual('Pausa');
+      });
+    });
+
+    describe('when the prop is NOT provided', () => {
+      it('should set the phrase text to the default string', () => {
+        const wrapper = mount(<Gallery galleryElements={mockGallery} />);
+        const autoButtonWrapper = wrapper.find('styled__ControlContainer').find('button').at(1);
+        autoButtonWrapper.simulate('click');
+        expect(wrapper.find('styled__ControlsButton').at(1).find('styled__PlaybackText').text()).toEqual('Pause autoplay');
+      });
+    });
+  });
+
+  describe('the "pageCountPhrase" prop', () => {
+    describe('when the prop is provided', () => {
+      it('should use the function to set the gallery page counter', () => {
+        const wrapper = mount(<Gallery galleryElements={mockGallery} pageCountPhrase={(current, total): string => `${current} av ${total}`} />);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch('1 av 6');
+      });
+    });
+
+    describe('when the prop is NOT provided', () => {
+      it('should use the default template string to set the gallery page counter', () => {
+        const wrapper = mount(<Gallery galleryElements={mockGallery} />);
+        expect(wrapper.find('styled__ImageCountText').text()).toMatch('1 of 6');
       });
     });
   });
