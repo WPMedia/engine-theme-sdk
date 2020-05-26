@@ -44,7 +44,7 @@ const ImageMetadata: React.FC<ImageMetadataProps> = ({
 
   const credits = (photographer || aff) && `(${[photographer, aff].filter((name) => name).join('/')})`;
 
-  return (subtitle || caption || credits) && (
+  return !!(subtitle || caption || credits) && (
     <MetadataParagraph className="image-metadata" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
       {
         subtitle && (

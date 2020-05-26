@@ -183,7 +183,7 @@ describe('the meta data ', () => {
           twitterSite={twitterSite}
           websiteName={websiteName}
         />);
-        expect(wrapper.find("meta[property='og:image']").props().content).toContain('1200x630/awesome-url');
+        expect(wrapper.find("meta[property='og:image']").props().content).toBe('https://fake.cdn.com/resizer/l_1yxKdAU0rtnyaww9LofnGAFkw=/1200x630/awesome-url');
       });
 
       it('should have a video og:image:alt meta tag', () => {
@@ -450,7 +450,7 @@ describe('the meta data ', () => {
           twitterSite={twitterSite}
           websiteName={websiteName}
         />);
-        expect(wrapper.find("meta[property='og:image']").props().content).toContain('/1200x630/awesome-url');
+        expect(wrapper.find("meta[property='og:image']").props().content).toBe('https://fake.cdn.com/resizer/l_1yxKdAU0rtnyaww9LofnGAFkw=/1200x630/awesome-url');
       });
 
       it('should have a gallery og:image:alt meta tag', () => {

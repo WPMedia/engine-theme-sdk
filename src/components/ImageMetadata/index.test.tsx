@@ -153,4 +153,11 @@ describe('the ImageMetadata component', () => {
       expect(wrapper.text()).toBe('ffffg ttttu (bbbyyy/affff)');
     });
   });
+
+  describe('when all the possible metadata values are undefined', () => {
+    it('should not render the metadata string', () => {
+      const wrapper = shallow(<ImageMetadata />);
+      expect(wrapper.isEmptyRender()).toBe(true);
+    });
+  });
 });
