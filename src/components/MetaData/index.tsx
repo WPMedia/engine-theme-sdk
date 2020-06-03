@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 interface CustomMetaData {
-    metaName: string;
-    metaValue: string;
+  metaName: string;
+  metaValue: string;
 }
 
 const getCustomMetaData = (metaHTMLString: string): Array<CustomMetaData> => {
@@ -36,33 +36,33 @@ const generateCustomMetaTags = (metaData, MetaTag, MetaTags): ReactElement => {
 };
 
 interface Props {
-    MetaTag: Function;
-    MetaTags: Function;
-    metaValue: Function;
-    globalContent?: {
-        description?: {
-            basic?: string;
-        };
-        headlines?: {
-            basic?: string;
-        };
-        taxonomy?: {
-            seo_keywords?: Array<string>;
-            tags?: Array<{
-                slug?: string;
-            }>;
-        };
-        authors?: Array<{
-            bio?: string;
-            byline?: string;
-        }>;
-        Payload?: Array<{
-            description?: string;
-            name?: string;
-        }>;
-    } | null;
-    websiteName?: string | null;
-    twitterSite?: string | null;
+  MetaTag: Function;
+  MetaTags: Function;
+  metaValue: Function;
+  globalContent?: {
+    description?: {
+      basic?: string;
+    };
+    headlines?: {
+      basic?: string;
+    };
+    taxonomy?: {
+      seo_keywords?: Array<string>;
+      tags?: Array<{
+          slug?: string;
+      }>;
+    };
+    authors?: Array<{
+      bio?: string;
+      byline?: string;
+    }>;
+    Payload?: Array<{
+      description?: string;
+      name?: string;
+    }>;
+  } | null;
+  websiteName?: string | null;
+  twitterSite?: string | null;
 }
 
 const MetaData: React.FC<Props> = ({
@@ -74,6 +74,7 @@ const MetaData: React.FC<Props> = ({
   let tagMetaDataTags = null;
   let authorMetaDataTags = null;
   let searchMetaDataTags = null;
+  let sectionMetaDataTags = null;
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
   const { getImgURL, getImgAlt } = require('./promoImageHelper');
@@ -131,20 +132,30 @@ const MetaData: React.FC<Props> = ({
 
       storyMetaDataTags = (
         <>
-          { metaData.description
-                        && <meta name="description" content={metaData.description} />}
-          { metaData.keywords
-            && <meta name="keywords" content={metaData.keywords} />}
+          { 
+            metaData.description
+            && <meta name="description" content={metaData.description} />
+          }
+          { 
+            metaData.keywords
+            && <meta name="keywords" content={metaData.keywords} />
+          }
 
           <meta property="og:title" content={metaData.ogTitle} />
 
-          { metaData.ogImage
-                && <meta property="og:image" content={metaData.ogImage} />}
-          { metaData.ogImageAlt
-                    && <meta property="og:image:alt" content={metaData.ogImageAlt} />}
-          {pageType === 'article' && (
-          <meta name="robots" content="noarchive" />
-          )}
+          { 
+            metaData.ogImage
+            && <meta property="og:image" content={metaData.ogImage} />
+          }
+          { 
+            metaData.ogImageAlt
+            && <meta property="og:image:alt" content={metaData.ogImageAlt} />
+          }
+          {
+            pageType === 'article' && (
+             <meta name="robots" content="noarchive" />
+            )
+          }
         </>
       );
     }
@@ -163,9 +174,9 @@ const MetaData: React.FC<Props> = ({
     authorMetaDataTags = (
       <>
         {
-                    metaData.description
-                    && <meta name="description" content={metaData.description} />
-    }
+          metaData.description
+          && <meta name="description" content={metaData.description} />
+        }
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
@@ -192,8 +203,31 @@ const MetaData: React.FC<Props> = ({
 
     tagMetaDataTags = (
       <>
-        { metaData.description
-                    && <meta name="description" content={metaData.description} />}
+        { 
+          metaData.description
+          && <meta name="description" content={metaData.description} />
+        }
+        <meta property="og:title" content={metaData.ogTitle} />
+      </>
+    );
+  } else if (pageType === 'section') {
+    const payload = (gc && gc.name) ? gc : {};
+    metaData.description = metaValue('description') || payload.description || null;
+    metaData.ogTitle = metaValue('og:title') || payload.name || '';
+    if (metaData.ogTitle === '') {
+      metaData.title = websiteName;
+      metaData.ogTitle = websiteName;
+    } else {
+      metaData.title = `${metaData.ogTitle} - ${websiteName}`;
+      metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
+    }
+
+    sectionMetaDataTags = (
+      <>
+        { 
+          metaData.description
+          && <meta name="description" content={metaData.description} />
+        }
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
@@ -201,12 +235,18 @@ const MetaData: React.FC<Props> = ({
   // Twitter meta tags go on all pages
   const twitterTags = (
     <>
-      { metaData.ogSiteName
-                && <meta property="og:site_name" content={metaData.ogSiteName} />}
-      { metaData.twitterSite
-    && <meta property="twitter:site" content={metaData.twitterSite} />}
-      { metaData.twitterCard
-        && <meta property="twitter:card" content={metaData.twitterCard} />}
+      { 
+        metaData.ogSiteName
+        && <meta property="og:site_name" content={metaData.ogSiteName} />
+      }
+      { 
+        metaData.twitterSite
+        && <meta property="twitter:site" content={metaData.twitterSite} />
+      }
+      { 
+        metaData.twitterCard
+        && <meta property="twitter:card" content={metaData.twitterCard} />
+      }
     </>
   );
 
@@ -217,6 +257,7 @@ const MetaData: React.FC<Props> = ({
       <title>{metaData.title}</title>
       {storyMetaDataTags}
       {tagMetaDataTags}
+      {sectionMetaDataTags}
       {authorMetaDataTags}
       {searchMetaDataTags}
       {customMetaTags}
