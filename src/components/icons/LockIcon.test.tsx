@@ -6,6 +6,7 @@ describe('the LockIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<LockIcon />);
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).toEqual('img');
   });
 
   describe('the width prop', () => {
