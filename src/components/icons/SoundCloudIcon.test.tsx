@@ -52,7 +52,7 @@ describe('the SoundCloudIcon component', () => {
 
     it('should default to an empty string', () => {
       const wrapper = shallow(<SoundCloudIcon />);
-      expect(wrapper.find('title').text()).toEqual('SoundCloud Logo');
+      expect(wrapper.find('title').text()).toEqual('');
     });
   });
 
