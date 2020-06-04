@@ -110,7 +110,7 @@ storiesOf('Image', module)
       breakpoints={{}}
     />
   ))
-  .add('if no resized params passed in, should slowly load raw url big image', () => (
+  .add('if no resized params passed in, should load no image', () => (
     <Image
       url={rawURL}
       alt={alt}
