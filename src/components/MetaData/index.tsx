@@ -132,28 +132,28 @@ const MetaData: React.FC<Props> = ({
 
       storyMetaDataTags = (
         <>
-          { 
+          {
             metaData.description
             && <meta name="description" content={metaData.description} />
           }
-          { 
+          {
             metaData.keywords
             && <meta name="keywords" content={metaData.keywords} />
           }
 
           <meta property="og:title" content={metaData.ogTitle} />
 
-          { 
+          {
             metaData.ogImage
             && <meta property="og:image" content={metaData.ogImage} />
           }
-          { 
+          {
             metaData.ogImageAlt
             && <meta property="og:image:alt" content={metaData.ogImageAlt} />
           }
           {
             pageType === 'article' && (
-             <meta name="robots" content="noarchive" />
+              <meta name="robots" content="noarchive" />
             )
           }
         </>
@@ -203,7 +203,7 @@ const MetaData: React.FC<Props> = ({
 
     tagMetaDataTags = (
       <>
-        { 
+        {
           metaData.description
           && <meta name="description" content={metaData.description} />
         }
@@ -224,7 +224,7 @@ const MetaData: React.FC<Props> = ({
 
     sectionMetaDataTags = (
       <>
-        { 
+        {
           metaData.description
           && <meta name="description" content={metaData.description} />
         }
@@ -235,15 +235,15 @@ const MetaData: React.FC<Props> = ({
   // Twitter meta tags go on all pages
   const twitterTags = (
     <>
-      { 
+      {
         metaData.ogSiteName
         && <meta property="og:site_name" content={metaData.ogSiteName} />
       }
-      { 
+      {
         metaData.twitterSite
         && <meta property="twitter:site" content={metaData.twitterSite} />
       }
-      { 
+      {
         metaData.twitterCard
         && <meta property="twitter:card" content={metaData.twitterCard} />
       }
