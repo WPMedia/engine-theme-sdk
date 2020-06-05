@@ -116,9 +116,9 @@ const Gallery: React.FC<GalleryProps> = ({
     const pg = page - 1;
     EventEmitter.dispatch('galleryImagePrevious', {
       eventName: 'galleryImagePrevious',
-      ansId,
-      ansHeadline,
-      id: galleryElements[pg]._id,
+      ansGalleryId: ansId,
+      ansGalleryHeadline: ansHeadline,
+      ansImageId: galleryElements[pg]._id,
       caption: galleryElements[pg].caption,
       orderPosition: pg + 1,
       totalImages: galleryElements.length,
@@ -134,9 +134,9 @@ const Gallery: React.FC<GalleryProps> = ({
     const pg = page + 1;
     EventEmitter.dispatch('galleryImageNext', {
       eventName: 'galleryImageNext',
-      ansId,
-      ansHeadline,
-      id: galleryElements[pg]._id,
+      ansGalleryId: ansId,
+      ansGalleryHeadline: ansHeadline,
+      ansImageId: galleryElements[pg]._id,
       caption: galleryElements[pg].caption,
       orderPosition: pg + 1,
       totalImages: galleryElements.length,
@@ -152,9 +152,9 @@ const Gallery: React.FC<GalleryProps> = ({
       const pg = page + 1;
       EventEmitter.dispatch('galleryImageNext', {
         eventName: 'galleryImageNext',
-        ansId,
-        ansHeadline,
-        id: galleryElements[pg]._id,
+        ansGalleryId: ansId,
+        ansGalleryHeadline: ansHeadline,
+        ansImageId: galleryElements[pg]._id,
         caption: galleryElements[pg].caption,
         orderPosition: pg + 1,
         totalImages: galleryElements.length,
@@ -172,9 +172,9 @@ const Gallery: React.FC<GalleryProps> = ({
         const pg = 0;
         EventEmitter.dispatch('galleryImagePrevious', {
           eventName: 'galleryImagePrevious',
-          ansId,
-          ansHeadline,
-          id: galleryElements[pg]._id,
+          ansGalleryId: ansId,
+          ansGalleryHeadline: ansHeadline,
+          ansImageId: galleryElements[pg]._id,
           caption: galleryElements[pg].caption,
           orderPosition: pg + 1,
           totalImages: galleryElements.length,
