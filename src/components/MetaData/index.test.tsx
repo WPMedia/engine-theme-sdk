@@ -920,7 +920,6 @@ describe('the meta data ', () => {
 
       const useFusionContext = {
         globalContent: {
-          description: 'Entertainment at The Sun',
           name: 'Entertainment',
         },
         arcSite: 'the-sun',
@@ -942,7 +941,7 @@ describe('the meta data ', () => {
         expect(wrapper.find('title').childAt(0).text()).toEqual('Entertainment - The Sun');
       });
 
-      it('should have a section description meta tag', () => {
+      it('should not have a section description meta tag', () => {
         const wrapper = shallow(<MetaData
           metaValue={metaValue}
           MetaTag={jest.fn()}
@@ -951,7 +950,7 @@ describe('the meta data ', () => {
           twitterSite={twitterSite}
           websiteName={websiteName}
         />);
-        expect(wrapper.find("meta[name='description']").props().content).toBe('Entertainment at The Sun');
+        expect(wrapper.find("meta[name='description']").length).toBe(0);
       });
 
       it('should have a section og:title meta tag', () => {
@@ -1019,7 +1018,6 @@ describe('the meta data ', () => {
       };
       const useFusionContext = {
         globalContent: {
-          description: 'Entertainment at The Sun',
           name: 'Entertainment',
         },
         arcSite: 'the-sun',

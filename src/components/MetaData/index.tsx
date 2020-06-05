@@ -60,6 +60,7 @@ interface Props {
       description?: string;
       name?: string;
     }>;
+    name? : string;
   } | null;
   websiteName?: string | null;
   twitterSite?: string | null;
@@ -212,7 +213,7 @@ const MetaData: React.FC<Props> = ({
     );
   } else if (pageType === 'section') {
     const payload = (gc && gc.name) ? gc : {};
-    metaData.description = metaValue('description') || payload.description || null;
+    metaData.description = metaValue('description') || null;
     metaData.ogTitle = metaValue('og:title') || payload.name || '';
     if (metaData.ogTitle === '') {
       metaData.title = websiteName;
