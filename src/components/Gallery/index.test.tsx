@@ -453,6 +453,13 @@ describe('the gallery block', () => {
   });
 
   describe('the Image child components', () => {
+    it('should pass the image _id to the wrapper element', () => {
+      const wrapper = shallow(<Gallery galleryElements={mockGallery} resizerURL="" />);
+      wrapper.find('styled__ImageWrapper').forEach((imageWrapper, index) => {
+        expect(imageWrapper.prop('data-image-id')).toBe(mockGallery[index]._id);
+      });
+    });
+
     it('should pass the correct dimensions', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} resizerURL="" />);
       wrapper.find('styled__ImageWrapper').forEach((imageWrapper) => {

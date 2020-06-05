@@ -269,6 +269,7 @@ const Gallery: React.FC<GalleryProps> = ({
         { galleryElements.map((imgContent): React.ReactElement => (
           <ImageWrapper
             key={`gallery-image-${imgContent._id}`}
+            data-image-id={imgContent._id}
             style={{
               transform: slide.isSliding
                 ? `translate(calc(${-100 * page}% - ${slide.delta}px), 0)`
