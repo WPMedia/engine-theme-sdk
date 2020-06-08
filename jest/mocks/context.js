@@ -8,3 +8,5 @@ export default {
     ...props,
   })),
 };
+
+export const useAppContext = () => ({});
