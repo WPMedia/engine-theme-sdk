@@ -7,6 +7,7 @@ function loadStories() {
   req.keys().forEach(req)
 }
 
+// add decorator with a11y checks
 addDecorator(withA11y);
 
 configure(loadStories, module)

@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import { storiesOf, addParameters } from '@storybook/react';
 import {
