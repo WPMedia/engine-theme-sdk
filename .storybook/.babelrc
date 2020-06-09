@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [
+          "."
+        ],
+        "alias": {
+          "fusion:themes": "./.storybook/themes.js",
+          "fusion:context": "./.storybook/context.js"
+        }
+      }
+    ]
+  ]
+}

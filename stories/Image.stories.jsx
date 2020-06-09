@@ -1,24 +1,8 @@
 import React from 'react';
-import { storiesOf, addParameters } from '@storybook/react';
 import {
-  INITIAL_VIEWPORTS,
-} from '@storybook/addon-viewport';
+  storiesOf,
+} from '@storybook/react';
 import Image from '../src/components/Image';
-
-addParameters({
-  viewport: {
-    viewports: {
-      ...INITIAL_VIEWPORTS,
-      MacbookPro: {
-        name: 'Macbook pro 1',
-        styles: {
-          width: '1200px',
-          height: '801px',
-        },
-      },
-    },
-  },
-});
 
 const breakpoints = {
   small: 420,

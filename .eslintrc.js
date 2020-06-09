@@ -13,13 +13,14 @@ module.exports = {
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
     'react/static-property-placement': 'off',
+    'import/extensions': 'off'
   },
   settings: {
-      'import/resolver': {
-          node: {
-              extensions: ['.js', '.jsx', '.ts', '.tsx'],
-          },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
+    },
   },
   env: {
     browser: true,

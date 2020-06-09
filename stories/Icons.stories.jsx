@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable import/extensions, @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import {
