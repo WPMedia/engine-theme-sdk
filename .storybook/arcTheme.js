@@ -57,6 +57,7 @@ export default create({
   inputBorderRadius: 4,
 
   brandTitle: 'Engine Theme SDK',
-  brandUrl: 'https://example.com',
-  brandImage: 'https://placehold.it/350x150',
+  brandUrl: 'https://github.com/WPMedia/engine-theme-sdk',
+  // todo: change this to a legitimate image url
+  brandImage: 'https://arcdesignsystem.com/img/arc-logo-black.svg',
 });
