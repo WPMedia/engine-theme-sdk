@@ -32,7 +32,7 @@ export default create({
 
   // UI
   appBg: 'white',
-  appContentBg: 'rgba(244, 247, 251, 0.92)',
+  // appContentBg: 'rgba(244, 247, 251, 0.92)',
   appBorderColor: '#6bc1ae',
   // rounded corners
   appBorderRadius: 4,
