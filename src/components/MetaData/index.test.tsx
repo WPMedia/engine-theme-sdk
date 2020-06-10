@@ -1014,10 +1014,17 @@ describe('the meta data ', () => {
         if (prop === 'og:title') {
           return 'this is a custom og:title';
         }
+        if (prop === 'title') {
+          return 'this is a custom title';
+        }
         return null;
       };
       const useFusionContext = {
         globalContent: {
+          metadata: {
+            metadata_title: 'This is a metadata title',
+            metadata_description: 'This is a metadata description',
+          },
           name: 'Entertainment',
         },
         arcSite: 'the-sun',
@@ -1036,7 +1043,7 @@ describe('the meta data ', () => {
       />);
 
       it('should have a title tag', () => {
-        expect(wrapper.find('title').childAt(0).text()).toEqual('this is a custom og:title - The Sun');
+        expect(wrapper.find('title').childAt(0).text()).toEqual('this is a custom title');
       });
 
       it('should have a tag description meta tag', () => {
@@ -1045,6 +1052,49 @@ describe('the meta data ', () => {
 
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title - The Sun');
+      });
+    });
+
+    describe('when metadata fields in global content are provided', () => {
+      const metaValue = (prop): string | null => {
+        if (prop === 'page-type') {
+          return 'section';
+        }
+        return null;
+      };
+      const useFusionContext = {
+        globalContent: {
+          metadata: {
+            metadata_title: 'This is a metadata title',
+            metadata_description: 'This is a metadata description',
+          },
+          name: 'Entertainment',
+        },
+        arcSite: 'the-sun',
+      };
+      const { globalContent, arcSite } = useFusionContext;
+      const {
+        websiteName, twitterSite,
+      } = getProperties(arcSite);
+      const wrapper = shallow(<MetaData
+        metaValue={metaValue}
+        MetaTag={jest.fn()}
+        MetaTags={jest.fn()}
+        globalContent={globalContent}
+        twitterSite={twitterSite}
+        websiteName={websiteName}
+      />);
+
+      it('should have a title tag', () => {
+        expect(wrapper.find('title').childAt(0).text()).toEqual('This is a metadata title');
+      });
+
+      it('should have a tag description meta tag', () => {
+        expect(wrapper.find("meta[name='description']").props().content).toBe('This is a metadata description');
+      });
+
+      it('should have a tag og:title meta tag', () => {
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('Entertainment - The Sun');
       });
     });
   });

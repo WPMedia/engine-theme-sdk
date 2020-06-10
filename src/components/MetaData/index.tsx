@@ -60,7 +60,11 @@ interface Props {
       description?: string;
       name?: string;
     }>;
-    name? : string;
+    metadata?: {
+      metadata_description?: string;
+      metadata_title?: string;
+    };
+    name?: string;
   } | null;
   websiteName?: string | null;
   twitterSite?: string | null;
@@ -213,14 +217,21 @@ const MetaData: React.FC<Props> = ({
     );
   } else if (pageType === 'section') {
     const payload = (gc && gc.name) ? gc : {};
-    metaData.description = metaValue('description') || null;
+    const gcMetadata = (gc && gc.metadata) ? gc.metadata : {}
+    metaData.description = metaValue('description') || gcMetadata.metadata_description || null;
     metaData.ogTitle = metaValue('og:title') || payload.name || '';
+    metaData.title = metaValue('title') || gcMetadata.metadata_title || payload.name || '';
     if (metaData.ogTitle === '') {
-      metaData.title = websiteName;
       metaData.ogTitle = websiteName;
     } else {
-      metaData.title = `${metaData.ogTitle} - ${websiteName}`;
       metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
+    }
+    if (metaData.title === ''){
+      metaData.title = metaData.ogTitle;
+    } else {
+      if (metaData.title === payload.name){
+        metaData.title = `${metaData.title} - ${websiteName}`;
+      }
     }
 
     sectionMetaDataTags = (
