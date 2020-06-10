@@ -217,7 +217,7 @@ const MetaData: React.FC<Props> = ({
     );
   } else if (pageType === 'section') {
     const payload = (gc && gc.name) ? gc : {};
-    const gcMetadata = (gc && gc.metadata) ? gc.metadata : {}
+    const gcMetadata = (gc && gc.metadata) ? gc.metadata : {};
     metaData.description = metaValue('description') || gcMetadata.metadata_description || null;
     metaData.ogTitle = metaValue('og:title') || payload.name || '';
     metaData.title = metaValue('title') || gcMetadata.metadata_title || payload.name || '';
@@ -226,12 +226,10 @@ const MetaData: React.FC<Props> = ({
     } else {
       metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
     }
-    if (metaData.title === ''){
+    if (metaData.title === '') {
       metaData.title = metaData.ogTitle;
-    } else {
-      if (metaData.title === payload.name){
-        metaData.title = `${metaData.title} - ${websiteName}`;
-      }
+    } else if (metaData.title === payload.name) {
+      metaData.title = `${metaData.title} - ${websiteName}`;
     }
 
     sectionMetaDataTags = (

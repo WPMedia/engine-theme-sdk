@@ -1022,7 +1022,9 @@ describe('the meta data ', () => {
       const useFusionContext = {
         globalContent: {
           metadata: {
+            // eslint-disable-next-line @typescript-eslint/camelcase
             metadata_title: 'This is a metadata title',
+            // eslint-disable-next-line @typescript-eslint/camelcase
             metadata_description: 'This is a metadata description',
           },
           name: 'Entertainment',
@@ -1065,7 +1067,9 @@ describe('the meta data ', () => {
       const useFusionContext = {
         globalContent: {
           metadata: {
+            // eslint-disable-next-line @typescript-eslint/camelcase
             metadata_title: 'This is a metadata title',
+            // eslint-disable-next-line @typescript-eslint/camelcase
             metadata_description: 'This is a metadata description',
           },
           name: 'Entertainment',
