@@ -6,6 +6,7 @@ describe('the ArrowUpIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<ArrowUpIcon />);
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).toEqual('img');
   });
 
   describe('the width prop', () => {

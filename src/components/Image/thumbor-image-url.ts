@@ -1,31 +1,20 @@
-import { resizerURL, resizerKey } from 'fusion:environment';
-import Thumbor from 'thumbor-lite';
-
 const buildThumborURL = (
-  url: string,
-  displayWidth: number,
-  displayHeight: number,
-  respectAspectRatio: boolean,
+  targetImageKeyWithFilter: string | undefined,
+  targetDimension: string,
+  imageSourceWithoutProtocol: string,
+  resizerURL: string,
 ): string => {
-  const thumbor = new Thumbor(resizerKey, resizerURL);
-  const imgSrc = url.replace(/^http[s]?:\/\//, '')
-    .replace(' ', '%20');
-  if (imgSrc.includes('?')) imgSrc.replace('?', '%3F');
+  if (typeof targetImageKeyWithFilter === 'undefined' || resizerURL.length <= 1) {
+    return '';
+  }
+  const [targetImageKey, imageFilter = ''] = targetImageKeyWithFilter.split('=');
 
-  if (respectAspectRatio) {
-  // https://thumbor.readthedocs.io/en/latest/filling.html?highlight=fill#filling
-  // fitIn will respect the aspect ratio of the photo and fit it into dsipaly
-  // fitin https://thumbor.readthedocs.io/en/latest/usage.html?highlight=fit#fit-in
-    return thumbor.setImagePath(imgSrc)
-      .fitIn(displayWidth, displayHeight)
-      .filter('fill(white)')
-      .filter('background_color(white)')
-      .buildUrl();
+  if (targetImageKeyWithFilter.includes('fit-in')) {
+    // https://resizer.com/resizer/OzPtTYdwjA0zqIliyUtp5iuF2Hc=//fit-in/377x283/filters:fill(white):background_color(white)/arc-anglerfish-staging-staging.s3.amazonaws.com/public/NA6FMAXWP5DR3FDZQ7SGJ3C3FE.png
+    return `${resizerURL}${targetImageKey}=${imageFilter}${imageSourceWithoutProtocol}`;
   }
 
-  return thumbor.setImagePath(imgSrc)
-    .resize(displayWidth, displayHeight)
-    .buildUrl();
+  return `${resizerURL}${targetImageKey}=/${targetDimension}/${imageFilter}${imageSourceWithoutProtocol}`;
 };
 
 export default buildThumborURL;

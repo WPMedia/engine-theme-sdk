@@ -3,7 +3,7 @@ import React from 'react';
 type IconProps = import('./types').default;
 
 const SoundCloudIcon: React.FC<IconProps> = ({
-  width = 24, height = 24, fill = '#000', title = 'SoundCloud Logo', description = '',
+  width = 24, height = 24, fill = '#000', title = '', description = '',
 }) => (
   <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" role="img">
     <title>{title}</title>

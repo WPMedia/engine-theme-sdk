@@ -6,6 +6,7 @@ describe('the StarIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<StarIcon />);
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).toEqual('img');
   });
 
   describe('the width prop', () => {
