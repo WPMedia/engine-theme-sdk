@@ -1,3 +1,6 @@
 dist
 .storybook
 docs
+stories
+storybook-static
+jest
