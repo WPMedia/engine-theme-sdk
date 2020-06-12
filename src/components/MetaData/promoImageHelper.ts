@@ -1,11 +1,11 @@
-import { resizerURL, resizerKey } from 'fusion:environment';
+import { resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
 
-export const getImgURL = (metaValue, metaType = 'og:image', globalContent): string => {
+export const getImgURL = (metaValue, metaType = 'og:image', globalContent, resizerURL): string => {
   const buildURL = (_url): string | null => {
     if (typeof window === 'undefined') {
       // eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
       const Thumbor = require('thumbor-lite');
-      const thumbor = new Thumbor(resizerKey, resizerURL);
+      const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerURL);
       let imgSrc = _url.replace(/^http[s]?:\/\//, '')
         .replace(' ', '%20');
       if (imgSrc.includes('?')) {
