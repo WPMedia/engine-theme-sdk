@@ -60,6 +60,7 @@ import {
   RssIcon,
   SearchIcon,
   ShareIcon,
+  ShoppingCartIcon,
   SnapchatIcon,
   SoundCloudIcon,
   SoundOffIcon,
@@ -142,6 +143,7 @@ storiesOf('Icons Available', module)
   .add('RssIcon', () => <RssIcon />)
   .add('SearchIcon', () => <SearchIcon />)
   .add('ShareIcon', () => <ShareIcon />)
+  .add('ShoppingCartIcon', () => <ShoppingCartIcon />)
   .add('SnapchatIcon', () => <SnapchatIcon />)
   .add('SoundCloudIcon', () => <SoundCloudIcon />)
   .add('SoundOffIcon', () => <SoundOffIcon />)

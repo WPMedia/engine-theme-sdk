@@ -13,11 +13,15 @@ jest.mock('react-dom/server', () => ({
   renderToString: jest.fn().mockReturnValue('<meta />'),
 }));
 
-getProperties.mockImplementation(() => ({
-  websiteName: 'The Sun',
-  twitterSite: 'https://www.twitter.com/the-sun',
-  dangerouslyInjectJS: [],
-}));
+// getProperties.mockImplementation(() => ({
+//   websiteName: 'The Sun',
+//   twitterSite: 'https://www.twitter.com/the-sun',
+//   dangerouslyInjectJS: [],
+// }));
+
+const websiteName = 'The Sun';
+const twitterSite = 'https://www.twitter.com/the-sun';
+const resizerURL = 'https://fake.cdn.com/resizer';
 
 describe('the meta data ', () => {
   describe('if page type is article', () => {
@@ -61,10 +65,7 @@ describe('the meta data ', () => {
       },
       arcSite: 'the-sun',
     };
-    const { globalContent, arcSite } = useFusionContext;
-    const {
-      websiteName, twitterSite,
-    } = getProperties(arcSite);
+    const { globalContent } = useFusionContext;
 
     const wrapper = shallow(<MetaData
       metaValue={metaValue}
@@ -73,6 +74,7 @@ describe('the meta data ', () => {
       globalContent={globalContent}
       twitterSite={twitterSite}
       websiteName={websiteName}
+      resizerURL={resizerURL}
     />);
     it('should have a title', () => {
       expect(wrapper.find('title').length).toBe(1);
@@ -121,10 +123,7 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
 
       it('should have a title tag', () => {
         const wrapper = shallow(<MetaData
@@ -134,6 +133,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find('title').childAt(0).text()).toEqual('this is a video headline – The Sun');
       });
@@ -146,6 +146,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[name='description']").props().content).toBe('this is a video description');
       });
@@ -158,6 +159,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[name='keywords']").props().content).toBe('keyword1,keyword2');
       });
@@ -170,6 +172,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a video headline');
       });
@@ -182,6 +185,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[property='og:image']").props().content).toBe('https://fake.cdn.com/resizer/l_1yxKdAU0rtnyaww9LofnGAFkw=/1200x630/awesome-url');
       });
@@ -194,6 +198,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('alt text');
       });
@@ -206,6 +211,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
@@ -221,10 +227,8 @@ describe('the meta data ', () => {
         globalContent: null,
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -232,6 +236,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
 
       it('should have a title tag', () => {
@@ -308,10 +313,8 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -319,6 +322,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
       it('should have a title tag', () => {
         expect(wrapper.find('title').childAt(0).text()).toEqual('this is a custom title – The Sun');
@@ -388,10 +392,7 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
 
       it('should have a title tag', () => {
         const wrapper = shallow(<MetaData
@@ -401,6 +402,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find('title').childAt(0).text()).toEqual('this is a gallery headline – The Sun');
       });
@@ -413,6 +415,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[name='description']").props().content).toBe('this is a gallery description');
       });
@@ -425,6 +428,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[name='keywords']").props().content).toBe('keyword1,keyword2');
       });
@@ -437,6 +441,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a gallery headline');
       });
@@ -449,6 +454,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[property='og:image']").props().content).toBe('https://fake.cdn.com/resizer/l_1yxKdAU0rtnyaww9LofnGAFkw=/1200x630/awesome-url');
       });
@@ -461,6 +467,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('alt text');
       });
@@ -473,6 +480,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
@@ -489,10 +497,8 @@ describe('the meta data ', () => {
         globalContent: null,
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -500,6 +506,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
 
       it('should have a title tag', () => {
@@ -575,10 +582,8 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -586,6 +591,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
 
       it('should have a title tag', () => {
@@ -636,10 +642,7 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
 
       it('should have a title tag', () => {
         const wrapper = shallow(<MetaData
@@ -649,6 +652,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find('title').childAt(0).text()).toEqual('John Doe - The Sun');
       });
@@ -661,6 +665,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[name='description']").props().content).toBe('John Doe is an author');
       });
@@ -673,6 +678,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('John Doe - The Sun');
       });
@@ -688,10 +694,8 @@ describe('the meta data ', () => {
         globalContent: null,
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -699,6 +703,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
 
       it('should have a title tag', () => {
@@ -733,10 +738,8 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -744,6 +747,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
 
       it('should have a title tag', () => {
@@ -780,10 +784,7 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
 
       it('should have a title tag', () => {
         const wrapper = shallow(<MetaData
@@ -793,6 +794,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find('title').childAt(0).text()).toEqual('tag name - The Sun');
       });
@@ -805,6 +807,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[name='description']").props().content).toBe('this is a tag description');
       });
@@ -817,6 +820,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('tag name - The Sun');
       });
@@ -833,10 +837,8 @@ describe('the meta data ', () => {
         globalContent: null,
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -844,6 +846,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
 
       it('should have a title tag', () => {
@@ -883,10 +886,8 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -894,6 +895,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
 
       it('should have a title tag', () => {
@@ -924,10 +926,7 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
 
       it('should have a title tag', () => {
         const wrapper = shallow(<MetaData
@@ -937,6 +936,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find('title').childAt(0).text()).toEqual('Entertainment - The Sun');
       });
@@ -949,6 +949,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[name='description']").length).toBe(0);
       });
@@ -961,6 +962,7 @@ describe('the meta data ', () => {
           globalContent={globalContent}
           twitterSite={twitterSite}
           websiteName={websiteName}
+          resizerURL={resizerURL}
         />);
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('Entertainment - The Sun');
       });
@@ -977,10 +979,8 @@ describe('the meta data ', () => {
         globalContent: null,
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -988,6 +988,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
 
       it('should have a title tag', () => {
@@ -1031,10 +1032,8 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -1042,6 +1041,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
 
       it('should have a title tag', () => {
@@ -1076,10 +1076,8 @@ describe('the meta data ', () => {
         },
         arcSite: 'the-sun',
       };
-      const { globalContent, arcSite } = useFusionContext;
-      const {
-        websiteName, twitterSite,
-      } = getProperties(arcSite);
+      const { globalContent } = useFusionContext;
+
       const wrapper = shallow(<MetaData
         metaValue={metaValue}
         MetaTag={jest.fn()}
@@ -1087,6 +1085,7 @@ describe('the meta data ', () => {
         globalContent={globalContent}
         twitterSite={twitterSite}
         websiteName={websiteName}
+        resizerURL={resizerURL}
       />);
 
       it('should have a title tag', () => {
