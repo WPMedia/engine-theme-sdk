@@ -56,6 +56,7 @@ export { default as RedditIcon } from './RedditIcon';
 export { default as RssIcon } from './RssIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as ShareIcon } from './ShareIcon';
+export { default as ShoppingCartIcon } from './ShoppingCartIcon';
 export { default as SnapchatIcon } from './SnapchatIcon';
 export { default as SoundCloudIcon } from './SoundCloudIcon';
 export { default as SoundOffIcon } from './SoundOffIcon';

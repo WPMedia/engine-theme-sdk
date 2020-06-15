@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ShoppingCartIcon from './ShoppingCart';
+import ShoppingCartIcon from './ShoppingCartIcon';
 
 describe('the ShoppingCart component', () => {
   it('should render an SVG', () => {
@@ -50,7 +50,7 @@ describe('the ShoppingCart component', () => {
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
 
-    it('should default to an empty string', () => {
+    it('should default to our default title', () => {
       const wrapper = shallow(<ShoppingCartIcon />);
       expect(wrapper.find('title').text()).toEqual('Shopping Cart Icon');
     });
