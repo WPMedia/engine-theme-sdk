@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import buildThumborURL from './thumbor-image-url';
 import SourceHandler from './SourceHandler';
 
@@ -164,6 +165,39 @@ const Image: React.FC<ImageProps> = ({
       }
     </StyledPicture>
   );
+};
+
+Image.propTypes = {
+  /** Image source URL */
+  url: PropTypes.string,
+  /** Alt text for the image */
+  alt: PropTypes.string,
+  /** Width for small images */
+  smallWidth: PropTypes.number,
+  /** Height for small images */
+  smallHeight: PropTypes.number,
+  /** Width for medium images */
+  mediumWidth: PropTypes.number,
+  /** Height for medium images */
+  mediumHeight: PropTypes.number,
+  /** Width for large images */
+  largeWidth: PropTypes.number,
+  /** Height for large images */
+  largeHeight: PropTypes.number,
+  /** Key/value options for resizing the image */
+  resizedImageOptions: PropTypes.array,
+  /** Thumbor resizer URL */
+  resizerURL: PropTypes.string,
+  /** Specify small, medium and large breakpoints for the image */
+  breakpoints: {
+    small: PropTypes.number,
+    medium: PropTypes.number,
+    large: PropTypes.number,
+  },
+  /** Width of the image's lightbox */
+  lightBoxWidth: PropTypes.number,
+  /** Height of the image's lightbox */
+  lightBoxHeight: PropTypes.number,
 };
 
 export default Image;
