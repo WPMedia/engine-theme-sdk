@@ -247,130 +247,114 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
     // Image sources
     //-----------------------------
 
-    /** Main display image url */
+    // Main display image url
     mainSrc: srcTypes.isRequired, // eslint-disable-line react/no-unused-prop-types
 
-    /**
-     * Previous display image url (displayed to the left).
-     * If left undefined, movePrev actions will not be performed, and the button not displayed
-     * */
+    // Previous display image url (displayed to the left)
+    // If left undefined, movePrev actions will not be performed, and the button not displayed
     prevSrc: srcTypes,
 
-    /**
-    * Next display image url (displayed to the right).
-    * If left undefined, moveNext actions will not be performed, and the button not displayed
-    */
+    // Next display image url (displayed to the right)
+    // If left undefined, moveNext actions will not be performed, and the button not displayed
     nextSrc: srcTypes,
 
     //-----------------------------
     // Image thumbnail sources
     //-----------------------------
 
-    /** Thumbnail image url corresponding to props.mainSrc */
+    // Thumbnail image url corresponding to props.mainSrc
     mainSrcThumbnail: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
 
-    /** Thumbnail image url corresponding to props.prevSrc */
+    // Thumbnail image url corresponding to props.prevSrc
     prevSrcThumbnail: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
 
-    /** Thumbnail image url corresponding to props.nextSrc */
+    // Thumbnail image url corresponding to props.nextSrc
     nextSrcThumbnail: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
 
     //-----------------------------
     // Event Handlers
     //-----------------------------
 
-    /**
-     * Close window event.
-     * Should change the parent state such that the lightbox is not rendered
-     */
+    // Close window event
+    // Should change the parent state such that the lightbox is not rendered
     onCloseRequest: PropTypes.func.isRequired,
 
-    /**
-     * Move to previous image event.
-     * Should change the parent state such that props.prevSrc becomes props.mainSrc,
-     * props.mainSrc becomes props.nextSrc, etc.
-     */
+    // Move to previous image event
+    // Should change the parent state such that props.prevSrc becomes props.mainSrc,
+    //  props.mainSrc becomes props.nextSrc, etc.
     onMovePrevRequest: PropTypes.func,
 
-    /**
-     * Move to next image event.
-     * Should change the parent state such that props.nextSrc becomes props.mainSrc,
-     * props.mainSrc becomes props.prevSrc, etc.
-     */
+    // Move to next image event
+    // Should change the parent state such that props.nextSrc becomes props.mainSrc,
+    //  props.mainSrc becomes props.prevSrc, etc.
     onMoveNextRequest: PropTypes.func,
 
-    /**
-     * Called when an image fails to load.
-     * (imageSrc: string, srcType: string, errorEvent: object): void
-     */
+    // Called when an image fails to load
+    // (imageSrc: string, srcType: string, errorEvent: object): void
     onImageLoadError: PropTypes.func,
 
-    /** Called when image successfully loads */
+    // Called when image successfully loads
     onImageLoad: PropTypes.func,
 
-    /** Open window event */
+    // Open window event
     onAfterOpen: PropTypes.func,
 
     //-----------------------------
     // Download discouragement settings
     //-----------------------------
 
-    /** Enable download discouragement (prevents [right-click -> Save Image As...]) */
+    // Enable download discouragement (prevents [right-click -> Save Image As...])
     discourageDownloads: PropTypes.bool,
 
     //-----------------------------
     // Animation settings
     //-----------------------------
 
-    /** Disable all animation */
+    // Disable all animation
     animationDisabled: PropTypes.bool,
 
-    /** Disable animation on actions performed with keyboard shortcuts */
+    // Disable animation on actions performed with keyboard shortcuts
     animationOnKeyInput: PropTypes.bool,
 
-    /** Animation duration (ms) */
+    // Animation duration (ms)
     animationDuration: PropTypes.number,
 
     //-----------------------------
     // Keyboard shortcut settings
     //-----------------------------
 
-    /**
-     * Required interval of time (ms) between key actions
-     * (prevents excessively fast navigation of images)
-     */
+    // Required interval of time (ms) between key actions
+    // (prevents excessively fast navigation of images)
     keyRepeatLimit: PropTypes.number,
 
-    /**
-     * Amount of time (ms) restored after each keyup
-     * (makes rapid key presses slightly faster than holding down the key to navigate images)
-     */
+    // Amount of time (ms) restored after each keyup
+    // (makes rapid key presses slightly faster than holding down the key to navigate images)
     keyRepeatKeyupBonus: PropTypes.number,
 
     //-----------------------------
     // Image info
     //-----------------------------
 
-    /** Image title */
+    // Image title
     imageTitle: PropTypes.node,
 
-    /** Image caption */
+    // Image caption
     imageCaption: PropTypes.node,
 
-    /** Image caption */
+    // Image caption
     showImageCaption: PropTypes.bool,
 
-    /** Optional crossOrigin attribute */
+    // Optional crossOrigin attribute
     imageCrossOrigin: PropTypes.string,
 
     //-----------------------------
     // Lightbox style
     //-----------------------------
 
-    /** Set z-index style, etc., for the parent react-modal (format: https://github.com/reactjs/react-modal#styles ) */
+    // Set z-index style, etc., for the parent react-modal (format: https://github.com/reactjs/react-modal#styles )
     reactModalStyle: PropTypes.shape({}),
 
-    /** Padding (px) between the edge of the window and the lightbox */
+    // Padding (px) between the edge of the window and the lightbox
     imagePadding: PropTypes.number,
 
     wrapperClassName: PropTypes.string,
@@ -379,30 +363,25 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
     // Other
     //-----------------------------
 
-    /** Array of custom toolbar buttons */
+    // Array of custom toolbar buttons
     toolbarButtons: PropTypes.arrayOf(PropTypes.node),
 
-    /** When true, clicks outside of the image close the lightbox */
+    // When true, clicks outside of the image close the lightbox
     clickOutsideToClose: PropTypes.bool,
 
-    /** Set to false to disable zoom functionality and hide zoom buttons */
+    // Set to false to disable zoom functionality and hide zoom buttons
     enableZoom: PropTypes.bool,
 
-    /** Override props set on react-modal (https://github.com/reactjs/react-modal) */
+    // Override props set on react-modal (https://github.com/reactjs/react-modal)
     reactModalProps: PropTypes.shape({}),
 
     // Aria-labels
-    /** Next label */
     nextLabel: PropTypes.string,
-    /** Previous label */
     prevLabel: PropTypes.string,
-    /** Zoom in label */
     zoomInLabel: PropTypes.string,
-    /** Zoom out label */
     zoomOutLabel: PropTypes.string,
-    /** Close label */
     closeLabel: PropTypes.string,
-    /** Error message on image loading */
+
     imageLoadErrorMessage: PropTypes.node,
   };
 
@@ -450,32 +429,32 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
       // Animation
       //-----------------------------
 
+      // Lightbox is closing
       /**
-       * Lightbox is closing
        * When Lightbox is mounted, if animation is enabled
        * it will open with the reverse of the closing animation
        */
       isClosing: !props.animationDisabled,
 
-      /** Component parts should animate (e.g., when images are moving, or image is being zoomed) */
+      // Component parts should animate (e.g., when images are moving, or image is being zoomed)
       shouldAnimate: false,
 
       //-----------------------------
       // Zoom settings
       //-----------------------------
-      /** Zoom level of image */
+      // Zoom level of image
       zoomLevel: MIN_ZOOM_LEVEL,
 
       //-----------------------------
       // Image position settings
       //-----------------------------
-      /** Horizontal offset from center */
+      // Horizontal offset from center
       offsetX: 0,
 
-      /** Vertical offset from center */
+      // Vertical offset from center
       offsetY: 0,
 
-      /** image load error for srcType */
+      // image load error for srcType
       loadErrorStatus: {},
     };
 

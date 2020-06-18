@@ -1,0 +1,49 @@
+import ImageMetadata from '../src/components/ImageMetadata';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+<Meta title="ImageMetadata" component={ImageMetadata} />
+
+# ImageMetadata
+
+The `ImageMetadata` component is to be used with the Image or Gallery components to display data relevant to their images.
+
+## Use
+
+To import into block:
+
+```
+import { ImageMetadata } from '@wpmedia/engine-theme-sdk';
+
+...
+
+<figure key={key}>
+    <Image
+        resizedImageOptions={resizedImageOptions}
+        url={url}
+        alt={altText}
+        smallWidth={768}
+        smallHeight={0}
+        mediumWidth={1024}
+        mediumHeight={0}
+        largeWidth={1440}
+        largeHeight={0}
+        breakpoints={getProperties(arcSite)?.breakpoints}
+        resizerURL={getProperties(arcSite)?.resizerURL}
+    />
+    <figcaption>
+        <ImageMetadata 
+            subtitle={subtitle} 
+            caption={caption} 
+            credits={credits} 
+        />
+    </figcaption>
+</figure>
+
+...
+
+```
+
+
+
+## Props
+<Props of={ImageMetadata} />
