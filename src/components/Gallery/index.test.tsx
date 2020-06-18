@@ -534,8 +534,8 @@ describe('the gallery block', () => {
   describe('the "expandPhrase" prop', () => {
     describe('when the prop is provided', () => {
       it('should set the phrase text to the passed in string', () => {
-        const wrapper = mount(<Gallery galleryElements={mockGallery} expandPhrase="Bygga ut" />);
-        expect(wrapper.find('styled__ControlsButton').at(0).find('styled__PlaybackText').text()).toEqual('Bygga ut');
+        const wrapper = mount(<Gallery galleryElements={mockGallery} expandPhrase="Förstora" />);
+        expect(wrapper.find('styled__ControlsButton').at(0).find('styled__PlaybackText').text()).toEqual('Förstora');
       });
     });
 
@@ -550,8 +550,8 @@ describe('the gallery block', () => {
   describe('the "autoplayPhrase" prop', () => {
     describe('when the prop is provided', () => {
       it('should set the phrase text to the passed in string', () => {
-        const wrapper = mount(<Gallery galleryElements={mockGallery} autoplayPhrase="Autospela" />);
-        expect(wrapper.find('styled__ControlsButton').at(1).find('styled__PlaybackText').text()).toEqual('Autospela');
+        const wrapper = mount(<Gallery galleryElements={mockGallery} autoplayPhrase="Spela upp" />);
+        expect(wrapper.find('styled__ControlsButton').at(1).find('styled__PlaybackText').text()).toEqual('Spela upp');
       });
     });
 

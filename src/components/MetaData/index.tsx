@@ -69,10 +69,11 @@ interface Props {
   } | null;
   websiteName?: string | null;
   twitterSite?: string | null;
+  resizerURL?: string | null;
 }
 
 const MetaData: React.FC<Props> = ({
-  MetaTag, MetaTags, metaValue, globalContent: gc, websiteName, twitterSite,
+  MetaTag, MetaTags, metaValue, globalContent: gc, websiteName, twitterSite, resizerURL,
 }) => {
   const pageType = metaValue('page-type') || '';
 
@@ -115,7 +116,7 @@ const MetaData: React.FC<Props> = ({
       }
       metaData.description = metaValue('description') || description || null;
       metaData.ogTitle = metaValue('og:title') || headline || websiteName;
-      metaData.ogImage = getImgURL(metaValue, 'og:image', gc);
+      metaData.ogImage = getImgURL(metaValue, 'og:image', gc, resizerURL);
       metaData.ogImageAlt = getImgAlt(metaValue, 'og:image:alt', gc);
 
       // Keywords could be comma delimited string or array of string or an array of objects
