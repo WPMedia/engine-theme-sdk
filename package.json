@@ -19,7 +19,7 @@
     "test": "jest",
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
     "prepublishOnly": "npm run build",
-    "preversion": "npm run lint",
+    "preversion": "npm run lint && npm run deploy-storybook",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "deploy-storybook": "storybook-to-ghpages -- --source-branch staging"
