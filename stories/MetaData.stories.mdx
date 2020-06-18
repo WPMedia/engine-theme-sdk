@@ -1,0 +1,55 @@
+import MetaData from '../src/components/MetaData';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+<Meta title="MetaData" component={MetaData} />
+
+# MetaData
+
+The `MetaData` component is to be used only with-in output-type components. It handles the rendering of the title tags and all meta tags with the exception of the viewport meta tag.
+
+## Use
+
+To import into an output-type component:
+
+```
+import { MetaData } from '@wpmedia/engine-theme-sdk';
+
+...
+
+<MetaData
+    MetaTag={MetaTag}
+    MetaTags={MetaTags}
+    metaValue={metaValue}
+    globalContent={gc}
+    websiteName={websiteName}
+    twitterSite={twitterSite}
+/>
+
+...
+
+```
+
+
+
+## Props
+<Props of={MetaData} />
+
+## Note
+
+This component should be placed high in the `<head>` section of the output-type see example below for ideal positioning:
+
+```
+...
+<head>  
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <MetaData
+        MetaTag={MetaTag}
+        MetaTags={MetaTags}
+        metaValue={metaValue}
+        globalContent={gc}
+        websiteName={websiteName}
+        twitterSite={twitterSite}
+    />
+...
+</head>
+```

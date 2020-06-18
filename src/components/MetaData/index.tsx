@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
+import PropTypes from 'prop-types';
 
 interface CustomMetaData {
   metaName: string;
@@ -274,6 +275,39 @@ const MetaData: React.FC<Props> = ({
       {twitterTags}
     </>
   );
+};
+
+MetaData.propTypes = {
+  /** The MetaTag function that is passed into an output type */
+  MetaTag: PropTypes.func,
+  /** The MetaTags function that is passed into an output type */
+  MetaTags: PropTypes.func,
+  /** The metaValue function that is passed into an output type */
+  metaValue: PropTypes.func,
+  /** The globalContent object that is obtained from the useFusionContext() in the fusion:context module */
+  globalContent: {
+    description: {
+      basic: PropTypes.string,
+    },
+    headlines: {
+      basic: PropTypes.string,
+    },
+    taxonomy: {
+      seo_keywords: PropTypes.array,
+      tags: PropTypes.array,
+    },
+    authors: PropTypes.array,
+    Payload: PropTypes.array,
+    metadata: {
+      metadata_description: PropTypes.string,
+      metadata_title: PropTypes.string,
+    },
+    name: PropTypes.string,
+  },
+  /** The name of the website */
+  websiteName: PropTypes.string,
+  /** The corresponding twitter site name */
+  twitterSite: PropTypes.string,
 };
 
 export default MetaData;
