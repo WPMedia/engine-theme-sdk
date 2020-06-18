@@ -1,7 +1,7 @@
 # Engine Theme SDK Components
 
 ## Preview Components, Functionality
-<a href="https://github.com/storybooks/storybook" target="_blank" ><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
+<a href="https://wpmedia.github.io/engine-theme-sdk/index.html" target="_blank" ><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
 Storybook allows custom block developers to see how components act individually and together. This will ensure that components work as expected and in an accessible implementation. Addons you'll see in the tray below the icon will determine its accessibility practices as well and provide suggestions for use.
 
@@ -13,7 +13,7 @@ The component explorer will also show the effect of different props on component
 
 If you don't go to the page automatically on successful compilation, go to [http://localhost:6006/](http://localhost:6006/). 
 
-In the future, this will be hosted. To build, see [documentation](https://storybook.js.org/docs/basics/exporting-storybook/) for exporting as a static site.
+Currently can be built from `staging` to [github pages](https://wpmedia.github.io/engine-theme-sdk/index.html) by running `npm run deploy-storybook`.
 
 ## How To Publish
 
