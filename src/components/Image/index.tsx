@@ -185,15 +185,15 @@ Image.propTypes = {
   /** Height for large images */
   largeHeight: PropTypes.number,
   /** Key/value options for resizing the image */
-  resizedImageOptions: PropTypes.array,
+  resizedImageOptions: PropTypes.object,
   /** Thumbor resizer URL */
   resizerURL: PropTypes.string,
   /** Specify small, medium and large breakpoints for the image */
-  breakpoints: {
+  breakpoints: PropTypes.shape({
     small: PropTypes.number,
     medium: PropTypes.number,
     large: PropTypes.number,
-  },
+  }),
   /** Width of the image's lightbox */
   lightBoxWidth: PropTypes.number,
   /** Height of the image's lightbox */
