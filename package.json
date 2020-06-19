@@ -21,7 +21,8 @@
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=pc32y518itq"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -63,6 +64,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-styled-components": "^1.10.7",
+    "chromatic": "^5.0.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.6.0",
