@@ -71,10 +71,10 @@ ImageMetadata.propTypes = {
    /** Image caption */
   caption: PropTypes.string,
    /** Image author related data */
-  credits: {
+  credits: PropTypes.shape({
     by: PropTypes.array,
     affiliation: PropTypes.array
-  }
+  })
 }
 
 export default ImageMetadata;
