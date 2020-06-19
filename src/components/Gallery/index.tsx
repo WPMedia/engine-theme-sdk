@@ -344,24 +344,24 @@ Gallery.propTypes = {
   /** ANS Headline identifier */
   ansHeadline: PropTypes.string,
   /** Globally Unique ID trait */
-  galleryElements: {
+  galleryElements: PropTypes.arrayOf(PropTypes.shape({
     /** Gallery ANS elements */
     _id: PropTypes.string,
     url: PropTypes.string,
     alt_text: PropTypes.string,
     subtitle: PropTypes.string,
     caption: PropTypes.string,
-    credits: {
-      by: PropTypes.string,
-      affiliation: PropTypes.string,
-    },
-    resized_params: PropTypes.array,
-    breakpoints: {
+    credits: PropTypes.shape({
+      by: PropTypes.array,
+      affiliation: PropTypes.array,
+    }),
+    resized_params: PropTypes.object,
+    breakpoints: PropTypes.shape({
       small: PropTypes.number,
       medium: PropTypes.number,
       large: PropTypes.number,
-    },
-  },
+    }),
+  })),
   /** Expand phrase text for internationalization */
   expandPhrase: PropTypes.string,
   /** Autoplay phrase text for internationalization */

@@ -1,4 +1,5 @@
 import Gallery from '../src/components/Gallery';
+import { number, select, text } from "@storybook/addon-knobs";
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 <Meta title="Gallery" component={Gallery} />
@@ -40,9 +41,9 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
 
 <Story name="Basic" />
 
-### **Display Photos**
+### **Custom Gallery**
 <Preview>
-    <Story name="Display Photos">
+    <Story name="Custom Gallery">
         <Gallery
             galleryElements={[
             {
@@ -64,20 +65,20 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 0,
                 },
                 address: {},
-                alt_text: 'A person laying on their surfboard in the ocean.',
-                caption: "I'm overriding the caption on this image for this particular gallery",
+                alt_text: text("Alt Text", "This is an alt text"),
+                caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 created_date: '2019-07-09T22:26:02Z',
                 credits: {
                 affiliation: [
                     {
-                    name: 'Death to Stock Photo',
+                    name: text("Affiliation", "Death to Stock Photo"),
                     type: 'author',
                     },
                 ],
                 by: [
                     {
-                    byline: 'Brett Danielsen (custom credit)',
-                    name: 'Brett Danielsen',
+                    byline: text("Byline", "John Doe (Custom credit)"),
+                    name: text("Name", "John Doe"),
                     type: 'author',
                     },
                 ],
@@ -95,12 +96,12 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 sponsored: false,
                 },
                 source: {
-                name: 'Death to Stock Photo',
+                name: text("Affiliation", "Death to Stock Photo"),
                 source_type: 'stock',
                 edit_url: 'https://corecomponents.arcpublishing.com/photo/P3V3THIJPVGUBLRIIYWKFHZTKA',
                 system: 'Anglerfish',
                 },
-                subtitle: "I'm overriding the subtitle on this image for this particular gallery",
+                subtitle: text("Subtitle", "Override the subtitle on this image for this particular gallery"),
                 taxonomy: {
                 associated_tasks: [],
                 },
@@ -195,8 +196,8 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 0,
                 },
                 address: {},
-                alt_text: 'Palm trees stand in front of a building.',
-                caption: 'The rain had chased all the beach-goers away. It was cloudy and cold.',
+                alt_text: text("Alt Text", "This is an alt text"),
+                caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 credits: {
                 affiliation: [],
                 },
@@ -212,12 +213,12 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 sponsored: false,
                 },
                 source: {
-                name: 'Death to Stock Photo',
+                name: text("Affiliation", "Death to Stock Photo"),
                 source_type: 'stock',
                 edit_url: 'https://corecomponents.arcpublishing.com/photo/IEYJJACCYVFQTN4TF37K4E2EMU',
                 system: 'Anglerfish',
                 },
-                subtitle: 'Cloudy day at the beach',
+                subtitle: text("Subtitle", "Override the subtitle on this image for this particular gallery"),
                 taxonomy: {
                 associated_tasks: [],
                 },
@@ -307,20 +308,20 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 0,
                 },
                 address: {},
-                alt_text: 'A person walks down a path with their surfboard towards the ocean.',
-                caption: "Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day. Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break; cowabunga Keanu.",
+                alt_text: text("Alt Text", "This is an alt text"),
+                caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 created_date: '2019-07-09T22:26:02Z',
                 credits: {
                 affiliation: [
                     {
-                    name: 'Death to Stock Photo',
+                    name: text("Affiliation", "Death to Stock Photo"),
                     type: 'author',
                     },
                 ],
                 by: [
                     {
-                    byline: 'Brett Danielsen (custom credit)',
-                    name: 'Brett Danielsen',
+                    byline: text("Byline", "John Doe (custom credit)"),
+                    name: text("Name", "John Doe"),
                     type: 'author',
                     },
                 ],
@@ -338,12 +339,12 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 sponsored: false,
                 },
                 source: {
-                name: 'Death to Stock Photo',
+                name: text("Affiliation", "Death to Stock Photo"),
                 source_type: 'stock',
                 edit_url: 'https://corecomponents.arcpublishing.com/photo/CITIAYX2ERDOPP2TPJGEUV7SNQ',
                 system: 'Anglerfish',
                 },
-                subtitle: 'Australia surf trip',
+                subtitle: text("Subtitle", "Override the subtitle on this image for this particular gallery"),
                 taxonomy: {
                 associated_tasks: [],
                 },
@@ -437,13 +438,13 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 1,
                 },
                 address: {},
-                alt_text: 'Close-up view of palm fronds with light shining through.',
-                caption: 'Sun shining through palm fronds',
+                alt_text: text("Alt Text", "This is an alt text"),
+                caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 created_date: '2019-07-09T23:03:02Z',
                 credits: {
                 affiliation: [
                     {
-                    name: 'Death to Stock Photo',
+                    name: text("Affiliation", "Death to Stock Photo"),
                     type: 'author',
                     },
                 ],
@@ -463,12 +464,12 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 sponsored: false,
                 },
                 source: {
-                name: 'Death to Stock Photo',
+                name: text("Affiliation", "Death to Stock Photo"),
                 source_type: 'stock',
                 edit_url: 'https://corecomponents.arcpublishing.com/photo/CLPUNWMKOZHWPLFYKRZXW6XTNU',
                 system: 'Anglerfish',
                 },
-                subtitle: 'Plants',
+                subtitle: text("Subtitle", "Override the subtitle on this image for this particular gallery"),
                 taxonomy: {
                 associated_tasks: [],
                 },
@@ -558,20 +559,20 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 0,
                 },
                 address: {},
-                alt_text: 'Three tiny silhouettes of people walking in the Australian wilderness.',
-                caption: "Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day. Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break; cowabunga Keanu.",
+                alt_text: text("Alt Text", "This is an alt text"),
+                caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 created_date: '2019-07-09T22:26:02Z',
                 credits: {
                 affiliation: [
                     {
-                    name: 'Death to Stock Photo',
+                    name: text("Affiliation", "Death to Stock Photo"),
                     type: 'author',
                     },
                 ],
                 by: [
                     {
-                    byline: 'Brett Danielsen (custom credit)',
-                    name: 'Brett Danielsen',
+                    byline: text("Byline", "John Doe (custom credit)"),
+                    name: text("Name", "John Doe"),
                     type: 'author',
                     },
                 ],
@@ -589,12 +590,12 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 sponsored: false,
                 },
                 source: {
-                name: 'Death to Stock Photo',
+                name: text("Affiliation", "Death to Stock Photo"),
                 source_type: 'stock',
                 edit_url: 'https://corecomponents.arcpublishing.com/photo/O3UWIM3AHBH3ZMM2C4MW6U472Y',
                 system: 'Anglerfish',
                 },
-                subtitle: 'Australia surf trip',
+                subtitle: text("Subtitle", "Override the subtitle on this image for this particular gallery"),
                 taxonomy: {
                 associated_tasks: [],
                 },
@@ -684,20 +685,20 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 0,
                 },
                 address: {},
-                alt_text: 'A person gets their sufboard out of the trunk of an orange Volkswagon RV.',
-                caption: "Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day. Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break; cowabunga Keanu.",
+                alt_text: text("Alt Text", "This is an alt text"),
+                caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 created_date: '2019-07-09T22:26:02Z',
                 credits: {
                 affiliation: [
                     {
-                    name: 'Death to Stock Photo',
+                    name: text("Affiliation", "Death to Stock Photo"),
                     type: 'author',
                     },
                 ],
                 by: [
                     {
-                    byline: 'Brett Danielsen (custom credit)',
-                    name: 'Brett Danielsen',
+                    byline: text("Byline", "John Doe (custom credit)"),
+                    name: text("Name", "John Doe"),
                     type: 'author',
                     },
                 ],
@@ -715,12 +716,12 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 sponsored: false,
                 },
                 source: {
-                name: 'Death to Stock Photo',
+                name: text("Affiliation", "Death to Stock Photo"),
                 source_type: 'stock',
                 edit_url: 'https://corecomponents.arcpublishing.com/photo/Y3TQJYLS3NGCRF5RIC53BQQDCU',
                 system: 'Anglerfish',
                 },
-                subtitle: 'Australia surf trip',
+                subtitle: text("Subtitle", "Override the subtitle on this image for this particular gallery"),
                 taxonomy: {
                 associated_tasks: [],
                 },
@@ -822,8 +823,8 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 3,
                 },
                 address: {},
-                alt_text: 'A woman with her back to the camera looks out at the ocean on a cloudy day.',
-                caption: 'test caption',
+                alt_text: text("Alt Text", "This is an alt text"),
+                caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 created_date: '2019-07-09T22:23:18Z',
                 credits: {
                 by: [],
@@ -842,7 +843,7 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 sponsored: false,
                 },
                 source: {
-                name: 'Death to Stock Photo',
+                name: text("Affiliation", "Death to Stock Photo"),
                 source_type: 'stock',
                 additional_properties: {
                     editor: 'photo center',
@@ -945,8 +946,8 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 0,
                 },
                 address: {},
-                alt_text: 'A vertical image of a big, cloudy, grey sky at the beach.',
-                caption: 'The rain had chased all the beach-goers away. It was cloudy and cold.',
+                alt_text: text("Alt Text", "This is an alt text"),
+                caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 credits: {
                 affiliation: [],
                 },
@@ -962,7 +963,7 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 sponsored: false,
                 },
                 source: {
-                name: 'Death to Stock Photo',
+                name: text("Affiliation", "Death to Stock Photo"),
                 source_type: 'stock',
                 edit_url: 'https://corecomponents.arcpublishing.com/photo/4JF472HUGVECVLATRYVJQZOZZU',
                 system: 'Anglerfish',
@@ -1069,8 +1070,8 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 1,
                 },
                 address: {},
-                alt_text: 'A lifeguard stand far away on the horizon at the beach.',
-                caption: '',
+                alt_text: text("Alt Text", "This is an alt text"),
+                caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 created_date: '2019-07-09T22:23:18Z',
                 credits: {
                 by: [],
@@ -1089,7 +1090,7 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 sponsored: false,
                 },
                 source: {
-                name: 'Death to Stock Photo',
+                name: text("Affiliation", "Death to Stock Photo"),
                 source_type: 'stock',
                 additional_properties: {
                     editor: 'photo center',
@@ -1170,6 +1171,10 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
             },
             ]}
             resizerURL={'https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer'}
+            ansHeadline={text('Headline', 'ANS Headline')}
+            expandPhrase={text('Expand phrase', 'Expand')}
+            autoplayPhrase={text('Autoplay phrase', 'Autoplay')}
+            pausePhrase={text('Pause phrase', 'Pause')}
         />
     </Story>
 </Preview>
@@ -1199,7 +1204,7 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 },
                 address: {},
                 alt_text: 'A person laying on their surfboard in the ocean.',
-                caption: "I'm overriding the caption on this image for this particular gallery",
+                caption: "Override the caption on this image for this particular gallery",
                 created_date: '2019-07-09T22:26:02Z',
                 credits: {
                 affiliation: [
@@ -1234,7 +1239,7 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 edit_url: 'https://corecomponents.arcpublishing.com/photo/P3V3THIJPVGUBLRIIYWKFHZTKA',
                 system: 'Anglerfish',
                 },
-                subtitle: "I'm overriding the subtitle on this image for this particular gallery",
+                subtitle: "Override the subtitle on this image for this particular gallery",
                 taxonomy: {
                 associated_tasks: [],
                 },
@@ -2307,3 +2312,4 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
         />
     </Story>
 </Preview>
+
