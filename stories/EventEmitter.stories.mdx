@@ -48,24 +48,35 @@ The event object for these events will contain the following information:
 
 <Story name="Basic" />
 
-### **Go to canvas to view this event**
+### **Event**
 <Preview>
     <Story name="Event">
-        <button 
-            onClick={() => console.log(
-                {
-                    "eventName": "galleryImageNext",
-                    "ansGalleryId": "HADBIJEFK5G57CXZN7UC7UQHF4",
-                    "ansGalleryHeadline": "A cloudy day",
-                    "ansImageId": "234845884",
-                    "caption": "The rain had chased all the beach-goers away",
-                    "orderPosition": 0,
-                    "totalImages": 4,
-                    "autoplay": false
-                }
-            )}
-        >
-            Click to view event
-        </button>
+         <div>
+            <button 
+                style={{
+                    backgroundColor: '#4ba2da',
+                    borderColor: 'transparent',
+                    borderRadius: 8,
+                    color: '#fff',
+                    height: 50,
+                    width: 200
+                }}
+                onClick={() => console.log(
+                    {
+                        "eventName": "galleryImageNext",
+                        "ansGalleryId": "HADBIJEFK5G57CXZN7UC7UQHF4",
+                        "ansGalleryHeadline": "A cloudy day",
+                        "ansImageId": "234845884",
+                        "caption": "The rain had chased all the beach-goers away",
+                        "orderPosition": 0,
+                        "totalImages": 4,
+                        "autoplay": false
+                    }
+                )}
+            >
+                Click to view event
+            </button>
+            <p>(Go to the <b><i>Actions</i></b> tab under Canvas)</p>
+        </div>
     </Story>
 </Preview>
