@@ -1,39 +1,23 @@
 import { create } from "@storybook/theming/create";
 
 /*
-reference arcpublishing.com
---green: #6bc1ae;
---blue: #46a1dc;
---orange: #f87966;
---turquoise-blue: #2b83c1;
---gray: #a7a9ac;
---binhex: #4ba2da;
---ink-dark: #333;
---ink-light: #fff;
---dark-gray-primary: #3e5364;
---dark-gray-secondary: #869098;
---light-gray-tertiary: #979797;
---light-gray-primary: #dfe3e6;
---light-gray-secondary: #f4f7fb;
---light-blue: #d8ecf8;
-*/
 
-// #333 - ink dark (primary)
-// #4ba2da - arc flat blue (secondary)
-// #6bc1ae - sea foam green arc (highlight)
-// white background rgba(244, 247, 251, 0.92)
+ Pickled Bluewood, off-navy #2D3E4A
+ plastic blue #45a1dc
+
+*/
 export default create({
   // see documentation for themes 
   // https://storybook.js.org/docs/configurations/theming/
   base: 'light',
 
-  colorPrimary: '#333',
-  colorSecondary: '#4ba2da',
+  colorPrimary: '#2D3E4A',
+  colorSecondary: '#45a1dc',
 
   // UI
-  appBg: 'white',
+  appBg: '#fff',
   // appContentBg: 'rgba(244, 247, 251, 0.92)',
-  appBorderColor: '#6bc1ae',
+  appBorderColor: '#fff',
   // rounded corners
   appBorderRadius: 4,
 
@@ -47,11 +31,11 @@ export default create({
 
   // Toolbar default and active colors
   barTextColor: 'white',
-  barSelectedColor: '#4ba2da',
-  barBg: '#333',
+  barSelectedColor: '#45a1dc',
+  barBg: '#2D3E4A',
 
   // Form colors
-  inputBg: 'white',
+  inputBg: '#fff',
   inputBorder: 'silver',
   inputTextColor: 'black',
   inputBorderRadius: 4,
@@ -59,5 +43,5 @@ export default create({
   brandTitle: 'Engine Theme SDK',
   brandUrl: 'https://github.com/WPMedia/engine-theme-sdk',
   // todo: change this to a legitimate image url
-  brandImage: 'https://arcdesignsystem.com/img/arc-logo-black.svg',
+  // brandImage: 'https://arcdesignsystem.com/img/arc-logo-black.svg',
 });
