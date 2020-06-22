@@ -373,7 +373,7 @@ Gallery.propTypes = {
   /** Pause phrase text for internationalization */
   pausePhrase: PropTypes.string,
   /** Page count phrase text for internationalization */
-  pageCountPhrase: PropTypes.string
+  pageCountPhrase: PropTypes.string,
 };
 
 export default Gallery;
