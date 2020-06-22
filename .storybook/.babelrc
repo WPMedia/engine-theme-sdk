@@ -8,7 +8,8 @@
         ],
         "alias": {
           "fusion:themes": "./.storybook/themes.js",
-          "fusion:context": "./.storybook/context.js"
+          "fusion:context": "./.storybook/context.js",
+          "fusion:environment": "./.storybook/environment.json"
         }
       }
     ]

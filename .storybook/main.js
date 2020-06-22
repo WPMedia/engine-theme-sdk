@@ -1,4 +1,8 @@
 module.exports = {
-  stories: ['../stories/*.stories.jsx'],
-  addons: ['@storybook/addon-a11y/register', '@storybook/addon-backgrounds'],
+  stories: ['../stories/*.stories.@(js|jsx|mdx|tsx)'],
+  addons: ['@storybook/addon-a11y/register', '@storybook/addon-backgrounds', '@storybook/addon-docs'],
+  typescript: {
+    // also valid 'react-docgen-typescript' | false
+    reactDocgen: 'react-docgen',
+  },
 };
