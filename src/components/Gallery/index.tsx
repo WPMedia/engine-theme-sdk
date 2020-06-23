@@ -5,8 +5,13 @@
  * Note on Events:
  * The prevHandler, nextHandler and autoplay callbacks use the EventEmitter object
  * to send off events that the next or previous image in the gallery has been accessed.
- * For next image access events, the event "galleryImageNext" is emitted and for previous,
- * the event "galleryImagePrevious" is emitted.
+ *
+ * This is the list of events actually reported by Gallery component:
+ *  galleryImageNext: when the next button is pressed.
+ *  galleryImagePrevious: when the next button is pressed.
+ *  galleryExpandEnter: when the expand button is pressed
+ *  galleryExpandExit: when the close button on the lightbox is pressed
+ *
  * To listen to these events, import the EventEmitter in your code:
  * @example
  * import { EventEmitter } from '@wpmedia/engine-theme-sdk';
@@ -106,10 +111,28 @@ const Gallery: React.FC<GalleryProps> = ({
   const fullScreen = (): void => {
     setAutoDuration(null);
     setIsOpen(true);
+    EventEmitter.dispatch('galleryExpandEnter', {
+      eventName: 'galleryExpandEnter',
+      ansGalleryId: ansId,
+      ansGalleryHeadline: ansHeadline,
+      ansImageId: galleryElements[page]._id,
+      caption: galleryElements[page].caption,
+      orderPosition: page,
+      totalImages: galleryElements.length,
+    });
   };
 
   const exitFullScreen = (): void => {
     setIsOpen(false);
+    EventEmitter.dispatch('galleryExpandExit', {
+      eventName: 'galleryExpandExit',
+      ansGalleryId: ansId,
+      ansGalleryHeadline: ansHeadline,
+      ansImageId: galleryElements[page]._id,
+      caption: galleryElements[page].caption,
+      orderPosition: page,
+      totalImages: galleryElements.length,
+    });
   };
 
   const prevHandler = (): void => {
