@@ -4,6 +4,7 @@ import { act } from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
 import Gallery from '.';
 import EventEmitter from '../EventEmitter';
+import Lightbox from '../Lightbox';
 
 jest.mock('fusion:context', () => ({
   useAppContext: jest.fn(() => ({})),
@@ -200,6 +201,33 @@ describe('the gallery block', () => {
         wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(0).childAt(1)
           .text(),
       ).toBe('Expand');
+    });
+
+    it('must emit events when enter/exit full screen mode', async () => {
+      const wrapper = mount(<Gallery galleryElements={mockGallery} resizerURL="" ansId="fullScreen" />);
+      const fullScreenBtnWrapper = wrapper.find('styled__ControlContainer').find('button').at(0);
+      const ran: string[] = [];
+      const eventHandler = (event: GalleryEventData, tst: string): void => {
+        if (event.ansGalleryId !== 'fullScreen') {
+          return;
+        }
+        ran.push(tst);
+      };
+      function sleep(ms: number): Promise<void> {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      EventEmitter.subscribe('galleryExpandEnter', (event: GalleryEventData) => eventHandler(event, 'start'));
+      EventEmitter.subscribe('galleryExpandExit', (event: GalleryEventData) => eventHandler(event, 'stop'));
+      fullScreenBtnWrapper.simulate('click');
+      await sleep(500);
+      const lightboxButton = wrapper.find(Lightbox).find('button').at(2);
+      await act(async () => {
+        lightboxButton.simulate('click');
+        await sleep(500);
+        expect(ran[0]).toEqual('start');
+        expect(ran[1]).toEqual('stop');
+      });
     });
   });
 
