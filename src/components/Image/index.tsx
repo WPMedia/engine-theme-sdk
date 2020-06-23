@@ -185,7 +185,9 @@ Image.propTypes = {
   /** Height for large images */
   largeHeight: PropTypes.number,
   /** Key/value options for resizing the image */
-  resizedImageOptions: PropTypes.objectOf(PropTypes.object),
+  resizedImageOptions: PropTypes.shape({
+    key: PropTypes.string,
+  }),
   /** Thumbor resizer URL */
   resizerURL: PropTypes.string,
   /** Specify small, medium and large breakpoints for the image */

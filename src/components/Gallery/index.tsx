@@ -349,25 +349,8 @@ Gallery.propTypes = {
   ansId: PropTypes.string,
   /** ANS Headline identifier */
   ansHeadline: PropTypes.string,
-  /** Globally Unique ID trait */
-  galleryElements: PropTypes.arrayOf(PropTypes.shape({
-    /** Gallery ANS elements */
-    _id: PropTypes.string,
-    url: PropTypes.string,
-    alt_text: PropTypes.string,
-    subtitle: PropTypes.string,
-    caption: PropTypes.string,
-    credits: PropTypes.shape({
-      by: PropTypes.array,
-      affiliation: PropTypes.array,
-    }),
-    resized_params: PropTypes.object,
-    breakpoints: PropTypes.shape({
-      small: PropTypes.number,
-      medium: PropTypes.number,
-      large: PropTypes.number,
-    }),
-  })),
+  /** Gallery ANS elements */
+  galleryElements: PropTypes.array,
   /** Expand phrase text for internationalization */
   expandPhrase: PropTypes.string,
   /** Autoplay phrase text for internationalization */
@@ -375,7 +358,7 @@ Gallery.propTypes = {
   /** Pause phrase text for internationalization */
   pausePhrase: PropTypes.string,
   /** Page count phrase text for internationalization */
-  pageCountPhrase: PropTypes.string,
+  pageCountPhrase: PropTypes.func
 };
 
 export default Gallery;
