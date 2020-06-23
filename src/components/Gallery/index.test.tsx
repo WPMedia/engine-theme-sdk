@@ -26,7 +26,7 @@ const mockGallery = [
       medium: 0,
       large: 0,
     },
-    resized_params: {},
+    resized_params: { '800x0': '' },
     credits: {
       by: [
         {
@@ -51,7 +51,7 @@ const mockGallery = [
       medium: 0,
       large: 0,
     },
-    resized_params: {},
+    resized_params: { '800x0': '' },
     credits: {
       by: [
         {
@@ -77,7 +77,7 @@ const mockGallery = [
       large: 0,
     },
     resizerURL: '',
-    resized_params: {},
+    resized_params: { '800x0': '' },
     credits: {
       by: [
         {
@@ -104,7 +104,7 @@ const mockGallery = [
       large: 0,
     },
     resizerURL: '',
-    resized_params: {},
+    resized_params: { '800x0': '' },
     credits: {
       affiliation: [
         {
@@ -126,7 +126,7 @@ const mockGallery = [
       large: 0,
     },
     resizerURL: '',
-    resized_params: {},
+    resized_params: { '800x0': '' },
     credits: {
       by: [
         {
@@ -148,7 +148,7 @@ const mockGallery = [
       large: 0,
     },
     resizerURL: '',
-    resized_params: {},
+    resized_params: { '800x0': '' },
   },
 ];
 
