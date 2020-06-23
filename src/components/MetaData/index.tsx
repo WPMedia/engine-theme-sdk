@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { ReactElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
@@ -285,7 +286,10 @@ MetaData.propTypes = {
   MetaTags: PropTypes.func,
   /** The metaValue function that is passed into an output type */
   metaValue: PropTypes.func,
-  /** The globalContent object that is obtained from the useFusionContext() in the fusion:context module */
+  /**
+   * The globalContent object that is obtained from the
+   * useFusionContext() in the fusion:context module
+   * */
   globalContent: {
     description: {
       basic: PropTypes.string,

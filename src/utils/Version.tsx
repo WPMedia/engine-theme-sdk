@@ -1,8 +1,7 @@
 import React from 'react';
+import pkg from '../../package.json';
 
-const pkg = require('../../package.json');
-
-const Version = () => (
+const Version: React.SFC = () => (
   <p style={{ fontFamily: 'Helvetica' }}>{pkg.version}</p>
 );
 
