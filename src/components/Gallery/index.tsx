@@ -4,8 +4,15 @@
  * Note on Events:
  * The prevHandler, nextHandler and autoplay callbacks use the EventEmitter object
  * to send off events that the next or previous image in the gallery has been accessed.
- * For next image access events, the event "galleryImageNext" is emitted and for previous,
- * the event "galleryImagePrevious" is emitted.
+ *
+ * This is the list of events actually reported by Gallery component:
+ *  galleryImageNext: when the next button is pressed.
+ *      if the autoplay property is true, the gallery is executing in autplay mode
+ *  galleryImagePrevious: when the next button is pressed.
+ *  galleryAutoplayStart: when the autplay button is pressed and the autoplay starts
+ *  galleryAutoplayStop: when the autoplay button is pressed and the autoplay stops
+ *      if the gallery reach the end of the playlist will stop and generate this event too
+ *
  * To listen to these events, import the EventEmitter in your code:
  * @example
  * import { EventEmitter } from '@wpmedia/engine-theme-sdk';
@@ -149,6 +156,15 @@ const Gallery: React.FC<GalleryProps> = ({
   useInterval(() => {
     if (page >= galleryElements.length - 1) {
       setAutoDuration(null);
+      EventEmitter.dispatch('galleryAutoplayStop', {
+        eventName: 'galleryAutoplayStop',
+        ansGalleryId: ansId,
+        ansGalleryHeadline: ansHeadline,
+        ansImageId: galleryElements[page]._id,
+        caption: galleryElements[page].caption,
+        orderPosition: page,
+        totalImages: galleryElements.length,
+      });
     } else {
       const pg = page + 1;
       EventEmitter.dispatch('galleryImageNext', {
@@ -168,7 +184,26 @@ const Gallery: React.FC<GalleryProps> = ({
   const onPlayHandler = (): void => {
     if (autoDuration) {
       setAutoDuration(null);
+      EventEmitter.dispatch('galleryAutoplayStop', {
+        eventName: 'galleryAutoplayStop',
+        ansGalleryId: ansId,
+        ansGalleryHeadline: ansHeadline,
+        ansImageId: galleryElements[page]._id,
+        caption: galleryElements[page].caption,
+        orderPosition: page,
+        totalImages: galleryElements.length,
+      });
     } else {
+      EventEmitter.dispatch('galleryAutoplayStart', {
+        eventName: 'galleryAutoplayStart',
+        ansGalleryId: ansId,
+        ansGalleryHeadline: ansHeadline,
+        ansImageId: galleryElements[page]._id,
+        caption: galleryElements[page].caption,
+        orderPosition: page,
+        totalImages: galleryElements.length,
+      });
+
       if (page >= galleryElements.length - 1) {
         const pg = 0;
         EventEmitter.dispatch('galleryImagePrevious', {

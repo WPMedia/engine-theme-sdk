@@ -3,6 +3,7 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
 import Gallery from '.';
+import EventEmitter from '../EventEmitter';
 
 jest.mock('fusion:context', () => ({
   useAppContext: jest.fn(() => ({})),
@@ -175,6 +176,10 @@ function createTouchEvent({ x = 0, y = 0 }, target: EventTarget): TouchEventInit
   return { touches: [createClientXY(x, y, target)] };
 }
 
+declare interface GalleryEventData {
+  [s: string]: string;
+}
+
 describe('the gallery block', () => {
   describe('the fullscreen button', () => {
     it('should be present with the "FullScreen" svg component with the correct fill', () => {
@@ -240,6 +245,58 @@ describe('the gallery block', () => {
       expect(autoBtnWrapper.childAt(1).text()).toMatch(/Pause\sautoplay/);
       fullScreenBtnWrapper.simulate('click');
       expect(autoBtnWrapper.childAt(1).text()).toBe('Autoplay');
+    });
+  });
+
+  describe('Autoplay events', () => {
+    it('must generate events at start and stop', () => {
+      const ansId = '9876';
+      const ansHeadline = 'The Gallery';
+      const wrapper = mount(<Gallery galleryElements={mockGallery} resizerURL="" ansId={ansId} ansHeadline={ansHeadline} />);
+      const autoBtnWrapper = wrapper.find('styled__ControlContainer').find('button').at(1);
+      const ran: number[] = [];
+      const eventHandler = (event: GalleryEventData, tst: number): void => {
+        if (event.ansGalleryId !== ansId) {
+          return;
+        }
+        expect(event.ansGalleryId).toEqual(ansId);
+        expect(event.ansGalleryHeadline).toEqual(ansHeadline);
+        expect(event.totalImages).toEqual(mockGallery.length);
+        expect(event.caption).toEqual(mockGallery[0].caption);
+        expect(event.orderPosition).toEqual(0);
+        ran.push(tst);
+      };
+
+      EventEmitter.subscribe('galleryAutoplayStart', (event: GalleryEventData) => eventHandler(event, 1));
+      EventEmitter.subscribe('galleryAutoplayStop', (event: GalleryEventData) => eventHandler(event, 2));
+      autoBtnWrapper.simulate('click');
+      autoBtnWrapper.simulate('click');
+      EventEmitter.subscribe('galleryAutoplayStart', () => {});
+      EventEmitter.subscribe('galleryAutoplayStop', () => {});
+      expect(ran.length).toBe(2);
+    });
+
+    it('must stop and the end of the gallery and generate the events', () => {
+      const wrapper = mount(<Gallery galleryElements={mockGallery} resizerURL="" ansId="cybertruck" />);
+      const autoBtnWrapper = wrapper.find('styled__ControlContainer').find('button').at(1);
+      const ran: number[] = [];
+      function sleep(ms: number): Promise<void> {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      const eventHandler = (event: GalleryEventData, tst: number): void => {
+        if (event.ansGalleryId !== 'cybertruck') {
+          return;
+        }
+        ran.push(tst);
+      };
+
+      EventEmitter.subscribe('galleryAutoplayStart', (event: GalleryEventData) => eventHandler(event, 1));
+      EventEmitter.subscribe('galleryAutoplayStop', (event: GalleryEventData) => eventHandler(event, 2));
+      autoBtnWrapper.simulate('click');
+      sleep(5000).then(() => {
+        expect(ran.length).toBe(2);
+      });
     });
   });
 
