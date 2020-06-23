@@ -76,6 +76,7 @@ import {
   ZoomOutIcon,
 } from '../src/components/icons';
 import { List, Item, Icon } from '../src/components/icons/Icon';
+import { number, select, text } from "@storybook/addon-knobs";
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 <Meta title="Icon" component={Icon} />
@@ -98,8 +99,6 @@ import { InstagramIcon } from '@wpmedia/engine-theme-sdk';
 ...
 
 ```
-
-
 
 ## Props
 <Props of={Icon} />
@@ -405,6 +404,19 @@ import { InstagramIcon } from '@wpmedia/engine-theme-sdk';
                 <p>zoomout</p>
             </Item>
         </List>
+    </Story>
+</Preview>
+
+### **Custom Icon**
+<Preview>
+    <Story name="Custom Icon">
+        <SoundCloudIcon
+            fill={text("Fill", "red")}
+            height={number('Height', 200)}
+            width={number('Width', 200)}
+            title={text("Title", "SoundCloud music service logo")}
+            description={text("Description", "This is a description")}
+        />
     </Story>
 </Preview>
 
