@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 /**
  * Gallery
  * --------------
@@ -26,6 +27,7 @@
 
 
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable camelcase */
 import React, { useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import PropTypes from 'prop-types';
