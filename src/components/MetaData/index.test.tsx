@@ -6,7 +6,6 @@
  */
 import React from 'react';
 import { shallow } from 'enzyme';
-import getProperties from 'fusion:properties';
 import MetaData from './index';
 
 jest.mock('react-dom/server', () => ({
