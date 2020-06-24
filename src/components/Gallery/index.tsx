@@ -89,6 +89,10 @@ interface GalleryProps {
   pageCountPhrase?: (current: number, total: number) => string;
 }
 
+declare interface EventOptionsInterface {
+  [s: string]: boolean | string | number;
+}
+
 const Gallery: React.FC<GalleryProps> = ({
   galleryElements,
   resizerURL = '',
@@ -108,6 +112,24 @@ const Gallery: React.FC<GalleryProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [autoDuration, setAutoDuration] = useState(null);
 
+  const emitEvent = (
+    eventName: string,
+    pg: number,
+    ord: number,
+    options: EventOptionsInterface = {},
+  ): void => {
+    EventEmitter.dispatch(eventName, {
+      eventName,
+      ansGalleryId: ansId,
+      ansGalleryHeadline: ansHeadline,
+      ansImageId: galleryElements[pg]._id,
+      caption: galleryElements[pg].caption,
+      orderPosition: ord,
+      totalImages: galleryElements.length,
+      ...options,
+    });
+  };
+
   const fullScreen = (): void => {
     setAutoDuration(null);
     setIsOpen(true);
@@ -122,16 +144,7 @@ const Gallery: React.FC<GalleryProps> = ({
       return;
     }
     const pg = page - 1;
-    EventEmitter.dispatch('galleryImagePrevious', {
-      eventName: 'galleryImagePrevious',
-      ansGalleryId: ansId,
-      ansGalleryHeadline: ansHeadline,
-      ansImageId: galleryElements[pg]._id,
-      caption: galleryElements[pg].caption,
-      orderPosition: pg + 1,
-      totalImages: galleryElements.length,
-      autoplay: false,
-    });
+    emitEvent('galleryImagePrevious', pg, pg + 1, { autoplay: false });
     setPage(pg);
   };
 
@@ -140,43 +153,17 @@ const Gallery: React.FC<GalleryProps> = ({
       return;
     }
     const pg = page + 1;
-    EventEmitter.dispatch('galleryImageNext', {
-      eventName: 'galleryImageNext',
-      ansGalleryId: ansId,
-      ansGalleryHeadline: ansHeadline,
-      ansImageId: galleryElements[pg]._id,
-      caption: galleryElements[pg].caption,
-      orderPosition: pg + 1,
-      totalImages: galleryElements.length,
-      autoplay: false,
-    });
+    emitEvent('galleryImageNext', pg, pg + 1, { autoplay: false });
     setPage(pg);
   };
 
   useInterval(() => {
     if (page >= galleryElements.length - 1) {
       setAutoDuration(null);
-      EventEmitter.dispatch('galleryAutoplayStop', {
-        eventName: 'galleryAutoplayStop',
-        ansGalleryId: ansId,
-        ansGalleryHeadline: ansHeadline,
-        ansImageId: galleryElements[page]._id,
-        caption: galleryElements[page].caption,
-        orderPosition: page,
-        totalImages: galleryElements.length,
-      });
+      emitEvent('galleryAutoplayStop', page, page);
     } else {
       const pg = page + 1;
-      EventEmitter.dispatch('galleryImageNext', {
-        eventName: 'galleryImageNext',
-        ansGalleryId: ansId,
-        ansGalleryHeadline: ansHeadline,
-        ansImageId: galleryElements[pg]._id,
-        caption: galleryElements[pg].caption,
-        orderPosition: pg + 1,
-        totalImages: galleryElements.length,
-        autoplay: true,
-      });
+      emitEvent('galleryImageNext', pg, pg + 1, { autoplay: true });
       setPage(pg);
     }
   }, autoDuration);
@@ -184,38 +171,12 @@ const Gallery: React.FC<GalleryProps> = ({
   const onPlayHandler = (): void => {
     if (autoDuration) {
       setAutoDuration(null);
-      EventEmitter.dispatch('galleryAutoplayStop', {
-        eventName: 'galleryAutoplayStop',
-        ansGalleryId: ansId,
-        ansGalleryHeadline: ansHeadline,
-        ansImageId: galleryElements[page]._id,
-        caption: galleryElements[page].caption,
-        orderPosition: page,
-        totalImages: galleryElements.length,
-      });
+      emitEvent('galleryAutoplayStop', page, page);
     } else {
-      EventEmitter.dispatch('galleryAutoplayStart', {
-        eventName: 'galleryAutoplayStart',
-        ansGalleryId: ansId,
-        ansGalleryHeadline: ansHeadline,
-        ansImageId: galleryElements[page]._id,
-        caption: galleryElements[page].caption,
-        orderPosition: page,
-        totalImages: galleryElements.length,
-      });
-
+      emitEvent('galleryAutoplayStart', page, page);
       if (page >= galleryElements.length - 1) {
         const pg = 0;
-        EventEmitter.dispatch('galleryImagePrevious', {
-          eventName: 'galleryImagePrevious',
-          ansGalleryId: ansId,
-          ansGalleryHeadline: ansHeadline,
-          ansImageId: galleryElements[pg]._id,
-          caption: galleryElements[pg].caption,
-          orderPosition: pg + 1,
-          totalImages: galleryElements.length,
-          autoplay: true,
-        });
+        emitEvent('galleryImagePrevious', pg, pg + 1, { autoplay: true });
         setPage(pg);
       }
       setAutoDuration(4000);
