@@ -133,28 +133,12 @@ const Gallery: React.FC<GalleryProps> = ({
   const fullScreen = (): void => {
     setAutoDuration(null);
     setIsOpen(true);
-    EventEmitter.dispatch('galleryExpandEnter', {
-      eventName: 'galleryExpandEnter',
-      ansGalleryId: ansId,
-      ansGalleryHeadline: ansHeadline,
-      ansImageId: galleryElements[page]._id,
-      caption: galleryElements[page].caption,
-      orderPosition: page,
-      totalImages: galleryElements.length,
-    });
+    emitEvent('galleryExpandEnter', page, page);
   };
 
   const exitFullScreen = (): void => {
     setIsOpen(false);
-    EventEmitter.dispatch('galleryExpandExit', {
-      eventName: 'galleryExpandExit',
-      ansGalleryId: ansId,
-      ansGalleryHeadline: ansHeadline,
-      ansImageId: galleryElements[page]._id,
-      caption: galleryElements[page].caption,
-      orderPosition: page,
-      totalImages: galleryElements.length,
-    });
+    emitEvent('galleryExpandExit', page, page);
   };
 
   const prevHandler = (): void => {
@@ -370,7 +354,7 @@ Gallery.propTypes = {
   /** Pause phrase text for internationalization */
   pausePhrase: PropTypes.string,
   /** Page count phrase text for internationalization */
-  pageCountPhrase: PropTypes.func
+  pageCountPhrase: PropTypes.func,
 };
 
 export default Gallery;
