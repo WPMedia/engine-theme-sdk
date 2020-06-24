@@ -13,8 +13,8 @@
   ],
   "scripts": {
     "build": "rm -rf dist && npm run build:cjs && npm run build:es && npm run build:dts",
-    "build:cjs": "BABEL_ENV=commonjs babel src --extensions='.ts,.tsx' --out-dir dist/cjs --ignore 'src/components/**/*.test.tsx' --copy-files --no-copy-ignored",
-    "build:es": "BABEL_ENV=es babel src --extensions='.ts,.tsx' --out-dir dist/es --ignore 'src/components/**/*.test.tsx' --copy-files --no-copy-ignored",
+    "build:cjs": "BABEL_ENV=commonjs babel src --extensions='.ts,.tsx' --out-dir dist/cjs --ignore 'src/components/**/*.test.tsx','src/components/**/*.test.ts' --no-copy-ignored",
+    "build:es": "BABEL_ENV=es babel src --extensions='.ts,.tsx' --out-dir dist/es --ignore 'src/components/**/*.test.tsx','src/components/**/*.test.ts' --no-copy-ignored",
     "build:dts": "tsc",
     "test": "jest",
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
