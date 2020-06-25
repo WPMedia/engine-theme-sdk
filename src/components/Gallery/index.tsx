@@ -5,8 +5,13 @@
  * Note on Events:
  * The prevHandler, nextHandler and autoplay callbacks use the EventEmitter object
  * to send off events that the next or previous image in the gallery has been accessed.
- * For next image access events, the event "galleryImageNext" is emitted and for previous,
- * the event "galleryImagePrevious" is emitted.
+ *
+ * This is the list of events actually reported by Gallery component:
+ *  galleryImageNext: when the next button is pressed.
+ *  galleryImagePrevious: when the next button is pressed.
+ *  galleryExpandEnter: when the expand button is pressed
+ *  galleryExpandExit: when the close button on the lightbox is pressed
+ *
  * To listen to these events, import the EventEmitter in your code:
  * @example
  * import { EventEmitter } from '@wpmedia/engine-theme-sdk';
@@ -84,6 +89,10 @@ interface GalleryProps {
   pageCountPhrase?: (current: number, total: number) => string;
 }
 
+declare interface EventOptionsInterface {
+  [s: string]: boolean | string | number;
+}
+
 const Gallery: React.FC<GalleryProps> = ({
   galleryElements,
   resizerURL = '',
@@ -103,13 +112,33 @@ const Gallery: React.FC<GalleryProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [autoDuration, setAutoDuration] = useState(null);
 
+  const emitEvent = (
+    eventName: string,
+    pg: number,
+    ord: number,
+    options: EventOptionsInterface = {},
+  ): void => {
+    EventEmitter.dispatch(eventName, {
+      eventName,
+      ansGalleryId: ansId,
+      ansGalleryHeadline: ansHeadline,
+      ansImageId: galleryElements[pg]._id,
+      caption: galleryElements[pg].caption,
+      orderPosition: ord,
+      totalImages: galleryElements.length,
+      ...options,
+    });
+  };
+
   const fullScreen = (): void => {
     setAutoDuration(null);
     setIsOpen(true);
+    emitEvent('galleryExpandEnter', page, page);
   };
 
   const exitFullScreen = (): void => {
     setIsOpen(false);
+    emitEvent('galleryExpandExit', page, page);
   };
 
   const prevHandler = (): void => {
@@ -117,16 +146,7 @@ const Gallery: React.FC<GalleryProps> = ({
       return;
     }
     const pg = page - 1;
-    EventEmitter.dispatch('galleryImagePrevious', {
-      eventName: 'galleryImagePrevious',
-      ansGalleryId: ansId,
-      ansGalleryHeadline: ansHeadline,
-      ansImageId: galleryElements[pg]._id,
-      caption: galleryElements[pg].caption,
-      orderPosition: pg + 1,
-      totalImages: galleryElements.length,
-      autoplay: false,
-    });
+    emitEvent('galleryImagePrevious', pg, pg + 1, { autoplay: false });
     setPage(pg);
   };
 
@@ -135,16 +155,7 @@ const Gallery: React.FC<GalleryProps> = ({
       return;
     }
     const pg = page + 1;
-    EventEmitter.dispatch('galleryImageNext', {
-      eventName: 'galleryImageNext',
-      ansGalleryId: ansId,
-      ansGalleryHeadline: ansHeadline,
-      ansImageId: galleryElements[pg]._id,
-      caption: galleryElements[pg].caption,
-      orderPosition: pg + 1,
-      totalImages: galleryElements.length,
-      autoplay: false,
-    });
+    emitEvent('galleryImageNext', pg, pg + 1, { autoplay: false });
     setPage(pg);
   };
 
@@ -153,16 +164,7 @@ const Gallery: React.FC<GalleryProps> = ({
       setAutoDuration(null);
     } else {
       const pg = page + 1;
-      EventEmitter.dispatch('galleryImageNext', {
-        eventName: 'galleryImageNext',
-        ansGalleryId: ansId,
-        ansGalleryHeadline: ansHeadline,
-        ansImageId: galleryElements[pg]._id,
-        caption: galleryElements[pg].caption,
-        orderPosition: pg + 1,
-        totalImages: galleryElements.length,
-        autoplay: true,
-      });
+      emitEvent('galleryImageNext', pg, pg + 1, { autoplay: true });
       setPage(pg);
     }
   }, autoDuration);
@@ -173,16 +175,7 @@ const Gallery: React.FC<GalleryProps> = ({
     } else {
       if (page >= galleryElements.length - 1) {
         const pg = 0;
-        EventEmitter.dispatch('galleryImagePrevious', {
-          eventName: 'galleryImagePrevious',
-          ansGalleryId: ansId,
-          ansGalleryHeadline: ansHeadline,
-          ansImageId: galleryElements[pg]._id,
-          caption: galleryElements[pg].caption,
-          orderPosition: pg + 1,
-          totalImages: galleryElements.length,
-          autoplay: true,
-        });
+        emitEvent('galleryImagePrevious', pg, pg + 1, { autoplay: true });
         setPage(pg);
       }
       setAutoDuration(4000);
@@ -358,7 +351,7 @@ Gallery.propTypes = {
   /** Pause phrase text for internationalization */
   pausePhrase: PropTypes.string,
   /** Page count phrase text for internationalization */
-  pageCountPhrase: PropTypes.func
+  pageCountPhrase: PropTypes.func,
 };
 
 export default Gallery;
