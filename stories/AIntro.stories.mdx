@@ -1,8 +1,11 @@
+import Version from '../src/utils/Version';
+import { Meta } from '@storybook/addon-docs/blocks';
+
 <Meta title="Intro" />
 
 # Engine SDK 
 
-**2.0.1-beta.5**
+<Version />
 
 It’s a collection of React components designed to:
 
@@ -18,15 +21,15 @@ We hope to accomplish these goals by:
 
 ### **Resources**
 
-- [Github](https://medium.com/storybookjs/component-story-format-66f4c32366df)
+- [Github](https://github.com/WPMedia/engine-theme-sdk)
 
-- [npm](https://medium.com/storybookjs/component-story-format-66f4c32366df)
+- [Releases](https://github.com/WPMedia/engine-theme-sdk/releases)
 
 
 
 ## Install
 
-Engine SDK components are written in React and Typescript, and its stories are written in [Component Story Format](https://medium.com/storybookjs/component-story-format-66f4c32366df). It requires Storybook version 6.0.0-beta.26 and up.
+Engine SDK components are written in React and Typescript, and its stories are written in [MDX Format](https://storybook.js.org/docs/formats/mdx-syntax/). It requires Storybook version 6.0.0-beta.26 and up.
 
 Add Engine SDK to your project.
 
@@ -103,3 +106,13 @@ You can test Engine SDK components locally by adding the following properties to
 ### **Resources**
 
 - [Read more about dist tags via npm.](https://docs.npmjs.com/adding-dist-tags-to-packages)
+
+## Deploy to ALC
+
+Engine SDK documentation is available [here](https://staging.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page). To update the documentation on Arc Learning Center you have to upload it to S3 by following these steps:
+1. Run `npm run build-storybook` on `engine-theme-sdk`. This will generate a static storybook build in `/storybook-static`.
+2. Open the [WP-ARC AWS Console](https://console.aws.amazon.com/s3/buckets/arc-learning-center-static/docs/?region=us-east-1&tab=overview#) (you might need to authenticate with OKTA first).
+3. Go to `storybooks`, then `engine-theme-sdk` and click on `Upload`.
+4. Upload your files to replace the contents of `engine-theme-sdk` with your new build. Make sure to include the `sb_dll` folder generated in the build.
+5. Click on `Next` and go through the uploading process with the default settings.
+6. After a minute your changes will be live on [ALC](https://staging.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page).

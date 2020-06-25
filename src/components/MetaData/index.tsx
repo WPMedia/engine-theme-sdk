@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { ReactElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
@@ -41,6 +42,7 @@ interface Props {
   MetaTags: Function;
   metaValue: Function;
   globalContent?: {
+    name?: string;
     description?: {
       basic?: string;
     };
@@ -65,7 +67,6 @@ interface Props {
       metadata_description?: string;
       metadata_title?: string;
     };
-    name?: string;
   } | null;
   websiteName?: string | null;
   twitterSite?: string | null;
@@ -285,26 +286,29 @@ MetaData.propTypes = {
   MetaTags: PropTypes.func,
   /** The metaValue function that is passed into an output type */
   metaValue: PropTypes.func,
-  /** The globalContent object that is obtained from the useFusionContext() in the fusion:context module */
-  globalContent: {
-    description: {
+  /**
+   * The globalContent object that is obtained from the
+   * useFusionContext() in the fusion:context module
+   * */
+  globalContent: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.shape({
       basic: PropTypes.string,
-    },
-    headlines: {
+    }),
+    headlines: PropTypes.shape({
       basic: PropTypes.string,
-    },
-    taxonomy: {
+    }),
+    taxonomy: PropTypes.shape({
       seo_keywords: PropTypes.array,
       tags: PropTypes.array,
-    },
+    }),
     authors: PropTypes.array,
     Payload: PropTypes.array,
-    metadata: {
+    metadata: PropTypes.shape({
       metadata_description: PropTypes.string,
       metadata_title: PropTypes.string,
-    },
-    name: PropTypes.string,
-  },
+    }),
+  }),
   /** The name of the website */
   websiteName: PropTypes.string,
   /** The corresponding twitter site name */

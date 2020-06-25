@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 /**
  * Gallery
  * --------------
@@ -12,6 +13,8 @@
  *  galleryAutoplayStart: when the autplay button is pressed
  *  galleryAutoplayStop: when the autoplay button is pressed and the autoplay mode was enabled
  *      if the gallery reach the end of the playlist will stop and generate this event too
+ *  galleryExpandEnter: when the expand button is pressed
+ *  galleryExpandExit: when the close button on the lightbox is pressed
  *
  * To listen to these events, import the EventEmitter in your code:
  * @example
@@ -26,6 +29,7 @@
 
 
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable camelcase */
 import React, { useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import PropTypes from 'prop-types';
@@ -133,10 +137,12 @@ const Gallery: React.FC<GalleryProps> = ({
   const fullScreen = (): void => {
     setAutoDuration(null);
     setIsOpen(true);
+    emitEvent('galleryExpandEnter', page, page);
   };
 
   const exitFullScreen = (): void => {
     setIsOpen(false);
+    emitEvent('galleryExpandExit', page, page);
   };
 
   const prevHandler = (): void => {
@@ -343,25 +349,8 @@ Gallery.propTypes = {
   ansId: PropTypes.string,
   /** ANS Headline identifier */
   ansHeadline: PropTypes.string,
-  /** Globally Unique ID trait */
-  galleryElements: {
-    /** Gallery ANS elements */
-    _id: PropTypes.string,
-    url: PropTypes.string,
-    alt_text: PropTypes.string,
-    subtitle: PropTypes.string,
-    caption: PropTypes.string,
-    credits: {
-      by: PropTypes.string,
-      affiliation: PropTypes.string,
-    },
-    resized_params: PropTypes.array,
-    breakpoints: {
-      small: PropTypes.number,
-      medium: PropTypes.number,
-      large: PropTypes.number,
-    },
-  },
+  /** Gallery ANS elements */
+  galleryElements: PropTypes.array,
   /** Expand phrase text for internationalization */
   expandPhrase: PropTypes.string,
   /** Autoplay phrase text for internationalization */
@@ -369,7 +358,7 @@ Gallery.propTypes = {
   /** Pause phrase text for internationalization */
   pausePhrase: PropTypes.string,
   /** Page count phrase text for internationalization */
-  pageCountPhrase: PropTypes.string
+  pageCountPhrase: PropTypes.func,
 };
 
 export default Gallery;

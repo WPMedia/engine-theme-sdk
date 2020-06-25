@@ -68,13 +68,13 @@ const ImageMetadata: React.FC<ImageMetadataProps> = ({
 ImageMetadata.propTypes = {
   /** Subtitle text for the image */
   subtitle: PropTypes.string,
-   /** Image caption */
+  /** Image caption */
   caption: PropTypes.string,
-   /** Image author related data */
-  credits: {
+  /** Image author related data */
+  credits: PropTypes.shape({
     by: PropTypes.array,
-    affiliation: PropTypes.array
-  }
-}
+    affiliation: PropTypes.array,
+  }),
+};
 
 export default ImageMetadata;
