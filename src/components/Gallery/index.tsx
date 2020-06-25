@@ -350,6 +350,7 @@ Gallery.propTypes = {
   /** ANS Headline identifier */
   ansHeadline: PropTypes.string,
   /** Gallery ANS elements */
+  // eslint-disable-next-line react/forbid-prop-types
   galleryElements: PropTypes.array,
   /** Expand phrase text for internationalization */
   expandPhrase: PropTypes.string,
