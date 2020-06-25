@@ -8,7 +8,11 @@
  *
  * This is the list of events actually reported by Gallery component:
  *  galleryImageNext: when the next button is pressed.
+ *      if the autoplay property of the event is true, the gallery is executing in autoplay mode
  *  galleryImagePrevious: when the next button is pressed.
+ *  galleryAutoplayStart: when the autplay button is pressed
+ *  galleryAutoplayStop: when the autoplay button is pressed and the autoplay mode was enabled
+ *      if the gallery reach the end of the playlist will stop and generate this event too
  *  galleryExpandEnter: when the expand button is pressed
  *  galleryExpandExit: when the close button on the lightbox is pressed
  *
@@ -162,6 +166,7 @@ const Gallery: React.FC<GalleryProps> = ({
   useInterval(() => {
     if (page >= galleryElements.length - 1) {
       setAutoDuration(null);
+      emitEvent('galleryAutoplayStop', page, page);
     } else {
       const pg = page + 1;
       emitEvent('galleryImageNext', pg, pg + 1, { autoplay: true });
@@ -172,7 +177,9 @@ const Gallery: React.FC<GalleryProps> = ({
   const onPlayHandler = (): void => {
     if (autoDuration) {
       setAutoDuration(null);
+      emitEvent('galleryAutoplayStop', page, page);
     } else {
+      emitEvent('galleryAutoplayStart', page, page);
       if (page >= galleryElements.length - 1) {
         const pg = 0;
         emitEvent('galleryImagePrevious', pg, pg + 1, { autoplay: true });
