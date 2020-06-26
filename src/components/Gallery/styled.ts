@@ -35,7 +35,7 @@ export const ControlContainer = styled.div`
   &, > button, > span {
     display: inline-flex;
     align-items: center;
-    color: green;
+    color: #191919;
     font-size: 14px;
     font-weight: 500;
   }
