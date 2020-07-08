@@ -5,7 +5,7 @@
  * @jest-environment node
  */
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import MetaData from './index';
 
 jest.mock('react-dom/server', () => ({
@@ -22,9 +22,19 @@ const websiteName = 'The Sun';
 const twitterUsername = 'the-sun';
 const resizerURL = 'https://fake.cdn.com/resizer';
 
+const expectTwitterMeta = (wrapper: ShallowWrapper): void => {
+  expect(wrapper.find("meta[property='twitter:site']").props().content).toBe(`@${twitterUsername}`);
+  expect(wrapper.find("meta[property='twitter:card']").props().content).toBe('summary_large_image');
+};
+
+const expectTwitterMetaMissing = (wrapper: ShallowWrapper): void => {
+  expect(wrapper.find("meta[property='twitter:site']").length).toBe(0);
+  expect(wrapper.find("meta[property='twitter:card']").props().content).toBe('summary_large_image');
+};
+
 describe('the meta data ', () => {
   describe('if page type is article', () => {
-    const metaValue = (prop): string | null => {
+    const metaValue = (prop: string): string | null => {
       if (prop === 'page-type') {
         return 'article';
       }
@@ -65,7 +75,6 @@ describe('the meta data ', () => {
       arcSite: 'the-sun',
     };
     const { globalContent } = useFusionContext;
-
     const wrapper = shallow(<MetaData
       metaValue={metaValue}
       MetaTag={jest.fn()}
@@ -75,6 +84,7 @@ describe('the meta data ', () => {
       websiteName={websiteName}
       resizerURL={resizerURL}
     />);
+
     it('should have a title', () => {
       expect(wrapper.find('title').length).toBe(1);
     });
@@ -82,10 +92,15 @@ describe('the meta data ', () => {
     it('should have meta tags', () => {
       expect(wrapper.find('meta').length).toBe(9);
     });
+
+    it('should have twitter tags', () => {
+      expectTwitterMeta(wrapper);
+    });
   });
+
   describe('when a video page type is provided', () => {
     describe('when global content is provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'video';
         }
@@ -160,10 +175,14 @@ describe('the meta data ', () => {
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when global content is not provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'video';
         }
@@ -212,10 +231,14 @@ describe('the meta data ', () => {
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when custom tags are provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'video';
         }
@@ -298,12 +321,16 @@ describe('the meta data ', () => {
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
   });
 
   describe('when a gallery page type is provided', () => {
     describe('when global content is provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'gallery';
         }
@@ -378,10 +405,14 @@ describe('the meta data ', () => {
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when global content is not provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'gallery';
         }
@@ -430,10 +461,14 @@ describe('the meta data ', () => {
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when custom tags are provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'gallery';
         }
@@ -515,12 +550,16 @@ describe('the meta data ', () => {
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
   });
 
   describe('when an author page type is provided', () => {
     describe('when global content is provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'author';
         }
@@ -559,10 +598,14 @@ describe('the meta data ', () => {
       it('should have an author og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('John Doe - The Sun');
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when global content is not provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'author';
         }
@@ -591,10 +634,14 @@ describe('the meta data ', () => {
       it('should have an author og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when custom tags are provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'author';
         }
@@ -640,12 +687,16 @@ describe('the meta data ', () => {
       it('should have an author og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title - The Sun');
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
   });
 
   describe('when a tag page type is provided', () => {
     describe('when global content is provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'tag';
         }
@@ -685,10 +736,14 @@ describe('the meta data ', () => {
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('tag name - The Sun');
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when global content is not provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'tag';
         }
@@ -721,10 +776,14 @@ describe('the meta data ', () => {
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when custom tags are provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'tag';
         }
@@ -770,12 +829,16 @@ describe('the meta data ', () => {
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title - The Sun');
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
   });
 
   describe('when a section page type is provided', () => {
     describe('when global content is provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'section';
         }
@@ -810,10 +873,14 @@ describe('the meta data ', () => {
       it('should have a section og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('Entertainment - The Sun');
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when global content is not provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'section';
         }
@@ -846,10 +913,14 @@ describe('the meta data ', () => {
       it('should have a section og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when custom tags are provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'section';
         }
@@ -899,10 +970,14 @@ describe('the meta data ', () => {
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title - The Sun');
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
     });
 
     describe('when metadata fields in global content are provided', () => {
-      const metaValue = (prop): string | null => {
+      const metaValue = (prop: string): string | null => {
         if (prop === 'page-type') {
           return 'section';
         }
@@ -943,6 +1018,81 @@ describe('the meta data ', () => {
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('Entertainment - The Sun');
       });
+
+      it('should have twitter tags', () => {
+        expectTwitterMeta(wrapper);
+      });
+    });
+  });
+
+  describe('twitter meta', () => {
+    const metaValue = (prop: string): string | null => {
+      if (prop === 'page-type') {
+        return 'article';
+      }
+      if (prop === 'title') {
+        return 'the-sun';
+      }
+      return null;
+    };
+
+    const useFusionContext = {
+      globalContent: {
+        description: {
+          basic: 'this is a description',
+        },
+        headlines: {
+          basic: 'this is a headline',
+        },
+        taxonomy: {
+          // eslint-disable-next-line @typescript-eslint/camelcase
+          seo_keywords: [
+            'keyword1',
+            'keyword2',
+          ],
+          tags: [
+            { slug: 'tag1' },
+            { slug: 'tag2' },
+          ],
+        },
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        promo_items: {
+          basic: {
+            url: 'awesome-url',
+            // eslint-disable-next-line @typescript-eslint/camelcase
+            alt_text: 'alt text',
+          },
+        },
+      },
+      arcSite: 'the-sun',
+    };
+    const { globalContent } = useFusionContext;
+
+    it('must not have an empty twitter:site metatag if twitterUsername missing', () => {
+      const wrapper = shallow(<MetaData
+        metaValue={metaValue}
+        MetaTag={jest.fn()}
+        MetaTags={jest.fn()}
+        globalContent={globalContent}
+        websiteName={websiteName}
+        resizerURL={resizerURL}
+      />);
+
+      expectTwitterMetaMissing(wrapper);
+    });
+
+    it('must not have an empty twitter:site metatag if twitterUsername empty', () => {
+      const wrapper = shallow(<MetaData
+        metaValue={metaValue}
+        MetaTag={jest.fn()}
+        MetaTags={jest.fn()}
+        globalContent={globalContent}
+        twitterUsername=""
+        websiteName={websiteName}
+        resizerURL={resizerURL}
+      />);
+
+      expectTwitterMetaMissing(wrapper);
     });
   });
 });
