@@ -14,12 +14,12 @@ jest.mock('react-dom/server', () => ({
 
 // getProperties.mockImplementation(() => ({
 //   websiteName: 'The Sun',
-//   twitterSite: 'https://www.twitter.com/the-sun',
+//   twitterUsername: 'the-sun',
 //   dangerouslyInjectJS: [],
 // }));
 
 const websiteName = 'The Sun';
-const twitterSite = 'https://www.twitter.com/the-sun';
+const twitterUsername = 'the-sun';
 const resizerURL = 'https://fake.cdn.com/resizer';
 
 describe('the meta data ', () => {
@@ -71,7 +71,7 @@ describe('the meta data ', () => {
       MetaTag={jest.fn()}
       MetaTags={jest.fn()}
       globalContent={globalContent}
-      twitterSite={twitterSite}
+      twitterUsername={twitterUsername}
       websiteName={websiteName}
       resizerURL={resizerURL}
     />);
@@ -130,7 +130,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -143,7 +143,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -156,7 +156,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -169,7 +169,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -182,7 +182,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -195,7 +195,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -208,7 +208,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -233,7 +233,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);
@@ -319,7 +319,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);
@@ -399,7 +399,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -412,7 +412,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -425,7 +425,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -438,7 +438,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -451,7 +451,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -464,7 +464,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -477,7 +477,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -503,7 +503,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);
@@ -588,7 +588,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);
@@ -649,7 +649,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -662,7 +662,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -675,7 +675,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -700,7 +700,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);
@@ -744,7 +744,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);
@@ -791,7 +791,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -804,7 +804,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -817,7 +817,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -843,7 +843,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);
@@ -892,7 +892,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);
@@ -933,7 +933,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -946,7 +946,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -959,7 +959,7 @@ describe('the meta data ', () => {
           MetaTag={jest.fn()}
           MetaTags={jest.fn()}
           globalContent={globalContent}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           resizerURL={resizerURL}
         />);
@@ -985,7 +985,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);
@@ -1038,7 +1038,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);
@@ -1082,7 +1082,7 @@ describe('the meta data ', () => {
         MetaTag={jest.fn()}
         MetaTags={jest.fn()}
         globalContent={globalContent}
-        twitterSite={twitterSite}
+        twitterUsername={twitterUsername}
         websiteName={websiteName}
         resizerURL={resizerURL}
       />);

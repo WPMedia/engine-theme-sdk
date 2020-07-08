@@ -69,12 +69,12 @@ interface Props {
     };
   } | null;
   websiteName?: string | null;
-  twitterSite?: string | null;
+  twitterUsername?: string | null;
   resizerURL?: string | null;
 }
 
 const MetaData: React.FC<Props> = ({
-  MetaTag, MetaTags, metaValue, globalContent: gc, websiteName, twitterSite, resizerURL,
+  MetaTag, MetaTags, metaValue, globalContent: gc, websiteName, twitterUsername, resizerURL,
 }) => {
   const pageType = metaValue('page-type') || '';
 
@@ -95,7 +95,7 @@ const MetaData: React.FC<Props> = ({
     title: websiteName,
     ogTitle: websiteName,
     ogSiteName: websiteName,
-    twitterSite: twitterSite ? `@${twitterSite}` : null,
+    twitterUsername: twitterUsername ? `@${twitterUsername}` : null,
     twitterCard: 'summary_large_image',
   };
 
@@ -253,8 +253,8 @@ const MetaData: React.FC<Props> = ({
         && <meta property="og:site_name" content={metaData.ogSiteName} />
       }
       {
-        metaData.twitterSite
-        && <meta property="twitter:site" content={metaData.twitterSite} />
+        metaData.twitterUsername
+        && <meta property="twitter:site" content={metaData.twitterUsername} />
       }
       {
         metaData.twitterCard
@@ -312,7 +312,7 @@ MetaData.propTypes = {
   /** The name of the website */
   websiteName: PropTypes.string,
   /** The corresponding twitter site name */
-  twitterSite: PropTypes.string,
+  twitterUsername: PropTypes.string,
 };
 
 export default MetaData;
