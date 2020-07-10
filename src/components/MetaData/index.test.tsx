@@ -93,9 +93,6 @@ describe('the meta data ', () => {
       expect(wrapper.find('meta').length).toBe(9);
     });
 
-    it('should have twitter tags', () => {
-      expectTwitterMeta(wrapper);
-    });
   });
 
   describe('when a video page type is provided', () => {
@@ -175,10 +172,6 @@ describe('the meta data ', () => {
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
-      });
     });
 
     describe('when global content is not provided', () => {
@@ -230,10 +223,6 @@ describe('the meta data ', () => {
 
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
-      });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
       });
     });
 
@@ -320,10 +309,6 @@ describe('the meta data ', () => {
 
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
-      });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
       });
     });
   });
@@ -405,10 +390,6 @@ describe('the meta data ', () => {
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
-      });
     });
 
     describe('when global content is not provided', () => {
@@ -460,10 +441,6 @@ describe('the meta data ', () => {
 
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
-      });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
       });
     });
 
@@ -550,10 +527,6 @@ describe('the meta data ', () => {
       it('should not have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").length).toBe(0);
       });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
-      });
     });
   });
 
@@ -598,10 +571,6 @@ describe('the meta data ', () => {
       it('should have an author og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('John Doe - The Sun');
       });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
-      });
     });
 
     describe('when global content is not provided', () => {
@@ -633,10 +602,6 @@ describe('the meta data ', () => {
 
       it('should have an author og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
-      });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
       });
     });
 
@@ -686,10 +651,6 @@ describe('the meta data ', () => {
 
       it('should have an author og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title - The Sun');
-      });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
       });
     });
   });
@@ -736,10 +697,6 @@ describe('the meta data ', () => {
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('tag name - The Sun');
       });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
-      });
     });
 
     describe('when global content is not provided', () => {
@@ -775,10 +732,6 @@ describe('the meta data ', () => {
 
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
-      });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
       });
     });
 
@@ -829,10 +782,6 @@ describe('the meta data ', () => {
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title - The Sun');
       });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
-      });
     });
   });
 
@@ -873,10 +822,6 @@ describe('the meta data ', () => {
       it('should have a section og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('Entertainment - The Sun');
       });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
-      });
     });
 
     describe('when global content is not provided', () => {
@@ -912,10 +857,6 @@ describe('the meta data ', () => {
 
       it('should have a section og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
-      });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
       });
     });
 
@@ -970,10 +911,6 @@ describe('the meta data ', () => {
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title - The Sun');
       });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
-      });
     });
 
     describe('when metadata fields in global content are provided', () => {
@@ -1017,10 +954,6 @@ describe('the meta data ', () => {
 
       it('should have a tag og:title meta tag', () => {
         expect(wrapper.find("meta[property='og:title']").props().content).toBe('Entertainment - The Sun');
-      });
-
-      it('should have twitter tags', () => {
-        expectTwitterMeta(wrapper);
       });
     });
   });
@@ -1067,6 +1000,20 @@ describe('the meta data ', () => {
       arcSite: 'the-sun',
     };
     const { globalContent } = useFusionContext;
+
+    it('should have twitter tags', () => {
+      const wrapper = shallow(<MetaData
+        metaValue={metaValue}
+        MetaTag={jest.fn()}
+        MetaTags={jest.fn()}
+        globalContent={globalContent}
+        twitterUsername={twitterUsername}
+        websiteName={websiteName}
+        resizerURL={resizerURL}
+      />);
+
+      expectTwitterMeta(wrapper);
+    });
 
     it('must not have an empty twitter:site metatag if twitterUsername missing', () => {
       const wrapper = shallow(<MetaData
