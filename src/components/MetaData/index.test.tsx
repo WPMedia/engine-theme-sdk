@@ -92,7 +92,6 @@ describe('the meta data ', () => {
     it('should have meta tags', () => {
       expect(wrapper.find('meta').length).toBe(9);
     });
-
   });
 
   describe('when a video page type is provided', () => {

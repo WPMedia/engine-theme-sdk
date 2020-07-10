@@ -36,7 +36,7 @@ import {
   LightboxImage,
   LightboxCaption,
   LightboxToolbar,
-} from './styled';
+} from '../Lightbox/styled';
 
 import {
   ChevronRightIcon,
