@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import Image from './index';
 
@@ -48,7 +48,7 @@ describe('image component', () => {
     expect(altProperty).toBe(alt);
   });
   it('returns various breakpoints with the widths', () => {
-    const wrapper = mount(<Image
+    const wrapper = shallow(<Image
       url={rawURL}
       alt={alt}
       smallWidth={smallWidth}
@@ -67,6 +67,6 @@ describe('image component', () => {
     expect(src).toBe('https://fake.cdn.arcpublishing.com/resizer/sDwhmVtwayjjDJww8CvlWjpydGM=/274x154/filters:format(jpg):quality(70)/fake.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg');
     expect(altProperty).toBe(alt);
 
-    expect(wrapper.find('source').length).toBe(3);
+    expect(wrapper.find('SourceHandler').length).toBe(3);
   });
 });
