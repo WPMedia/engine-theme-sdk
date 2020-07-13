@@ -1,5 +1,5 @@
 template: v1/cfn/shared/pipelines/simple-pipeline/simple-pipeline.template.yml
-stack_name: engine-theme-sdk-pipeline
+stack_name: engine-theme-sdk-inf
 region: us-east-1
 
 context:
