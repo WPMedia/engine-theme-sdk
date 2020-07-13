@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - echo Running npm install...
+      - npm install
+  pre_build:
+    commands:
+      - echo Running project tests...
+      - CI=true npm test
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm run build-storybook
+  post_build:
+    commands:
+      - echo Build finished on `date`
+      - echo Deployment started on `date`
+      - aws s3 rm s3://arc-learning-center-static/docs/storybooks/engine-theme-sdk  --recursive
+      - aws s3 sync storybook-static s3://arc-learning-center-static/docs/storybooks/engine-theme-sdk  --cache-control max-age=31536000
+
+artifacts:
+  files:
+    - storybook-static/**/*

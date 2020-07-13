@@ -1,0 +1,28 @@
+template: v1/cfn/shared/pipelines/simple-pipeline/simple-pipeline.template.yml
+stack_name: engine-theme-sdk-test-pipeline
+region: us-east-1
+
+context:
+  pipeline:
+    name: engine-theme-sdk
+    restart_on_update: true
+
+    git:
+      owner: WPMedia
+      branch: master
+      repo: engine-theme-sdk
+
+    stages:
+      - name: Pipeline
+        actions:
+          - name: RebuildThisPipeline
+            config: cfn/configs/deployment.yml
+
+      - name: PackageAndDeploy
+        actions:
+          - name: PackageAndDeploy
+            image: aws/codebuild/standard:2.0
+            buildspec: codebuild/buildspec.yml
+            outputArtifact: ServerlessPackage
+            env_vars:
+              phase: PackageAndDeploy
