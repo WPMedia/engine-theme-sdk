@@ -9,7 +9,7 @@ interface LogoProps {
 const ArcLogo: React.FC<LogoProps> = ({
   title = 'Arc Publishing logo', description = '',
 }) => (
-  <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img">
     <title>{title}</title>
     <desc>{description}</desc>
     <defs>
