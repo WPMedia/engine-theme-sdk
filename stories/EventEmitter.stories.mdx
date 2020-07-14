@@ -1,0 +1,82 @@
+import EventEmitter from '../src/components/EventEmitter';
+import { action } from '@storybook/addon-actions';
+import { withConsole } from '@storybook/addon-console';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+<Meta title="EventEmitter" component={EventEmitter} />
+
+# EventEmitter
+
+The `EventEmitter` component is is used to emit events for the gallery and lead art blocks. These events are named galleryImageNext and galleryImagePrevious respectively.
+
+## Use
+
+If you want to listen to these events, the first thing is to import the `EventEmitter` object into your code:
+
+```
+import { EventEmitter } from '@wpmedia/engine-theme-sdk';
+
+```
+
+Then create a callback function such as:
+
+```
+const myGalleryImageNext = (event) => { console.log('Here is the event: ', event); }
+const myGalleryImagePrevious = (event) => { console.log('Here is the event: ', event); }
+```
+
+Then use you use your callback in subscribing to the event:
+
+```
+EventEmitter.subscribe('galleryImageNext', (event) => myGalleryImageNext(event)); 
+EventEmitter.subscribe('galleryImagePrevious', (event) => myGalleryImagePrevious(event));
+```
+
+The event object for these events will contain the following information:
+
+
+- **eventName** (string): The event name fired. In this case could be either galleryImageNext or galleryImagePrevious.
+- **ansGalleryId** (string): The id of the gallery.
+- **ansGalleryHeadline** (string): The headline for the gallery.
+- **ansImageId** (string): The id for the current image.
+- **caption** (string): The caption for the current image.
+- **orderPosition** (number): The position in the carousel for the current image.
+- **totalImages** (number): Total number of images in the carousel.
+- **autoplay** (boolean): whether or not the event triggered during autoplay. Value is either true or false.
+
+## Stories
+
+<Story name="Basic" />
+
+### **Event**
+<Preview>
+    <Story name="Event">
+         <div>
+            <button 
+                style={{
+                    backgroundColor: '#4ba2da',
+                    borderColor: 'transparent',
+                    borderRadius: 8,
+                    color: '#fff',
+                    height: 50,
+                    width: 200
+                }}
+                onClick={() => console.log(
+                    {
+                        "eventName": "galleryImageNext",
+                        "ansGalleryId": "HADBIJEFK5G57CXZN7UC7UQHF4",
+                        "ansGalleryHeadline": "A cloudy day",
+                        "ansImageId": "234845884",
+                        "caption": "The rain had chased all the beach-goers away",
+                        "orderPosition": 0,
+                        "totalImages": 4,
+                        "autoplay": false
+                    }
+                )}
+            >
+                Click to view event
+            </button>
+            <p>(Go to the <b><i>Actions</i></b> tab under Canvas)</p>
+        </div>
+    </Story>
+</Preview>

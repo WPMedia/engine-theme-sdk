@@ -1,0 +1,47 @@
+import Lightbox from '../src/components/Lightbox';
+import { number, select, text } from "@storybook/addon-knobs";
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+<Meta title="Lightbox" component={Lightbox} />
+
+# Lightbox
+
+The `Lightbox` component displays a set of images by filling the screen, and dimming out the rest of the web page.
+
+## Use
+
+Import it into a block: 
+
+```
+import { Lightbox } from '@wpmedia/engine-theme-sdk';
+
+...
+
+<Lightbox />
+
+...
+
+```
+
+## Props
+<Props of={Lightbox} />
+
+## Stories
+
+
+<Story name="Basic" />
+
+### **Custom Lightbox**
+<Preview>
+    View on Canvas
+    <Story name="Custom Lightbox">
+    {
+        select('Visible', [true, false], false) &&  (
+            <Lightbox
+                closeLabel={text('Close label', 'Close lightbox')}
+            />
+        )
+    }
+        
+    </Story>
+</Preview>

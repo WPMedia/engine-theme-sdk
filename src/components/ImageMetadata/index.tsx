@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 
@@ -61,6 +62,19 @@ const ImageMetadata: React.FC<ImageMetadataProps> = ({
       }
     </MetadataParagraph>
   );
+};
+
+
+ImageMetadata.propTypes = {
+  /** Subtitle text for the image */
+  subtitle: PropTypes.string,
+  /** Image caption */
+  caption: PropTypes.string,
+  /** Image author related data */
+  credits: PropTypes.shape({
+    by: PropTypes.array,
+    affiliation: PropTypes.array,
+  }),
 };
 
 export default ImageMetadata;

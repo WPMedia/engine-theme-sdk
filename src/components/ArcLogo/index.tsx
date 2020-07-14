@@ -1,9 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const ArcLogo: React.FC<{ title?: string; description?: string }> = ({
+interface LogoProps {
+  title?: string;
+  description?: string;
+}
+
+const ArcLogo: React.FC<LogoProps> = ({
   title = 'Arc Publishing logo', description = '',
 }) => (
-  <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img">
     <title>{title}</title>
     <desc>{description}</desc>
     <defs>
@@ -33,5 +39,10 @@ const ArcLogo: React.FC<{ title?: string; description?: string }> = ({
     </g>
   </svg>
 );
+
+ArcLogo.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+};
 
 export default ArcLogo;

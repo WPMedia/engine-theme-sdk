@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { ReactElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
+import PropTypes from 'prop-types';
 
 interface CustomMetaData {
   metaName: string;
@@ -40,6 +42,7 @@ interface Props {
   MetaTags: Function;
   metaValue: Function;
   globalContent?: {
+    name?: string;
     description?: {
       basic?: string;
     };
@@ -64,15 +67,14 @@ interface Props {
       metadata_description?: string;
       metadata_title?: string;
     };
-    name?: string;
   } | null;
   websiteName?: string | null;
-  twitterSite?: string | null;
+  twitterUsername?: string | null;
   resizerURL?: string | null;
 }
 
 const MetaData: React.FC<Props> = ({
-  MetaTag, MetaTags, metaValue, globalContent: gc, websiteName, twitterSite, resizerURL,
+  MetaTag, MetaTags, metaValue, globalContent: gc, websiteName, twitterUsername, resizerURL,
 }) => {
   const pageType = metaValue('page-type') || '';
 
@@ -93,7 +95,7 @@ const MetaData: React.FC<Props> = ({
     title: websiteName,
     ogTitle: websiteName,
     ogSiteName: websiteName,
-    twitterSite: twitterSite ? `@${twitterSite}` : null,
+    twitterUsername: twitterUsername ? `@${twitterUsername}` : null,
     twitterCard: 'summary_large_image',
   };
 
@@ -251,8 +253,8 @@ const MetaData: React.FC<Props> = ({
         && <meta property="og:site_name" content={metaData.ogSiteName} />
       }
       {
-        metaData.twitterSite
-        && <meta property="twitter:site" content={metaData.twitterSite} />
+        metaData.twitterUsername
+        && <meta property="twitter:site" content={metaData.twitterUsername} />
       }
       {
         metaData.twitterCard
@@ -275,6 +277,42 @@ const MetaData: React.FC<Props> = ({
       {twitterTags}
     </>
   );
+};
+
+MetaData.propTypes = {
+  /** The MetaTag function that is passed into an output type */
+  MetaTag: PropTypes.func,
+  /** The MetaTags function that is passed into an output type */
+  MetaTags: PropTypes.func,
+  /** The metaValue function that is passed into an output type */
+  metaValue: PropTypes.func,
+  /**
+   * The globalContent object that is obtained from the
+   * useFusionContext() in the fusion:context module
+   * */
+  globalContent: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.shape({
+      basic: PropTypes.string,
+    }),
+    headlines: PropTypes.shape({
+      basic: PropTypes.string,
+    }),
+    taxonomy: PropTypes.shape({
+      seo_keywords: PropTypes.array,
+      tags: PropTypes.array,
+    }),
+    authors: PropTypes.array,
+    Payload: PropTypes.array,
+    metadata: PropTypes.shape({
+      metadata_description: PropTypes.string,
+      metadata_title: PropTypes.string,
+    }),
+  }),
+  /** The name of the website */
+  websiteName: PropTypes.string,
+  /** The corresponding twitter site name */
+  twitterUsername: PropTypes.string,
 };
 
 export default MetaData;

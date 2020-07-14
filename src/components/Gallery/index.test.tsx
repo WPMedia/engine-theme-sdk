@@ -3,6 +3,8 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
 import Gallery from '.';
+import EventEmitter from '../EventEmitter';
+import Lightbox from '../Lightbox';
 
 jest.mock('fusion:context', () => ({
   useAppContext: jest.fn(() => ({})),
@@ -25,7 +27,7 @@ const mockGallery = [
       medium: 0,
       large: 0,
     },
-    resized_params: {},
+    resized_params: { '800x0': '' },
     credits: {
       by: [
         {
@@ -50,7 +52,7 @@ const mockGallery = [
       medium: 0,
       large: 0,
     },
-    resized_params: {},
+    resized_params: { '800x0': '' },
     credits: {
       by: [
         {
@@ -76,7 +78,7 @@ const mockGallery = [
       large: 0,
     },
     resizerURL: '',
-    resized_params: {},
+    resized_params: { '800x0': '' },
     credits: {
       by: [
         {
@@ -103,7 +105,7 @@ const mockGallery = [
       large: 0,
     },
     resizerURL: '',
-    resized_params: {},
+    resized_params: { '800x0': '' },
     credits: {
       affiliation: [
         {
@@ -125,7 +127,7 @@ const mockGallery = [
       large: 0,
     },
     resizerURL: '',
-    resized_params: {},
+    resized_params: { '800x0': '' },
     credits: {
       by: [
         {
@@ -147,7 +149,7 @@ const mockGallery = [
       large: 0,
     },
     resizerURL: '',
-    resized_params: {},
+    resized_params: { '800x0': '' },
   },
 ];
 
@@ -175,6 +177,10 @@ function createTouchEvent({ x = 0, y = 0 }, target: EventTarget): TouchEventInit
   return { touches: [createClientXY(x, y, target)] };
 }
 
+declare interface GalleryEventData {
+  [s: string]: string;
+}
+
 describe('the gallery block', () => {
   describe('the fullscreen button', () => {
     it('should be present with the "FullScreen" svg component with the correct fill', () => {
@@ -195,6 +201,33 @@ describe('the gallery block', () => {
         wrapper.find('styled__ControlContainer').find('styled__ControlsButton').at(0).childAt(1)
           .text(),
       ).toBe('Expand');
+    });
+
+    it('must emit events when enter/exit full screen mode', async () => {
+      const wrapper = mount(<Gallery galleryElements={mockGallery} resizerURL="" ansId="fullScreen" />);
+      const fullScreenBtnWrapper = wrapper.find('styled__ControlContainer').find('button').at(0);
+      const ran: string[] = [];
+      const eventHandler = (event: GalleryEventData, tst: string): void => {
+        if (event.ansGalleryId !== 'fullScreen') {
+          return;
+        }
+        ran.push(tst);
+      };
+      function sleep(ms: number): Promise<void> {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      EventEmitter.subscribe('galleryExpandEnter', (event: GalleryEventData) => eventHandler(event, 'start'));
+      EventEmitter.subscribe('galleryExpandExit', (event: GalleryEventData) => eventHandler(event, 'stop'));
+      fullScreenBtnWrapper.simulate('click');
+      await sleep(500);
+      const lightboxButton = wrapper.find(Lightbox).find('button').at(2);
+      await act(async () => {
+        lightboxButton.simulate('click');
+        await sleep(500);
+        expect(ran[0]).toEqual('start');
+        expect(ran[1]).toEqual('stop');
+      });
     });
   });
 
@@ -240,6 +273,58 @@ describe('the gallery block', () => {
       expect(autoBtnWrapper.childAt(1).text()).toMatch(/Pause\sautoplay/);
       fullScreenBtnWrapper.simulate('click');
       expect(autoBtnWrapper.childAt(1).text()).toBe('Autoplay');
+    });
+  });
+
+  describe('Autoplay events', () => {
+    it('must generate events at start and stop', () => {
+      const ansId = '9876';
+      const ansHeadline = 'The Gallery';
+      const wrapper = mount(<Gallery galleryElements={mockGallery} resizerURL="" ansId={ansId} ansHeadline={ansHeadline} />);
+      const autoBtnWrapper = wrapper.find('styled__ControlContainer').find('button').at(1);
+      const ran: number[] = [];
+      const eventHandler = (event: GalleryEventData, tst: number): void => {
+        if (event.ansGalleryId !== ansId) {
+          return;
+        }
+        expect(event.ansGalleryId).toEqual(ansId);
+        expect(event.ansGalleryHeadline).toEqual(ansHeadline);
+        expect(event.totalImages).toEqual(mockGallery.length);
+        expect(event.caption).toEqual(mockGallery[0].caption);
+        expect(event.orderPosition).toEqual(0);
+        ran.push(tst);
+      };
+
+      EventEmitter.subscribe('galleryAutoplayStart', (event: GalleryEventData) => eventHandler(event, 1));
+      EventEmitter.subscribe('galleryAutoplayStop', (event: GalleryEventData) => eventHandler(event, 2));
+      autoBtnWrapper.simulate('click');
+      autoBtnWrapper.simulate('click');
+      EventEmitter.subscribe('galleryAutoplayStart', () => {});
+      EventEmitter.subscribe('galleryAutoplayStop', () => {});
+      expect(ran.length).toBe(2);
+    });
+
+    it('must stop and the end of the gallery and generate the events', () => {
+      const wrapper = mount(<Gallery galleryElements={mockGallery} resizerURL="" ansId="cybertruck" />);
+      const autoBtnWrapper = wrapper.find('styled__ControlContainer').find('button').at(1);
+      const ran: number[] = [];
+      function sleep(ms: number): Promise<void> {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      const eventHandler = (event: GalleryEventData, tst: number): void => {
+        if (event.ansGalleryId !== 'cybertruck') {
+          return;
+        }
+        ran.push(tst);
+      };
+
+      EventEmitter.subscribe('galleryAutoplayStart', (event: GalleryEventData) => eventHandler(event, 1));
+      EventEmitter.subscribe('galleryAutoplayStop', (event: GalleryEventData) => eventHandler(event, 2));
+      autoBtnWrapper.simulate('click');
+      sleep(5000).then(() => {
+        expect(ran.length).toBe(2);
+      });
     });
   });
 
@@ -534,8 +619,8 @@ describe('the gallery block', () => {
   describe('the "expandPhrase" prop', () => {
     describe('when the prop is provided', () => {
       it('should set the phrase text to the passed in string', () => {
-        const wrapper = mount(<Gallery galleryElements={mockGallery} expandPhrase="Bygga ut" />);
-        expect(wrapper.find('styled__ControlsButton').at(0).find('styled__PlaybackText').text()).toEqual('Bygga ut');
+        const wrapper = mount(<Gallery galleryElements={mockGallery} expandPhrase="Förstora" />);
+        expect(wrapper.find('styled__ControlsButton').at(0).find('styled__PlaybackText').text()).toEqual('Förstora');
       });
     });
 
@@ -550,8 +635,8 @@ describe('the gallery block', () => {
   describe('the "autoplayPhrase" prop', () => {
     describe('when the prop is provided', () => {
       it('should set the phrase text to the passed in string', () => {
-        const wrapper = mount(<Gallery galleryElements={mockGallery} autoplayPhrase="Autospela" />);
-        expect(wrapper.find('styled__ControlsButton').at(1).find('styled__PlaybackText').text()).toEqual('Autospela');
+        const wrapper = mount(<Gallery galleryElements={mockGallery} autoplayPhrase="Spela upp" />);
+        expect(wrapper.find('styled__ControlsButton').at(1).find('styled__PlaybackText').text()).toEqual('Spela upp');
       });
     });
 

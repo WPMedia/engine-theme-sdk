@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.0.1-beta.4",
+  "version": "2.0.1-beta.9",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -13,8 +13,8 @@
   ],
   "scripts": {
     "build": "rm -rf dist && npm run build:cjs && npm run build:es && npm run build:dts",
-    "build:cjs": "BABEL_ENV=commonjs babel src --extensions='.ts,.tsx' --out-dir dist/cjs --copy-files",
-    "build:es": "BABEL_ENV=es babel src --extensions='.ts,.tsx' --out-dir dist/es --copy-files",
+    "build:cjs": "BABEL_ENV=commonjs babel src --extensions='.ts,.tsx' --out-dir dist/cjs --ignore 'src/components/**/*.test.tsx','src/components/**/*.test.ts' --no-copy-ignored",
+    "build:es": "BABEL_ENV=es babel src --extensions='.ts,.tsx' --out-dir dist/es --ignore 'src/components/**/*.test.tsx','src/components/**/*.test.ts' --no-copy-ignored",
     "build:dts": "tsc",
     "test": "jest",
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
@@ -23,6 +23,11 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token=pc32y518itq"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run chromatic"
+    }
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -39,17 +44,21 @@
   },
   "homepage": "https://github.com/WPMedia/engine-theme-sdk#readme",
   "devDependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-proposal-decorators": "^7.7.4",
-    "@babel/plugin-transform-modules-commonjs": "^7.7.0",
-    "@babel/preset-react": "^7.7.0",
-    "@babel/preset-typescript": "^7.7.2",
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-proposal-decorators": "^7.10.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
+    "@babel/preset-react": "^7.10.1",
+    "@babel/preset-typescript": "^7.10.1",
     "@storybook/addon-a11y": "^5.3.19",
-    "@storybook/addon-backgrounds": "^6.0.0-beta.23",
-    "@storybook/addons": "^6.0.0-beta.23",
-    "@storybook/react": "^6.0.0-beta.23",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-backgrounds": "^6.0.0-beta.26",
+    "@storybook/addon-console": "^1.2.1",
+    "@storybook/addon-docs": "^6.0.0-beta.26",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addons": "^6.0.0-beta.26",
+    "@storybook/react": "^6.0.0-beta.26",
     "@types/babel__core": "^7.1.3",
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.23",
@@ -73,13 +82,16 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.3.0",
+    "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.2",
     "typescript": "^3.7.2"
   },
   "dependencies": {
+    "dom-parser": "^0.1.6",
     "is-react": "^1.3.3",
+    "lazy-child": "^0.2.0",
     "polished": "^3.4.4",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -88,7 +100,6 @@
     "react-swipeable": "^5.5.0",
     "styled-components": "^4.4.1",
     "thumbor-lite": "^0.1.6",
-    "dom-parser": "^0.1.6",
     "timezone": "^1.0.23"
   },
   "jest": {

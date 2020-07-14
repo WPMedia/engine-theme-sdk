@@ -1,0 +1,79 @@
+import ArcLogo from '../src/components/ArcLogo';
+import { text } from "@storybook/addon-knobs";
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+<Meta title="ArcLogo" component={ArcLogo} />
+
+# ArcLogo
+
+The `ArcLogo` component is generally used for the navigation header block, footer block or anywhere that requires a fallback logo for branding.
+
+## Use
+
+Import it into a block: 
+
+```
+import { ArcLogo } from '@wpmedia/engine-theme-sdk';
+
+...
+
+<ArcLogo />
+
+...
+
+```
+
+
+
+## Props
+<Props of={ArcLogo} />
+
+## Stories
+<Story name="Basic" />
+
+### **Custom ArcLogo**
+<Preview>
+    <Story name="Custom ArcLogo">
+        <ArcLogo
+            title={text('Title', 'Custom title')}
+            description={text('Description', 'Custom description')}
+        />
+    </Story>
+</Preview>
+
+### **With accessible title**
+<Preview>
+    <Story name="With accessible title">
+        <ArcLogo title="Custom Arc Logo Messaging" />
+    </Story>
+</Preview>
+
+### **With no title nor description designated, using default will show default title option filled string**
+<Preview>
+    <Story name="With no title nor description">
+        <ArcLogo />
+    </Story>
+</Preview>
+
+### **Without description, no description default -- it is empty**
+<Preview>
+    <Story name="Without description, no description default">
+        <ArcLogo />
+    </Story>
+</Preview>
+
+### **With description**
+<Preview>
+    <Story name="With description">
+        <ArcLogo description="Tools for digital publishers built by The Washington Post" />
+    </Story>
+</Preview>
+
+### **With custom title and description**
+<Preview>
+    <Story name="With custom title and description">
+        <ArcLogo title="Custom Arc Logo Messaging" description="Tools for digital publishers built by The Washington Post" />
+    </Story>
+</Preview>
+
+
