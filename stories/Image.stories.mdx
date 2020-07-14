@@ -7,13 +7,15 @@ import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 The `Image` component is used to replace the `img` tag, providing a fast, responsive and resized image for your blocks.
 
+This component uses [`lazy-child`](https://www.npmjs.com/package/lazy-child) which has a dependency on IntersectionObserver which is not supported in all browsers [see support](https://caniuse.com/#feat=intersectionobserver) - if you need to support browsers that do not have IntersectionObserver you will need to use a polyfill. The IntersectionObserver polyfill is already included with the theme blocks output types.
+
 - [How To Make Your Images Load Speedy, Secure, and SEO-Friendly](https://github.com/WPMedia/fusion/blob/2.5-hydrate/documentation/recipes/best-practices-images.md)
 
 - [Secure Image Resizing Quickstart](https://github.com/WPMedia/fusion/blob/2.5-hydrate/documentation/recipes/secure-speedy-images.md)
 
 ## Use
 
-Import it into a block: 
+Import it into a block:
 
 ```
 import { Image } from '@wpmedia/engine-theme-sdk';
@@ -50,26 +52,70 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 ### **With widths and heights**
 <Preview>
     <Story name="With widths and heights">
-        <Image
-            url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
-            alt={'This is a Free article for testing Mentor Medier’s paywall'}
-            smallWidth={158}
-            smallHeight={89}
-            mediumWidth={274}
-            mediumHeight={154}
-            largeWidth={274}
-            largeHeight={154}
-            resizedImageOptions={{
-                '158x89': '/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/',
-                '274x154': '/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/',
-            }}
-            resizerURL={'https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer'}
-            breakpoints={{
-                small: 420,
-                medium: 768,
-                large: 992,
-            }}
-        />
+        <div>
+            <p>Scroll down to see lazy loading example</p>
+            <Image
+                url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
+                alt={'This is a Free article for testing Mentor Medier’s paywall'}
+                smallWidth={158}
+                smallHeight={89}
+                mediumWidth={274}
+                mediumHeight={154}
+                largeWidth={274}
+                largeHeight={154}
+                resizedImageOptions={{
+                    '158x89': '/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/',
+                    '274x154': '/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/',
+                }}
+                resizerURL={'https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer'}
+                breakpoints={{
+                    small: 420,
+                    medium: 768,
+                    large: 992,
+                }}
+            />
+            <p style={{ height: '150vh' }}></p>
+            <Image
+                url={'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/P3V3THIJPVGUBLRIIYWKFHZTKA.jpg'}
+                alt={'This is a Free article for testing Mentor Medier’s paywall'}
+                smallWidth={800}
+                smallHeight={600}
+                mediumWidth={800}
+                mediumHeight={600}
+                largeWidth={800}
+                largeHeight={600}
+                resizedImageOptions={{
+                    '800x600': '/ncyEH4gZKt-brhaXCK_GfHw3I6Q=filters:format(jpg):quality(70)/',
+                }}
+                resizerURL={'https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer'}
+                breakpoints={{
+                    small: 420,
+                    medium: 768,
+                    large: 992,
+                }}
+            />
+            <p style={{ height: '150vh' }}></p>
+            <Image
+                url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
+                alt={'This is a Free article for testing Mentor Medier’s paywall'}
+                smallWidth={158}
+                smallHeight={89}
+                mediumWidth={274}
+                mediumHeight={154}
+                largeWidth={274}
+                largeHeight={154}
+                resizedImageOptions={{
+                    '158x89': '/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/',
+                    '274x154': '/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/',
+                }}
+                resizerURL={'https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer'}
+                breakpoints={{
+                    small: 420,
+                    medium: 768,
+                    large: 992,
+                }}
+            />
+        </div>
     </Story>
 </Preview>
 

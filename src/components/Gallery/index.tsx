@@ -8,11 +8,7 @@
  *
  * This is the list of events actually reported by Gallery component:
  *  galleryImageNext: when the next button is pressed.
- *      if the autoplay property of the event is true, the gallery is executing in autoplay mode
  *  galleryImagePrevious: when the next button is pressed.
- *  galleryAutoplayStart: when the autplay button is pressed
- *  galleryAutoplayStop: when the autoplay button is pressed and the autoplay mode was enabled
- *      if the gallery reach the end of the playlist will stop and generate this event too
  *  galleryExpandEnter: when the expand button is pressed
  *  galleryExpandExit: when the close button on the lightbox is pressed
  *
