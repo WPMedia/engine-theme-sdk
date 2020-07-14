@@ -20,7 +20,7 @@ phases:
       - echo Build finished on `date`
       - echo Deployment started on `date`
       - aws s3 rm s3://arc-learning-center-static/docs/storybooks/engine-theme-sdk  --recursive
-      - aws s3 sync storybook-static s3://arc-learning-center-static/docs/storybooks/engine-theme-sdk  --cache-control max-age=31536000
+      - aws s3 sync storybook-static s3://arc-learning-center-static/docs/storybooks/engine-theme-sdk --acl public-read  --cache-control max-age=31536000
 
 artifacts:
   files:

@@ -1,10 +1,10 @@
 template: v1/cfn/shared/pipelines/simple-pipeline/simple-pipeline.template.yml
-stack_name: engine-theme-sdk-pipeline
+stack_name: engine-theme-sdk-inf-pipeline
 region: us-east-1
 
 context:
   pipeline:
-    name: engine-theme-sdk
+    name: engine-theme-sdk-inf
     restart_on_update: true
 
     git:
@@ -18,11 +18,11 @@ context:
           - name: RebuildThisPipeline
             config: cfn/configs/deployment.yml
 
-      - name: PackageAndDeploy
+      - name: Package-and-Deploy
         actions:
-          - name: PackageAndDeploy
+          - name: Package-and-Deploy
             image: aws/codebuild/standard:2.0
             buildspec: codebuild/buildspec.yml
             outputArtifact: ServerlessPackage
             env_vars:
-              phase: PackageAndDeploy
+              phase: Package
