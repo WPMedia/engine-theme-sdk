@@ -8,3 +8,4 @@ coverage
 .cache
 storybook-static
 .vscode/*
+/build-storybook.log
