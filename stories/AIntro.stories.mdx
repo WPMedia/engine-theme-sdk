@@ -81,7 +81,8 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 5. Implement unit tests for your component in a `index.test.tsx` file. Remember to use your component [locally](https://staging.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page#local-development) to test the changes.
 6. Document your component by creating a new story `YourComponentName.stories.mdx` under `stories/`.
     - Run `npm run storybook` to verify your story was created
-7. When your component is ready make a PR against `staging`, get approval for your PR, then follow the [publishing](https://staging.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page#how-to-publish) steps.
+7. When committing your changes, Chromatic will run visual regression tests and will generate a link to review any changes
+8. When your component is ready make a PR against `staging`, get approval for your PR, then follow the [publishing](https://staging.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page#how-to-publish) steps.
 
 ## How To Publish
 
