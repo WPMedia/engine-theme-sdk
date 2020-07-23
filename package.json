@@ -20,6 +20,7 @@
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint",
+    "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token=pc32y518itq --exit-zero-on-changes"
