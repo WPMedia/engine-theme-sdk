@@ -13,11 +13,6 @@ context:
       repo: engine-theme-sdk
 
     stages:
-      - name: Pipeline
-        actions:
-          - name: RebuildThisPipeline
-            config: cfn/configs/deployment.yml
-
       - name: Package-and-Deploy
         actions:
           - name: Package-and-Deploy
