@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.0.1-beta.10",
+  "version": "2.2.0",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -20,6 +20,7 @@
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint",
+    "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token=pc32y518itq --exit-zero-on-changes"
