@@ -137,7 +137,7 @@ const Image: React.FC<ImageProps> = ({
     height: ${mediumHeight};
     width: ${mediumWidth};
     max-width: 100%;
-    @media (max-width: ${largeBreakpoint}px) {
+    @media only screen and (max-width: ${largeBreakpoint}px) {
       max-width: 50px;
     }
   `;
