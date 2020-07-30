@@ -143,7 +143,7 @@ const Image: React.FC<ImageProps> = ({
         renderPlaceholder={(ref): React.ReactElement => (
           <div
             ref={ref}
-            style={{ height: mediumHeight, width: mediumWidth }}
+            style={{ height: mediumHeight, width: mediumWidth, maxWidth: '50px' }}
           />
         )}
       >
