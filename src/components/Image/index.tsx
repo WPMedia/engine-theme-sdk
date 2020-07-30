@@ -133,15 +133,6 @@ const Image: React.FC<ImageProps> = ({
     );
   }
 
-  const StyledImagePlaceholder = styled.div`
-    height: ${mediumHeight};
-    width: ${mediumWidth};
-    max-width: 100%;
-    @media only screen and (max-width: ${largeBreakpoint}px) {
-      max-width: 50px;
-    }
-  `;
-
   return (
     <StyledPicture>
       <Lazy
@@ -150,7 +141,10 @@ const Image: React.FC<ImageProps> = ({
         offsetRight={lazyOptions.offsetRight}
         offsetTop={lazyOptions.offsetTop}
         renderPlaceholder={(ref): React.ReactElement => (
-          <StyledImagePlaceholder ref={ref}></StyledImagePlaceholder>
+          <div
+            ref={ref}
+            style={{ height: mediumHeight, width: mediumWidth, maxWidth: '50px' }}
+          />
         )}
       >
         <SourceHandler
