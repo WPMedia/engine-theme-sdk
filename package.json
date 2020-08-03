@@ -31,14 +31,14 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
-    "access": "restricted"
+    "access": "public"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WPMedia/engine-theme-sdk.git"
   },
   "author": "",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND-4.0",
   "bugs": {
     "url": "https://github.com/WPMedia/engine-theme-sdk/issues"
   },
