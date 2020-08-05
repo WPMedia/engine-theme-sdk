@@ -22,6 +22,23 @@ The component explorer will also show the effect of different props on component
 
 If you don't go to the page automatically on successful compilation, go to [http://localhost:6006/](http://localhost:6006/). 
 
+## Contribute	
+If you need to update an existing Engine SDK component, contact the Pagebuilder team. If you want to create a new component follow these instructions:	
+1. Pull the latest `staging` branch	
+
+    - `git checkout staging`	
+
+    - `git fetch -a`	
+2. Branch off the `staging` branch	
+    - `git checkout -b PEN-[jira ticket num]-[brief description of feature]`	
+3. Create a new folder `YourComponentName` under `src/components`.	
+4. Implement your component in a `index.tsx` file. Remember to add an `interface` with your component's props and add `proptypes` for type checking.	
+5. Implement unit tests for your component in a `index.test.tsx` file. Remember to use your component [locally](https://staging.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page#local-development) to test the changes.	
+6. Document your component by creating a new story `YourComponentName.stories.mdx` under `stories/`.	
+    - Run `npm run storybook` to verify your story was created	
+7. When committing your changes, Chromatic will run visual regression tests and will generate a link to review any changes	
+8. When your component is ready make a PR against `staging`, get approval for your PR, then follow the [publishing](https://staging.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page#how-to-publish) steps.
+
 ## How To Publish To Canary
 
 1. Pull the latest `staging` branch.
@@ -40,7 +57,7 @@ If you don't go to the page automatically on successful compilation, go to [http
 
     - Get approval for your pr on your feature branch.
 
-`npm version prerelease --preid=canary`
+ `npm version prerelease --preid=canary`
 
  `npm publish --tag canary`
 
