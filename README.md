@@ -36,7 +36,7 @@ If you don't go to the page automatically on successful compilation, go to [http
 
 3. Do the work, commit as you go, which will run the linter and tests.
 
-4. Make pull request using GitHub against the   staging` branch. 
+4. Make pull request using GitHub against the `staging` branch. 
 
     - Get approval for your pr on your feature branch.
 
