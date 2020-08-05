@@ -44,6 +44,8 @@ If you don't go to the page automatically on successful compilation, go to [http
 
  `npm publish --tag canary`
 
+5. Merge into `staging` branch.
+
 6. Go to new theme feature pack's `blocks.json`. Change your engine block to the `@canary` release in the blocks list (eg, "@wpmedia/header-nav" -> "@wpmedia/header-nav@beta"). Make a pr against the news theme repo making that change to the `master` branch. Then publish that change using deployment strategy to the staging environment (corecomponents prod is a staging env). Alert quality assurance stakeholder that the change has been published.
 
 `blocks.json`
