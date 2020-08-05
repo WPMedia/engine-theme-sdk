@@ -126,10 +126,6 @@ If you don't go to the page automatically on successful compilation, go to [http
 }
 ```
 
-
-
-`npm publish --tag stable`
-
 [Read more](https://docs.npmjs.com/adding-dist-tags-to-packages) about dist tags via npm.
 
 ## License
