@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -32,14 +32,14 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
-    "access": "restricted"
+    "access": "public"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WPMedia/engine-theme-sdk.git"
   },
   "author": "",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND-4.0",
   "bugs": {
     "url": "https://github.com/WPMedia/engine-theme-sdk/issues"
   },
