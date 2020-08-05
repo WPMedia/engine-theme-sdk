@@ -73,6 +73,12 @@ You can test Engine SDK components locally by adding the following properties to
 -  `"useLocal": true`
 -  `"useLocalEngineSDK": true`
 
+### Arc Logo
+
+While most SDK components are public facing, the `ArcLogo` is meant for internal use and is generally used for the navigation header block, footer block or anywhere that requires a fallback logo for branding.
+
+Since the documentation for this cannot be available in ALC as it is meant to be a user-facing documentation source, there is internal documentation in this repo for it's use which can be found at `/stories/internal/ArcLogo.stories.mdx`
+
 ## Deploy to ALC
 
 Engine Theme SDK automatically deploys to ALC.
