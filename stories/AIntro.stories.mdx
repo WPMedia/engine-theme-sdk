@@ -38,7 +38,15 @@ Add to your `blocks.json`.
 
 ### **Use**
 
-Import components you want into your project
+Add engine-theme-sdk your block's `package.json` dependencies
+
+```
+"dependencies": {
+    "@wpmedia/engine-theme-sdk": "latest"
+  },
+```
+
+Import components you want into your block
 
 `import { ImageMetadata } from '@wpmedia/engine-theme-sdk';`
 
@@ -46,14 +54,6 @@ and use them like so
 
 ```
   <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />
-```
-
-add engine-theme-sdk yo your block's `package.json` dependencies
-
-```
-"dependencies": {
-    "@wpmedia/engine-theme-sdk": "latest"
-  },
 ```
 
 ## Feedback

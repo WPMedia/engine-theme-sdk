@@ -1,5 +1,14 @@
 # Engine Theme SDK Components
 
+
+## `dist-tags`
+
+This package has been published with a number of dist-tags meant for different purposes:
+
+- `stable`: Production environment
+- `beta`: Sandbox environment
+- `canary`: For developers to test on core components 
+
 ## Preview Components, Functionality
 <a href="https://github.com/storybooks/storybook" target="_blank" ><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
@@ -13,9 +22,7 @@ The component explorer will also show the effect of different props on component
 
 If you don't go to the page automatically on successful compilation, go to [http://localhost:6006/](http://localhost:6006/). 
 
-In the future, this will be hosted. To build, see [documentation](https://storybook.js.org/docs/basics/exporting-storybook/) for exporting as a static site.
-
-## How To Publish
+## How To Publish To Canary
 
 1. Pull the latest `staging` branch.
 
@@ -33,25 +40,91 @@ In the future, this will be hosted. To build, see [documentation](https://storyb
 
     - Get approval for your pr on your feature branch.
 
-5. Merge into `staging` branch.
+`npm version prerelease --preid=canary`
 
-    - `npm version prerelease --preid=beta`
+ `npm publish --tag canary`
 
-    - `npm publish --tag beta`
+6. Go to new theme feature pack's `blocks.json`. Change your engine block to the `@canary` release in the blocks list (eg, "@wpmedia/header-nav" -> "@wpmedia/header-nav@beta"). Make a pr against the news theme repo making that change to the `master` branch. Then publish that change using deployment strategy to the staging environment (corecomponents prod is a staging env). Alert quality assurance stakeholder that the change has been published.
 
-6. Go to new theme feature pack's `blocks.json`
-    - Change your engine block to the `@beta` release in the blocks list (eg, `"@wpmedia/header-nav"` -> `"@wpmedia/header-nav@beta"`).
-    - Make a pr against the news theme repo making that change to the `master` branch. 
-    - Then publish that change using deployment strategy to the `staging` environment (corecomponents prod is a `staging` env). 
-    - Alert quality assurance stakeholder that the change has been published.
+`blocks.json`
 
-7. After design qa and qa approval, make a pull request from the `staging` branch to the `master` branch. (Should we make a new pr for just your staging changes?)
+```json
+{
+  "engineSDK": "@wpmedia/engine-theme-sdk@canary"
 
-8. Once the pr has been approved, merge your feature staging branch to `master`. 
-    - In master, you can publish against what's changed. (This could be done at the end of a sprint.)
-    - `npm publish`
+}
+```
+## How To Publish To Beta 
 
-### **Resources**
+1. After design qa and qa approval, make a pull request from the `staging` branch to the `rc` (release candidate) branch.
+
+2. Version and publish as above 
+
+`npm version prerelease --preid=beta`
+
+`git push origin staging` 
+
+`npm publish --tag beta`
+
+3. Your changes should be reflected in the blocks using `engine-theme-sdk`
+
+`blocks/card-list-block/package.json`
+
+```json
+{
+  "name": "@wpmedia/card-list-block",
+  "dependencies": {
+    "@wpmedia/engine-theme-sdk": "beta",
+  }
+}
+```
+
+4. Go to new theme feature pack's `blocks.json`. Change your engine block to the `@beta` release in the blocks list (eg, "@wpmedia/header-nav" -> "@wpmedia/header-nav@beta"). Make a pr against the news theme repo making that change to the `master` branch. Then publish that change using deployment strategy to the staging environment (corecomponents prod is a staging env). Alert quality assurance stakeholder that the change has been published.
+
+`blocks.json`
+
+```json
+{
+  "engineSDK": "@wpmedia/engine-theme-sdk@canary"
+
+}
+```
+
+### How To Publish To Production
+
+1. After design qa and qa approval, make a pull request from the `rc` branch to the `master` branch.
+
+2. Version and publish as above 
+
+`npm version`
+
+`git push origin rc` 
+
+`npm publish --tag stable`
+
+3. Your changes should be reflected in the blocks using `engine-theme-sdk`
+
+`blocks/card-list-block/package.json`
+
+```json
+{
+  "name": "@wpmedia/card-list-block",
+  "dependencies": {
+    "@wpmedia/engine-theme-sdk": "stable",
+  }
+}
+```
+
+4. Go to new theme feature pack's `blocks.json`. Change your engine block to the `@beta` release in the blocks list (eg, "@wpmedia/header-nav" -> "@wpmedia/header-nav@beta"). Make a pr against the news theme repo making that change to the `master` branch. Then publish that change using deployment strategy to the staging environment (corecomponents prod is a staging env). Alert quality assurance stakeholder that the change has been published.
+
+`blocks.json`
+
+```json
+{
+  "engineSDK": "@wpmedia/engine-theme-sdk@stable"
+
+}
+```
 
 [Read more](https://docs.npmjs.com/adding-dist-tags-to-packages) about dist tags via npm.
 
