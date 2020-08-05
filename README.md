@@ -17,35 +17,72 @@ In the future, this will be hosted. To build, see [documentation](https://storyb
 
 ## How To Publish
 
-1. Pull the latest `staging` branch. 
+1. Pull the latest `staging` branch.
 
-`git checkout staging`
+    - `git checkout staging`
 
-`git fetch -a`
+    - `git fetch -a`
 
 2. Branch off the `staging` branch
 
-`git checkout -b PEN-[jira ticket num]-[brief description of feature]`
+    - `git checkout -b PEN-[jira ticket num]-[brief description of feature]`
 
-3. Do the work (heh). Commit as you go, which will run the linter and tests.
+3. Do the work, commit as you go, which will run the linter and tests.
 
-4. Make pull request using GitHub against the `staging` branch. Get approval for your pr on your feature branch. 
+4. Make pull request using GitHub against the   staging` branch. 
 
-5. Merge into `staging` branch. 
+    - Get approval for your pr on your feature branch.
 
-`npm version prerelease --preid=beta`
+5. Merge into `staging` branch.
 
- `npm publish --tag beta`
+    - `npm version prerelease --preid=beta`
 
-6. Go to new theme feature pack's `blocks.json`. Change your engine block to the @beta release in the blocks list (eg, "@wpmedia/header-nav" -> "@wpmedia/header-nav@beta"). Make a pr against the news theme repo making that change to the `master` branch. Then publish that change using deployment strategy to the staging environment (corecomponents prod is a staging env). Alert quality assurance stakeholder that the change has been published.
+    - `npm publish --tag beta`
 
-7. After design qa and qa approval, make a pull request from the staging branch to the master branch. (Should we make a new pr for just your staging changes?) 
+6. Go to new theme feature pack's `blocks.json`
+    - Change your engine block to the `@beta` release in the blocks list (eg, `"@wpmedia/header-nav"` -> `"@wpmedia/header-nav@beta"`).
+    - Make a pr against the news theme repo making that change to the `master` branch. 
+    - Then publish that change using deployment strategy to the `staging` environment (corecomponents prod is a `staging` env). 
+    - Alert quality assurance stakeholder that the change has been published.
 
-8. Once the pr has been approved, merge your feature staging branch to master. Then, in master, you can publish against what's changed. (This could be done at the end of a sprint.)
+7. After design qa and qa approval, make a pull request from the `staging` branch to the `master` branch. (Should we make a new pr for just your staging changes?)
 
-`npm publish`
+8. Once the pr has been approved, merge your feature staging branch to `master`. 
+    - In master, you can publish against what's changed. (This could be done at the end of a sprint.)
+    - `npm publish`
+
+### **Resources**
 
 [Read more](https://docs.npmjs.com/adding-dist-tags-to-packages) about dist tags via npm.
+
+## Install
+
+Engine SDK components are written in React and Typescript, and its stories are written in [MDX Format](https://storybook.js.org/docs/formats/mdx-syntax/). It requires Storybook version 6.0.0-beta.26 and up.
+
+Add Engine SDK to your project.
+
+`npm install --save @wpmedia/engine-theme-sdk`
+
+Add to your `blocks.json`.
+
+`@wpmedia/engine-theme-sdk@version`
+
+### Local Development
+
+You can test Engine SDK components locally by adding the following properties to yout blocks.json:
+-  `"useLocal": true`
+-  `"useLocalEngineSDK": true`
+
+## Deploy to ALC
+
+Engine Theme SDK automatically deploys to ALC.
+Engine SDK documentation is available [here](https://staging.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page). To update the documentation on Arc Learning Center you have to upload it to S3 by following these steps:
+1. Run `npm run build-storybook` on `engine-theme-sdk`. This will generate a static storybook build in `/storybook-static`.
+2. Open the [WP-ARC AWS Console](https://console.aws.amazon.com/s3/buckets/arc-learning-center-static/docs/?region=us-east-1&tab=overview#) (you might need to authenticate with OKTA first).
+3. Go to `storybooks`, then `engine-theme-sdk` and click on `Upload`.
+4. Upload your files to replace the contents of `engine-theme-sdk` with your new build. Make sure to include the `sb_dll` folder generated in the build.
+5. Click on `Next` and go through the uploading process with the default settings.
+6. After a minute your changes will be live on [ALC](https://staging.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page).
 
 ## License
 
