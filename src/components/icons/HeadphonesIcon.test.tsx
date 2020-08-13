@@ -50,11 +50,6 @@ describe('the HeadphonesIcon component', () => {
       const wrapper = shallow(<HeadphonesIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<HeadphonesIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {

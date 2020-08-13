@@ -50,11 +50,6 @@ describe('the ZoomOutIcon component', () => {
       const wrapper = shallow(<ZoomOutIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<ZoomOutIcon />);
-      expect(wrapper.find('title').text()).toEqual('Zoom out');
-    });
   });
 
   describe('the description prop', () => {

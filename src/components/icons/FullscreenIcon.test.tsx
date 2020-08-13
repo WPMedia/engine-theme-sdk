@@ -50,11 +50,6 @@ describe('the FullscreenIcon component', () => {
       const wrapper = shallow(<FullscreenIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<FullscreenIcon />);
-      expect(wrapper.find('title').text()).toEqual('Fullscreen icon');
-    });
   });
 
   describe('the description prop', () => {

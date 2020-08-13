@@ -3,7 +3,7 @@ import React from 'react';
 type IconProps = import('./types').default;
 
 const ChartIcon: React.FC<IconProps> = ({
-  width = 24, height = 24, fill = '#000', title = '', description = '',
+  width = 24, height = 24, fill = '#000', title = 'Chart', description = '',
 }) => (
   <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" role="img">
     <title>{title}</title>

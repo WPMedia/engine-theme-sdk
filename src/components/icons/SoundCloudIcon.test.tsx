@@ -49,11 +49,6 @@ describe('the SoundCloudIcon component', () => {
       const wrapper = shallow(<SoundCloudIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<SoundCloudIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {
