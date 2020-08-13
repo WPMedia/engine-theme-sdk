@@ -49,11 +49,6 @@ describe('the RedditIcon component', () => {
       const wrapper = shallow(<RedditIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<RedditIcon />);
-      expect(wrapper.find('title').text()).toEqual('Reddit logo');
-    });
   });
 
   describe('the description prop', () => {

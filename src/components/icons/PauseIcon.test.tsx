@@ -50,11 +50,6 @@ describe('the PauseIcon component', () => {
       const wrapper = shallow(<PauseIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<PauseIcon />);
-      expect(wrapper.find('title').text()).toEqual('Pause button icon');
-    });
   });
 
   describe('the description prop', () => {

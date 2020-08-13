@@ -49,11 +49,6 @@ describe('the MediumIcon component', () => {
       const wrapper = shallow(<MediumIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<MediumIcon />);
-      expect(wrapper.find('title').text()).toEqual('Medium logo');
-    });
   });
 
   describe('the description prop', () => {

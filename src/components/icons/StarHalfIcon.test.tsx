@@ -50,11 +50,6 @@ describe('the StarHalfIcon component', () => {
       const wrapper = shallow(<StarHalfIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<StarHalfIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {

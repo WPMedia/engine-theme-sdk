@@ -50,11 +50,6 @@ describe('the HamburgerMenuIcon component', () => {
       const wrapper = shallow(<HamburgerMenuIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<HamburgerMenuIcon />);
-      expect(wrapper.find('title').text()).toEqual('Hamburger menu icon');
-    });
   });
 
   describe('the description prop', () => {

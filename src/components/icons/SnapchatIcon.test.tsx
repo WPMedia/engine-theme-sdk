@@ -61,10 +61,5 @@ describe('the SnapchatIcon component', () => {
       const wrapper = shallow(<SnapchatIcon description="this is an icon!" />);
       expect(wrapper.find('desc').text()).toEqual('this is an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<SnapchatIcon />);
-      expect(wrapper.find('desc').text()).toEqual('');
-    });
   });
 });

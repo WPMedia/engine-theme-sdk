@@ -50,11 +50,6 @@ describe('the SearchIcon component', () => {
       const wrapper = shallow(<SearchIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<SearchIcon />);
-      expect(wrapper.find('title').text()).toEqual('Search magnifying glass');
-    });
   });
 
   describe('the description prop', () => {
