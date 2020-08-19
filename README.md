@@ -111,9 +111,9 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 
 ### How To Publish To Production
 
-1. After design qa and qa approval, make a pull request from the `rc` branch to the `master` branch.
+1. After design qa and qa approval, make a pull request from the `rc` branch to the `master` branch. 
 
-2. Version and publish as above 
+2. Version and publish as above. Make sure you're using `stable` not `latest`.
 
 `npm version`
 
