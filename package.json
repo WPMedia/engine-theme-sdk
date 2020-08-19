@@ -25,11 +25,6 @@
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token=pc32y518itq --exit-zero-on-changes"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run chromatic"
-    }
-  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
