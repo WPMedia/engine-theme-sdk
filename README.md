@@ -43,7 +43,7 @@ In the future, this will be hosted. To build, see [documentation](https://storyb
 
 8. Once the pr has been approved, merge your feature staging branch to master. Then, in master, you can publish against what's changed. (This could be done at the end of a sprint.)
 
-`npm publish`
+`npm publish --tag stable`
 
 [Read more](https://docs.npmjs.com/adding-dist-tags-to-packages) about dist tags via npm.
 
