@@ -75,15 +75,15 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 ```
 ## How To Publish To Beta 
 
+![Beta Publish](https://github.com/WPMedia/engine-theme-sdk/workflows/Beta%20Publish/badge.svg?branch=staging)
+
 1. After design qa and qa approval, make a pull request from the `staging` branch to the `rc` (release candidate) branch.
 
-2. Version and publish as above 
+2. Version and publish. Then the workflow (linked above) will publish to the desired tag `beta`.
 
 `npm version prerelease --preid=beta`
 
 `git push origin staging` 
-
-`npm publish --tag beta`
 
 3. Your changes should be reflected in the blocks using `engine-theme-sdk`
 
