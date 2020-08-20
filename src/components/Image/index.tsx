@@ -111,7 +111,7 @@ const Image: React.FC<ImageProps> = ({
           alt={alt}
           // for fallback width and height
           width={smallWidth}
-          height={smallHeight}
+          height={smallHeight || null}
         />
       </StyledPicture>
     );
@@ -128,7 +128,7 @@ const Image: React.FC<ImageProps> = ({
         src=""
         alt={alt}
         width={largeWidth}
-        height={largeHeight}
+        height={largeHeight || null}
       />
     );
   }
@@ -150,7 +150,7 @@ const Image: React.FC<ImageProps> = ({
         <SourceHandler
           resizedImageOptions={resizedImageOptions}
           width={largeWidth}
-          height={largeHeight}
+          height={largeHeight || null}
           imageSourceWithoutProtocol={imageSourceWithoutProtocol}
           resizerURL={resizerURL}
           breakpointWidth={largeBreakpoint}
@@ -158,7 +158,7 @@ const Image: React.FC<ImageProps> = ({
         <SourceHandler
           resizedImageOptions={resizedImageOptions}
           width={mediumWidth}
-          height={mediumHeight}
+          height={mediumHeight || null}
           imageSourceWithoutProtocol={imageSourceWithoutProtocol}
           resizerURL={resizerURL}
           breakpointWidth={mediumBreakpoint}
@@ -166,7 +166,7 @@ const Image: React.FC<ImageProps> = ({
         <SourceHandler
           resizedImageOptions={resizedImageOptions}
           width={smallWidth}
-          height={smallHeight}
+          height={smallHeight || null}
           imageSourceWithoutProtocol={imageSourceWithoutProtocol}
           resizerURL={resizerURL}
           breakpointWidth={smallBreakpoint}
@@ -178,7 +178,7 @@ const Image: React.FC<ImageProps> = ({
                 alt={alt}
                 src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
                 width={largeWidth}
-                height={largeHeight}
+                height={largeHeight || null}
               />
             )
             : (
@@ -188,7 +188,7 @@ const Image: React.FC<ImageProps> = ({
                 // lightbox component reads from this data attribute
                 data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
                 width={largeWidth}
-                height={largeHeight}
+                height={largeHeight || null}
               />
             )
         }
