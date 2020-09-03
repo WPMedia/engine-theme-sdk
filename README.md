@@ -75,13 +75,13 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 ```
 ## How To Publish To Beta 
 
-1. After design qa and qa approval, make a pull request from the `staging` branch to the `rc` (release candidate) branch.
+1. After design qa and qa approval, make a pull request from the `staging` branch to the `beta` (release candidate) branch.
 
 2. Version and publish as above 
 
 `npm version prerelease --preid=beta`
 
-`git push origin staging` 
+`git push origin beta` 
 
 `npm publish --tag beta`
 
