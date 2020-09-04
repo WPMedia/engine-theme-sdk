@@ -8,8 +8,7 @@
   "types": "dist/es/index.d.ts",
   "files": [
     "dist",
-    "types",
-    "svg"
+    "types"
   ],
   "scripts": {
     "build": "rm -rf dist && npm run build:cjs && npm run build:es && npm run build:dts",
@@ -23,8 +22,7 @@
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=pc32y518itq --exit-zero-on-changes",
-    "minify:svg": "svgo -f svg"
+    "chromatic": "npx chromatic --project-token=pc32y518itq --exit-zero-on-changes"
   },
   "husky": {
     "hooks": {
@@ -88,7 +86,6 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.2",
-    "svgo": "^1.3.2",
     "typescript": "^3.7.2"
   },
   "dependencies": {
