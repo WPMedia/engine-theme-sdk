@@ -50,11 +50,6 @@ describe('the ArrowLeftIcon component', () => {
       const wrapper = shallow(<ArrowLeftIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<ArrowLeftIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {

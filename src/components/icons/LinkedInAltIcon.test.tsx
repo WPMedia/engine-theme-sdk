@@ -50,11 +50,6 @@ describe('the LinkedInAltIcon component', () => {
       const wrapper = shallow(<LinkedInAltIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<LinkedInAltIcon />);
-      expect(wrapper.find('title').text()).toEqual('LinkedIn logo');
-    });
   });
 
   describe('the description prop', () => {

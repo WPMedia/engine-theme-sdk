@@ -50,11 +50,6 @@ describe('the PlayIcon component', () => {
       const wrapper = shallow(<PlayIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<PlayIcon />);
-      expect(wrapper.find('title').text()).toEqual('Play button icon');
-    });
   });
 
   describe('the description prop', () => {

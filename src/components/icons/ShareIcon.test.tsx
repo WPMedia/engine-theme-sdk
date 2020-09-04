@@ -50,11 +50,6 @@ describe('the ShareIcon component', () => {
       const wrapper = shallow(<ShareIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<ShareIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {

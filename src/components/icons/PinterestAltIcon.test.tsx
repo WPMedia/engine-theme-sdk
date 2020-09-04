@@ -50,11 +50,6 @@ describe('the PinterestAltIcon component', () => {
       const wrapper = shallow(<PinterestAltIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<PinterestAltIcon />);
-      expect(wrapper.find('title').text()).toEqual('Pinterest logo');
-    });
   });
 
   describe('the description prop', () => {

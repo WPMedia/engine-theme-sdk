@@ -50,11 +50,6 @@ describe('the EnvelopeIcon component', () => {
       const wrapper = shallow(<EnvelopeIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<EnvelopeIcon />);
-      expect(wrapper.find('title').text()).toEqual('Envelope');
-    });
   });
 
   describe('the description prop', () => {

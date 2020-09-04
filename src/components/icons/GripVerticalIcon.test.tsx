@@ -50,11 +50,6 @@ describe('the GripVerticalIcon component', () => {
       const wrapper = shallow(<GripVerticalIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<GripVerticalIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {

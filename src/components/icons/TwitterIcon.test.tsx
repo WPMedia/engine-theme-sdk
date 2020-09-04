@@ -50,11 +50,6 @@ describe('the TwitterIcon component', () => {
       const wrapper = shallow(<TwitterIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<TwitterIcon />);
-      expect(wrapper.find('title').text()).toEqual('Twitter logo');
-    });
   });
 
   describe('the description prop', () => {

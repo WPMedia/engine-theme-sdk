@@ -50,11 +50,6 @@ describe('the UserIcon component', () => {
       const wrapper = shallow(<UserIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<UserIcon />);
-      expect(wrapper.find('title').text()).toEqual('User icon');
-    });
   });
 
   describe('the description prop', () => {
