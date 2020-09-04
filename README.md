@@ -161,7 +161,7 @@ Add to your `blocks.json`.
 
 ### Local Development
 
-You can test Engine SDK components locally by adding the following properties to yout blocks.json:
+You can test Engine SDK components locally by adding the following properties to your blocks.json:
 -  `"useLocal": true`
 -  `"useLocalEngineSDK": true`
 
