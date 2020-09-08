@@ -17,21 +17,22 @@ const Icon: React.FC<IconProps> = ({
 
 const Item = styled.li`
 display: inline-flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  flex: 0 1 15%;
+  flex: 0 1 31%;
   min-width: 120px;
   padding: 0px 7.5px 20px;
-  svg {
-    margin-right: 10px;
-    width: 24px;
-    height: 24px;
+  p {
+      font-size: 14px;
+      color: rgb(102, 102, 102);
   }
-    p {
-        font-size: 14px;
-        color: rgb(102, 102, 102);
-    }
 `;
+
+const IconsPreview = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
 
 const List = styled.ul`
   display: flex;
@@ -56,4 +57,4 @@ Icon.defaultProps = {
   description: '',
 };
 
-export { Icon, List, Item };
+export { Icon, List, Item, IconsPreview };
