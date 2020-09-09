@@ -83,6 +83,7 @@ const MetaData: React.FC<Props> = ({
   let authorMetaDataTags = null;
   let searchMetaDataTags = null;
   let sectionMetaDataTags = null;
+  let homepageMetaDataTags = null;
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
   const { getImgURL, getImgAlt } = require('./promoImageHelper');
@@ -244,6 +245,8 @@ const MetaData: React.FC<Props> = ({
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
+  } else if (pageType === 'homepage') {
+    homepageMetaDataTags = <meta property="og:title" content={metaData.ogTitle} />;
   }
   // Twitter meta tags go on all pages
   const twitterTags = (
@@ -271,6 +274,7 @@ const MetaData: React.FC<Props> = ({
       {storyMetaDataTags}
       {tagMetaDataTags}
       {sectionMetaDataTags}
+      {homepageMetaDataTags}
       {authorMetaDataTags}
       {searchMetaDataTags}
       {customMetaTags}
