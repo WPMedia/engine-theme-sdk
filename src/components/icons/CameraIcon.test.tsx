@@ -63,4 +63,11 @@ describe('the CameraIcon component', () => {
       expect(wrapper.find('desc').text()).toEqual('');
     });
   });
+
+  describe('should have a viewBox property', () => {
+    it('should be present and with a value', () => {
+      const wrapper = shallow(<CameraIcon />);
+      expect(wrapper.prop('viewBox')).toEqual(expect.anything());
+    });
+  });
 });
