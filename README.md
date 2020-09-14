@@ -17,31 +17,31 @@ In the future, this will be hosted. To build, see [documentation](https://storyb
 
 ## How To Publish
 
-1. Pull the latest `staging` branch. 
+1. Pull the latest `canary` branch. 
 
-`git checkout staging`
+`git checkout canary`
 
 `git fetch -a`
 
-2. Branch off the `staging` branch
+2. Branch off the `canary` branch
 
 `git checkout -b PEN-[jira ticket num]-[brief description of feature]`
 
 3. Do the work (heh). Commit as you go, which will run the linter and tests.
 
-4. Make pull request using GitHub against the `staging` branch. Get approval for your pr on your feature branch. 
+4. Make pull request using GitHub against the `canary` branch. Get approval for your pr on your feature branch, then merge.
 
-5. Merge into `staging` branch. 
+5. When the approved work is ready to move into beta, merge into `canary` branch into the `beta` branch. 
 
 `npm version prerelease --preid=beta`
 
  `npm publish --tag beta`
 
-6. Go to new theme feature pack's `blocks.json`. Change your engine block to the @beta release in the blocks list (eg, "@wpmedia/header-nav" -> "@wpmedia/header-nav@beta"). Make a pr against the news theme repo making that change to the `master` branch. Then publish that change using deployment strategy to the staging environment (corecomponents prod is a staging env). Alert quality assurance stakeholder that the change has been published.
+6. Go to new theme feature pack's `blocks.json`. Change your engine block to the @beta release in the blocks list (eg, "@wpmedia/header-nav" -> "@wpmedia/header-nav@beta"). Make a pr against the news theme repo making that change to the `stable` branch. Then publish that change using deployment strategy to the staging environment (corecomponents prod is a staging env). Alert quality assurance stakeholder that the change has been published.
 
-7. After design qa and qa approval, make a pull request from the staging branch to the master branch. (Should we make a new pr for just your staging changes?) 
+7. After design qa and qa approval, make a pull request from the `beta` branch to the `stable` branch. (Should we make a new pr for just your staging changes?) 
 
-8. Once the pr has been approved, merge your feature staging branch to master. Then, in master, you can publish against what's changed. (This could be done at the end of a sprint.)
+8. Once the pr has been approved, merge the `beta` branch to `stable`. Then, in `stable`, you can publish against what's changed. (This could be done at the end of a sprint.)
 
 `npm publish --tag stable`
 
