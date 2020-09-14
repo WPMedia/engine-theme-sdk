@@ -9,7 +9,7 @@ context:
 
     git:
       owner: WPMedia
-      branch: staging
+      branch: stable
       repo: engine-theme-sdk
 
     stages:
