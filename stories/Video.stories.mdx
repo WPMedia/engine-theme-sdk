@@ -1,0 +1,64 @@
+import Video from '../src/components/Video';
+import { text } from "@storybook/addon-knobs";
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+<Meta title="Video" component={Video} />
+
+# Video
+
+The `Video` component is generally used to display videos created in [Video Center](https://corecomponents.arcpublishing.com/alc/arc-products/videocenter/).
+
+## Requirement
+
+The playerRoot and videoOrg Fusion environment variables must be defined in order to load the POWA player's library.
+
+
+## Use
+
+Import it into a block: 
+
+```
+import { Video } from '@wpmedia/engine-theme-sdk';
+
+...
+
+<Video uuid={video._id} org="corecomponents" env="prod" />
+
+...
+
+```
+
+
+## Props
+<Props of={Video} />
+
+## Stories
+<Story name="Basic" />
+
+### **Video with minimum configurations**
+<Preview>
+    <Story name="Video with minimum configurations">
+        <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" />
+    </Story>
+</Preview>
+
+### **Video with autoplay**
+<Preview>
+    <Story name="Video with autoplay">
+        <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" autoplay />
+    </Story>
+</Preview>
+
+### **Video with playthrough**
+<Preview>
+    <Story name="Video with playthrough">
+        <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" playthrough />
+    </Story>
+</Preview>
+
+### **Video with customized aspect ratio**
+<Preview>
+    <Story name="Video with customized aspect ratio">
+        <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" aspectRatio={0.75} />
+    </Story>
+</Preview>
