@@ -34,63 +34,250 @@ const expectTwitterMetaMissing = (wrapper: ShallowWrapper): void => {
 
 describe('the meta data ', () => {
   describe('if page type is article', () => {
-    const metaValue = (prop: string): string | null => {
-      if (prop === 'page-type') {
-        return 'article';
-      }
-      if (prop === 'title') {
-        return 'the-sun';
-      }
-      return null;
-    };
+    describe('when globalContent is complete', () => {
+      const metaValue = (prop: string): string | null => {
+        if (prop === 'page-type') {
+          return 'article';
+        }
+        if (prop === 'title') {
+          return 'the-sun';
+        }
+        return null;
+      };
 
-    const useFusionContext = {
-      globalContent: {
-        description: {
-          basic: 'this is a description',
-        },
-        headlines: {
-          basic: 'this is a headline',
-        },
-        taxonomy: {
-          // eslint-disable-next-line @typescript-eslint/camelcase
-          seo_keywords: [
-            'keyword1',
-            'keyword2',
-          ],
-          tags: [
-            { slug: 'tag1' },
-            { slug: 'tag2' },
-          ],
-        },
-        // eslint-disable-next-line @typescript-eslint/camelcase
-        promo_items: {
-          basic: {
-            url: 'awesome-url',
+      const useFusionContext = {
+        globalContent: {
+          description: {
+            basic: 'this is a description',
+          },
+          headlines: {
+            basic: 'this is a headline',
+          },
+          taxonomy: {
             // eslint-disable-next-line @typescript-eslint/camelcase
-            alt_text: 'alt text',
+            seo_keywords: [
+              'keyword1',
+              'keyword2',
+            ],
+            tags: [
+              { slug: 'tag1' },
+              { slug: 'tag2' },
+            ],
+          },
+          // eslint-disable-next-line @typescript-eslint/camelcase
+          promo_items: {
+            basic: {
+              url: 'awesome-url',
+              // eslint-disable-next-line @typescript-eslint/camelcase
+              alt_text: 'alt text',
+            },
           },
         },
-      },
-      arcSite: 'the-sun',
-    };
-    const { globalContent } = useFusionContext;
-    const wrapper = shallow(<MetaData
-      metaValue={metaValue}
-      MetaTag={jest.fn()}
-      MetaTags={jest.fn()}
-      globalContent={globalContent}
-      twitterUsername={twitterUsername}
-      websiteName={websiteName}
-      resizerURL={resizerURL}
-    />);
+        arcSite: 'the-sun',
+      };
+      const { globalContent } = useFusionContext;
+      const wrapper = shallow(<MetaData
+        metaValue={metaValue}
+        MetaTag={jest.fn()}
+        MetaTags={jest.fn()}
+        globalContent={globalContent}
+        twitterUsername={twitterUsername}
+        websiteName={websiteName}
+        resizerURL={resizerURL}
+      />);
 
-    it('should have a title', () => {
-      expect(wrapper.find('title').length).toBe(1);
+      it('should have a title', () => {
+        expect(wrapper.find('title').length).toBe(1);
+      });
+
+      it('should have meta tags', () => {
+        expect(wrapper.find('meta').length).toBe(9);
+      });
     });
 
-    it('should have meta tags', () => {
-      expect(wrapper.find('meta').length).toBe(9);
+    describe('when need to add a description tag', () => {
+      it('must use the meta value first', () => {
+        const metaValue = (prop: string): string | null => {
+          if (prop === 'page-type') {
+            return 'article';
+          }
+          if (prop === 'title') {
+            return 'the-sun';
+          }
+          if (prop === 'description') {
+            return 'description from metaValue';
+          }
+          return null;
+        };
+
+        const useFusionContext = {
+          globalContent: {
+            description: {
+              basic: 'this is a description',
+            },
+          },
+          arcSite: 'the-sun',
+        };
+        const { globalContent } = useFusionContext;
+        const wrapper = shallow(<MetaData
+          metaValue={metaValue}
+          MetaTag={jest.fn()}
+          MetaTags={jest.fn()}
+          globalContent={globalContent}
+          twitterUsername={twitterUsername}
+          websiteName={websiteName}
+          resizerURL={resizerURL}
+        />);
+        expect(wrapper.find("meta[name='description']").prop('content')).toEqual(metaValue('description'));
+      });
+
+      it('must use the global content if metaValue missing', () => {
+        const metaValue = (prop: string): string | null => {
+          if (prop === 'page-type') {
+            return 'article';
+          }
+          if (prop === 'title') {
+            return 'the-sun';
+          }
+          return null;
+        };
+
+        const useFusionContext = {
+          globalContent: {
+            description: {
+              basic: 'this is a description',
+            },
+          },
+          arcSite: 'the-sun',
+        };
+        const { globalContent } = useFusionContext;
+        const wrapper = shallow(<MetaData
+          metaValue={metaValue}
+          MetaTag={jest.fn()}
+          MetaTags={jest.fn()}
+          globalContent={globalContent}
+          twitterUsername={twitterUsername}
+          websiteName={websiteName}
+          resizerURL={resizerURL}
+        />);
+        expect(wrapper.find("meta[name='description']").prop('content')).toEqual(globalContent.description.basic);
+      });
+
+      it('must not render a description if found no valid values', () => {
+        const metaValue = (prop: string): string | null => {
+          if (prop === 'page-type') {
+            return 'article';
+          }
+          if (prop === 'title') {
+            return 'the-sun';
+          }
+          return null;
+        };
+
+        const useFusionContext = {
+          globalContent: {},
+          arcSite: 'the-sun',
+        };
+        const { globalContent } = useFusionContext;
+        const wrapper = shallow(<MetaData
+          metaValue={metaValue}
+          MetaTag={jest.fn()}
+          MetaTags={jest.fn()}
+          globalContent={globalContent}
+          twitterUsername={twitterUsername}
+          websiteName={websiteName}
+          resizerURL={resizerURL}
+        />);
+        expect(wrapper.find("meta[name='description']").length).toBe(0);
+      });
+    });
+
+    describe('when need to add a title tag', () => {
+      it('must use the metaValue first and append the websiteName', () => {
+        const metaValue = (prop: string): string | null => {
+          if (prop === 'page-type') {
+            return 'article';
+          }
+          if (prop === 'title') {
+            return 'title from metaValue';
+          }
+          return null;
+        };
+
+        const useFusionContext = {
+          globalContent: {
+            headlines: {
+              basic: 'this is a headline',
+            },
+          },
+          arcSite: 'the-sun',
+        };
+        const { globalContent } = useFusionContext;
+        const wrapper = shallow(<MetaData
+          metaValue={metaValue}
+          MetaTag={jest.fn()}
+          MetaTags={jest.fn()}
+          globalContent={globalContent}
+          twitterUsername={twitterUsername}
+          websiteName={websiteName}
+          resizerURL={resizerURL}
+        />);
+        expect(wrapper.find('title').text()).toEqual(`${metaValue('title')} – ${websiteName}`);
+      });
+
+      it('must use the headlines story if metaValue missing and append the websiteName', () => {
+        const metaValue = (prop: string): string | null => {
+          if (prop === 'page-type') {
+            return 'article';
+          }
+          return null;
+        };
+
+        const useFusionContext = {
+          globalContent: {
+            headlines: {
+              basic: 'this is a headline',
+            },
+          },
+          arcSite: 'the-sun',
+        };
+        const { globalContent } = useFusionContext;
+        const wrapper = shallow(<MetaData
+          metaValue={metaValue}
+          MetaTag={jest.fn()}
+          MetaTags={jest.fn()}
+          globalContent={globalContent}
+          twitterUsername={twitterUsername}
+          websiteName={websiteName}
+          resizerURL={resizerURL}
+        />);
+        expect(wrapper.find('title').text()).toEqual(`${globalContent.headlines.basic} – ${websiteName}`);
+      });
+
+      it('must use the websiteName if other values not found ', () => {
+        const metaValue = (prop: string): string | null => {
+          if (prop === 'page-type') {
+            return 'article';
+          }
+          return null;
+        };
+
+        const useFusionContext = {
+          globalContent: {},
+          arcSite: 'the-sun',
+        };
+        const { globalContent } = useFusionContext;
+        const wrapper = shallow(<MetaData
+          metaValue={metaValue}
+          MetaTag={jest.fn()}
+          MetaTags={jest.fn()}
+          globalContent={globalContent}
+          twitterUsername={twitterUsername}
+          websiteName={websiteName}
+          resizerURL={resizerURL}
+        />);
+        expect(wrapper.find('title').text()).toEqual(websiteName);
+      });
     });
   });
 
