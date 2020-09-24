@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 declare global {
-  interface Window { powaBoot?: any }
+  interface Window { powaBoot?: Function }
 }
 
 interface VideoProps {
@@ -44,7 +44,8 @@ const Video: React.FC<VideoProps> = (props) => {
         data-autoplay={autoplay}
         data-playthrough={playthrough}
         data-muted={muted}
-        data-aspect-ratio={aspectRatio} />
+        data-aspect-ratio={aspectRatio}
+      />
     </div>
   );
 };

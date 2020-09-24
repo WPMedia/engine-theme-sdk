@@ -4,8 +4,8 @@ import Video from '.';
 
 describe('Video', () => {
   beforeEach(() => {
-    global.powaBoot = jest.fn()
-  })
+    global.powaBoot = jest.fn();
+  });
 
   describe('with minimum configurations', () => {
     it('set proper data attributes and call window.powaBoot', () => {
@@ -19,7 +19,7 @@ describe('Video', () => {
       expect(videoElement.prop('data-playthrough')).toBe(false);
       expect(videoElement.prop('data-muted')).toBe(false);
       expect(videoElement.prop('data-aspect-ratio')).toBe(0.5625);
-      expect(global.powaBoot).toBeCalled()
+      expect(global.powaBoot).toBeCalled();
     });
   });
 
@@ -35,7 +35,7 @@ describe('Video', () => {
       expect(videoElement.prop('data-playthrough')).toBe(false);
       expect(videoElement.prop('data-muted')).toBe(true);
       expect(videoElement.prop('data-aspect-ratio')).toBe(0.5625);
-      expect(global.powaBoot).toBeCalled()
+      expect(global.powaBoot).toBeCalled();
     });
   });
 
@@ -51,7 +51,7 @@ describe('Video', () => {
       expect(videoElement.prop('data-playthrough')).toBe(true);
       expect(videoElement.prop('data-muted')).toBe(false);
       expect(videoElement.prop('data-aspect-ratio')).toBe(0.5625);
-      expect(global.powaBoot).toBeCalled()
+      expect(global.powaBoot).toBeCalled();
     });
   });
 
@@ -67,7 +67,7 @@ describe('Video', () => {
       expect(videoElement.prop('data-playthrough')).toBe(false);
       expect(videoElement.prop('data-muted')).toBe(false);
       expect(videoElement.prop('data-aspect-ratio')).toBe(0.75);
-      expect(global.powaBoot).toBeCalled()
+      expect(global.powaBoot).toBeCalled();
     });
   });
 });
