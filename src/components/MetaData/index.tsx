@@ -101,13 +101,9 @@ const MetaData: React.FC<Props> = ({
 
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
     if (typeof window === 'undefined') {
-      let description = null;
-      let headline = null;
+      const description = gc && gc.description && gc.description.basic;
+      const headline = gc && gc.headlines && gc.headlines.basic;
 
-      if (gc && gc.description && gc.headlines) {
-        description = gc.description.basic;
-        headline = gc.headlines.basic;
-      }
       if (metaValue('title')) {
         metaData.title = `${metaValue('title')} – ${websiteName}`;
       } else if (headline) {
