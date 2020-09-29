@@ -9,17 +9,21 @@ const buildThumborURL = (
   }
 
   /**
-   * In blocks/resizer-image-block/index.js (in fusion-news-theme-blocks
-   * we are compressing the format and quality params.
-   * Here we need to convert it back to thumbor format
+   * In blocks/resizer-image-block/index.js (in fusion-news-theme-blocks),
+   * we are compressing the format and quality params. We add a param 'cm=t' to alert us that
+   * the string is compressed.  We will look for that param to see if we need to
+   * convert the string back to the thumbor format by:
+   * 1) Add back the leading slash
+   * 2) remove the compression flag
+   * 3) Convert the format and quality params to thumbor params.
    */
   let uncompressedTarget = targetImageKeyWithFilter;
-  if (!uncompressedTarget.startsWith('/') && uncompressedTarget.indexOf('f=jpg') !== -1) {
+  if (uncompressedTarget.indexOf(':cm=t') !== -1) {
+    uncompressedTarget = uncompressedTarget.replace(':cm=t', '')
+      .replace('f=jpg', 'format(jpg)')
+      .replace('q=70', 'quality(70)');
     uncompressedTarget = `/${uncompressedTarget}`;
   }
-  uncompressedTarget = uncompressedTarget
-    .replace('f=jpg', 'format(jpg)')
-    .replace('q=70', 'quality(70)');
 
   const [targetImageKey, imageFilter = ''] = uncompressedTarget.split('=');
 
