@@ -15,13 +15,11 @@ const buildThumborURL = (
    * convert the string back to the thumbor format by:
    * 1) Add back the leading slash
    * 2) remove the compression flag
-   * 3) Convert the format and quality params to thumbor params.
+   * 3) Convert the default format and quality params to thumbor params.
    */
   let uncompressedTarget = targetImageKeyWithFilter;
   if (uncompressedTarget.indexOf(':cm=t') !== -1) {
-    uncompressedTarget = uncompressedTarget.replace(':cm=t', '')
-      .replace('f=jpg', 'format(jpg)')
-      .replace('q=70', 'quality(70)');
+    uncompressedTarget = uncompressedTarget.replace(':cm=t', ':format(jpg):quality(70)');
     uncompressedTarget = `/${uncompressedTarget}`;
   }
 
