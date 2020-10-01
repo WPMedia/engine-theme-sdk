@@ -49,11 +49,6 @@ describe('the TumblrIcon component', () => {
       const wrapper = shallow(<TumblrIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<TumblrIcon />);
-      expect(wrapper.find('title').text()).toEqual('Tumblr logo');
-    });
   });
 
   describe('the description prop', () => {

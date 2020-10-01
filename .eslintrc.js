@@ -1,7 +1,11 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  extends: ['airbnb', 'plugin:@typescript-eslint/recommended'],
+  extends: [
+    'airbnb', 
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended'
+  ],
   globals: {
     Fusion: 'readonly',
   },

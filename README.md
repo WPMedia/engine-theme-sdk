@@ -10,7 +10,7 @@ This package has been published with a number of dist-tags meant for different p
 - `canary`: For developers to test on core components 
 
 ## Preview Components, Functionality
-<a href="https://github.com/storybooks/storybook" target="_blank" ><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
+<a href="https://staging.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/" target="_blank" ><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
 Storybook allows custom block developers to see how components act individually and together. This will ensure that components work as expected and in an accessible implementation. Addons you'll see in the tray below the icon will determine its accessibility practices as well and provide suggestions for use.
 
@@ -75,13 +75,13 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 ```
 ## How To Publish To Beta 
 
-1. After design qa and qa approval, make a pull request from the `staging` branch to the `rc` (release candidate) branch.
+1. After design qa and qa approval, make a pull request from the `staging` branch to the `beta` (release candidate) branch.
 
 2. Version and publish as above 
 
 `npm version prerelease --preid=beta`
 
-`git push origin staging` 
+`git push origin beta` 
 
 `npm publish --tag beta`
 
@@ -111,9 +111,9 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 
 ### How To Publish To Production
 
-1. After design qa and qa approval, make a pull request from the `rc` branch to the `master` branch.
+1. After design qa and qa approval, make a pull request from the `rc` branch to the `master` branch. 
 
-2. Version and publish as above 
+2. Version and publish as above. Make sure you're using `stable` not `latest`.
 
 `npm version`
 
@@ -161,7 +161,7 @@ Add to your `blocks.json`.
 
 ### Local Development
 
-You can test Engine SDK components locally by adding the following properties to yout blocks.json:
+You can test Engine SDK components locally by adding the following properties to your blocks.json:
 -  `"useLocal": true`
 -  `"useLocalEngineSDK": true`
 

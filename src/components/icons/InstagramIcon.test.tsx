@@ -50,11 +50,6 @@ describe('the InstagramIcon component', () => {
       const wrapper = shallow(<InstagramIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<InstagramIcon />);
-      expect(wrapper.find('title').text()).toEqual('Instagram logo');
-    });
   });
 
   describe('the description prop', () => {

@@ -50,11 +50,6 @@ describe('the HomeIcon component', () => {
       const wrapper = shallow(<HomeIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<HomeIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {

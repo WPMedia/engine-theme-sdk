@@ -50,11 +50,6 @@ describe('the ChartIcon component', () => {
       const wrapper = shallow(<ChartIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<ChartIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {
