@@ -9,7 +9,7 @@ interface CustomMetaData {
 }
 
 interface GlobalContentBag {
-  [x: string]: object;
+  [x: string]: unknown;
 }
 
 const getCustomMetaData = (metaHTMLString: string): Array<CustomMetaData> => {

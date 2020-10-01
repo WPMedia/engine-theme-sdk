@@ -23,7 +23,7 @@ interface MetaValuesReturnInterface {
 }
 
 interface GlobalContentBag {
-  [x: string]: object;
+  [x: string]: unknown;
 }
 
 const websiteName = 'The Sun';
@@ -485,11 +485,10 @@ const noGlobalContent = (pageType: string): void => {
   const metaValue = metaValues({
     'page-type': pageType,
   });
-  const globalContent = null;
-  const wrapper = wrapperGenerator(metaValue, globalContent);
+  const wrapper = wrapperGenerator(metaValue, null);
 
   it('should have a title tag', () => {
-    expect(wrapper.find('title').childAt(0).text()).toEqual('The Sun');
+    expect(wrapper.find('title').childAt(0).text()).toEqual(websiteName);
   });
 
   it('should not have a description meta tag', () => {
@@ -509,18 +508,18 @@ const noGlobalContent = (pageType: string): void => {
   });
 
   it('should have a og:title meta tag', () => {
-    expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
+    expect(wrapper.find("meta[property='og:title']").prop('content')).toBe(websiteName);
   });
 
   it('should have a twitter:title meta tag', () => {
-    expect(wrapper.find("meta[name='twitter:title']").props().content).toBe('The Sun');
+    expect(wrapper.find("meta[name='twitter:title']").prop('content')).toBe(websiteName);
   });
 
-  it('should have a og:image meta tag', () => {
+  it('should not have an og:image meta tag', () => {
     expect(wrapper.find("meta[property='og:image']").length).toBe(0);
   });
 
-  it('should not have a og:image:alt meta tag', () => {
+  it('should not have an og:image:alt meta tag', () => {
     expect(wrapper.find("meta[property='og:image:alt']").length).toBe(0);
   });
 };
