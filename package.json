@@ -8,7 +8,8 @@
   "types": "dist/es/index.d.ts",
   "files": [
     "dist",
-    "types"
+    "types",
+    "svg"
   ],
   "scripts": {
     "build": "rm -rf dist && npm run build:cjs && npm run build:es && npm run build:dts",
