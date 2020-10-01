@@ -240,6 +240,13 @@ const MetaData: React.FC<Props> = ({
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
+  } else {
+    sectionMetaDataTags = (
+      <>
+        <meta property="og:title" content={metaData.title} />
+        <meta name="twitter:title" content={metaData.title} />
+      </>
+    );
   }
   // Twitter meta tags go on all pages
   const twitterTags = (

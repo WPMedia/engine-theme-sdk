@@ -1228,4 +1228,10 @@ describe('the meta data ', () => {
       expectTwitterMetaMissing(wrapper);
     });
   });
+
+  describe('when page type is not provided', () => {
+    describe('must reder default meta tags', () => {
+      noGlobalContent('');
+    });
+  });
 });
