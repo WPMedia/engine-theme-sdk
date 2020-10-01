@@ -1244,4 +1244,10 @@ describe('the meta data ', () => {
       expect(wrapper.find("meta[property='og:url']").length).toBe(0);
     });
   });
+
+  describe('when page type is not provided', () => {
+    describe('must reder default meta tags', () => {
+      noGlobalContent('');
+    });
+  });
 });
