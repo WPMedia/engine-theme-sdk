@@ -8,6 +8,10 @@ interface CustomMetaData {
   metaValue: string;
 }
 
+interface GlobalContentBag {
+  [x: string]: unknown;
+}
+
 const getCustomMetaData = (metaHTMLString: string): Array<CustomMetaData> => {
   let customMetaData = null;
   if (typeof window === 'undefined') {
@@ -35,6 +39,14 @@ const generateCustomMetaTags = (metaData, MetaTag, MetaTags): ReactElement => {
       ))}
     </>
   );
+};
+
+const generateUrl = (arcSite: string, websiteDomain: string, gc: GlobalContentBag): string => {
+  const siteData = gc && gc.websites && gc.websites[arcSite];
+  if (!siteData) {
+    return null;
+  }
+  return `${websiteDomain}${siteData.website_url}`;
 };
 
 interface Props {
@@ -69,14 +81,26 @@ interface Props {
     };
   } | null;
   websiteName?: string | null;
+  websiteDomain?: string | null;
   twitterUsername?: string | null;
   resizerURL?: string | null;
+  arcSite?: string | null;
+  facebookAdmins?: string | null;
 }
 
 const MetaData: React.FC<Props> = ({
-  MetaTag, MetaTags, metaValue, globalContent: gc, websiteName, twitterUsername, resizerURL,
+  MetaTag,
+  MetaTags,
+  metaValue,
+  globalContent: gc,
+  websiteName,
+  websiteDomain,
+  twitterUsername,
+  resizerURL,
+  arcSite,
+  facebookAdmins,
 }) => {
-  const pageType = metaValue('page-type') || '';
+  const pageType = metaValue('page-type');
 
   let storyMetaDataTags = null;
   let tagMetaDataTags = null;
@@ -91,12 +115,15 @@ const MetaData: React.FC<Props> = ({
     keywords: null,
     ogImage: null,
     ogImageAlt: null,
+    url: generateUrl(arcSite, websiteDomain, gc),
     'page-type': pageType,
     title: websiteName,
     ogTitle: websiteName,
     ogSiteName: websiteName,
     twitterUsername: twitterUsername ? `@${twitterUsername}` : null,
     twitterCard: 'summary_large_image',
+    twitterTitle: websiteName,
+    twitterImage: null,
   };
 
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
@@ -115,6 +142,8 @@ const MetaData: React.FC<Props> = ({
       metaData.ogTitle = metaValue('og:title') || headline || websiteName;
       metaData.ogImage = getImgURL(metaValue, 'og:image', gc, resizerURL);
       metaData.ogImageAlt = getImgAlt(metaValue, 'og:image:alt', gc);
+      metaData.twitterTitle = metaValue('twitterTitle') || headline || websiteName;
+      metaData.twitterImage = getImgURL(metaValue, 'twitterImage', gc, resizerURL);
 
       // Keywords could be comma delimited string or array of string or an array of objects
       if (metaValue('keywords')) {
@@ -129,6 +158,7 @@ const MetaData: React.FC<Props> = ({
           gc.taxonomy.tags.forEach((item) => {
             if (item.slug) metaData.keywords.push(item.slug);
           });
+          metaData.keywords = metaData.keywords.join(',');
         }
       } else {
         metaData.keywords = null;
@@ -137,8 +167,13 @@ const MetaData: React.FC<Props> = ({
       storyMetaDataTags = (
         <>
           {
-            metaData.description
-            && <meta name="description" content={metaData.description} />
+            metaData.description && (
+              <>
+                <meta name="description" content={metaData.description} />
+                <meta name="twitter:description" content={metaData.description} />
+                <meta property="og:description" content={metaData.description} />
+              </>
+            )
           }
           {
             metaData.keywords
@@ -146,10 +181,15 @@ const MetaData: React.FC<Props> = ({
           }
 
           <meta property="og:title" content={metaData.ogTitle} />
+          <meta name="twitter:title" content={metaData.twitterTitle} />
 
           {
             metaData.ogImage
             && <meta property="og:image" content={metaData.ogImage} />
+          }
+          {
+            metaData.twitterImage
+            && <meta name="twitter:image" content={metaData.twitterImage} />
           }
           {
             metaData.ogImageAlt
@@ -157,7 +197,10 @@ const MetaData: React.FC<Props> = ({
           }
           {
             pageType === 'article' && (
-              <meta name="robots" content="noarchive" />
+              <>
+                <meta property="og:type" content="article" />
+                <meta name="robots" content="noarchive" />
+              </>
             )
           }
         </>
@@ -167,12 +210,20 @@ const MetaData: React.FC<Props> = ({
     const author = (gc && gc.authors && gc.authors.length) ? gc.authors[0] : {};
     metaData.description = metaValue('description') || author.bio || null;
     metaData.ogTitle = metaValue('og:title') || author.byline || '';
+    metaData.twitterTitle = metaValue('twitterTitle') || author.byline || '';
+
     if (metaData.ogTitle === '') {
       metaData.title = websiteName;
       metaData.ogTitle = websiteName;
     } else {
       metaData.title = `${metaData.ogTitle} - ${websiteName}`;
       metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
+    }
+
+    if (metaData.twitterTitle === '') {
+      metaData.twitterTitle = websiteName;
+    } else {
+      metaData.twitterTitle = `${metaData.twitterTitle} - ${websiteName}`;
     }
 
     authorMetaDataTags = (
@@ -182,6 +233,7 @@ const MetaData: React.FC<Props> = ({
           && <meta name="description" content={metaData.description} />
         }
         <meta property="og:title" content={metaData.ogTitle} />
+        <meta name="twitter:title" content={metaData.twitterTitle} />
       </>
     );
   } else if (pageType === 'search') {
@@ -191,18 +243,27 @@ const MetaData: React.FC<Props> = ({
     searchMetaDataTags = (
       <>
         <meta property="og:title" content={metaData.ogTitle} />
+        <meta name="twitter:title" content={metaData.ogTitle} />
       </>
     );
   } else if (pageType === 'tag') {
     const payload = (gc && gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
     metaData.description = metaValue('description') || payload.description || null;
     metaData.ogTitle = metaValue('og:title') || payload.name || '';
+    metaData.twitterTitle = metaValue('twitterTitle') || payload.name || '';
+
     if (metaData.ogTitle === '') {
       metaData.title = websiteName;
       metaData.ogTitle = websiteName;
     } else {
       metaData.title = `${metaData.ogTitle} - ${websiteName}`;
       metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
+    }
+
+    if (metaData.twitterTitle === '') {
+      metaData.twitterTitle = websiteName;
+    } else {
+      metaData.twitterTitle = `${metaData.twitterTitle} - ${websiteName}`;
     }
 
     tagMetaDataTags = (
@@ -212,6 +273,7 @@ const MetaData: React.FC<Props> = ({
           && <meta name="description" content={metaData.description} />
         }
         <meta property="og:title" content={metaData.ogTitle} />
+        <meta name="twitter:title" content={metaData.twitterTitle} />
       </>
     );
   } else if (pageType === 'section') {
@@ -220,6 +282,8 @@ const MetaData: React.FC<Props> = ({
     metaData.description = metaValue('description') || gcMetadata.metadata_description || null;
     metaData.ogTitle = metaValue('og:title') || payload.name || '';
     metaData.title = metaValue('title') || gcMetadata.metadata_title || payload.name || '';
+    metaData.twitterTitle = metaValue('twitterTitle') || payload.name || '';
+
     if (metaData.ogTitle === '') {
       metaData.ogTitle = websiteName;
     } else {
@@ -230,6 +294,11 @@ const MetaData: React.FC<Props> = ({
     } else if (metaData.title === payload.name) {
       metaData.title = `${metaData.title} - ${websiteName}`;
     }
+    if (metaData.twitterTitle === '') {
+      metaData.twitterTitle = websiteName;
+    } else {
+      metaData.twitterTitle = `${metaData.twitterTitle} - ${websiteName}`;
+    }
 
     sectionMetaDataTags = (
       <>
@@ -238,6 +307,14 @@ const MetaData: React.FC<Props> = ({
           && <meta name="description" content={metaData.description} />
         }
         <meta property="og:title" content={metaData.ogTitle} />
+        <meta name="twitter:title" content={metaData.twitterTitle} />
+      </>
+    );
+  } else {
+    sectionMetaDataTags = (
+      <>
+        <meta property="og:title" content={metaData.title} />
+        <meta name="twitter:title" content={metaData.title} />
       </>
     );
   } else {
@@ -256,12 +333,20 @@ const MetaData: React.FC<Props> = ({
         && <meta property="og:site_name" content={metaData.ogSiteName} />
       }
       {
+        metaData.url
+        && <meta property="og:url" content={metaData.url} />
+      }
+      {
         metaData.twitterUsername
-        && <meta property="twitter:site" content={metaData.twitterUsername} />
+        && <meta name="twitter:site" content={metaData.twitterUsername} />
       }
       {
         metaData.twitterCard
-        && <meta property="twitter:card" content={metaData.twitterCard} />
+        && <meta name="twitter:card" content={metaData.twitterCard} />
+      }
+      {
+        facebookAdmins
+        && <meta property="fb:admins" content={facebookAdmins} />
       }
     </>
   );
