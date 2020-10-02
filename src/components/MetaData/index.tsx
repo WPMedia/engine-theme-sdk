@@ -310,8 +310,6 @@ const MetaData: React.FC<Props> = ({
         <meta name="twitter:title" content={metaData.twitterTitle} />
       </>
     );
-  } else if (pageType === 'homepage') {
-    homepageMetaDataTags = <meta property="og:title" content={metaData.ogTitle} />;
   } else {
     sectionMetaDataTags = (
       <>
