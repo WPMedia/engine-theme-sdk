@@ -311,6 +311,8 @@ const MetaData: React.FC<Props> = ({
         <meta name="twitter:title" content={metaData.twitterTitle} />
       </>
     );
+  } else if (pageType === 'homepage') {
+    homepageMetaDataTags = <meta property="og:title" content={metaData.ogTitle} />;
   } else {
     sectionMetaDataTags = (
       <>
@@ -318,8 +320,6 @@ const MetaData: React.FC<Props> = ({
         <meta name="twitter:title" content={metaData.title} />
       </>
     );
-  } else if (pageType === 'homepage') {
-    homepageMetaDataTags = <meta property="og:title" content={metaData.ogTitle} />;
   }
   // Twitter meta tags go on all pages
   const twitterTags = (
