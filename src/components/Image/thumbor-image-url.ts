@@ -19,7 +19,11 @@ const buildThumborURL = (
    */
   let uncompressedTarget = targetImageKeyWithFilter;
   if (uncompressedTarget.indexOf(':cm=t') !== -1) {
-    uncompressedTarget = uncompressedTarget.replace(':cm=t', ':format(jpg):quality(70)');
+    if (uncompressedTarget.indexOf(':format') === -1) {
+      uncompressedTarget = uncompressedTarget.replace(':cm=t', ':format(jpg):quality(70)');
+    } else {
+      uncompressedTarget = uncompressedTarget.replace(':cm=t', ':quality(70)');
+    }
     uncompressedTarget = `/${uncompressedTarget}`;
   }
 
