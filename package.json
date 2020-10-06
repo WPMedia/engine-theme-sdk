@@ -23,7 +23,7 @@
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=pc32y518itq --exit-zero-on-changes"
+    "chromatic": "npx chromatic --project-token=pc32y518itq --exit-once-uploaded"
   },
   "husky": {
     "hooks": {
