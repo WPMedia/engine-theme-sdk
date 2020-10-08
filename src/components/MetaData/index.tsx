@@ -108,6 +108,8 @@ const MetaData: React.FC<Props> = ({
   let searchMetaDataTags = null;
   let sectionMetaDataTags = null;
   let homepageMetaDataTags = null;
+  let nativoMetaDataTags = null;
+  let commonTagsOnPage = true;
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
   const { getImgURL, getImgAlt } = require('./promoImageHelper');
@@ -313,6 +315,16 @@ const MetaData: React.FC<Props> = ({
     );
   } else if (pageType === 'homepage') {
     homepageMetaDataTags = <meta property="og:title" content={metaData.ogTitle} />;
+  } else if (pageType === 'nativo-clp') {
+    /* Nativo ad integration */
+    /* this kind of page type can not render any social metadata */
+    commonTagsOnPage = false;
+    nativoMetaDataTags = (
+      <>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="robots" content="noindex, nofollow" />
+      </>
+    );
   } else {
     sectionMetaDataTags = (
       <>
@@ -359,7 +371,8 @@ const MetaData: React.FC<Props> = ({
       {authorMetaDataTags}
       {searchMetaDataTags}
       {customMetaTags}
-      {twitterTags}
+      {commonTagsOnPage && twitterTags}
+      {nativoMetaDataTags}
     </>
   );
 };
