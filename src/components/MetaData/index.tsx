@@ -231,7 +231,13 @@ const MetaData: React.FC<Props> = ({
       <>
         {
           metaData.description
-          && <meta name="description" content={metaData.description} />
+          && (
+            <>
+              <meta name="description" content={metaData.description} />
+              <meta property="og:description" content={metaData.description} />
+              <meta name="twitter:description" content={metaData.description} />
+            </>
+          )
         }
         <meta property="og:title" content={metaData.ogTitle} />
         <meta name="twitter:title" content={metaData.twitterTitle} />
@@ -271,7 +277,13 @@ const MetaData: React.FC<Props> = ({
       <>
         {
           metaData.description
-          && <meta name="description" content={metaData.description} />
+          && (
+            <>
+              <meta name="description" content={metaData.description} />
+              <meta property="og:description" content={metaData.description} />
+              <meta name="twitter:description" content={metaData.description} />
+            </>
+          )
         }
         <meta property="og:title" content={metaData.ogTitle} />
         <meta name="twitter:title" content={metaData.twitterTitle} />
@@ -305,14 +317,25 @@ const MetaData: React.FC<Props> = ({
       <>
         {
           metaData.description
-          && <meta name="description" content={metaData.description} />
+          && (
+            <>
+              <meta name="description" content={metaData.description} />
+              <meta property="og:description" content={metaData.description} />
+              <meta name="twitter:description" content={metaData.description} />
+            </>
+          )
         }
         <meta property="og:title" content={metaData.ogTitle} />
         <meta name="twitter:title" content={metaData.twitterTitle} />
       </>
     );
   } else if (pageType === 'homepage') {
-    homepageMetaDataTags = <meta property="og:title" content={metaData.ogTitle} />;
+    homepageMetaDataTags = (
+      <>
+        <meta property="og:title" content={metaData.ogTitle} />
+        <meta name="twitter:title" content={metaData.twitterTitle} />
+      </>
+    );
   } else {
     sectionMetaDataTags = (
       <>
