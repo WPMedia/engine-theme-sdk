@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.4.0-beta.1",
+  "version": "2.4.0-canary.5",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -23,7 +23,7 @@
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=pc32y518itq --exit-zero-on-changes"
+    "chromatic": "npx chromatic --project-token=pc32y518itq --exit-once-uploaded"
   },
   "husky": {
     "hooks": {
