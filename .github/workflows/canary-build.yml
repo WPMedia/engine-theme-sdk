@@ -1,7 +1,7 @@
 name: Canary build
 
 # Controls when the action will run. Triggers the workflow on push
-# events but only for the test-canary-branch branch
+# events but only for the test-canary-build branch
 on:
   push:
     branches:
@@ -21,6 +21,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
+      # Caches NPM files
       - name: Cache NPM files
         uses: actions/cache@v2
         with:
@@ -29,18 +30,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      # Sets up Node v12
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: '12'
           registry-url: 'https://npm.pkg.github.com'
 
+      # NPM ci init
       - run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
 
-      # Git init
-      - run: git config --global user.email "beltran.caliz@ewashpost.com" && git config --global user.name "beltrancaliz"
+      # Git config
+      - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
       
@@ -50,10 +53,11 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       # Publish
-      - run: npm publish --tag canary
+      - run: npm publish --tag test-canary-build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Push tag
       - run: git push origin test-canary-build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
