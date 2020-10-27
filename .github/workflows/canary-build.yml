@@ -54,6 +54,13 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: git add . && git commit -m "New version" && git push origin test-canary-build
+      - name: Push tags
+        uses: actions/checkout@v2
+        with:
+          node-version: '12'
+          registry-url: 'https://npm.pkg.github.com'
+        run: git add . && git commit -m "New version" && git push origin
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      
