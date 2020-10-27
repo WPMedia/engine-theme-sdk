@@ -7,9 +7,7 @@ on:
     branches:
       - test-canary-build
 
-# Publishes Canary builds with the dist tag of "canary" and
-# with a version of 0.0.0 with a short git SHA appended to
-# the end.
+# Publishes Canary builds with the dist tag of "canary"
 jobs:
   # This workflow contains a single job called "publish"
   publish:
@@ -41,14 +39,17 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
 
+      # Git init
       - run: git config --global user.email "beltran.caliz@ewashpost.com" && git config --global user.name "beltrancaliz"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
       
+      # Prerelease (tests and lint)
       - run: npm version prerelease --preid=canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
+      # Publish
       - run: npm publish --tag canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
