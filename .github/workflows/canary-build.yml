@@ -1,11 +1,11 @@
 name: Canary build
 
 # Controls when the action will run. Triggers the workflow on push
-# events but only for the test-canary-build branch
+# events but only for the canary branch
 on:
   push:
     branches:
-      - test-canary-build
+      - canary
 
 # Publishes Canary builds with the dist tag of "canary"
 jobs:
@@ -53,11 +53,11 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       # Publish
-      - run: npm publish --tag test-canary-build
+      - run: npm publish --tag canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Push tag
-      - run: git push origin test-canary-build
+      - run: git push origin canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
