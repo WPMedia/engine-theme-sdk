@@ -54,6 +54,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: git add . && git commit -m "New version" && git push
+      - run: git add . && git commit -m "New version" && git push origin test-canary-build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
