@@ -45,6 +45,11 @@ jobs:
       - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
+
+      # Versioning
+      - run: npm version patch
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       # Publish
       - run: npm publish --tag stable
