@@ -17,6 +17,17 @@ In the future, this will be hosted. To build, see [documentation](https://storyb
 
 ## How To Publish
 
+Publishing new Engine Theme SDK releases happens automatically through Github actions. Whenever a push happens in any of these branches, a new version will be created with its corresponding dist tag:
+- canary
+- beta
+- stable
+
+You can view the status of these workflows [here](https://github.com/WPMedia/engine-theme-sdk/actions).
+
+## How To Manually Publish
+
+We strongly encourage sticking to our automated publishing process, however if for any reason a manual publish is needed, follow these steps:
+
 1. Pull the latest `canary` branch. 
 
 `git checkout canary`
