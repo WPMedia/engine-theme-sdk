@@ -3,6 +3,7 @@ const buildThumborURL = (
   targetDimension: string,
   imageSourceWithoutProtocol: string,
   resizerURL: string,
+  compressedParams?: boolean,
 ): string => {
   if (typeof targetImageKeyWithFilter === 'undefined' || resizerURL.length <= 1) {
     return '';
@@ -18,7 +19,7 @@ const buildThumborURL = (
    * 3) Convert the default format and quality params to thumbor params.
    */
   let uncompressedTarget = targetImageKeyWithFilter;
-  if (uncompressedTarget.indexOf(':cm=t') !== -1) {
+  if (uncompressedTarget.indexOf(':cm=t') !== -1 && compressedParams) {
     uncompressedTarget = uncompressedTarget.replace(':cm=t', ':format(jpg):quality(70)');
     uncompressedTarget = `/${uncompressedTarget}`;
   }
