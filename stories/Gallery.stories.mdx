@@ -1,6 +1,6 @@
 import Gallery from '../src/components/Gallery';
 import { number, select, text } from "@storybook/addon-knobs";
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta title="Gallery" component={Gallery} />
 
@@ -34,15 +34,15 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
 
 
 
-## Props
-<Props of={Gallery} />
+## ArgsTable
+<ArgsTable of={Gallery} />
 
 ## Stories
 
 <Story name="Basic" />
 
 ### **Custom Gallery**
-<Preview>
+<Canvas>
     <Story name="Custom Gallery">
         <Gallery
             galleryElements={[
@@ -1177,10 +1177,10 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
             pausePhrase={text('Pause phrase', 'Pause')}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ### **No Resizer URL**
-<Preview>
+<Canvas>
     <Story name="No resizer URL">
         <Gallery
             galleryElements={[
@@ -2311,5 +2311,5 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
             resizerURL={''}
         />
     </Story>
-</Preview>
+</Canvas>
 
