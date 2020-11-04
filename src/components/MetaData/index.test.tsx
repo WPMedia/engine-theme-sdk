@@ -32,6 +32,8 @@ const twitterUsername = 'the-sun';
 const resizerURL = 'https://fake.cdn.com/resizer';
 const arcSite = 'the-sun';
 const facebookAdmins = '1111111111';
+const fallbackImageLocal = '/resources/images/fallback_image.jpg';
+const fallbackImageRemote = 'https://remote-site.com/images/fallback_image_remote.jpg';
 
 /* eslint-disable @typescript-eslint/camelcase */
 const globalContentComplete = {
@@ -127,6 +129,7 @@ const expectDefaultMetaMissing = (wrapper: ShallowWrapper): void => {
 const wrapperGenerator = (
   metaValue: MetaValuesReturnInterface,
   globalContent: GlobalContentBag,
+  localFallback = true,
 ): ShallowWrapper => (
   shallow(
     <MetaData
@@ -140,6 +143,7 @@ const wrapperGenerator = (
       arcSite={arcSite}
       websiteDomain={websiteDomain}
       facebookAdmins={facebookAdmins}
+      fallbackImage={localFallback ? fallbackImageLocal : fallbackImageRemote}
     />,
   )
 );
@@ -805,6 +809,89 @@ describe('the meta data ', () => {
           `${globalContentAuthor.authors[0].byline} - ${websiteName}`,
         );
       });
+
+      it('should use local fallbackImage for social meta tags', () => {
+        const metaValue = metaValues({
+          'page-type': 'author',
+        });
+        const authors = { ...globalContentAuthor.authors[0], image: undefined };
+        const wrapper = wrapperGenerator(metaValue, { authors: [authors] });
+        expect(
+          wrapper.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          authors.byline,
+        );
+        expect(
+          wrapper.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          authors.byline,
+        );
+      });
+
+      it('should use remote fallbackImage for social meta tags', () => {
+        const metaValue = metaValues({
+          'page-type': 'author',
+        });
+        const authors = { ...globalContentAuthor.authors[0], image: undefined };
+        const wrapper = wrapperGenerator(metaValue, { authors: [authors] }, false);
+        expect(
+          wrapper.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          authors.byline,
+        );
+        expect(
+          wrapper.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapper.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          authors.byline,
+        );
+      });
+
+      it('should use author image for social meta tags if exists', () => {
+        const metaValue = metaValues({
+          'page-type': 'author',
+        });
+        const wrapper = wrapperGenerator(metaValue, globalContentAuthor);
+        expect(
+          wrapper.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          globalContentAuthor.authors[0].image,
+        );
+        expect(
+          wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          globalContentAuthor.authors[0].byline,
+        );
+        expect(
+          wrapper.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          globalContentAuthor.authors[0].image,
+        );
+        expect(
+          wrapper.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          globalContentAuthor.authors[0].byline,
+        );
+      });
     });
 
     describe('when global content is not provided', () => {
@@ -825,6 +912,53 @@ describe('the meta data ', () => {
 
       it('should have default social meta', () => {
         expectDefaultMeta(wrapper);
+      });
+
+      it('should use local fallbackImage for social meta tags', () => {
+        expect(
+          wrapper.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
+        expect(
+          wrapper.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
+      });
+
+      it('should use remote fallbackImage for social meta tags', () => {
+        const wrapperAlt = wrapperGenerator(metaValue, null, false);
+        expect(
+          wrapperAlt.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapperAlt.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
+        expect(
+          wrapperAlt.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapperAlt.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
       });
     });
   });
@@ -929,6 +1063,60 @@ describe('the meta data ', () => {
           `${globalContentComplete.Payload[0].name} - ${websiteName}`,
         );
       });
+
+      it('should use local fallbackImage for social meta tags', () => {
+        const metaValue = metaValues({
+          'page-type': 'tag',
+        });
+        const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+        expect(
+          wrapper.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          `${globalContentComplete.Payload[0].name} - ${websiteName}`,
+        );
+        expect(
+          wrapper.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          `${globalContentComplete.Payload[0].name} - ${websiteName}`,
+        );
+      });
+
+      it('should use remote fallbackImage for social meta tags', () => {
+        const metaValue = metaValues({
+          'page-type': 'tag',
+        });
+        const wrapper = wrapperGenerator(metaValue, globalContentComplete, false);
+        expect(
+          wrapper.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          `${globalContentComplete.Payload[0].name} - ${websiteName}`,
+        );
+        expect(
+          wrapper.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapper.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          `${globalContentComplete.Payload[0].name} - ${websiteName}`,
+        );
+      });
     });
 
     describe('when global content is not provided', () => {
@@ -945,6 +1133,53 @@ describe('the meta data ', () => {
 
       it('should not have description', () => {
         expect(wrapper.find("meta[name='description']").length).toBe(0);
+      });
+
+      it('should use local fallbackImage for social meta tags', () => {
+        expect(
+          wrapper.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
+        expect(
+          wrapper.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
+      });
+
+      it('should use remote fallbackImage for social meta tags', () => {
+        const wrapperRemote = wrapperGenerator(metaValue, null, false);
+        expect(
+          wrapperRemote.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapperRemote.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
+        expect(
+          wrapperRemote.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapperRemote.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
       });
     });
   });
@@ -1118,6 +1353,62 @@ describe('the meta data ', () => {
           websiteName,
         );
       });
+
+      it('should use local fallbackImage for social meta tags', () => {
+        const metaValue = metaValues({
+          'page-type': 'section',
+        });
+        const content = { ...globalContentComplete };
+        const wrapper = wrapperGenerator(metaValue, content);
+        expect(
+          wrapper.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          `${content.name} - ${websiteName}`,
+        );
+        expect(
+          wrapper.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          `${content.name} - ${websiteName}`,
+        );
+      });
+
+      it('should use remote fallbackImage for social meta tags', () => {
+        const metaValue = metaValues({
+          'page-type': 'section',
+        });
+        const content = { ...globalContentComplete };
+        const wrapper = wrapperGenerator(metaValue, content, false);
+        expect(
+          wrapper.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          `${content.name} - ${websiteName}`,
+        );
+        expect(
+          wrapper.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapper.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          `${content.name} - ${websiteName}`,
+        );
+      });
     });
 
     describe('when global content is not provided', () => {
@@ -1140,6 +1431,53 @@ describe('the meta data ', () => {
 
       it('should use websiteName as twitter:title meta tag', () => {
         expect(wrapper.find("meta[name='twitter:title']").prop('content')).toBe(websiteName);
+      });
+
+      it('should use local fallbackImage for social meta tags', () => {
+        expect(
+          wrapper.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
+        expect(
+          wrapper.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          `${websiteDomain}${fallbackImageLocal}`,
+        );
+        expect(
+          wrapper.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
+      });
+
+      it('should use remote fallbackImage for social meta tags', () => {
+        const wrapperRemote = wrapperGenerator(metaValue, null, false);
+        expect(
+          wrapperRemote.find("meta[name='twitter:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapperRemote.find("meta[name='twitter:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
+        expect(
+          wrapperRemote.find("meta[property='og:image']").prop('content'),
+        ).toBe(
+          fallbackImageRemote,
+        );
+        expect(
+          wrapperRemote.find("meta[property='og:image:alt']").prop('content'),
+        ).toBe(
+          websiteName,
+        );
       });
     });
   });
@@ -1209,6 +1547,60 @@ describe('the meta data ', () => {
       });
       const wrapper = wrapperGenerator(metaValue, globalContentComplete);
       expectDefaultMeta(wrapper);
+    });
+
+    it('should use local fallbackImage for social meta tags', () => {
+      const metaValue = metaValues({
+        'page-type': 'homepage',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(
+        wrapper.find("meta[name='twitter:image']").prop('content'),
+      ).toBe(
+        `${websiteDomain}${fallbackImageLocal}`,
+      );
+      expect(
+        wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+      ).toBe(
+        websiteName,
+      );
+      expect(
+        wrapper.find("meta[property='og:image']").prop('content'),
+      ).toBe(
+        `${websiteDomain}${fallbackImageLocal}`,
+      );
+      expect(
+        wrapper.find("meta[property='og:image:alt']").prop('content'),
+      ).toBe(
+        websiteName,
+      );
+    });
+
+    it('should use remote fallbackImage for social meta tags', () => {
+      const metaValue = metaValues({
+        'page-type': 'homepage',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, false);
+      expect(
+        wrapper.find("meta[name='twitter:image']").prop('content'),
+      ).toBe(
+        fallbackImageRemote,
+      );
+      expect(
+        wrapper.find("meta[name='twitter:image:alt']").prop('content'),
+      ).toBe(
+        websiteName,
+      );
+      expect(
+        wrapper.find("meta[property='og:image']").prop('content'),
+      ).toBe(
+        fallbackImageRemote,
+      );
+      expect(
+        wrapper.find("meta[property='og:image:alt']").prop('content'),
+      ).toBe(
+        websiteName,
+      );
     });
   });
 
