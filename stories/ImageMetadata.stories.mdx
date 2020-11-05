@@ -1,7 +1,7 @@
 import ImageMetadata from '../src/components/ImageMetadata';
 import Image from '../src/components/Image';
 import { number, select, text } from "@storybook/addon-knobs";
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta title="ImageMetadata" component={ImageMetadata} />
 
@@ -47,15 +47,15 @@ import { ImageMetadata } from '@wpmedia/engine-theme-sdk';
 
 
 
-## Props
-<Props of={ImageMetadata} />
+## ArgsTable
+<ArgsTable of={ImageMetadata} />
 
 ## Stories
 
 <Story name="Basic" />
 
 ** Custom ImageMetadata **
-<Preview>
+<Canvas>
     <Story name="Custom ImageMetadata">
         <figure>
             <Image
@@ -101,4 +101,4 @@ import { ImageMetadata } from '@wpmedia/engine-theme-sdk';
           </figcaption>
         </figure>
     </Story>
-</Preview>
+</Canvas>
