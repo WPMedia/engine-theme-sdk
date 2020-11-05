@@ -50,7 +50,10 @@ const generateUrl = (arcSite: string, websiteDomain: string, gc: GlobalContentBa
 };
 
 const normalizeFallbackImage = (websiteDomain: string, url: string): string | null => {
-  if (url && !url.startsWith('http')) {
+  if (!url) {
+    return null;
+  }
+  if (!url.startsWith('http')) {
     const tmp = `${websiteDomain}¬${url}`;
     return tmp.replace(/\/?¬\/?/, '/');
   }
