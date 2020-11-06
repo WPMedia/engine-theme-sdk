@@ -21,7 +21,7 @@
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint",
     "postpublish": "git push --tags",
-    "storybook": "start-storyboosk -p 6006",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "publishConfig": {
