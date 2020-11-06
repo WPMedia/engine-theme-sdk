@@ -22,6 +22,8 @@ The component explorer will also show the effect of different props on component
 
 If you don't go to the page automatically on successful compilation, go to [http://localhost:6006/](http://localhost:6006/). 
 
+When you push to the branch and make a pull request, you will see the built storybook in the pull request checks.
+
 ## Contribute	
 If you need to update an existing Engine SDK component, contact the Pagebuilder team. If you want to create a new component follow these instructions:	
 1. Pull the latest `staging` branch	
