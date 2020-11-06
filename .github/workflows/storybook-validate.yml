@@ -6,7 +6,7 @@ on:
     types: [synchronize, opened]
 
 jobs:
-  test_and_lint:
+  chromatic_publish_validate:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,3 +31,9 @@ jobs:
         run: npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      
+      - name: Publish storybook
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
