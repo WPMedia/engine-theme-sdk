@@ -32,8 +32,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      - name: Run tests 
-        run: npm run test 
+      - name: Run tests with coverage minimum
+        run: npm run test:coverage 
 
       - name: Check linting
         run: npm run lint
