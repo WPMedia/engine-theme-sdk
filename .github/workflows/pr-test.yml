@@ -8,6 +8,8 @@ on:
 jobs:
   test_and_lint:
     runs-on: ubuntu-latest
+    env: 
+      SLACK_WEBHOOK_URL: ${{ secrets.THEMES_OPS_SLACK_WEBHOOK_URL }}
 
     steps:
       - name: Checkout repo
@@ -26,9 +28,9 @@ jobs:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
-      - name: Install dependencies if lockfile changed
+      - name: Clean install dependencies if lockfile changed
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install
+        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
@@ -37,3 +39,9 @@ jobs:
 
       - name: Check linting
         run: npm run lint
+
+      - name: Check failure status and post in themes ops channel
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+        if: failure()
