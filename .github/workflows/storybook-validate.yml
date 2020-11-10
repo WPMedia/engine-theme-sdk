@@ -8,6 +8,8 @@ on:
 jobs:
   chromatic_publish_validate:
     runs-on: ubuntu-latest
+    env: 
+      SLACK_WEBHOOK_URL: ${{ secrets.THEMES_OPS_SLACK_WEBHOOK_URL }}
 
     steps:
       - name: Checkout repo
@@ -37,3 +39,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      
+      - name: Check failure status and post in themes ops channel
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+        if: failure()
