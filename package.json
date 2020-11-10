@@ -17,6 +17,7 @@
     "build:es": "BABEL_ENV=es babel src --extensions='.ts,.tsx' --out-dir dist/es --ignore 'src/components/**/*.test.tsx','src/components/**/*.test.ts' --no-copy-ignored",
     "build:dts": "tsc",
     "test": "jest",
+    "test:coverage": "npm run test -- --coverage",
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint",
@@ -100,22 +101,5 @@
     "styled-components": "^4.4.1",
     "thumbor-lite": "^0.1.6",
     "timezone": "^1.0.23"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest",
-      "^.+\\.(svg)$": "./jest/fileTransform.js"
-    },
-    "setupFilesAfterEnv": [
-      "./jest/testSetupFile.js",
-      "./node_modules/jest-enzyme/lib/index.js"
-    ],
-    "moduleNameMapper": {
-      "^.+\\.(css|less|scss)$": "identity-obj-proxy"
-    },
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "<rootDir>/dist"
-    ]
   }
 }
