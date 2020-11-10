@@ -26,9 +26,9 @@ jobs:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
-      - name: Install dependencies if lockfile changed
+      - name: Clean install dependencies if lockfile changed
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install
+        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       
