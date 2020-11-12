@@ -72,7 +72,6 @@ describe('image component', () => {
 
   describe('when compressedThumborParams is set to true', () => {
     it('should return various breakpoints with the widths', () => {
-
       const wrapper = shallow(<Image
         url={rawURL}
         alt={alt}
