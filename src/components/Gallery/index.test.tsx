@@ -153,6 +153,10 @@ const mockGallery = [
   },
 ];
 
+function sleep(ms: number) {
+  return new Promise((resolve: Function) => setTimeout(resolve, ms));
+}
+
 function createClientXY(x: number, y: number, target: EventTarget): Touch {
   return {
     clientX: x,
@@ -681,6 +685,60 @@ describe('the gallery block', () => {
         const wrapper = mount(<Gallery galleryElements={mockGallery} />);
         expect(wrapper.find('styled__ImageCountText').text()).toMatch('1 of 6');
       });
+    });
+  });
+
+  describe('the interstitialClicks prop', () => {
+    const AdBlock = (): React.ReactElement => (
+      <div className="ad-block">
+        <p>AdBlock</p>
+      </div>
+    );
+
+    it('should render an Ad at 2nd position when interstitialClick match', async () => {
+      const wrapper = mount(
+        <Gallery
+          galleryElements={mockGallery}
+          interstitialClicks={2}
+          AdElement={AdBlock}
+        />,
+      );
+      expect(wrapper.find('.ad-block').length).toBe(0);
+      const fowardButton = wrapper.find('button.next-button').at(0);
+      act(() => {
+        fowardButton.simulate('click');
+      });
+      act(() => {
+        fowardButton.simulate('click');
+      });
+      wrapper.setProps({});
+      await sleep(1000);
+      expect(wrapper.find('#gallery-pos-2 .ad-block').length).toBe(1);
+    });
+
+    it('should render an Ad at 1st position when interstitialClick match on any direction', async () => {
+      const wrapper = mount(
+        <Gallery
+          galleryElements={mockGallery}
+          interstitialClicks={3}
+          AdElement={AdBlock}
+        />,
+      );
+      expect(wrapper.find('.ad-block').length).toBe(0);
+      const fowardButton = wrapper.find('button.next-button').at(0);
+      const backwardButton = wrapper.find('button.prev-button').at(0);
+      act(() => {
+        fowardButton.simulate('click');
+      });
+      act(() => {
+        fowardButton.simulate('click');
+      });
+      act(() => {
+        backwardButton.simulate('click');
+      });
+      wrapper.setProps({});
+      await sleep(1000);
+      expect(wrapper.find('#gallery-pos-1 .ad-block').length).toBe(1);
     });
   });
 });
