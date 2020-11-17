@@ -153,7 +153,7 @@ const mockGallery = [
   },
 ];
 
-function sleep(ms: number) {
+function sleep(ms: number): Promise<void> {
   return new Promise((resolve: Function) => setTimeout(resolve, ms));
 }
 
@@ -217,9 +217,6 @@ describe('the gallery block', () => {
         }
         ran.push(tst);
       };
-      function sleep(ms: number): Promise<void> {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-      }
 
       EventEmitter.subscribe('galleryExpandEnter', (event: GalleryEventData) => eventHandler(event, 'start'));
       EventEmitter.subscribe('galleryExpandExit', (event: GalleryEventData) => eventHandler(event, 'stop'));
@@ -312,9 +309,6 @@ describe('the gallery block', () => {
       const wrapper = mount(<Gallery galleryElements={mockGallery} resizerURL="" ansId="cybertruck" />);
       const autoBtnWrapper = wrapper.find('styled__ControlContainer').find('button').at(1);
       const ran: number[] = [];
-      function sleep(ms: number): Promise<void> {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-      }
 
       const eventHandler = (event: GalleryEventData, tst: number): void => {
         if (event.ansGalleryId !== 'cybertruck') {
