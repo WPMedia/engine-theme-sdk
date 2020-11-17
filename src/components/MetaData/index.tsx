@@ -49,6 +49,17 @@ const generateUrl = (arcSite: string, websiteDomain: string, gc: GlobalContentBa
   return `${websiteDomain}${siteData.website_url}`;
 };
 
+const normalizeFallbackImage = (websiteDomain: string, url: string): string | null => {
+  if (!url) {
+    return null;
+  }
+  if (!url.startsWith('http')) {
+    const tmp = `${websiteDomain}¬${url}`;
+    return tmp.replace(/\/?¬\/?/, '/');
+  }
+  return url;
+};
+
 interface Props {
   MetaTag: Function;
   MetaTags: Function;
@@ -70,6 +81,11 @@ interface Props {
     authors?: Array<{
       bio?: string;
       byline?: string;
+      image?: string | {
+        url?: string;
+        alt_text?: string;
+      };
+      name?: string;
     }>;
     Payload?: Array<{
       description?: string;
@@ -86,6 +102,7 @@ interface Props {
   resizerURL?: string | null;
   arcSite?: string | null;
   facebookAdmins?: string | null;
+  fallbackImage?: string | null;
 }
 
 const MetaData: React.FC<Props> = ({
@@ -99,6 +116,7 @@ const MetaData: React.FC<Props> = ({
   resizerURL,
   arcSite,
   facebookAdmins,
+  fallbackImage,
 }) => {
   const pageType = metaValue('page-type');
 
@@ -125,6 +143,7 @@ const MetaData: React.FC<Props> = ({
     twitterCard: 'summary_large_image',
     twitterTitle: websiteName,
     twitterImage: null,
+    fallbackImage: normalizeFallbackImage(websiteDomain, fallbackImage),
   };
 
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
@@ -212,6 +231,13 @@ const MetaData: React.FC<Props> = ({
     metaData.description = metaValue('description') || author.bio || null;
     metaData.ogTitle = metaValue('og:title') || author.byline || '';
     metaData.twitterTitle = metaValue('twitterTitle') || author.byline || '';
+    const { name: authorName } = author;
+    const authorImageUrl = (typeof author.image === 'string')
+      ? author.image
+      : (author.image && author.image.url);
+    const authorAltText = (typeof author.image === 'object')
+      ? author.image.alt_text
+      : author.byline || authorName;
 
     if (metaData.ogTitle === '') {
       metaData.title = websiteName;
@@ -226,6 +252,8 @@ const MetaData: React.FC<Props> = ({
     } else {
       metaData.twitterTitle = `${metaData.twitterTitle} - ${websiteName}`;
     }
+    const authorPhoto = authorImageUrl || metaData.fallbackImage;
+    const authorAlt = authorAltText || authorName || author.byline || websiteName;
 
     authorMetaDataTags = (
       <>
@@ -241,6 +269,17 @@ const MetaData: React.FC<Props> = ({
         }
         <meta property="og:title" content={metaData.ogTitle} />
         <meta name="twitter:title" content={metaData.twitterTitle} />
+        {
+          authorPhoto
+          && (
+            <>
+              <meta property="og:image" content={authorPhoto} />
+              <meta property="og:image:alt" content={authorAlt} />
+              <meta name="twitter:image" content={authorPhoto} />
+              <meta name="twitter:image:alt" content={authorAlt} />
+            </>
+          )
+        }
       </>
     );
   } else if (pageType === 'search') {
@@ -287,6 +326,17 @@ const MetaData: React.FC<Props> = ({
         }
         <meta property="og:title" content={metaData.ogTitle} />
         <meta name="twitter:title" content={metaData.twitterTitle} />
+        {
+          metaData.fallbackImage
+          && (
+            <>
+              <meta property="og:image" content={metaData.fallbackImage} />
+              <meta property="og:image:alt" content={metaData.ogTitle} />
+              <meta name="twitter:image" content={metaData.fallbackImage} />
+              <meta name="twitter:image:alt" content={metaData.twitterTitle} />
+            </>
+          )
+        }
       </>
     );
   } else if (pageType === 'section') {
@@ -327,6 +377,18 @@ const MetaData: React.FC<Props> = ({
         }
         <meta property="og:title" content={metaData.ogTitle} />
         <meta name="twitter:title" content={metaData.twitterTitle} />
+
+        {
+          metaData.fallbackImage
+          && (
+            <>
+              <meta property="og:image" content={metaData.fallbackImage} />
+              <meta property="og:image:alt" content={metaData.ogTitle} />
+              <meta name="twitter:image" content={metaData.fallbackImage} />
+              <meta name="twitter:image:alt" content={metaData.twitterTitle} />
+            </>
+          )
+        }
       </>
     );
   } else if (pageType === 'homepage') {
@@ -334,6 +396,17 @@ const MetaData: React.FC<Props> = ({
       <>
         <meta property="og:title" content={metaData.ogTitle} />
         <meta name="twitter:title" content={metaData.twitterTitle} />
+        {
+          metaData.fallbackImage
+          && (
+            <>
+              <meta property="og:image" content={metaData.fallbackImage} />
+              <meta property="og:image:alt" content={metaData.ogTitle} />
+              <meta name="twitter:image" content={metaData.fallbackImage} />
+              <meta name="twitter:image:alt" content={metaData.twitterTitle} />
+            </>
+          )
+        }
       </>
     );
   } else {
