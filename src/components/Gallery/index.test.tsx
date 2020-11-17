@@ -700,7 +700,7 @@ describe('the gallery block', () => {
         <Gallery
           galleryElements={mockGallery}
           interstitialClicks={2}
-          AdElement={AdBlock}
+          adElement={AdBlock}
         />,
       );
       expect(wrapper.find('.ad-block').length).toBe(0);
@@ -721,7 +721,7 @@ describe('the gallery block', () => {
         <Gallery
           galleryElements={mockGallery}
           interstitialClicks={3}
-          AdElement={AdBlock}
+          adElement={AdBlock}
         />,
       );
       expect(wrapper.find('.ad-block').length).toBe(0);
