@@ -1,5 +1,5 @@
 import Image from '../src/components/Image';
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta title="Image" component={Image} />
 
@@ -42,15 +42,15 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 
 
 
-## Props
-<Props of={Image} />
+## ArgsTable
+<ArgsTable of={Image} />
 
 ## Stories
 
 <Story name="Basic" />
 
 ### **With widths and heights**
-<Preview>
+<Canvas>
     <Story name="With widths and heights">
         <div>
             <p>Scroll down to see lazy loading example</p>
@@ -117,10 +117,10 @@ import { Image } from '@wpmedia/engine-theme-sdk';
             />
         </div>
     </Story>
-</Preview>
+</Canvas>
 
 ### **With widths and heights and lightbox**
-<Preview>
+<Canvas>
     <Story name="With widths, heights and lightbox">
         <Image
             url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
@@ -145,10 +145,10 @@ import { Image } from '@wpmedia/engine-theme-sdk';
             lightBoxHeight={154}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Without resizer URL**
-<Preview>
+<Canvas>
     <Story name="Without resizer URL">
         <Image
             url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
@@ -173,10 +173,10 @@ import { Image } from '@wpmedia/engine-theme-sdk';
             lightBoxHeight={154}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Without breakpoints**
-<Preview>
+<Canvas>
     <Story name="Without breakpoints">
         <Image
             url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
@@ -197,10 +197,10 @@ import { Image } from '@wpmedia/engine-theme-sdk';
             lightBoxHeight={154}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ### **No resized params**
-<Preview>
+<Canvas>
     <Story name="No resized params">
         <Image
             url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
@@ -222,12 +222,12 @@ import { Image } from '@wpmedia/engine-theme-sdk';
             lightBoxHeight={154}
         />
     </Story>
-</Preview>
+</Canvas>
 
 <!-- // https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/74FUDjj5P9QGqVekHa1JSdaSU1M=/fit-in/274x183/filters:quality(70):fill(white):background_color(white)/arc-anglerfish-staging-staging.s3.amazonaws.com/public/NA6FMAXWP5DR3FDZQ7SGJ3C3FE.png  -->
 
 ### **For fit in logic, with placeholder**
-<Preview>
+<Canvas>
     <Story name="For fit in logic, with placeholder">        
       <Image
             url={'https://arc-anglerfish-staging-staging.s3.amazonaws.com/public/NA6FMAXWP5DR3FDZQ7SGJ3C3FE.png'}
@@ -310,4 +310,4 @@ import { Image } from '@wpmedia/engine-theme-sdk';
             lightBoxHeight={154}
         />
     </Story>
-</Preview>
+</Canvas>
