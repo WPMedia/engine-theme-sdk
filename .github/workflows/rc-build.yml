@@ -1,0 +1,70 @@
+name: Release candidate build
+
+# Controls when the action will run. Triggers the workflow on push
+# events but only for the rc branch
+on:
+  push:
+    branches:
+      - rc
+
+# Publishes beta builds with the dist tag of "rc"
+jobs:
+  # This workflow contains a single job called "publish"
+  publish:
+    name: Release candidate build publish
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env: 
+      SLACK_WEBHOOK_URL: ${{ secrets.THEMES_OPS_SLACK_WEBHOOK_URL }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      # Caches NPM files
+      - name: Cache NPM files
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      # Sets up Node v12
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+          registry-url: 'https://npm.pkg.github.com'
+
+      # NPM ci init
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
+
+      # Git config
+      - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
+      
+      # Prerelease (tests and lint)
+      - run: npm version prerelease --preid=rc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Publish
+      - run: npm publish --tag rc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Push tag
+      - run: git push origin rc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check failure status and post in themes ops channel
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+        if: failure()
