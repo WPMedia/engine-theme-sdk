@@ -24,11 +24,19 @@ const buildThumborURL = (
     uncompressedTarget = `/${uncompressedTarget}`;
   }
 
-  const [targetImageKey, imageFilter = ''] = uncompressedTarget.split('=');
+  const splitCompressedTarget = uncompressedTarget.split('=');
+
+  let targetImageKey = splitCompressedTarget[0];
+
+  const imageFilter = splitCompressedTarget[1] || '';
 
   if (uncompressedTarget.includes('fit-in')) {
     // https://resizer.com/resizer/OzPtTYdwjA0zqIliyUtp5iuF2Hc=/fit-in/377x283/filters:fill(white):background_color(white)/arc-anglerfish-staging-staging.s3.amazonaws.com/public/NA6FMAXWP5DR3FDZQ7SGJ3C3FE.png
     return `${resizerURL}/${targetImageKey}=${imageFilter}${imageSourceWithoutProtocol}`;
+  }
+
+  if (!targetImageKey.startsWith('/')) {
+    targetImageKey = `/${targetImageKey}`;
   }
 
   return `${resizerURL}${targetImageKey}=/${targetDimension}/${imageFilter}${imageSourceWithoutProtocol}`;

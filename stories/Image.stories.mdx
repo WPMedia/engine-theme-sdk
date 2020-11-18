@@ -398,3 +398,31 @@ import { Image } from '@wpmedia/engine-theme-sdk';
         />
     </Story>
 </Preview>
+
+### **For compressed logic opt out with first resizer slash fix**
+<Preview>
+    <Story name="For compressed logic opt out with first resizer slash fix">        
+      <Image
+            url={'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/PXYWEPTDCJF7JKDLK435PZM7HI.jpg'}
+            alt={'brand image'}
+            smallWidth={400}
+            smallHeight={267}
+            mediumWidth={400}
+            mediumHeight={267}
+            largeWidth={400}
+            largeHeight={267}
+            resizedImageOptions={{
+              "400x267": "ATxBzcGNaQfNiZWOlDXIQu6YFBQ=filters:format(jpg):quality(70)/"
+            }}
+            resizerURL={'https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer'}
+            breakpoints={{
+                small: 420,
+                medium: 768,
+                large: 992,
+            }}
+            lightBoxWidth={274}
+            lightBoxHeight={154}
+            compressedThumborParams={false}
+        />
+    </Story>
+</Preview>
