@@ -1784,4 +1784,52 @@ describe('the meta data ', () => {
       noGlobalContent('');
     });
   });
+
+  describe('when page type is nativo-clp with globalContent', () => {
+    const metaValue = metaValues({
+      'page-type': 'nativo-clp',
+    });
+    const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+
+    it('must not have any twitter meta tags', () => {
+      expect(wrapper.find("meta[name^='twitter:']").length).toBe(0);
+    });
+
+    it('must not have any facebook meta tags', () => {
+      expect(wrapper.find("meta[name^='og:']").length).toBe(0);
+    });
+
+    it('must not have canonical tag', () => {
+      expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+    });
+
+    it('must have required nativo tags', () => {
+      expect(wrapper.find('meta[content="IE=edge"]').prop('httpEquiv')).toEqual('X-UA-Compatible');
+      expect(wrapper.find('meta[name="robots"]').prop('content')).toEqual('noindex, nofollow');
+    });
+  });
+
+  describe('when page type is nativo-clp without globalContent', () => {
+    const metaValue = metaValues({
+      'page-type': 'nativo-clp',
+    });
+    const wrapper = wrapperGenerator(metaValue, null);
+
+    it('must not have any twitter meta tags', () => {
+      expect(wrapper.find("meta[name^='twitter:']").length).toBe(0);
+    });
+
+    it('must not have any facebook meta tags', () => {
+      expect(wrapper.find("meta[name^='og:']").length).toBe(0);
+    });
+
+    it('must not have canonical tag', () => {
+      expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+    });
+
+    it('must have required nativo tags', () => {
+      expect(wrapper.find('meta[content="IE=edge"]').prop('httpEquiv')).toEqual('X-UA-Compatible');
+      expect(wrapper.find('meta[name="robots"]').prop('content')).toEqual('noindex, nofollow');
+    });
+  });
 });
