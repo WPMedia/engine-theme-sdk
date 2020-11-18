@@ -69,30 +69,4 @@ describe('image component', () => {
 
     expect(wrapper.find('SourceHandler').length).toBe(3);
   });
-
-  describe('when compressedThumborParams is set to true', () => {
-    it('should return various breakpoints with the widths', () => {
-      const wrapper = shallow(<Image
-        url={rawURL}
-        alt={alt}
-        smallWidth={smallWidth}
-        smallHeight={smallHeight}
-        mediumWidth={mediumWidth}
-        mediumHeight={mediumHeight}
-        largeWidth={largeWidth}
-        largeHeight={largeHeight}
-        lightBoxWidth={largeWidth}
-        lightBoxHeight={largeHeight}
-        resizedImageOptions={resizedParams}
-        resizerURL={resizerURL}
-        breakpoints={breakpoints}
-        compressedThumborParams
-      />);
-      const { src, alt: altProperty } = wrapper.find('img').props();
-      expect(src).toBe('https://fake.cdn.arcpublishing.com/resizer/sDwhmVtwayjjDJww8CvlWjpydGM=/274x154/filters:format(jpg):quality(70)/fake.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg');
-      expect(altProperty).toBe(alt);
-
-      expect(wrapper.find('SourceHandler').length).toBe(3);
-    });
-  });
 });

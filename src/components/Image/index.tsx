@@ -34,7 +34,6 @@ interface ImageProps {
   lightBoxWidth?: number;
   lightBoxHeight?: number;
   lazyOptions?: LazyProps;
-  compressedThumborParams?: boolean;
 }
 
 /*
@@ -64,7 +63,6 @@ const StyledPicture = styled.picture`
 * @param {string} resizerURL - Link to the assigned resizer url for generating resized url
 * @param {object} breakpoints - Widths to determine small, med, and large breakpoints used
 * @param {object} lazyOptions - Object of offset values for each side (top, right, bottom, left)
-* @param {boolean} compressedThumborParam - Compresses the Thumbor compression params
     for the lazy-child moudles
 */
 const Image: React.FC<ImageProps> = ({
@@ -87,7 +85,6 @@ const Image: React.FC<ImageProps> = ({
     offsetRight: 0,
     offsetTop: 0,
   },
-  compressedThumborParams,
 }) => {
   if (typeof url === 'undefined') {
     return null;
@@ -157,7 +154,6 @@ const Image: React.FC<ImageProps> = ({
           imageSourceWithoutProtocol={imageSourceWithoutProtocol}
           resizerURL={resizerURL}
           breakpointWidth={largeBreakpoint}
-          compressedParams={compressedThumborParams}
         />
         <SourceHandler
           resizedImageOptions={resizedImageOptions}
@@ -166,7 +162,6 @@ const Image: React.FC<ImageProps> = ({
           imageSourceWithoutProtocol={imageSourceWithoutProtocol}
           resizerURL={resizerURL}
           breakpointWidth={mediumBreakpoint}
-          compressedParams={compressedThumborParams}
         />
         <SourceHandler
           resizedImageOptions={resizedImageOptions}
@@ -175,7 +170,6 @@ const Image: React.FC<ImageProps> = ({
           imageSourceWithoutProtocol={imageSourceWithoutProtocol}
           resizerURL={resizerURL}
           breakpointWidth={smallBreakpoint}
-          compressedParams={compressedThumborParams}
         />
         {
           typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
