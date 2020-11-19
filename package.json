@@ -19,6 +19,7 @@
     "test": "jest",
     "test:coverage": "npm run test -- --coverage",
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
+    "lint:fix": "npm run lint -- --fix",
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint",
     "postpublish": "git push --tags",
