@@ -23,6 +23,9 @@ The component explorer will also show the effect of different props on component
 
 If you don't go to the page automatically on successful compilation, go to [http://localhost:6006/](http://localhost:6006/). 
 
+### Image development 
+
+Please note that the best way to debug images is to copy-paste from production environment with thumbor into the test parameters. See the stories folder images for more details.
 ## Contribute	
 If you need to update an existing Engine SDK component, contact the Pagebuilder team. If you want to create a new component follow these instructions:	
 1. Pull the latest `canary` branch	
