@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.5.0-rc.6",
+  "version": "2.5.0-rc.7",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
