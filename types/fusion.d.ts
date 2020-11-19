@@ -13,4 +13,5 @@ declare module 'fusion:themes';
 
 declare const Fusion: {
     deployment?: string;
+    isAdmin?: boolean;
 };

@@ -123,8 +123,11 @@ const Image: React.FC<ImageProps> = ({
   // if url passed in directly without resized params
   if (typeof resizedImageOptions === 'undefined' || typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
     // todo: remove for prod
-    console.error(`no resized options found for url: ${url}.`);
-    console.error('Please use resized options to save money on serving bigger images than necessary. Consider using resizer content source block or adding the resizer block to content source transform.');
+    if (Fusion?.isAdmin) {
+      console.error(`no resized options found for url: ${url}.`);
+      console.error('Please use resized options to save money on serving bigger images than necessary. Consider using resizer content source block or adding the resizer block to content source transform.');
+    }
+
     return (
       <img
         // will not serve image raw
@@ -182,7 +185,7 @@ const Image: React.FC<ImageProps> = ({
             ? (
               <img
                 alt={alt}
-                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL, compressedThumborParams)}
                 width={largeWidth}
                 height={largeHeight}
               />
@@ -190,9 +193,9 @@ const Image: React.FC<ImageProps> = ({
             : (
               <img
                 alt={alt}
-                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL, compressedThumborParams)}
                 // lightbox component reads from this data attribute
-                data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
+                data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL, compressedThumborParams)}
                 width={largeWidth}
                 height={largeHeight}
               />

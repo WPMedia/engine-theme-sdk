@@ -31,7 +31,7 @@ const buildThumborURL = (
     return `${resizerURL}/${targetImageKey}=${imageFilter}${imageSourceWithoutProtocol}`;
   }
 
-  return `${resizerURL}${targetImageKey}=/${targetDimension}/${imageFilter}${imageSourceWithoutProtocol}`;
+  return `${resizerURL}/${targetImageKey}=/${targetDimension}/${imageFilter}${imageSourceWithoutProtocol}`;
 };
 
 export default buildThumborURL;

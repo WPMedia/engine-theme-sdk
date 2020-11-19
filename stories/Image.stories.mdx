@@ -311,3 +311,31 @@ import { Image } from '@wpmedia/engine-theme-sdk';
         />
     </Story>
 </Preview>
+
+### Compress resizedParams
+<Preview>
+    <Story name="compress params">
+        <Image
+            url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/DSGZ5WCVBZHRXDB3JT4K5TWL4Y.jpg'}
+            alt={'Aerial view of bridge'}
+            smallWidth={84}
+            smallHeight={56}
+            mediumWidth={84}
+            mediumHeight={56}
+            largeWidth={84}
+            largeHeight={56}
+            resizedImageOptions={{
+                "84x56": "W-KzYlliwcoZ7IR5-g6LrRsp63Q=filters:cm=t/"
+            }}
+            resizerURL={'https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer'}
+            breakpoints={{
+                small: 420,
+                medium: 768,
+                large: 992,
+            }}
+            lightBoxWidth={274}
+            lightBoxHeight={154}
+            compressedThumborParams={true}
+        />
+    </Story>
+</Preview>
