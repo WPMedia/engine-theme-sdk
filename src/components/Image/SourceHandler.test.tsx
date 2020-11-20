@@ -14,7 +14,6 @@ describe('image source handler component', () => {
       imageSourceWithoutProtocol={imageSource}
       breakpointWidth={200}
       resizerURL={resizerURL}
-      compressedParams={false}
     />);
     expect(wrapper.find('source').prop('media')).toBe('screen and (min-width: 200px)');
 
@@ -30,29 +29,11 @@ describe('image source handler component', () => {
       imageSourceWithoutProtocol={imageSource}
       breakpointWidth={200}
       resizerURL={resizerURL}
-      compressedParams={false}
     />);
 
     expect(wrapper.html()).not.toBe('<source srcset="www.hey.resizer.com/correct-image.jpg=/100x100/www.hey.com/ffdfdf" media="screen and (min-width: 200px)">');
     expect(wrapper.html()).toBe(null);
     expect(wrapper.text()).toBe('');
     // wanted to use empty render here but not supported in this version of jest, nor on shallow
-  });
-
-  describe('when compressedParams is true', () => {
-    it('returns well-formed source tag if correct dimension image passed in', () => {
-      const wrapper = shallow(<SourceHandler
-        width={100}
-        height={100}
-        resizedImageOptions={{ '100x100': 'correct-image.jpg' }}
-        imageSourceWithoutProtocol={imageSource}
-        breakpointWidth={200}
-        resizerURL={resizerURL}
-        compressedParams
-      />);
-      expect(wrapper.find('source').prop('media')).toBe('screen and (min-width: 200px)');
-
-      expect(wrapper.html()).toBe('<source srcSet="www.hey.resizer.com/correct-image.jpg=/100x100/www.hey.com/ffdfdf" media="screen and (min-width: 200px)"/>');
-    });
   });
 });
