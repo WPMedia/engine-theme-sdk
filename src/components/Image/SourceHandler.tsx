@@ -10,7 +10,6 @@ interface SourceImageProps {
   imageSourceWithoutProtocol: string;
   resizerURL: string;
   breakpointWidth: number;
-  compressedParams: boolean;
 }
 
 const SourceHandler: React.FC<SourceImageProps> = (props) => {
@@ -21,7 +20,6 @@ const SourceHandler: React.FC<SourceImageProps> = (props) => {
     imageSourceWithoutProtocol,
     resizerURL,
     breakpointWidth,
-    compressedParams,
   } = props;
 
   const interpolatedWidthHeight = `${width}x${height}`;
@@ -40,7 +38,7 @@ const SourceHandler: React.FC<SourceImageProps> = (props) => {
     <>
       <source
         // using src with picture tag parent is deprecated via console info warning
-        srcSet={buildThumborURL(resizedImageOptions[`${width}x${height}`], `${width}x${height}`, imageSourceWithoutProtocol, resizerURL, compressedParams)}
+        srcSet={buildThumborURL(resizedImageOptions[`${width}x${height}`], `${width}x${height}`, imageSourceWithoutProtocol, resizerURL)}
         media={`screen and (min-width: ${breakpointWidth}px)`}
       />
     </>
