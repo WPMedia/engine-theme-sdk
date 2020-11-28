@@ -195,7 +195,7 @@ const Gallery: React.FC<GalleryProps> = ({
         return array[(pageNo + array.length - 1) % array.length].dataset.lightbox;
       }
       // main operation
-      if (array[pageNo] && array[pageNo]?.dataset) {
+      if (array[pageNo] && array[pageNo].dataset) {
         return array[pageNo].dataset.lightbox;
       }
     }
