@@ -1,6 +1,5 @@
 # Engine Theme SDK Components
 
-
 ## `dist-tags`
 
 This package has been published with a number of dist-tags meant for different purposes:
@@ -8,9 +7,10 @@ This package has been published with a number of dist-tags meant for different p
 - `stable`: Client Production environment
 - `beta`: Client Sandbox environment
 - `rc`: Developer environment for testing hotfixes preparing for `beta` or, worst comes to worst, `stable`
-- `canary`: For developers to test on core components 
+- `canary`: For developers to test on core components
 
 ## Preview Components, Functionality
+
 <a href="https://canary.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/" target="_blank" ><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
 Storybook allows custom block developers to see how components act individually and together. This will ensure that components work as expected and in an accessible implementation. Addons you'll see in the tray below the icon will determine its accessibility practices as well and provide suggestions for use.
@@ -21,47 +21,50 @@ The component explorer will also show the effect of different props on component
 
 `npm run storybook`
 
-If you don't go to the page automatically on successful compilation, go to [http://localhost:6006/](http://localhost:6006/). 
+If you don't go to the page automatically on successful compilation, go to [http://localhost:6006/](http://localhost:6006/).
 
-## Contribute	
-If you need to update an existing Engine SDK component, contact the Pagebuilder team. If you want to create a new component follow these instructions:	
-1. Pull the latest `canary` branch	
+## Contribute
 
-    - `git checkout canary`	
+If you need to update an existing Engine SDK component, contact the Pagebuilder team. If you want to create a new component follow these instructions:
 
-    - `git fetch -a`	
-2. Branch off the `canary` branch	
-    - `git checkout -b PEN-[jira ticket num]-[brief description of feature]`	
-3. Create a new folder `YourComponentName` under `src/components`.	
-4. Implement your component in a `index.tsx` file. Remember to add an `interface` with your component's props and add `proptypes` for type checking.	
-5. Implement unit tests for your component in a `index.test.tsx` file. Remember to use your component [locally](https://canary.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page#local-development) to test the changes.	
-6. Document your component by creating a new story `YourComponentName.stories.mdx` under `stories/`.	
-    - Run `npm run storybook` to verify your story was created	
-7. When committing your changes, Chromatic will run visual regression tests and will generate a link to review any changes	
+1. Pull the latest `canary` branch
+
+   - `git checkout canary`
+
+   - `git fetch -a`
+
+2. Branch off the `canary` branch
+   - `git checkout -b PEN-[jira ticket num]-[brief description of feature]`
+3. Create a new folder `YourComponentName` under `src/components`.
+4. Implement your component in a `index.tsx` file. Remember to add an `interface` with your component's props and add `proptypes` for type checking.
+5. Implement unit tests for your component in a `index.test.tsx` file. Remember to use your component [locally](https://canary.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page#local-development) to test the changes.
+6. Document your component by creating a new story `YourComponentName.stories.mdx` under `stories/`.
+   - Run `npm run storybook` to verify your story was created
+7. When committing your changes, Chromatic will run visual regression tests and will generate a link to review any changes
 8. When your component is ready make a PR against `canary`, get approval for your PR, then follow the [publishing](https://canary.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page#how-to-publish) steps.
 
 ## How To Publish To Canary
 
 - Merge into `canary` branch. You can watch the github publish action [here](https://github.com/WPMedia/engine-theme-sdk/actions?query=workflow%3A%22Canary+build%22).
 
-## How To Publish To RC 
+## How To Publish To RC
 
 - Merge into `rc` branch. You can watch the github publish action [here](https://github.com/WPMedia/engine-theme-sdk/actions?query=workflow%3A%22Release+candidate+build%22).
 
-## How To Publish To Beta 
+## How To Publish To Beta
 
 - Changes published to beta should be tested in either `rc` branch or `canary` first. `beta` is a client environment that is not for themes developers to test in.
-- Merge into `beta` branch. You can watch the github publish action [here](https://github.com/WPMedia/engine-theme-sdk/actions?query=workflow%3A%22Beta+build%22). 
+- Merge into `beta` branch. You can watch the github publish action [here](https://github.com/WPMedia/engine-theme-sdk/actions?query=workflow%3A%22Beta+build%22).
 
 ### How To Publish To Production
 
-1. After design qa and qa approval, make a pull request from the `rc` branch to the `master` branch. 
+1. After design qa and qa approval, make a pull request from the `rc` branch to the `master` branch.
 
 2. Version and publish as above. Make sure you're using `stable` not `latest`.
 
 `npm version`
 
-`git push origin rc` 
+`git push origin rc`
 
 `npm publish --tag stable`
 
@@ -73,7 +76,7 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 {
   "name": "@wpmedia/card-list-block",
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "stable",
+    "@wpmedia/engine-theme-sdk": "stable"
   }
 }
 ```
@@ -85,7 +88,6 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 ```json
 {
   "engineSDK": "@wpmedia/engine-theme-sdk@stable"
-
 }
 ```
 
@@ -117,6 +119,7 @@ Since the documentation for this cannot be available in ALC as it is meant to be
 
 Engine Theme SDK automatically deploys to ALC.
 Engine SDK documentation is available [here](https://canary.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page). To update the documentation on Arc Learning Center you have to upload it to S3 by following these steps:
+
 1. Run `npm run build-storybook` on `engine-theme-sdk`. This will generate a static storybook build in `/storybook-static`.
 2. Open the [WP-ARC AWS Console](https://console.aws.amazon.com/s3/buckets/arc-learning-center-static/docs/?region=us-east-1&tab=overview#) (you might need to authenticate with OKTA first).
 3. Go to `storybooks`, then `engine-theme-sdk` and click on `Upload`.
