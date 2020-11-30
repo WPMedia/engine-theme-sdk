@@ -49,11 +49,6 @@ describe('the WhatsAppIcon component', () => {
       const wrapper = shallow(<WhatsAppIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<WhatsAppIcon />);
-      expect(wrapper.find('title').text()).toEqual('WhatsApp logo');
-    });
   });
 
   describe('the description prop', () => {

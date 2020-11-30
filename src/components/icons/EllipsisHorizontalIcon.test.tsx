@@ -50,11 +50,6 @@ describe('the EllipsisHorizontalIcon component', () => {
       const wrapper = shallow(<EllipsisHorizontalIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<EllipsisHorizontalIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {

@@ -50,11 +50,6 @@ describe('the SoundOnIcon component', () => {
       const wrapper = shallow(<SoundOnIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<SoundOnIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {

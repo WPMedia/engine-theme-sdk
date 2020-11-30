@@ -50,11 +50,6 @@ describe('the FacebookAltIcon component', () => {
       const wrapper = shallow(<FacebookAltIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<FacebookAltIcon />);
-      expect(wrapper.find('title').text()).toEqual('Facebook logo');
-    });
   });
 
   describe('the description prop', () => {

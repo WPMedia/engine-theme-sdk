@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.4.1",
+  "version": "2.6.0-beta.1",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -18,16 +18,13 @@
     "build:dts": "tsc",
     "test": "jest",
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
+    "lint:fix": "npm run lint -- --fix",
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint",
+    "postpublish": "git push --tags",
+    "test:coverage": "npm run test -- --coverage",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=pc32y518itq --exit-zero-on-changes"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run chromatic"
-    }
+    "build-storybook": "build-storybook"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -81,7 +78,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^2.3.0",
+    "eslint-plugin-react-hooks": "^4.1.0",
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
@@ -101,22 +98,5 @@
     "styled-components": "^4.4.1",
     "thumbor-lite": "^0.1.6",
     "timezone": "^1.0.23"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest",
-      "^.+\\.(svg)$": "./jest/fileTransform.js"
-    },
-    "setupFilesAfterEnv": [
-      "./jest/testSetupFile.js",
-      "./node_modules/jest-enzyme/lib/index.js"
-    ],
-    "moduleNameMapper": {
-      "^.+\\.(css|less|scss)$": "identity-obj-proxy"
-    },
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "<rootDir>/dist"
-    ]
   }
 }

@@ -50,11 +50,6 @@ describe('the CameraIcon component', () => {
       const wrapper = shallow(<CameraIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<CameraIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {
@@ -66,6 +61,13 @@ describe('the CameraIcon component', () => {
     it('should default to an empty string', () => {
       const wrapper = shallow(<CameraIcon />);
       expect(wrapper.find('desc').text()).toEqual('');
+    });
+  });
+
+  describe('should have a viewBox property', () => {
+    it('should be present and with a value', () => {
+      const wrapper = shallow(<CameraIcon />);
+      expect(wrapper.prop('viewBox')).toEqual(expect.anything());
     });
   });
 });

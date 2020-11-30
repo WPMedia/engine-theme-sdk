@@ -50,11 +50,6 @@ describe('the YoutubeAltIcon component', () => {
       const wrapper = shallow(<YoutubeAltIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<YoutubeAltIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {

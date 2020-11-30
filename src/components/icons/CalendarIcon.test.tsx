@@ -50,11 +50,6 @@ describe('the CalendarIcon component', () => {
       const wrapper = shallow(<CalendarIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<CalendarIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {

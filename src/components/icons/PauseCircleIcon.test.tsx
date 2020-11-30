@@ -50,11 +50,6 @@ describe('the PauseCircleIcon component', () => {
       const wrapper = shallow(<PauseCircleIcon title="an icon!" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
-
-    it('should default to an empty string', () => {
-      const wrapper = shallow(<PauseCircleIcon />);
-      expect(wrapper.find('title').text()).toEqual('');
-    });
   });
 
   describe('the description prop', () => {
