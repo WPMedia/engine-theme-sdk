@@ -1,6 +1,83 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {
+  ArrowDownIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowUpIcon,
+  BackwardIcon,
+  BellIcon,
+  CalendarIcon,
+  CameraIcon,
+  ChartIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronUpIcon,
+  CloseIcon,
+  ClosedCaptioningIcon,
+  CogIcon,
+  CommentsIcon,
+  DeleteIcon,
+  DownloadIcon,
+  EditIcon,
+  EllipsisHorizontalIcon,
+  EllipsisVerticalIcon,
+  EnvelopeIcon,
+  EnvelopeOpenIcon,
+  ExternalLinkIcon,
+  FacebookAltIcon,
+  FacebookIcon,
+  ForwardIcon,
+  FullscreenIcon,
+  GiftIcon,
+  GridIcon,
+  GripVerticalIcon,
+  HamburgerMenuIcon,
+  HeadphonesIcon,
+  HomeIcon,
+  InstagramIcon,
+  LinkIcon,
+  LinkedInAltIcon,
+  LinkedInIcon,
+  LockIcon,
+  MediumIcon,
+  NextIcon,
+  PageIcon,
+  PauseCircleIcon,
+  PauseIcon,
+  PhoneIcon,
+  PinterestAltIcon,
+  PinterestIcon,
+  PlayCircleIcon,
+  PlayIcon,
+  PlusIcon,
+  PreviousIcon,
+  PrintIcon,
+  RedditIcon,
+  RssIcon,
+  SearchIcon,
+  ShareIcon,
+  SnapchatIcon,
+  SoundCloudIcon,
+  SoundOffIcon,
+  SoundOnIcon,
+  StarHalfIcon,
+  StarIcon,
+  TumblrIcon,
+  TwitchIcon,
+  TwitterAltIcon,
+  TwitterIcon,
+  UnlockIcon,
+  UserIcon,
+  WhatsAppIcon,
+  YoutubeAltIcon,
+  YoutubeIcon,
+  ZoomInIcon,
+  ZoomOutIcon,
+} from '.';
 
 
 type IconProps = import('./types').default;
@@ -56,4 +133,74 @@ Icon.defaultProps = {
   description: '',
 };
 
-export { Icon, List, Item };
+const IconSelector = ({
+  type = 'arrowdown', width = 24, height = 24, fill = '#000', title = 'Instagram logo', description = '',
+}) => {
+  switch (type) {
+    case 'arrowdown':
+      return (
+        <ArrowDownIcon
+          width={width}
+          height={height}
+          fill={fill}
+          title={title}
+          description={description}
+        />
+      );
+    case 'arrowleft':
+      return (
+        <ArrowLeftIcon
+          width={width}
+          height={height}
+          fill={fill}
+          title={title}
+          description={description}
+        />
+      );
+    case 'arrowright':
+      return (
+        <ArrowRightIcon
+          width={width}
+          height={height}
+          fill={fill}
+          title={title}
+          description={description}
+        />
+      );
+    case 'arrow-up':
+      return (
+        <ArrowUpIcon
+          width={width}
+          height={height}
+          fill={fill}
+          title={title}
+          description={description}
+        />
+      );
+    case 'camera':
+      return (
+        <CameraIcon
+          width={width}
+          height={height}
+          fill={fill}
+          title={title}
+          description={description}
+        />
+      );
+    default:
+      return null;
+  }
+};
+
+IconSelector.propTypes = {
+  type: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  fill: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+};
+
+export {
+  Icon, List, Item, IconSelector,
+};

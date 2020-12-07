@@ -9,6 +9,13 @@ describe('the ArrowDownIcon component', () => {
     expect(wrapper.prop('role')).toEqual('img');
   });
 
+  describe('the viewBox prop', () => {
+    it('viewBox property should available', () => {
+      const wrapper = shallow(<ArrowDownIcon />);
+      expect(wrapper.prop('viewBox')).toEqual('0 0 24 24');
+    });
+  });
+
   describe('the width prop', () => {
     it('should set the width of the svg element', () => {
       const wrapper = shallow(<ArrowDownIcon width={42} />);

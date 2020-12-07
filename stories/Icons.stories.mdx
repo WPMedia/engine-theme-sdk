@@ -75,9 +75,9 @@ import {
   ZoomInIcon,
   ZoomOutIcon,
 } from '../src/components/icons';
-import { List, Item, Icon } from '../src/components/icons/Icon';
-import { number, select, text } from "@storybook/addon-knobs";
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { List, Item, Icon, IconSelector } from '../src/components/icons/Icon';
+import { number, select, text, color } from "@storybook/addon-knobs";
+import { Meta, Story, Preview, Props, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta title="Icon" component={Icon} />
 
@@ -409,12 +409,13 @@ import { InstagramIcon } from '@wpmedia/engine-theme-sdk';
 
 ### **Custom Icon**
 <Canvas>
-    <Story name="Custom Icon">
-        <SoundCloudIcon
-            fill={text("Fill", "red")}
+    <Story name="Custom Icon"  parameters={{ docs: { source: { code: '<ArrowDownIcon fill="#3480eb" height={200} width={200} title="This is title" description="This is a description"  />' } } }}>
+        <IconSelector
+            type={select("Icon type", ["arrowdown", "arrowleft", "arrowright", "arrow-up", "camera"])}
+            fill={color("Fill", "#3480eb")}
             height={number('Height', 200)}
             width={number('Width', 200)}
-            title={text("Title", "SoundCloud music service logo")}
+            title={text("Title", "This is title")}
             description={text("Description", "This is a description")}
         />
     </Story>

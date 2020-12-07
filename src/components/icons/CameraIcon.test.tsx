@@ -9,6 +9,13 @@ describe('the CameraIcon component', () => {
     expect(wrapper.prop('role')).toEqual('img');
   });
 
+  describe('the viewBox prop', () => {
+    it('viewBox property should available', () => {
+      const wrapper = shallow(<CameraIcon />);
+      expect(wrapper.prop('viewBox')).toEqual('0 -256 1950 1950');
+    });
+  });
+
   describe('the width prop', () => {
     it('should set the width of the svg element', () => {
       const wrapper = shallow(<CameraIcon width={42} />);

@@ -9,6 +9,13 @@ describe('the BackwardIcon component', () => {
     expect(wrapper.prop('role')).toEqual('img');
   });
 
+  describe('the viewBox prop', () => {
+    it('viewBox property should available', () => {
+      const wrapper = shallow(<BackwardIcon />);
+      expect(wrapper.prop('viewBox')).toEqual('0 0 24 24');
+    });
+  });
+
   describe('the width prop', () => {
     it('should set the width of the svg element', () => {
       const wrapper = shallow(<BackwardIcon width={42} />);
