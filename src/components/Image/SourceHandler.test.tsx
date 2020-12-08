@@ -5,7 +5,6 @@ import SourceHandler from './SourceHandler';
 describe('image source handler component', () => {
   const imageSource = 'www.hey.com/ffdfdf';
   const resizerURL = 'www.hey.resizer.com/';
-
   it('returns well-formed source tag if correct dimension image passed in', () => {
     const wrapper = shallow(<SourceHandler
       width={100}
@@ -19,7 +18,6 @@ describe('image source handler component', () => {
 
     expect(wrapper.html()).toBe('<source srcSet="www.hey.resizer.com/correct-image.jpg=/100x100/www.hey.com/ffdfdf" media="screen and (min-width: 200px)"/>');
   });
-
   it('returns a null render if no matching dimension found', () => {
     const wrapper = shallow(<SourceHandler
       width={100}

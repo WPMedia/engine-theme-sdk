@@ -34,6 +34,7 @@ const buildThumborURL = (
     return `${resizerURL}/${targetImageKey}=${imageFilter}${imageSourceWithoutProtocol}`;
   }
 
+  // prevents /resizer missing issue in the keys
   if (!targetImageKey.startsWith('/') && !resizerURL.endsWith('/')) {
     targetImageKey = `/${targetImageKey}`;
   }

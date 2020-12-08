@@ -1,6 +1,6 @@
 import Video from '../src/components/Video';
 import { text } from "@storybook/addon-knobs";
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta title="Video" component={Video} />
 
@@ -29,36 +29,36 @@ import { Video } from '@wpmedia/engine-theme-sdk';
 ```
 
 
-## Props
-<Props of={Video} />
+## ArgsTable
+<ArgsTable of={Video} />
 
 ## Stories
 <Story name="Basic" />
 
 ### **Video with minimum configurations**
-<Preview>
+<Canvas>
     <Story name="Video with minimum configurations">
         <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Video with autoplay**
-<Preview>
+<Canvas>
     <Story name="Video with autoplay">
         <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" autoplay />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Video with playthrough**
-<Preview>
+<Canvas>
     <Story name="Video with playthrough">
         <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" playthrough />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Video with customized aspect ratio**
-<Preview>
+<Canvas>
     <Story name="Video with customized aspect ratio">
         <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" aspectRatio={0.75} />
     </Story>
-</Preview>
+</Canvas>
