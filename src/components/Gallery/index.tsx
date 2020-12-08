@@ -87,7 +87,6 @@ interface GalleryProps {
   autoplayPhrase?: string;
   pausePhrase?: string;
   pageCountPhrase?: (current: number, total: number) => string;
-  compressedThumborParams?: boolean;
 }
 
 declare interface EventOptionsInterface {
@@ -103,7 +102,6 @@ const Gallery: React.FC<GalleryProps> = ({
   autoplayPhrase,
   pausePhrase,
   pageCountPhrase,
-  compressedThumborParams = false,
 }) => {
   const galleryRef = useRef(null);
   const [page, setPage] = useState(0);
@@ -279,7 +277,6 @@ const Gallery: React.FC<GalleryProps> = ({
             }}
           >
             <Image
-              compressedThumborParams={compressedThumborParams}
               url={imgContent.url}
               alt={imgContent.alt_text}
               smallWidth={400}
