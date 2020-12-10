@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import extractVideoEmbedFromStory from './extractVideoEmbedFromStory';
 
 const contentTypeImageBasicPromo = {
