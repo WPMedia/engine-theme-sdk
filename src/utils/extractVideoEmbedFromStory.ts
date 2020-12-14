@@ -5,6 +5,9 @@ interface SchemaANS {
       type?: string;
       embed_html?: string;
     };
+    basic?: {
+      type?: string;
+    };
   };
   embed_html?: string;
 }
