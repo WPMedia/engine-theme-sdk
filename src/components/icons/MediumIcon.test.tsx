@@ -5,6 +5,7 @@ import MediumIcon from './MediumIcon';
 describe('the MediumIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<MediumIcon />);
+    expect(wrapper.prop('viewBox')).toEqual('0 0 512 512');
     expect(wrapper.name()).toEqual('svg');
   });
 

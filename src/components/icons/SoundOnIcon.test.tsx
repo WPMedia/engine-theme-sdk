@@ -6,6 +6,7 @@ describe('the SoundOnIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<SoundOnIcon />);
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('viewBox')).toEqual('0 0 576 512');
     expect(wrapper.prop('role')).toEqual('img');
   });
 

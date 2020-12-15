@@ -6,6 +6,7 @@ describe('the PlayIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<PlayIcon />);
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('viewBox')).toEqual('2 1 22 22');
     expect(wrapper.prop('role')).toEqual('img');
   });
 

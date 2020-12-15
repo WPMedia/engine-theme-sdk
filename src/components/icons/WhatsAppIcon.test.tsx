@@ -5,6 +5,7 @@ import WhatsAppIcon from './WhatsAppIcon';
 describe('the WhatsAppIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<WhatsAppIcon />);
+    expect(wrapper.prop('viewBox')).toEqual('0 0 448 512');
     expect(wrapper.name()).toEqual('svg');
   });
 

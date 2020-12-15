@@ -6,6 +6,7 @@ describe('the ChevronRightIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<ChevronRightIcon />);
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('viewBox')).toEqual('0 0 320 512');
     expect(wrapper.prop('role')).toEqual('img');
   });
 

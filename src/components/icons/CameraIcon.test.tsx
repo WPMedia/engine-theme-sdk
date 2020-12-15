@@ -6,6 +6,7 @@ describe('the CameraIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<CameraIcon />);
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('viewBox')).toEqual('0 -256 1950 1950');
     expect(wrapper.prop('role')).toEqual('img');
   });
 
