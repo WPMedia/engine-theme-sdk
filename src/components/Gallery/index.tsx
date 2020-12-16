@@ -26,7 +26,7 @@
 
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable camelcase */
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import PropTypes from 'prop-types';
 import Image from '../Image';
@@ -45,6 +45,7 @@ import {
   CarouselContainer,
   CarouselButton,
   ImageWrapper,
+  AdWrapper,
 } from './styled';
 import {
   ChevronLeftIcon,
@@ -60,34 +61,42 @@ interface ImageAttribution {
   name?: string;
 }
 
+enum Direction {
+  forward = 0,
+  backward = 1
+}
+
+interface GalleryElement {
+  _id: string;
+  url: string;
+  alt_text?: string;
+  subtitle?: string;
+  caption?: string;
+  credits?: {
+    by?: ImageAttribution[];
+    affiliation?: ImageAttribution[];
+  };
+  resized_params: {
+    [key: string]: string;
+  };
+  breakpoints: {
+    small: number;
+    medium: number;
+    large: number;
+  };
+}
+
 interface GalleryProps {
   resizerURL?: string;
   ansId?: string;
   ansHeadline?: string;
-  galleryElements?: {
-    _id: string;
-    url: string;
-    alt_text?: string;
-    subtitle?: string;
-    caption?: string;
-    credits?: {
-      by?: ImageAttribution[];
-      affiliation?: ImageAttribution[];
-    };
-    resized_params: {
-      [key: string]: string;
-    };
-    breakpoints: {
-      small: number;
-      medium: number;
-      large: number;
-    };
-  }[];
+  galleryElements?: GalleryElement[];
   expandPhrase?: string;
   autoplayPhrase?: string;
   pausePhrase?: string;
   pageCountPhrase?: (current: number, total: number) => string;
-  compressedThumborParams?: boolean;
+  interstitialClicks?: number;
+  adElement?: Function;
 }
 
 declare interface EventOptionsInterface {
@@ -103,16 +112,40 @@ const Gallery: React.FC<GalleryProps> = ({
   autoplayPhrase,
   pausePhrase,
   pageCountPhrase,
-  compressedThumborParams = false,
+  interstitialClicks,
+  adElement: AdElement,
 }) => {
   const galleryRef = useRef(null);
+  const carouselRef = useRef(null);
   const [page, setPage] = useState(0);
+  const [direction, setDirection] = useState(Direction.forward);
+  const [adClicks, setAdClicks] = useState(0);
   const [slide, setSlide] = useState({
     isSliding: false,
     delta: 0,
   });
   const [isOpen, setIsOpen] = useState(false);
   const [autoDuration, setAutoDuration] = useState(null);
+  const [adHidding, setAdHidding] = useState(false);
+  const [adDone, setAdDone] = useState(false);
+
+  const isAdsEnabled = (): boolean => (
+    (!!interstitialClicks && !!AdElement)
+  );
+
+  const isAdActive = (): boolean => {
+    if (!isAdsEnabled() || adClicks === 0) {
+      return false;
+    }
+    if (adDone) {
+      return false;
+    }
+    return adClicks % interstitialClicks === 0;
+  };
+
+  const isAdInPage = (index: number): boolean => (
+    index === page
+  );
 
   const emitEvent = (
     eventName: string,
@@ -149,7 +182,14 @@ const Gallery: React.FC<GalleryProps> = ({
     }
     const pg = page - 1;
     emitEvent('galleryImagePrevious', pg, pg + 1, { autoplay: false });
-    setPage(pg);
+    setDirection(Direction.backward);
+    if (isAdActive() && !isOpen) {
+      setAdHidding(true);
+    } else {
+      setPage(pg);
+      setAdClicks(adClicks + 1);
+      setAdDone(false);
+    }
   };
 
   const nextHandler = (): void => {
@@ -158,7 +198,14 @@ const Gallery: React.FC<GalleryProps> = ({
     }
     const pg = page + 1;
     emitEvent('galleryImageNext', pg, pg + 1, { autoplay: false });
-    setPage(pg);
+    setDirection(Direction.forward);
+    if (isAdActive() && !isOpen) {
+      setAdHidding(true);
+    } else {
+      setPage(pg);
+      setAdClicks(adClicks + 1);
+      setAdDone(false);
+    }
   };
 
   useInterval(() => {
@@ -168,7 +215,14 @@ const Gallery: React.FC<GalleryProps> = ({
     } else {
       const pg = page + 1;
       emitEvent('galleryImageNext', pg, pg + 1, { autoplay: true });
-      setPage(pg);
+      setDirection(Direction.forward);
+      if (isAdActive() && !isOpen) {
+        setAdHidding(true);
+      } else {
+        setPage(pg);
+        setAdClicks(adClicks + 1);
+        setAdDone(false);
+      }
     }
   }, autoDuration);
 
@@ -226,6 +280,82 @@ const Gallery: React.FC<GalleryProps> = ({
     preventDefaultTouchmoveEvent: false,
   });
 
+  const renderAd = (): React.ReactElement => {
+    let dirFlag = 0;
+    if (adHidding) {
+      dirFlag = direction === Direction.forward ? -100 : 100;
+    }
+    return (
+      <AdWrapper
+        className="gallery-ad-wrapper"
+        ref={carouselRef}
+        style={{
+          transform: slide.isSliding
+            ? `translate(calc(${dirFlag}% - ${slide.delta}px), 0)`
+            : `translate(${dirFlag}%, 0)`,
+          transitionDuration: slide.isSliding ? '0s' : '1s',
+        }}
+      >
+        <AdElement />
+      </AdWrapper>
+    );
+  };
+
+  const renderImage = (
+    imgContent: GalleryElement,
+    index: number,
+    showAd: boolean,
+  ): React.ReactElement => (
+    <ImageWrapper
+      key={`gallery-image-${imgContent._id}`}
+      id={`gallery-pos-${index}`}
+      data-image-id={imgContent._id}
+      style={{
+        transform: slide.isSliding
+          ? `translate(calc(${-100 * page}% - ${slide.delta}px), 0)`
+          : `translate(${-100 * page}%, 0)`,
+        transitionDuration: slide.isSliding ? '0s' : '1s',
+      }}
+    >
+      { showAd && renderAd() }
+      <Image
+        url={imgContent.url}
+        alt={imgContent.alt_text}
+        smallWidth={400}
+        smallHeight={0}
+        mediumWidth={600}
+        mediumHeight={0}
+        largeWidth={800}
+        largeHeight={0}
+        lightBoxWidth={1600}
+        lightBoxHeight={0}
+        resizedImageOptions={imgContent.resized_params}
+        breakpoints={imgContent.breakpoints || {}}
+        resizerURL={resizerURL}
+      />
+    </ImageWrapper>
+  );
+
+  useEffect(() => {
+    if (!isAdsEnabled()) {
+      return undefined;
+    }
+    const carousel = carouselRef.current;
+    if (!carousel) {
+      return undefined;
+    }
+
+    const handler = (): void => {
+      setAdHidding(false);
+      setAdDone(true);
+    };
+
+    carousel.addEventListener('transitionend', handler);
+    return (): void => {
+      carousel.removeEventListener('transitionend', handler);
+    };
+  });
+
   return (
     <GalleryDiv ref={galleryRef}>
       <ControlsDiv>
@@ -267,34 +397,8 @@ const Gallery: React.FC<GalleryProps> = ({
         </ControlContainer>
       </ControlsDiv>
       <CarouselContainer {...handlers}>
-        { galleryElements.map((imgContent): React.ReactElement => (
-          <ImageWrapper
-            key={`gallery-image-${imgContent._id}`}
-            data-image-id={imgContent._id}
-            style={{
-              transform: slide.isSliding
-                ? `translate(calc(${-100 * page}% - ${slide.delta}px), 0)`
-                : `translate(${-100 * page}%, 0)`,
-              transitionDuration: slide.isSliding ? '0s' : '1s',
-            }}
-          >
-            <Image
-              compressedThumborParams={compressedThumborParams}
-              url={imgContent.url}
-              alt={imgContent.alt_text}
-              smallWidth={400}
-              smallHeight={0}
-              mediumWidth={600}
-              mediumHeight={0}
-              largeWidth={800}
-              largeHeight={0}
-              lightBoxWidth={1600}
-              lightBoxHeight={0}
-              resizedImageOptions={imgContent.resized_params}
-              breakpoints={imgContent.breakpoints || {}}
-              resizerURL={resizerURL}
-            />
-          </ImageWrapper>
+        { galleryElements.map((imgContent, index): React.ReactElement => (
+          renderImage(imgContent, index, isAdActive() && isAdInPage(index))
         ))}
         <CarouselButton type="button" className="prev-button" onClick={(): void => prevHandler()}>
           <ChevronLeftIcon width="100%" height="100%" fill="white" />
@@ -359,6 +463,10 @@ Gallery.propTypes = {
   pausePhrase: PropTypes.string,
   /** Page count phrase text for internationalization */
   pageCountPhrase: PropTypes.func,
+  /** Number of clicks between Ads (clicks can be in any direction) */
+  interstitialClicks: PropTypes.number,
+  /** Function element to be rendered as an Ad */
+  adElement: PropTypes.func,
 };
 
 export default Gallery;

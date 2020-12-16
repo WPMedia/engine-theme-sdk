@@ -1,6 +1,6 @@
 import ArcLogo from '../src/components/ArcLogo';
 import { text } from "@storybook/addon-knobs";
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta title="ArcLogo" component={ArcLogo} />
 
@@ -25,55 +25,55 @@ import { ArcLogo } from '@wpmedia/engine-theme-sdk';
 
 
 
-## Props
-<Props of={ArcLogo} />
+## ArgsTable
+<ArgsTable of={ArcLogo} />
 
 ## Stories
 <Story name="Basic" />
 
 ### **Custom ArcLogo**
-<Preview>
+<Canvas>
     <Story name="Custom ArcLogo">
         <ArcLogo
             title={text('Title', 'Custom title')}
             description={text('Description', 'Custom description')}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ### **With accessible title**
-<Preview>
+<Canvas>
     <Story name="With accessible title">
         <ArcLogo title="Custom Arc Logo Messaging" />
     </Story>
-</Preview>
+</Canvas>
 
 ### **With no title nor description designated, using default will show default title option filled string**
-<Preview>
+<Canvas>
     <Story name="With no title nor description">
         <ArcLogo />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Without description, no description default -- it is empty**
-<Preview>
+<Canvas>
     <Story name="Without description, no description default">
         <ArcLogo />
     </Story>
-</Preview>
+</Canvas>
 
 ### **With description**
-<Preview>
+<Canvas>
     <Story name="With description">
         <ArcLogo description="Tools for digital publishers built by The Washington Post" />
     </Story>
-</Preview>
+</Canvas>
 
 ### **With custom title and description**
-<Preview>
+<Canvas>
     <Story name="With custom title and description">
         <ArcLogo title="Custom Arc Logo Messaging" description="Tools for digital publishers built by The Washington Post" />
     </Story>
-</Preview>
+</Canvas>
 
 

@@ -31,7 +31,7 @@ export const ControlContainer = styled.div`
   line-height: ${rem('16px')};
   margin: 6px 0;
   width: auto;
-  
+
   &, > button, > span {
     display: inline-flex;
     align-items: center;
@@ -44,12 +44,12 @@ export const ControlContainer = styled.div`
 export const ControlsButton = styled(GalleryButton)`
   display: flex;
   align-items: center;
-  
+
   svg {
     height: 1rem;
     width: 1rem;
   }
-  
+
   > * {
     flex: auto;
     line-height: 1;
@@ -98,5 +98,27 @@ export const ImageWrapper = styled.div`
   img {
     object-fit: contain;
     height: 100%;
+  }
+`;
+
+export const AdWrapper = styled.div`
+  background-color: black;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .advertisement-label {
+    color: white;
+    line-height: 1.5rem;
+  }
+
+  .arcad_feature {
+    background-color: #222222;
+    padding: 2rem;
   }
 `;

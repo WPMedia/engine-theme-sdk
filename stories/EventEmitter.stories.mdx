@@ -1,7 +1,7 @@
 import EventEmitter from '../src/components/EventEmitter';
 import { action } from '@storybook/addon-actions';
 import { withConsole } from '@storybook/addon-console';
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta title="EventEmitter" component={EventEmitter} />
 
@@ -49,7 +49,7 @@ The event object for these events will contain the following information:
 <Story name="Basic" />
 
 ### **Event**
-<Preview>
+<Canvas>
     <Story name="Event">
          <div>
             <button 
@@ -79,4 +79,4 @@ The event object for these events will contain the following information:
             <p>(Go to the <b><i>Actions</i></b> tab under Canvas)</p>
         </div>
     </Story>
-</Preview>
+</Canvas>

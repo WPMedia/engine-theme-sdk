@@ -77,7 +77,7 @@ import {
 } from '../src/components/icons';
 import { List, Item, Icon } from '../src/components/icons/Icon';
 import { number, select, text } from "@storybook/addon-knobs";
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta title="Icon" component={Icon} />
 
@@ -100,15 +100,15 @@ import { InstagramIcon } from '@wpmedia/engine-theme-sdk';
 
 ```
 
-## Props
-<Props of={Icon} />
+## ArgsTable
+<ArgsTable of={Icon} />
 
 ## Stories
 
 <Story name="Basic" />
 
 ### **All Icons **
-<Preview>
+<Canvas>
     <Story name="All icons">
         <List>
             <Item>
@@ -405,10 +405,10 @@ import { InstagramIcon } from '@wpmedia/engine-theme-sdk';
             </Item>
         </List>
     </Story>
-</Preview>
+</Canvas>
 
 ### **Custom Icon**
-<Preview>
+<Canvas>
     <Story name="Custom Icon">
         <SoundCloudIcon
             fill={text("Fill", "red")}
@@ -418,82 +418,82 @@ import { InstagramIcon } from '@wpmedia/engine-theme-sdk';
             description={text("Description", "This is a description")}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ### **With accessible title designated**
-<Preview>
+<Canvas>
     <Story name="With accessible title designated">
         <SoundCloudIcon title="SoundCloud music service logo" />
     </Story>
-</Preview>
+</Canvas>
 
 ### **With no title designated**
-<Preview>
+<Canvas>
     <Story name="With no title designated">
         <SoundCloudIcon />
     </Story>
-</Preview>
+</Canvas>
 
 ### **With description**
-<Preview>
+<Canvas>
     <Story name="With description">
         <SoundCloudIcon description="Service is a great place to find indie artists and free downloads" />
     </Story>
-</Preview>
+</Canvas>
 
 ### **With accessible title and description**
-<Preview>
+<Canvas>
     <Story name="With accessible title and description">
         <SoundCloudIcon title="SoundCloud music service logo" description="Service is a great place to find indie artists and free downloads" />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Custom width**
-<Preview>
+<Canvas>
     <Story name="Custom width">
         <SoundCloudIcon width={100} />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Custom height**
-<Preview>
+<Canvas>
     <Story name="Custom height">
         <SoundCloudIcon height={100} />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Custom height and width**
-<Preview>
+<Canvas>
     <Story name="Custom height and width">
         <SoundCloudIcon height={100} width={100} />
     </Story>
-</Preview>
+</Canvas>
 
 
 ### **Custom height and width camera**
-<Preview>
+<Canvas>
     <Story name="Custom height and width for camera">
         <CameraIcon height={100} width={100} />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Color fill**
-<Preview>
+<Canvas>
     <Story name="Color fill">
         <SoundCloudIcon fill="red" />
     </Story>
-</Preview>
+</Canvas>
 
 ### **Color fill hex code**
-<Preview>
+<Canvas>
     <Story name="Color fill hex code">
         <SoundCloudIcon fill="#ffd1dc" />
     </Story>
-</Preview>
+</Canvas>
 
 ### **No color fill**
-<Preview>
+<Canvas>
     <Story name="No color fill">
         <SoundCloudIcon fill="none" />
     </Story>
-</Preview>
+</Canvas>
