@@ -5,10 +5,10 @@ type IconProps = import('./types').default;
 const CheckIcon: React.FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Check', description = '',
 }) => (
-  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" role="img">
+  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
     <title>{title}</title>
     <desc>{description}</desc>
-    <path fill={fill} d="M9.22 19.542l-6.909-6.91a1.063 1.063 0 010-1.503l1.504-1.503a1.063 1.063 0 011.503 0l4.654 4.655 9.97-9.97a1.063 1.063 0 011.503 0l1.503 1.504a1.063 1.063 0 010 1.503L10.724 19.542a1.063 1.063 0 01-1.503 0z" />
+    <path fill={fill} d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" />
   </svg>
 );
 

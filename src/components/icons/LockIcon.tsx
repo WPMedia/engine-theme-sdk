@@ -5,10 +5,10 @@ type IconProps = import('./types').default;
 const LockIcon: React.FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Lock', description = '',
 }) => (
-  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" role="img">
+  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" role="img">
     <title>{title}</title>
     <desc>{description}</desc>
-    <path fill={fill} d="M19.609 10.301h-.997v-2.99A6.32 6.32 0 0012.301 1 6.32 6.32 0 005.99 7.311v2.99h-.997c-1.1 0-1.993.893-1.993 1.993v7.972c0 1.1.893 1.994 1.993 1.994H19.61c1.1 0 1.993-.893 1.993-1.994v-7.972c0-1.1-.893-1.993-1.993-1.993zm-4.318 0H9.31v-2.99a2.993 2.993 0 012.99-2.99 2.993 2.993 0 012.99 2.99v2.99z" />
+    <path fill={fill} d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z" />
   </svg>
 );
 
