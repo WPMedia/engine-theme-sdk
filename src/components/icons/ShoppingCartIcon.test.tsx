@@ -5,6 +5,7 @@ import ShoppingCartIcon from './ShoppingCartIcon';
 describe('the ShoppingCart component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<ShoppingCartIcon />);
+    expect(wrapper.prop('viewBox')).toEqual('0 0 576 512');
     expect(wrapper.name()).toEqual('svg');
   });
 

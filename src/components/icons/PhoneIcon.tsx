@@ -5,10 +5,10 @@ type IconProps = import('./types').default;
 const PhoneIcon: React.FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Phone', description = '',
 }) => (
-  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" role="img">
+  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
     <title>{title}</title>
     <desc>{description}</desc>
-    <path fill={fill} d="M21.653 16.023l-4.65-1.994a.997.997 0 00-1.163.287l-2.06 2.516a15.39 15.39 0 01-7.357-7.357l2.516-2.06a.994.994 0 00.287-1.162l-1.993-4.65a1.003 1.003 0 00-1.142-.578l-4.319.997a.997.997 0 00-.772.97C1 13.644 9.633 22.26 20.266 22.26c.465 0 .868-.32.972-.772l.997-4.318a1.009 1.009 0 00-.582-1.146z" />
+    <path fill={fill} d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z" />
   </svg>
 );
 
