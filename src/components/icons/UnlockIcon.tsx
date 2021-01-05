@@ -5,10 +5,10 @@ type IconProps = import('./types').default;
 const UnlockIcon: React.FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Unlock', description = '',
 }) => (
-  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" role="img">
+  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" role="img">
     <title>{title}</title>
     <desc>{description}</desc>
-    <path fill={fill} d="M19.609 11.63H9.311V7.349c0-1.644 1.317-3.01 2.961-3.027a2.994 2.994 0 013.019 2.99v.664c0 .552.444.996.996.996h1.329a.994.994 0 00.996-.996V7.31A6.318 6.318 0 0012.28 1c-3.488.012-6.29 2.886-6.29 6.374v4.256h-.997c-1.1 0-1.993.893-1.993 1.993v6.643c0 1.1.893 1.994 1.993 1.994H19.61c1.1 0 1.993-.893 1.993-1.994v-6.643c0-1.1-.893-1.993-1.993-1.993z" />
+    <path fill={fill} d="M400 256H152V152.9c0-39.6 31.7-72.5 71.3-72.9 40-.4 72.7 32.1 72.7 72v16c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24v-16C376 68 307.5-.3 223.5 0 139.5.3 72 69.5 72 153.5V256H48c-26.5 0-48 21.5-48 48v160c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z" />
   </svg>
 );
 

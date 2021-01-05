@@ -6,6 +6,7 @@ describe('the EllipsisHorizontalIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<EllipsisHorizontalIcon />);
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('viewBox')).toEqual('0 0 512 512');
     expect(wrapper.prop('role')).toEqual('img');
   });
 

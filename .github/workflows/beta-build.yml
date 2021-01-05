@@ -14,6 +14,8 @@ jobs:
     name: Beta build publish
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.THEMES_OPS_SLACK_WEBHOOK_URL }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -33,8 +35,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
 
       # NPM ci init
       - run: npm ci
@@ -45,12 +47,12 @@ jobs:
       - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
-      
+
       # Prerelease (tests and lint)
       - run: npm version prerelease --preid=beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       # Publish
       - run: npm publish --tag beta
         env:
@@ -60,3 +62,9 @@ jobs:
       - run: git push origin beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check failure status and post in themes ops channel
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+        if: failure()
