@@ -255,6 +255,13 @@ const Gallery: React.FC<GalleryProps> = ({
         return array[pageNo].dataset.lightbox;
       }
     }
+
+    // querySelectorAll looks like not rendered image 
+    // and we getting empty data
+    if(galleryElements[pageNo]){
+      return galleryElements[pageNo].url;
+    }
+
     return '';
   };
 
