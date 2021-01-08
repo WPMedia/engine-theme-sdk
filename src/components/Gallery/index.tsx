@@ -257,14 +257,14 @@ const Gallery: React.FC<GalleryProps> = ({
       }
     }
 
-    // querySelectorAll looks like not rendered next image 
+    // querySelectorAll looks like not rendered next image
     // and we getting empty data for lightBox
-    if(galleryElements[pageNo]){
+    if (galleryElements[pageNo]) {
       const galleryElement = galleryElements[pageNo];
       const imageSourceWithoutProtocol = galleryElement.url.replace('https://', '');
-      const imageSrc = buildThumborURL(galleryElement.resized_params[`${1600}x${0}`], `${1600}x${0}`
-        , imageSourceWithoutProtocol
-        , resizerURL);
+      const imageSrc = buildThumborURL(galleryElement.resized_params[`${1600}x${0}`], `${1600}x${0}`,
+        imageSourceWithoutProtocol,
+        resizerURL);
       return imageSrc;
     }
 

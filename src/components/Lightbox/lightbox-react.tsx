@@ -1708,16 +1708,16 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
       const addItem = (srcType, imageClass, baseStyle = {}): void => {
         const DisplayItem = this.props[srcType];
         if (!DisplayItem) {
-            displayItems.push(
-              <LightboxImage
-                as="div"
-                className={imageClass}
-                style={baseStyle}
-                key={this.props[srcType] + keyEndings[srcType]}
-              >
-                <ErrorContainer className="errorContainer">{this.props.imageLoadErrorMessage}</ErrorContainer>
-              </LightboxImage>,
-            );
+          displayItems.push(
+            <LightboxImage
+              as="div"
+              className={imageClass}
+              style={baseStyle}
+              key={this.props[srcType] + keyEndings[srcType]}
+            >
+              <ErrorContainer className="errorContainer">{this.props.imageLoadErrorMessage}</ErrorContainer>
+            </LightboxImage>,
+          );
 
           return;
         }
