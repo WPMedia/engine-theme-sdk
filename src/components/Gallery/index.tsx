@@ -34,6 +34,7 @@ import Lightbox from '../Lightbox/index';
 import ImageMetadata from '../ImageMetadata';
 import useInterval from './setInterval';
 import EventEmitter from '../EventEmitter';
+import buildThumborURL from '../image/thumbor-image-url';
 
 import {
   GalleryDiv,
@@ -256,10 +257,15 @@ const Gallery: React.FC<GalleryProps> = ({
       }
     }
 
-    // querySelectorAll looks like not rendered image 
-    // and we getting empty data
+    // querySelectorAll looks like not rendered next image 
+    // and we getting empty data for lightBox
     if(galleryElements[pageNo]){
-      return galleryElements[pageNo].url;
+      const galleryElement = galleryElements[pageNo];
+      const imageSourceWithoutProtocol = galleryElement.url.replace('https://', '');
+      const imageSrc = buildThumborURL(galleryElement.resized_params[`${1600}x${0}`], `${1600}x${0}`
+        , imageSourceWithoutProtocol
+        , resizerURL);
+      return imageSrc;
     }
 
     return '';
