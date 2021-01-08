@@ -30,11 +30,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import PropTypes from 'prop-types';
 import Image from '../Image';
+import buildThumborURL from '../Image/thumbor-image-url';
 import Lightbox from '../Lightbox/index';
 import ImageMetadata from '../ImageMetadata';
 import useInterval from './setInterval';
 import EventEmitter from '../EventEmitter';
-import buildThumborURL from '../image/thumbor-image-url';
 
 import {
   GalleryDiv,
