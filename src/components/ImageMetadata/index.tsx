@@ -15,6 +15,10 @@ interface ImageMetadataProps {
     by?: ImageAttribution[];
     affiliation?: ImageAttribution[];
   };
+  vanityCredits?: {
+    by?: ImageAttribution[];
+    affiliation?: ImageAttribution[];
+  };
 }
 
 const MetadataParagraph = styled.p<{ primaryFont: string }>`
@@ -38,11 +42,20 @@ const ImageMetadata: React.FC<ImageMetadataProps> = ({
   subtitle,
   caption,
   credits: { by = [{}], affiliation = [{}] } = {},
+  vanityCredits,
 }) => {
   const { arcSite } = useAppContext();
-  const photographer = by && by[0] && by[0].name;
-  const aff = affiliation && affiliation[0] && affiliation[0].name;
-
+  let photographer = by && by[0] && by[0].name;
+  let aff = affiliation && affiliation[0] && affiliation[0].name;
+  if (vanityCredits) {
+    const { by: vanityBy, affiliation: vanityAff } = vanityCredits;
+    if (vanityBy) {
+      photographer = (vanityBy[0] && vanityBy[0].name) || null;
+    }
+    if (vanityAff) {
+      aff = (vanityAff[0] && vanityAff[0].name) || null;
+    }
+  }
   const credits = (photographer || aff) && `(${[photographer, aff].filter((name) => name).join('/')})`;
 
   return !!(subtitle || caption || credits) && (
@@ -72,6 +85,11 @@ ImageMetadata.propTypes = {
   caption: PropTypes.string,
   /** Image author related data */
   credits: PropTypes.shape({
+    by: PropTypes.array,
+    affiliation: PropTypes.array,
+  }),
+  /** Vanity credits related data */
+  vanityCredits: PropTypes.shape({
     by: PropTypes.array,
     affiliation: PropTypes.array,
   }),
