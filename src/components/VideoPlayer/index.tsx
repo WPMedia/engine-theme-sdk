@@ -30,12 +30,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 }) => {
   const videoRef = useRef(id);
 
-  // the fetched data may be null
-  // embed_html from a null object which throws errors and interferes
-  // comments out script but keeps the ref id
-  // todo: potentially return null if embedHTML is invalid
-  const validEmbedHTML = embedHTML && embedHTML.replace('<script', '<!--script')
-    .replace('script>', 'script-->');
 
   useEffect(() => {
     if (document.getElementById(`video-${videoRef.current}`)) {
@@ -49,9 +43,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <EmbedVideoContainer>
-      <EmbedContainer markup={validEmbedHTML}>
+      <EmbedContainer markup={embedHTML}>
         {/* eslint-disable-next-line react/no-danger */}
-        <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: validEmbedHTML }} />
+        <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
       </EmbedContainer>
     </EmbedVideoContainer>
   );
