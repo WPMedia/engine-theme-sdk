@@ -27,7 +27,7 @@ interface CustomFields {
 }
 
 interface VideoPlayerProps {
-  embedHTML: string;
+  embedMarkup: string;
   id: string;
   enableAutoplay?: boolean;
   customFields?: CustomFields;
@@ -62,7 +62,7 @@ const EmbedVideoContainer = styled.div`
 
 // document id better as the id exactly matching the content
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
-  embedHTML,
+  embedMarkup,
   id,
   enableAutoplay = false,
   customFields = {},
@@ -81,7 +81,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   });
 
   const embedHTMLWithPlayStatus = formatEmbedHTML(
-    embedHTML,
+    embedMarkup,
     enableAutoplay || autoplay,
     playthrough,
   );
