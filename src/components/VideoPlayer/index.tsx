@@ -1,10 +1,22 @@
 import React, { useRef, useEffect } from 'react';
 import EmbedContainer from 'react-oembed-container';
+import styled from 'styled-components';
 
 interface VideoPlayerProps {
   embedHTML: string;
   id: string;
 }
+
+const EmbedVideoContainer = styled.div`
+  @media screen and (min-width: 48rem) {
+    margin-bottom: 1.5rem;
+  }
+
+  margin-bottom: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+`;
 
 // todo: include the css and scss for margin block
 // document id better as the id exactly matching the content
@@ -13,9 +25,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 }) => {
   const videoRef = useRef(id);
 
-  // Make sure that the player does not render until after component is mounted
-  // eslint-disable-next-line no-param-reassign
-  embedHTML = embedHTML && embedHTML.replace('<script', '<!--script')
+  // the fetched data may be null
+  // embed_html from a null object which throws errors and interferes
+  // comments out script but keeps the ref id
+  // todo: potentially return null if embedHTML is invalid
+  const validEmbedHTML = embedHTML && embedHTML.replace('<script', '<!--script')
     .replace('script>', 'script-->');
 
   useEffect(() => {
@@ -29,13 +43,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   });
 
   return (
-    <div className="embed-video">
-      {/* not sure if I need the useRef with the id */}
-      <EmbedContainer markup={embedHTML}>
+    <EmbedVideoContainer>
+      <EmbedContainer markup={validEmbedHTML}>
         {/* eslint-disable-next-line react/no-danger */}
-        <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
+        <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: validEmbedHTML }} />
       </EmbedContainer>
-    </div>
+    </EmbedVideoContainer>
   );
 };
 
