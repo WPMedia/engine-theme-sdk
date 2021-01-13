@@ -2,6 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import EmbedContainer from 'react-oembed-container';
 import styled from 'styled-components';
 
+// todo: add enableAutoplay
+// enableAutoplay={!!(customFields?.enableAutoplay)}
+// customFields={{
+//   playthrough:
+// }}
 interface VideoPlayerProps {
   embedHTML: string;
   id: string;
