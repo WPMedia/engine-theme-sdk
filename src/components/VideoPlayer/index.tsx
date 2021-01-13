@@ -36,14 +36,14 @@ interface VideoPlayerProps {
 
 function formatEmbedHTML(embedHTML: string, enableAutoplay: boolean, playthrough: boolean): string {
   let embedHTMLWithPlayStatus = embedHTML;
-  if (enableAutoplay && embedHTML) {
+  if (playthrough && embedHTMLWithPlayStatus) {
     const position = embedHTMLWithPlayStatus.search('id=');
-    embedHTMLWithPlayStatus = [embedHTMLWithPlayStatus.slice(0, position), ' data-autoplay=true data-muted=true ', embedHTML.slice(position)].join('');
+    embedHTMLWithPlayStatus = [embedHTMLWithPlayStatus.slice(0, position), 'data-playthrough=true ', embedHTMLWithPlayStatus.slice(position)].join('');
   }
 
-  if (playthrough && embedHTML) {
-    const position = embedHTMLWithPlayStatus.search('id=');
-    embedHTMLWithPlayStatus = [embedHTML.slice(0, position), ' data-playthrough=true ', embedHTML.slice(position)].join('');
+  if (enableAutoplay && embedHTML) {
+    const position = playthrough ? embedHTMLWithPlayStatus.search('data-playthrough=') : embedHTMLWithPlayStatus.search('id=');
+    embedHTMLWithPlayStatus = [embedHTMLWithPlayStatus.slice(0, position), ' data-autoplay=true data-muted=true ', embedHTMLWithPlayStatus.slice(position)].join('');
   }
 
   return embedHTMLWithPlayStatus;
