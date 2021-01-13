@@ -18,8 +18,8 @@ import styled from 'styled-components';
   * */
 
 interface CustomFields {
-  playthrough: boolean;
-  autoplay: boolean;
+  playthrough?: boolean;
+  autoplay?: boolean;
   // todo:
   // alertBadge
   // title: string;
@@ -29,9 +29,9 @@ interface CustomFields {
 interface VideoPlayerProps {
   embedHTML: string;
   id: string;
-  enableAutoplay: boolean;
-  customFields: CustomFields;
-  playthrough: boolean;
+  enableAutoplay?: boolean;
+  customFields?: CustomFields;
+  playthrough?: boolean;
 }
 
 function formatEmbedHTML(embedHTML: string, enableAutoplay: boolean, playthrough: boolean): string {
@@ -64,10 +64,10 @@ const EmbedVideoContainer = styled.div`
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   embedHTML,
   id,
-  enableAutoplay,
-  customFields,
+  enableAutoplay = false,
+  customFields = {},
 }) => {
-  const { playthrough, autoplay } = customFields;
+  const { playthrough = false, autoplay = false } = customFields;
   const videoRef = useRef(id);
 
   useEffect(() => {
