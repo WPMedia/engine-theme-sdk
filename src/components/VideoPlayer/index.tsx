@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import EmbedContainer from 'react-oembed-container';
 import styled from 'styled-components';
+import formatEmbedMarkup from './formatEmbedMarkup';
 
 /**
     autoplay,
@@ -34,43 +35,6 @@ interface VideoPlayerProps {
   playthrough?: boolean;
 }
 
-/**
- * via https://gomakethings.com/converting-a-string-into-markup-with-vanilla-js/#a-better-way
- * Convert a template string into HTML DOM nodes
- * @param  {String} string The template string
- * @return {Node}       The template HTML
- */
-function convertStringToNode(string: string): HTMLElement {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(string, 'text/html');
-  // get the body, will return <body> around your code
-  return doc.body;
-}
-
-export function formatEmbedHTML(
-  embedHTML: string,
-  enableAutoplay: boolean,
-  playthrough: boolean,
-): string {
-  if (embedHTML) {
-    const embedHTMLWithPlayStatus = convertStringToNode(embedHTML).querySelector('div');
-
-    if (enableAutoplay) {
-      embedHTMLWithPlayStatus.setAttribute('data-autoplay', 'true');
-      embedHTMLWithPlayStatus.setAttribute('data-muted', 'true');
-    }
-
-    if (playthrough) {
-      embedHTMLWithPlayStatus.setAttribute('data-playthrough', 'true');
-    }
-
-    return embedHTMLWithPlayStatus.outerHTML;
-  }
-
-  // if falsy (empty string, undefined, or null), return empty string
-  // possibly throw an error
-  return '';
-}
 
 const EmbedVideoContainer = styled.div`
   @media screen and (min-width: 48rem) {
@@ -103,7 +67,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }
   });
 
-  const embedHTMLWithPlayStatus = formatEmbedHTML(
+  const embedHTMLWithPlayStatus = formatEmbedMarkup(
     embedMarkup,
     enableAutoplay || autoplay,
     playthrough,
