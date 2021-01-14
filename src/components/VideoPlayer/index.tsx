@@ -34,19 +34,30 @@ interface VideoPlayerProps {
   playthrough?: boolean;
 }
 
-function formatEmbedHTML(embedHTML: string, enableAutoplay: boolean, playthrough: boolean): string {
-  let embedHTMLWithPlayStatus = embedHTML;
-  if (enableAutoplay && embedHTML) {
-    const position = embedHTMLWithPlayStatus.search('id=');
-    embedHTMLWithPlayStatus = [embedHTMLWithPlayStatus.slice(0, position), ' data-autoplay=true data-muted=true ', embedHTML.slice(position)].join('');
+export function formatEmbedHTML(
+  embedHTML: string,
+  enableAutoplay: boolean,
+  playthrough: boolean,
+): string {
+  if (embedHTML) {
+    let embedHTMLWithPlayStatus = embedHTML;
+
+    if (enableAutoplay) {
+      const position = embedHTMLWithPlayStatus.search('id=');
+      embedHTMLWithPlayStatus = [embedHTMLWithPlayStatus.slice(0, position), ' data-autoplay=true data-muted=true ', embedHTML.slice(position)].join('');
+    }
+
+    if (playthrough) {
+      const position = embedHTMLWithPlayStatus.search('id=');
+      embedHTMLWithPlayStatus = [embedHTML.slice(0, position), ' data-playthrough=true ', embedHTML.slice(position)].join('');
+    }
+
+    return embedHTMLWithPlayStatus;
   }
 
-  if (playthrough && embedHTML) {
-    const position = embedHTMLWithPlayStatus.search('id=');
-    embedHTMLWithPlayStatus = [embedHTML.slice(0, position), ' data-playthrough=true ', embedHTML.slice(position)].join('');
-  }
-
-  return embedHTMLWithPlayStatus;
+  // if falsy (empty string, undefined, or null), return empty string
+  // possibly throw an error
+  return '';
 }
 
 const EmbedVideoContainer = styled.div`
