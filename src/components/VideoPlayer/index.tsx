@@ -19,9 +19,9 @@ import formatEmbedMarkup from './formatEmbedMarkup';
   * */
 
 interface CustomFields {
-  /* @deprecated Use playthrough prop directly instead */
+  /* @deprecated Use isPlaythrough prop directly instead */
   playthrough?: boolean;
-  /* @deprecated Use autoplay prop directly instead */
+  /* @deprecated Use enableAutoplay prop directly instead */
   autoplay?: boolean;
   // todo:
   // alertBadge
@@ -34,9 +34,8 @@ interface VideoPlayerProps {
   id: string;
   enableAutoplay?: boolean;
   customFields?: CustomFields;
-  playthrough?: boolean;
+  isPlaythrough?: boolean;
 }
-
 
 const EmbedVideoContainer = styled.div`
   @media screen and (min-width: 48rem) {
@@ -49,12 +48,19 @@ const EmbedVideoContainer = styled.div`
   margin-top: 0;
 `;
 
-// document id better as the id exactly matching the content
+/**
+ * @param {string} embedMarkup is html that has powa info
+ * @param {string} id corresponds to the video-{id} player loaded by powa video player
+ * @param {boolean} enableAutoplay sets video to autoplay per user settings
+ * @param {object} customFields is @deprecated but takes in values like the block video player.
+ * @param {boolean} isPlaythrough is preferred way of setting playthrough in video
+ */
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   embedMarkup,
   id,
   enableAutoplay = false,
   customFields = {},
+  isPlaythrough = false,
 }) => {
   const { playthrough = false, autoplay = false } = customFields;
   const videoRef = useRef(id);
@@ -72,7 +78,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const embedHTMLWithPlayStatus = formatEmbedMarkup(
     embedMarkup,
     enableAutoplay || autoplay,
-    playthrough,
+    isPlaythrough || playthrough,
   );
 
   return (
