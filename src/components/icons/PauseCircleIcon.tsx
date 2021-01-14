@@ -5,10 +5,10 @@ type IconProps = import('./types').default;
 const PauseCircleIcon: React.FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Pause', description = '',
 }) => (
-  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" role="img">
+  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
     <title>{title}</title>
     <desc>{description}</desc>
-    <path fill={fill} d="M12.298 2C6.609 2 2 6.609 2 12.298c0 5.688 4.609 10.297 10.298 10.297 5.688 0 10.297-4.609 10.297-10.297C22.595 6.609 17.986 2 12.298 2zm-.665 13.62a.666.666 0 01-.664.664H8.976a.666.666 0 01-.665-.665V8.976c0-.366.3-.665.665-.665h1.993c.365 0 .664.3.664.665v6.643zm4.65 0a.666.666 0 01-.664.664h-1.993a.666.666 0 01-.664-.665V8.976c0-.366.299-.665.664-.665h1.993c.366 0 .665.3.665.665v6.643z" />
+    <path fill={fill} d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-16 328c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160zm112 0c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160z" />
   </svg>
 );
 

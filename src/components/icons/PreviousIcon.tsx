@@ -5,10 +5,10 @@ type IconProps = import('./types').default;
 const PreviousIcon: React.FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Previous', description = '',
 }) => (
-  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" role="img">
+  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" role="img">
     <title>{title}</title>
     <desc>{description}</desc>
-    <path fill={fill} d="M5 21.104V3.5a.5.5 0 01.498-.5h1.993a.5.5 0 01.499.499v7.324l8.117-7.515c.856-.71 2.18-.117 2.18 1.021v15.945c0 1.137-1.324 1.731-2.18 1.021l-8.117-7.47v7.28a.5.5 0 01-.499.497H5.498A.5.5 0 015 21.104z" />
+    <path fill={fill} d="M64 468V44c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12v176.4l195.5-181C352.1 22.3 384 36.6 384 64v384c0 27.4-31.9 41.7-52.5 24.6L136 292.7V468c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12z" />
   </svg>
 );
 

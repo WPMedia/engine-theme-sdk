@@ -5,6 +5,7 @@ import SoundCloudIcon from './SoundCloudIcon';
 describe('the SoundCloudIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<SoundCloudIcon />);
+    expect(wrapper.prop('viewBox')).toEqual('0 0 640 512');
     expect(wrapper.name()).toEqual('svg');
   });
 

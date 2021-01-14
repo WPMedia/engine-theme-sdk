@@ -5,10 +5,10 @@ type IconProps = import('./types').default;
 const PlayCircleIcon: React.FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Play', description = '',
 }) => (
-  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" role="img">
+  <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
     <title>{title}</title>
     <desc>{description}</desc>
-    <path fill={fill} d="M12.298 1C6.609 1 2 5.609 2 11.298c0 5.688 4.609 10.297 10.298 10.297 5.688 0 10.297-4.609 10.297-10.297C22.595 5.609 17.986 1 12.298 1zm4.804 11.294l-7.308 4.194a.998.998 0 01-1.483-.872V6.979a.999.999 0 011.483-.872l7.308 4.443a1 1 0 010 1.744z" />
+    <path fill={fill} d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z" />
   </svg>
 );
 
