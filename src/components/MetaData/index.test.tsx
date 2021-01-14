@@ -1568,6 +1568,15 @@ describe('the meta data ', () => {
       expect(wrapper.find('title').childAt(0).text()).toEqual(websiteName);
     });
 
+    it('should override title when defining title meta tag', () => {
+      const metaValue = metaValues({
+        'page-type': 'homepage',
+        title: 'This is customization title',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('title').childAt(0).text()).toEqual('This is customization title');
+    });
+
     it('should use websiteName as og:title', () => {
       const metaValue = metaValues({
         'page-type': 'homepage',
