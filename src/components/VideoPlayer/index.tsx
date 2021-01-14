@@ -54,7 +54,7 @@ const EmbedVideoContainer = styled.div`
  * @param {string} id corresponds to the video-{id} player loaded by powa video player
  * @param {boolean} enableAutoplay sets video to autoplay per user settings
  * @param {boolean} isPlaythrough is preferred way of setting playthrough in video
- * @param {object} customFields is @deprecated but takes in values like the block video player.
+ * @param {object} customFields is deprecated but takes in values like the block video player.
  */
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   embedMarkup,
@@ -74,7 +74,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         if (window.powaBoot) window.powaBoot();
       }
     }
-  });
+    // only run on mount with []
+  }, []);
 
   const embedHTMLWithPlayStatus = formatEmbedMarkup(
     embedMarkup,
