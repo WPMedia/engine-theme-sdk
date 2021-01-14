@@ -19,7 +19,9 @@ import formatEmbedMarkup from './formatEmbedMarkup';
   * */
 
 interface CustomFields {
+  /* @deprecated Use playthrough prop directly instead */
   playthrough?: boolean;
+  /* @deprecated Use autoplay prop directly instead */
   autoplay?: boolean;
   // todo:
   // alertBadge
