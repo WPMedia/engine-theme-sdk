@@ -49,11 +49,12 @@ const EmbedVideoContainer = styled.div`
 `;
 
 /**
+ * Creates a video player with arc's powa player with fusion id loaded
  * @param {string} embedMarkup is html that has powa info
  * @param {string} id corresponds to the video-{id} player loaded by powa video player
  * @param {boolean} enableAutoplay sets video to autoplay per user settings
- * @param {object} customFields is @deprecated but takes in values like the block video player.
  * @param {boolean} isPlaythrough is preferred way of setting playthrough in video
+ * @param {object} customFields is @deprecated but takes in values like the block video player.
  */
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   embedMarkup,

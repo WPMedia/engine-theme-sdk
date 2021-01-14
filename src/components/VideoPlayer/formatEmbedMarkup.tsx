@@ -1,9 +1,9 @@
 
 /**
- * via https://gomakethings.com/converting-a-string-into-markup-with-vanilla-js/#a-better-way
  * Convert a template string into HTML DOM nodes
+ * via https://gomakethings.com/converting-a-string-into-markup-with-vanilla-js/#a-better-way
  * @param  {String} string The template string
- * @return {Node}       The template HTML
+ * @return {Node} The template HTML
  */
 function convertStringToNode(string: string): HTMLElement {
   const parser = new DOMParser();
@@ -11,6 +11,13 @@ function convertStringToNode(string: string): HTMLElement {
   // get the body, will return <body> around your code
   return doc.body;
 }
+
+/**
+ * Adds properties related to the video based on video settings
+ * @param {string} embedHTML is html that has powa info
+ * @param {boolean} enableAutoplay sets video to autoplay
+ * @param {boolean} playthrough sets video to continue playing through
+ */
 function formatEmbedMarkup(
   embedHTML: string,
   enableAutoplay: boolean,
