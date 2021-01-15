@@ -160,4 +160,78 @@ describe('the ImageMetadata component', () => {
       expect(wrapper.isEmptyRender()).toBe(true);
     });
   });
+
+  describe('when a vanityCredits is passed in the props', () => {
+    it('should hide photographer and credit on image', () => {
+      const wrapper = shallow(<ImageMetadata
+        subtitle="ffffg"
+        caption="ttttu"
+        credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
+        vanityCredits={{ by: [{}], affiliation: [{}] }}
+      />);
+      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span').first().text()).toBe('ffffg ');
+      expect(wrapper.text()).toBe('ffffg ttttu ');
+    });
+
+    it('should override photographer and credit on image using vanity credits info', () => {
+      const wrapper = shallow(<ImageMetadata
+        subtitle="ffffg"
+        caption="ttttu"
+        credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
+        vanityCredits={{ by: [{ name: 'vanity photograher' }], affiliation: [{ name: 'vanity credit' }] }}
+      />);
+      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span').first().text()).toBe('ffffg ');
+      expect(wrapper.text()).toBe('ffffg ttttu (vanity photograher/vanity credit)');
+    });
+
+    it('should override photographer on image using vanity credits info', () => {
+      const wrapper = shallow(<ImageMetadata
+        subtitle="ffffg"
+        caption="ttttu"
+        credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
+        vanityCredits={{ by: [{ name: 'vanity photograher' }] }}
+      />);
+      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span').first().text()).toBe('ffffg ');
+      expect(wrapper.text()).toBe('ffffg ttttu (vanity photograher/affff)');
+    });
+
+    it('should override credit on image using vanity credits info', () => {
+      const wrapper = shallow(<ImageMetadata
+        subtitle="ffffg"
+        caption="ttttu"
+        credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
+        vanityCredits={{ affiliation: [{ name: 'vanity credit' }] }}
+      />);
+      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span').first().text()).toBe('ffffg ');
+      expect(wrapper.text()).toBe('ffffg ttttu (bbbyyy/vanity credit)');
+    });
+
+    it('should show photographer and hide credit on image using vanity credits info', () => {
+      const wrapper = shallow(<ImageMetadata
+        subtitle="ffffg"
+        caption="ttttu"
+        credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
+        vanityCredits={{ by: [{ name: 'vanity photograher' }], affiliation: [{}] }}
+      />);
+      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span').first().text()).toBe('ffffg ');
+      expect(wrapper.text()).toBe('ffffg ttttu (vanity photograher)');
+    });
+
+    it('should hide photographer and show credit on image using vanity credits info', () => {
+      const wrapper = shallow(<ImageMetadata
+        subtitle="ffffg"
+        caption="ttttu"
+        credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
+        vanityCredits={{ by: [{}], affiliation: [{ name: 'vanity credit' }] }}
+      />);
+      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span').first().text()).toBe('ffffg ');
+      expect(wrapper.text()).toBe('ffffg ttttu (vanity credit)');
+    });
+  });
 });

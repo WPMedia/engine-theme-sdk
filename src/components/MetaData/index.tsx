@@ -394,6 +394,9 @@ const MetaData: React.FC<Props> = ({
       </>
     );
   } else if (pageType === 'homepage') {
+    if (metaValue('title')) {
+      metaData.title = `${metaValue('title')}`;
+    }
     homepageMetaDataTags = (
       <>
         <meta property="og:title" content={metaData.ogTitle} />
