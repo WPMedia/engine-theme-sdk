@@ -51,7 +51,7 @@
     "@storybook/addon-a11y": "^6.0.28",
     "@storybook/addon-console": "^1.2.2",
     "@storybook/addon-essentials": "^6.1.14",
-    "@storybook/addon-knobs": "^6.0.28",
+    "@storybook/addon-knobs": "^6.1.14",
     "@storybook/addons": "^6.0.28",
     "@storybook/react": "^6.0.28",
     "@types/babel__core": "^7.1.3",
