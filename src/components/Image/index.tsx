@@ -110,8 +110,8 @@ const Image: React.FC<ImageProps> = ({
           src={url}
           alt={alt}
           // for fallback width and height
-          width={smallWidth}
-          height={smallHeight}
+          width={largeWidth}
+          height={largeHeight}
         />
       </StyledPicture>
     );
