@@ -32,7 +32,6 @@ const Video: React.FC<VideoProps> = (props) => {
     }
   }, []);
 
-
   return (
     <div className="video-container">
       <div

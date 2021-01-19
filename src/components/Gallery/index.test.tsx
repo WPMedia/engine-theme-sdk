@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/camelcase */
 import React from 'react';
 import { act } from 'react-dom/test-utils';
