@@ -77,7 +77,6 @@ const ImageMetadata: React.FC<ImageMetadataProps> = ({
   );
 };
 
-
 ImageMetadata.propTypes = {
   /** Subtitle text for the image */
   subtitle: PropTypes.string,

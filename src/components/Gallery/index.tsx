@@ -23,7 +23,6 @@
  * EventEmitter.subscribe('galleryImageNext', (event) => galleryImageNext(event));
  */
 
-
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable camelcase */
 import React, { useRef, useState, useEffect } from 'react';
