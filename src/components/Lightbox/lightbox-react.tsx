@@ -1,3 +1,5 @@
+/* eslint-disable react/sort-comp */
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint react/destructuring-assignment: "off", no-mixed-operators: "off", max-len: "off", comma-dangle: "off", react/jsx-props-no-spreading: "off" */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';

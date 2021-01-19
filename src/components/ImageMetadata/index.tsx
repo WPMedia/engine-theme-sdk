@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -76,7 +77,6 @@ const ImageMetadata: React.FC<ImageMetadataProps> = ({
     </MetadataParagraph>
   );
 };
-
 
 ImageMetadata.propTypes = {
   /** Subtitle text for the image */
