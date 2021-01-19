@@ -1,4 +1,3 @@
-
 /**
  * Convert a template string into HTML DOM nodes
  * via https://gomakethings.com/converting-a-string-into-markup-with-vanilla-js/#a-better-way
