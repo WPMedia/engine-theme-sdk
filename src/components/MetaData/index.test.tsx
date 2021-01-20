@@ -1569,12 +1569,15 @@ describe('the meta data ', () => {
     });
 
     it('should override title when defining title meta tag', () => {
+      const title = 'This is customization title';
       const metaValue = metaValues({
         'page-type': 'homepage',
-        title: 'This is customization title',
+        title,
       });
       const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-      expect(wrapper.find('title').childAt(0).text()).toEqual('This is customization title');
+      expect(wrapper.find('title').childAt(0).text()).toEqual(title);
+      expect(wrapper.find("meta[property='og:title']").prop('content')).toBe(title);
+      expect(wrapper.find("meta[name='twitter:title']").prop('content')).toBe(title);
     });
 
     it('should use websiteName as og:title', () => {
