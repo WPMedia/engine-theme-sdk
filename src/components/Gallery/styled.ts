@@ -19,7 +19,6 @@ const GalleryButton = styled.button`
   }
 `;
 
-
 export const ControlsDiv = styled.div`
   display: flex;
   justify-content: space-between;

@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { ReactElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
