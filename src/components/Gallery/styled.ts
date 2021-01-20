@@ -40,7 +40,9 @@ export const ControlContainer = styled.div`
   }
 `;
 
-export const ControlsButton = styled(GalleryButton)`
+// via typescript styled issue https://github.com/microsoft/TypeScript/issues/37597
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const ControlsButton = styled(GalleryButton as any)`
   display: flex;
   align-items: center;
 
@@ -72,7 +74,9 @@ export const CarouselContainer = styled.div`
   background-color: black;
 `;
 
-export const CarouselButton = styled(GalleryButton)`
+// via typescript styled issue https://github.com/microsoft/TypeScript/issues/37597
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const CarouselButton = styled(GalleryButton as any)`
   position: absolute;
   top: 50%;
   height: 3rem;
