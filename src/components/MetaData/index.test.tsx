@@ -298,7 +298,7 @@ const ogImageTest = (pageType: string): void => {
         content.slice(url.length * -1),
       ).toEqual(url);
     });
-    it('must not add og:image if url not found', () => {
+    it('must add og:image if url not found', () => {
       const metaValue = metaValues({
         'page-type': pageType,
       });
@@ -309,7 +309,9 @@ const ogImageTest = (pageType: string): void => {
       };
 
       const wrapper = wrapperGenerator(metaValue, globalContent);
-      expect(wrapper.find("meta[property='og:image']").length).toBe(0);
+      expect(
+        wrapper.find("meta[property='og:image']").prop('content'),
+      ).toEqual(`${websiteDomain}${fallbackImageLocal}`);
     });
   });
 };
@@ -422,7 +424,7 @@ const twitterImageTest = (pageType: string): void => {
       ).toEqual(url);
     });
 
-    it('must not add twitter:image if url not found', () => {
+    it('must add twitter:image if url not found', () => {
       const metaValue = metaValues({
         'page-type': pageType,
       });
@@ -433,7 +435,9 @@ const twitterImageTest = (pageType: string): void => {
       };
 
       const wrapper = wrapperGenerator(metaValue, globalContent);
-      expect(wrapper.find("meta[name='twitter:image']").length).toBe(0);
+      expect(
+        wrapper.find("meta[name='twitter:image']").prop('content'),
+      ).toEqual(`${websiteDomain}${fallbackImageLocal}`);
     });
   });
 };
@@ -555,8 +559,18 @@ const noGlobalContent = (pageType: string): void => {
     expect(wrapper.find("meta[name='twitter:title']").prop('content')).toBe(websiteName);
   });
 
-  it('should not have an og:image meta tag', () => {
-    expect(wrapper.find("meta[property='og:image']").length).toBe(0);
+  it('should not have an og:image meta tag if there is not any page-type', () => {
+    if (metaValue['page-type'] === '') {
+      expect(wrapper.find("meta[property='og:image']").length).toBe(0);
+    }
+  });
+
+  it('should have an og:image meta tag if any page-type', () => {
+    if (metaValue['page-type']) {
+      expect(
+        wrapper.find("meta[property='og:image']").prop('content'),
+      ).toEqual(`${websiteDomain}${fallbackImageLocal}`);
+    }
   });
 
   it('should not have an og:image:alt meta tag', () => {

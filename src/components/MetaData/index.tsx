@@ -163,10 +163,10 @@ const MetaData: React.FC<Props> = ({
       }
       metaData.description = metaValue('description') || description || null;
       metaData.ogTitle = metaValue('og:title') || headline || websiteName;
-      metaData.ogImage = getImgURL(metaValue, 'og:image', gc, resizerURL);
+      metaData.ogImage = getImgURL(metaValue, 'og:image', gc, resizerURL) || metaData.fallbackImage;
       metaData.ogImageAlt = getImgAlt(metaValue, 'og:image:alt', gc);
       metaData.twitterTitle = metaValue('twitterTitle') || headline || websiteName;
-      metaData.twitterImage = getImgURL(metaValue, 'twitterImage', gc, resizerURL);
+      metaData.twitterImage = getImgURL(metaValue, 'twitterImage', gc, resizerURL) || metaData.fallbackImage;
 
       // Keywords could be comma delimited string or array of string or an array of objects
       if (metaValue('keywords')) {
