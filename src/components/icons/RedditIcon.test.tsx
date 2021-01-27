@@ -5,6 +5,7 @@ import RedditIcon from './RedditIcon';
 describe('the RedditIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<RedditIcon />);
+    expect(wrapper.prop('viewBox')).toEqual('0 0 512 512');
     expect(wrapper.name()).toEqual('svg');
   });
 

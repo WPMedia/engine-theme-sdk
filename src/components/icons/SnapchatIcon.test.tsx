@@ -5,6 +5,7 @@ import SnapchatIcon from './SnapchatIcon';
 describe('the SnapchatIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<SnapchatIcon />);
+    expect(wrapper.prop('viewBox')).toEqual('0 0 512 512');
     expect(wrapper.name()).toEqual('svg');
   });
 

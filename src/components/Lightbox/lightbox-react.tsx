@@ -1,3 +1,5 @@
+/* eslint-disable react/sort-comp */
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint react/destructuring-assignment: "off", no-mixed-operators: "off", max-len: "off", comma-dangle: "off", react/jsx-props-no-spreading: "off" */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -1704,11 +1706,24 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
           </LightboxImage>,
         );
       };
+
       const addItem = (srcType, imageClass, baseStyle = {}): void => {
         const DisplayItem = this.props[srcType];
         if (!DisplayItem) {
+          displayItems.push(
+            <LightboxImage
+              as="div"
+              className={imageClass}
+              style={baseStyle}
+              key={this.props[srcType] + keyEndings[srcType]}
+            >
+              <ErrorContainer className="errorContainer">{this.props.imageLoadErrorMessage}</ErrorContainer>
+            </LightboxImage>,
+          );
+
           return;
         }
+
         if (typeof DisplayItem === 'string') {
           addImage(srcType, imageClass, baseStyle);
         }

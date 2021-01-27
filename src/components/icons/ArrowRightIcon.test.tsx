@@ -6,6 +6,7 @@ describe('the ArrowRightIcon component', () => {
   it('should render an SVG', () => {
     const wrapper = shallow(<ArrowRightIcon />);
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('viewBox')).toEqual('0 0 448 512');
     expect(wrapper.prop('role')).toEqual('img');
   });
 
