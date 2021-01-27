@@ -95,7 +95,7 @@
     "react-modal": "^3.11.1",
     "react-oembed-container": "^1.0.0",
     "react-swipeable": "^5.5.0",
-    "styled-components": "^4.4.1",
+    "styled-components": "^5.2.1",
     "thumbor-lite": "^0.1.6",
     "timezone": "^1.0.23"
   }
