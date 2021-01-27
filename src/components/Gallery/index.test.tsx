@@ -321,7 +321,7 @@ describe('the gallery block', () => {
       EventEmitter.subscribe('galleryAutoplayStart', (event: GalleryEventData) => eventHandler(event, 1));
       EventEmitter.subscribe('galleryAutoplayStop', (event: GalleryEventData) => eventHandler(event, 2));
       autoBtnWrapper.simulate('click');
-      sleep(10000).then(() => {
+      sleep(5000).then(() => {
         expect(ran.length).toBe(2);
       });
     });
