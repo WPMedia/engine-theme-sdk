@@ -65,32 +65,40 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 }) => {
   const { playthrough = false, autoplay = false } = customFields;
   const videoRef = useRef(id);
+  const shouldRender = !!(
+    typeof window !== 'undefined'
+    && typeof document !== 'undefined'
+  );
 
   useEffect(() => {
-    if (document.getElementById(`video-${videoRef.current}`)) {
+    if (shouldRender && document.getElementById(`video-${videoRef.current}`)) {
       const powaEl = document.getElementById(`video-${videoRef.current}`).firstElementChild;
-
       if (powaEl) {
         if (window.powaBoot) window.powaBoot();
       }
     }
     // only run on mount with []
-  }, []);
+  }, [shouldRender]);
 
-  const embedHTMLWithPlayStatus = formatEmbedMarkup(
-    embedMarkup,
-    enableAutoplay || autoplay,
-    isPlaythrough || playthrough,
+  const getEmbedHTMLWithPlayStatus = (): string => (
+    formatEmbedMarkup(
+      embedMarkup,
+      enableAutoplay || autoplay,
+      isPlaythrough || playthrough,
+    )
   );
 
-  return (
+  return shouldRender ? (
     <EmbedVideoContainer>
-      <EmbedContainer markup={embedHTMLWithPlayStatus}>
-        {/* eslint-disable-next-line react/no-danger */}
-        <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTMLWithPlayStatus }} />
+      <EmbedContainer markup={getEmbedHTMLWithPlayStatus()}>
+        <div
+          id={`video-${videoRef.current}`}
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: getEmbedHTMLWithPlayStatus() }}
+        />
       </EmbedContainer>
     </EmbedVideoContainer>
-  );
+  ) : null;
 };
 
 export default VideoPlayer;
