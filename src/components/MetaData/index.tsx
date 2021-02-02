@@ -399,7 +399,6 @@ const MetaData: React.FC<Props> = ({
     if (pageTitle) {
       metaData.title = `${pageTitle}`;
       metaData.ogTitle = `${pageTitle}`;
-      metaData.ogSiteName = `${pageTitle}`;
       metaData.twitterTitle = `${pageTitle}`;
     }
     homepageMetaDataTags = (
@@ -411,9 +410,9 @@ const MetaData: React.FC<Props> = ({
           && (
             <>
               <meta property="og:image" content={metaData.fallbackImage} />
-              <meta property="og:image:alt" content={metaData.ogTitle} />
+              <meta property="og:image:alt" content={websiteName} />
               <meta name="twitter:image" content={metaData.fallbackImage} />
-              <meta name="twitter:image:alt" content={metaData.twitterTitle} />
+              <meta name="twitter:image:alt" content={websiteName} />
             </>
           )
         }
