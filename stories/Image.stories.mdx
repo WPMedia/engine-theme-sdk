@@ -277,6 +277,39 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
   </Story>
 </Canvas>
 
+### **Without resizer URL -- This will not work do to the missing required resizer param**
+
+<Canvas>
+  <Story name="Without resizer URL">
+    <Image
+      url={
+        "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
+      }
+      alt={"Aerial view of bridge"}
+      smallWidth={158}
+      smallHeight={89}
+      mediumWidth={274}
+      mediumHeight={154}
+      largeWidth={274}
+      largeHeight={154}
+      resizedImageOptions={{
+        "158x89":
+          "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
+        "274x154":
+          "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
+      }}
+      resizerURL={""}
+      breakpoints={{
+        small: 420,
+        medium: 768,
+        large: 992,
+      }}
+      lightBoxWidth={274}
+      lightBoxHeight={154}
+    />
+  </Story>
+</Canvas>
+
 ### **Without breakpoints**
 
 <Canvas>
@@ -308,7 +341,7 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
   </Story>
 </Canvas>
 
-### **No resized params**
+### **No resized params -- This will not work do to the missing/empty resizedImageOptions****
 
 <Canvas>
   <Story name="No resized params">
@@ -323,12 +356,7 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
       mediumHeight={154}
       largeWidth={274}
       largeHeight={154}
-      resizedImageOptions={{
-        "158x89":
-          "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
-        "274x154":
-          "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
-      }}
+      resizedImageOptions={{}}
       resizerURL={
         "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
       }
