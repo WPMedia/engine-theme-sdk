@@ -8,17 +8,20 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 The `Image` component is used to replace the `img` tag, providing a fast, responsive and resized image for your blocks.
 
 ## Lazy Loading
+
 This component uses [`lazy-child`](https://www.npmjs.com/package/lazy-child) which has a dependency on IntersectionObserver which is not supported in all browsers [see support](https://caniuse.com/#feat=intersectionobserver) - if you need to support browsers that do not have IntersectionObserver you will need to use a polyfill.
 The IntersectionObserver polyfill is already included with the theme blocks output types.
 
 At this time, all images are lazy loaded, however the lazyOptions param
-object can be used to adjust when the image is loaded when it enters the viewport.  The lazyOptions param object allows for checks against the bottom, left, right and top.
+object can be used to adjust when the image is loaded when it enters the viewport. The lazyOptions param object allows for checks against the bottom, left, right and top.
 The default is 0 for all 4 options. By adjusting those values, you can force an image to load sooner or later as it approaches the viewport.
 
 ## Additional general information on images and optimization:
+
 - [How To Make Your Images Load Speedy, Secure, and SEO-Friendly](https://corecomponents.arcpublishing.com/alc/arc-products/pagebuilder/fusion/documentation/recipes/best-practices-images.md?version=2.6)
 
 ## For a deeper understanding on Image resizing and setup:
+
 - [Secure Image Resizing Quickstart](https://corecomponents.arcpublishing.com/alc/arc-products/pagebuilder/fusion/documentation/recipes/secure-speedy-images.md?version=2.6)
 
 ## Use
@@ -49,11 +52,13 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 ```
 
 ## ArgsTable
+
 Below is a table of the parameters for the Image component. Properties denoted with an asterisk are required. Failure to provide required params will result in a broken/blank image element.
 
 resizedImageOptions is required to prevent very large images from being served. If resizedImageOptions is not
-supplied, an image element will be rendered without a url being present in the src attribute -- in effect, a blank image.  The relationship between resizedImageOptions
-and the width and height arguments (such as `smallWidth`, `mediumHeight`, `largeWidth`) must be consistent.  So for example, say you have defined your width and height params as follows:
+supplied, an image element will be rendered without a url being present in the src attribute -- in effect, a blank image. The relationship between resizedImageOptions
+and the width and height arguments (such as `smallWidth`, `mediumHeight`, `largeWidth`) must be consistent. So for example, say you have defined your width and height params as follows:
+
 ```
 smallWidth={158}
 smallHeight={89}
@@ -62,7 +67,9 @@ mediumHeight={154}
 largeWidth={400}
 largeHeight={250}
 ```
-Since you have defined three unique image sizes, you will need to provide three corresponding size entries in the resizedImageOptions.  It would look something like this:
+
+Since you have defined three unique image sizes, you will need to provide three corresponding size entries in the resizedImageOptions. It would look something like this:
+
 ```
 resizedImageOptions={{
   "158x89":
@@ -73,8 +80,10 @@ resizedImageOptions={{
     "/sdkshrbrhJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
 }}
 ```
-Let's say you want medium and large images to be the same size.  You would simply define the medium and large params
-the same and then you only have to have 2 entries in the resizedImageOptions object.  That would look something like this:
+
+Let's say you want medium and large images to be the same size. You would simply define the medium and large params
+the same and then you only have to have 2 entries in the resizedImageOptions object. That would look something like this:
+
 ```
 smallWidth={158}
 smallHeight={89}
@@ -89,6 +98,7 @@ resizedImageOptions={{
     "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
 }}
 ```
+
 For more information on how to setup resizedImageOptions, please see: [Secure Image Resizing Quickstart](https://corecomponents.arcpublishing.com/alc/arc-products/pagebuilder/fusion/documentation/recipes/secure-speedy-images.md?version=2.6)
 
 <ArgsTable of={Image} />
@@ -96,6 +106,7 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
 ## Stories
 
 ### **Basic**
+
 <Canvas>
   <Story name="Basic">
     <div>
@@ -248,6 +259,7 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
 </Canvas>
 
 ### **PNG** File
+
 <Canvas>
   <Story name="Transparent png file">
     <Image
@@ -265,7 +277,9 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
         "158x89":
           "BdkyX5wvprEpd8N4tFJxP_fdLfM=filters:format(png):quality(70)/",
       }}
-      resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+      resizerURL={
+        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
+      }
       breakpoints={{
         small: 420,
         medium: 768,
@@ -277,10 +291,10 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
   </Story>
 </Canvas>
 
-### **Without resizer URL -- This will not work due to the missing required resizer param**
+### **Without resizer URL, logs error and does not render image**
 
 <Canvas>
-  <Story name="Without resizer URL - This will not work due to the missing required resizer param">
+  <Story name="Without resizer URL, logs error and does not render image">
     <Image
       url={
         "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
@@ -341,10 +355,10 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
   </Story>
 </Canvas>
 
-### **No resized params -- This will not work due to the missing/empty resizedImageOptions**
+### **Without resized params, logs error and does not render image**
 
 <Canvas>
-  <Story name="No resized params - This will not work due to the missing/empty resizedImageOptions">
+  <Story name="Without resized params, logs error and does not render image">
     <Image
       url={
         "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
