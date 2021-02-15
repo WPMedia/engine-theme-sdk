@@ -5,4 +5,5 @@ export default interface IconProps {
     fill?: string;
     title?: string;
     description?: string;
+    context?: string;
 }

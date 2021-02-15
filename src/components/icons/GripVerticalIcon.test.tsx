@@ -7,6 +7,12 @@ describe('the GripVerticalIcon component', () => {
     const wrapper = shallow(<GripVerticalIcon />);
     expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('viewBox')).toEqual('0 0 320 512');
+    expect(wrapper.prop('role')).not.toBeDefined();
+  });
+
+  it('should render as an "img" SVG', () => {
+    const wrapper = shallow(<GripVerticalIcon context="image" />);
+    expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('role')).toEqual('img');
   });
 

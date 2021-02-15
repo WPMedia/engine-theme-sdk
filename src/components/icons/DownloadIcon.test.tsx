@@ -7,6 +7,12 @@ describe('the DownloadIcon component', () => {
     const wrapper = shallow(<DownloadIcon />);
     expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('viewBox')).toEqual('0 0 512 512');
+    expect(wrapper.prop('role')).not.toBeDefined();
+  });
+
+  it('should render as an "img" SVG', () => {
+    const wrapper = shallow(<DownloadIcon context="image" />);
+    expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('role')).toEqual('img');
   });
 

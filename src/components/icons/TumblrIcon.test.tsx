@@ -7,6 +7,13 @@ describe('the TumblrIcon component', () => {
     const wrapper = shallow(<TumblrIcon />);
     expect(wrapper.prop('viewBox')).toEqual('0 0 320 512');
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).not.toBeDefined();
+  });
+
+  it('should render as an "img" SVG', () => {
+    const wrapper = shallow(<TumblrIcon context="image" />);
+    expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).toEqual('img');
   });
 
   describe('the width prop', () => {

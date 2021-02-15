@@ -7,6 +7,13 @@ describe('the SoundCloudIcon component', () => {
     const wrapper = shallow(<SoundCloudIcon />);
     expect(wrapper.prop('viewBox')).toEqual('0 0 640 512');
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).not.toBeDefined();
+  });
+
+  it('should render as an "img" SVG', () => {
+    const wrapper = shallow(<SoundCloudIcon context="image" />);
+    expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).toEqual('img');
   });
 
   describe('the width prop', () => {
