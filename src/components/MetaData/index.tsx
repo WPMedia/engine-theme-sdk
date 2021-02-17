@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { ReactElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -394,6 +395,13 @@ const MetaData: React.FC<Props> = ({
       </>
     );
   } else if (pageType === 'homepage') {
+    const pageTitle = metaValue('title');
+    if (pageTitle) {
+      metaData.title = `${pageTitle}`;
+      metaData.ogTitle = `${pageTitle}`;
+      metaData.ogSiteName = `${pageTitle}`;
+      metaData.twitterTitle = `${pageTitle}`;
+    }
     homepageMetaDataTags = (
       <>
         <meta property="og:title" content={metaData.ogTitle} />
