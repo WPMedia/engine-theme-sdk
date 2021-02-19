@@ -4,7 +4,7 @@ import additionalSVGProps from './Helpers';
 type IconProps = import('./types').default;
 
 const EllipsisHorizontalIcon: React.FC<IconProps> = ({
-  width = 24, height = 24, fill = '#000', title = 'EllipsisHorizontal', description = '', context = 'presentational',
+  width = 24, height = 24, fill = '#000', title = 'Ellipsis Horizontal', description = '', context = 'presentational',
 }) => (
   <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" {...additionalSVGProps(context)}>
     <title>{title}</title>
