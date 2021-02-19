@@ -4,7 +4,7 @@ import additionalSVGProps from './Helpers';
 type IconProps = import('./types').default;
 
 const ArrowRightIcon: React.FC<IconProps> = ({
-  width = 24, height = 24, fill = '#000', title = 'Arrow Left', description = '', context = 'presentational',
+  width = 24, height = 24, fill = '#000', title = 'Arrow Right', description = '', context = 'presentational',
 }) => (
   <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" {...additionalSVGProps(context)}>
     <title>{title}</title>
