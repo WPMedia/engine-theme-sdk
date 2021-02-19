@@ -54,19 +54,19 @@ describe('the ChevronLeftIcon component', () => {
 
   describe('the title prop', () => {
     it('should set the title of the svg element', () => {
-      const wrapper = shallow(<ChevronLeftIcon title="an icon!" />);
+      const wrapper = shallow(<ChevronLeftIcon title="an icon!" context="image" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
   });
 
   describe('the description prop', () => {
     it('should set the description of the svg element', () => {
-      const wrapper = shallow(<ChevronLeftIcon description="this is an icon!" />);
+      const wrapper = shallow(<ChevronLeftIcon description="this is an icon!" context="image" />);
       expect(wrapper.find('desc').text()).toEqual('this is an icon!');
     });
 
     it('should default to an empty string', () => {
-      const wrapper = shallow(<ChevronLeftIcon />);
+      const wrapper = shallow(<ChevronLeftIcon context="image" />);
       expect(wrapper.find('desc').text()).toEqual('');
     });
   });

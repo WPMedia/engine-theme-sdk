@@ -54,19 +54,19 @@ describe('the EnvelopeOpenIcon component', () => {
 
   describe('the title prop', () => {
     it('should set the title of the svg element', () => {
-      const wrapper = shallow(<EnvelopeOpenIcon title="an icon!" />);
+      const wrapper = shallow(<EnvelopeOpenIcon title="an icon!" context="image" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
   });
 
   describe('the description prop', () => {
     it('should set the description of the svg element', () => {
-      const wrapper = shallow(<EnvelopeOpenIcon description="this is an icon!" />);
+      const wrapper = shallow(<EnvelopeOpenIcon description="this is an icon!" context="image" />);
       expect(wrapper.find('desc').text()).toEqual('this is an icon!');
     });
 
     it('should default to an empty string', () => {
-      const wrapper = shallow(<EnvelopeOpenIcon />);
+      const wrapper = shallow(<EnvelopeOpenIcon context="image" />);
       expect(wrapper.find('desc').text()).toEqual('');
     });
   });
