@@ -7,6 +7,13 @@ describe('the ArrowDownIcon component', () => {
     const wrapper = shallow(<ArrowDownIcon />);
     expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('viewBox')).toEqual('0 0 448 512');
+    expect(wrapper.prop('role')).not.toBeDefined();
+  });
+
+  it('should render as an "img" SVG', () => {
+    const wrapper = shallow(<ArrowDownIcon context="image" />);
+    expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('viewBox')).toEqual('0 0 448 512');
     expect(wrapper.prop('role')).toEqual('img');
   });
 
@@ -48,19 +55,19 @@ describe('the ArrowDownIcon component', () => {
 
   describe('the title prop', () => {
     it('should set the title of the svg element', () => {
-      const wrapper = shallow(<ArrowDownIcon title="an icon!" />);
+      const wrapper = shallow(<ArrowDownIcon title="an icon!" context="image" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
   });
 
   describe('the description prop', () => {
     it('should set the description of the svg element', () => {
-      const wrapper = shallow(<ArrowDownIcon description="this is an icon!" />);
+      const wrapper = shallow(<ArrowDownIcon description="this is an icon!" context="image" />);
       expect(wrapper.find('desc').text()).toEqual('this is an icon!');
     });
 
     it('should default to an empty string', () => {
-      const wrapper = shallow(<ArrowDownIcon />);
+      const wrapper = shallow(<ArrowDownIcon context="image" />);
       expect(wrapper.find('desc').text()).toEqual('');
     });
   });

@@ -7,6 +7,13 @@ describe('the ShoppingCart component', () => {
     const wrapper = shallow(<ShoppingCartIcon />);
     expect(wrapper.prop('viewBox')).toEqual('0 0 576 512');
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).not.toBeDefined();
+  });
+
+  it('should render as an "img" SVG', () => {
+    const wrapper = shallow(<ShoppingCartIcon context="image" />);
+    expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).toEqual('img');
   });
 
   describe('the width prop', () => {
@@ -47,24 +54,24 @@ describe('the ShoppingCart component', () => {
 
   describe('the title prop', () => {
     it('should set the title of the svg element', () => {
-      const wrapper = shallow(<ShoppingCartIcon title="an icon!" />);
+      const wrapper = shallow(<ShoppingCartIcon title="an icon!" context="image" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
 
     it('should default to our default title', () => {
-      const wrapper = shallow(<ShoppingCartIcon />);
+      const wrapper = shallow(<ShoppingCartIcon context="image" />);
       expect(wrapper.find('title').text()).toEqual('Shopping Cart Icon');
     });
   });
 
   describe('the description prop', () => {
     it('should set the description of the svg element', () => {
-      const wrapper = shallow(<ShoppingCartIcon description="this is an icon!" />);
+      const wrapper = shallow(<ShoppingCartIcon description="this is an icon!" context="image" />);
       expect(wrapper.find('desc').text()).toEqual('this is an icon!');
     });
 
     it('should default to an empty string', () => {
-      const wrapper = shallow(<ShoppingCartIcon />);
+      const wrapper = shallow(<ShoppingCartIcon context="image" />);
       expect(wrapper.find('desc').text()).toEqual('');
     });
   });

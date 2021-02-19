@@ -2,7 +2,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   extends: [
-    'airbnb', 
+    'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended'
   ],
@@ -17,7 +17,8 @@ module.exports = {
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
     'react/static-property-placement': 'off',
-    'import/extensions': 'off'
+    'import/extensions': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
   settings: {
     'import/resolver': {
