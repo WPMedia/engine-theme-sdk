@@ -47,7 +47,7 @@
     "@babel/plugin-proposal-decorators": "^7.12.12",
     "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@babel/preset-react": "^7.10.1",
-    "@babel/preset-typescript": "^7.10.1",
+    "@babel/preset-typescript": "^7.12.17",
     "@storybook/addon-a11y": "^6.1.14",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "^6.1.14",
