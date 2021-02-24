@@ -1,0 +1,25 @@
+import ErrorBoundry from '../src/components/ErrorBoundry';
+import { text } from "@storybook/addon-knobs";
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+<Meta title="ErrorBoundry" component={ErrorBoundry} />
+
+# Error Boundry
+
+The `ErrorBoundry` component is used when you wish to handle catching errors within children components and provide a fallback render option.
+
+If an error is thrown within `Children` this compoennt will catch it and redner the `fallback` prop value.
+
+## Use
+
+Import it into a block:
+
+```
+import { ErrorBoundry } from '@wpmedia/engine-theme-sdk';
+
+
+<ErrorBoundary fallback={<div>Fallback</div>}>
+  <div>Children</div>
+</ErrorBoundary>
+
+```
