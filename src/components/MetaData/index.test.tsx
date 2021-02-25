@@ -12,12 +12,6 @@ jest.mock('react-dom/server', () => ({
   renderToString: jest.fn().mockReturnValue('<meta />'),
 }));
 
-// getProperties.mockImplementation(() => ({
-//   websiteName: 'The Sun',
-//   twitterUsername: 'the-sun',
-//   dangerouslyInjectJS: [],
-// }));
-
 interface MetaValuesReturnInterface {
   (prop: string): string | null;
 }
@@ -162,13 +156,13 @@ const metaValues = (values: object): MetaValuesReturnInterface => {
 
 const titleTest = (pageType: string): void => {
   describe('when need to add a title tag', () => {
-    it('must use the meta value first and add the site name', () => {
+    it('must use the meta value', () => {
       const metaValue = metaValues({
         'page-type': pageType,
         title: 'meta title',
       });
       const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-      expect(wrapper.find('title').text()).toEqual(`${metaValue('title')} – ${websiteName}`);
+      expect(wrapper.find('title').text()).toEqual(metaValue('title'));
     });
 
     it('must use the headline if metaValue missing', () => {
@@ -578,7 +572,107 @@ const noGlobalContent = (pageType: string): void => {
   });
 };
 
-describe('the meta data ', () => {
+describe('the meta data', () => {
+  describe('override page title on any page type', () => {
+    it('when no page-type given', () => {
+      const metaValue = metaValues({
+        title: 'Custom Page Title',
+        'og:title': 'Custom OG Title',
+        twitterTitle: 'Custom Twitter Title',
+      });
+      const wrapper = wrapperGenerator(metaValue, {});
+      expect(wrapper.find('title').text()).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[property='og:title']").prop('content')).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[name='twitter:title']").prop('content')).toEqual(metaValue('title'));
+    });
+
+    it('when search page-type', () => {
+      const metaValue = metaValues({
+        'page-type': 'search',
+        title: 'Custom Page Title',
+        'og:title': 'Custom OG Title',
+        twitterTitle: 'Custom Twitter Title',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('title').text()).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[property='og:title']").prop('content')).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[name='twitter:title']").prop('content')).toEqual(metaValue('title'));
+    });
+
+    it('when article page-type', () => {
+      const metaValue = metaValues({
+        'page-type': 'article',
+        title: 'Custom Page Title',
+        'og:title': 'Custom OG Title',
+        twitterTitle: 'Custom Twitter Title',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('title').text()).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[property='og:title']").prop('content')).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[name='twitter:title']").prop('content')).toEqual(metaValue('title'));
+    });
+
+    it('when video page type', () => {
+      const metaValue = metaValues({
+        'page-type': 'video',
+        title: 'Custom Page Title',
+        'og:title': 'Custom OG Title',
+        twitterTitle: 'Custom Twitter Title',
+      });
+      const globalContent = {
+        ...globalContentComplete,
+        headlines: {},
+      };
+      const wrapper = wrapperGenerator(metaValue, globalContent);
+      expect(wrapper.find('title').text()).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[property='og:title']").prop('content')).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[name='twitter:title']").prop('content')).toEqual(metaValue('title'));
+    });
+
+    it('when gallery page-type', () => {
+      const metaValue = metaValues({
+        'page-type': 'gallery',
+        title: 'Custom Page Title',
+        'og:title': 'Custom OG Title',
+        twitterTitle: 'Custom Twitter Title',
+      });
+      const globalContent = {
+        ...globalContentComplete,
+        headlines: {},
+      };
+      const wrapper = wrapperGenerator(metaValue, globalContent);
+      expect(wrapper.find('title').text()).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[property='og:title']").prop('content')).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[name='twitter:title']").prop('content')).toEqual(metaValue('title'));
+    });
+
+    it('when author page-type', () => {
+      const metaValue = metaValues({
+        'page-type': 'author',
+        title: 'Custom Page Title',
+        'og:title': 'Custom OG Title',
+        twitterTitle: 'Custom Twitter Title',
+      });
+      const wrapper = wrapperGenerator(metaValue, {});
+      expect(wrapper.find('title').text()).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[property='og:title']").prop('content')).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[name='twitter:title']").prop('content')).toEqual(metaValue('title'));
+    });
+
+    it('when tag page-type', () => {
+      const metaValue = metaValues({
+        'page-type': 'tag',
+        title: 'Custom Page Title',
+        'og:title': 'Custom OG Title',
+        twitterTitle: 'Custom Twitter Title',
+      });
+      const wrapper = wrapperGenerator(metaValue, {});
+      expect(wrapper.find('title').text()).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[property='og:title']").prop('content')).toEqual(metaValue('title'));
+      expect(wrapper.find("meta[name='twitter:title']").prop('content')).toEqual(metaValue('title'));
+    });
+  });
+
   describe('when a article page type is provided', () => {
     describe('when globalContent is provided', () => {
       titleTest('article');
