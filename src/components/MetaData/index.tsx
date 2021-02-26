@@ -139,12 +139,12 @@ const MetaData: React.FC<Props> = ({
     ogImageAlt: null,
     url: generateUrl(arcSite, websiteDomain, gc),
     'page-type': pageType,
-    title: websiteName,
-    ogTitle: websiteName,
+    title: metaValue('title') || websiteName,
+    ogTitle: metaValue('og:title') || websiteName,
     ogSiteName: websiteName,
     twitterUsername: twitterUsername ? `@${twitterUsername}` : null,
     twitterCard: 'summary_large_image',
-    twitterTitle: websiteName,
+    twitterTitle: metaValue('twitter:title') || websiteName,
     twitterImage: null,
     fallbackImage: normalizeFallbackImage(websiteDomain, fallbackImage),
   };
@@ -154,18 +154,12 @@ const MetaData: React.FC<Props> = ({
       const description = gc && gc.description && gc.description.basic;
       const headline = gc && gc.headlines && gc.headlines.basic;
 
-      if (metaValue('title')) {
-        metaData.title = `${metaValue('title')} – ${websiteName}`;
-      } else if (headline) {
-        metaData.title = `${headline} – ${websiteName}`;
-      } else {
-        metaData.title = websiteName;
-      }
+      metaData.title = metaValue('title') || (headline && `${headline} – ${websiteName}`) || websiteName;
       metaData.description = metaValue('description') || description || null;
       metaData.ogTitle = metaValue('og:title') || headline || websiteName;
       metaData.ogImage = getImgURL(metaValue, 'og:image', gc, resizerURL) || metaData.fallbackImage;
       metaData.ogImageAlt = getImgAlt(metaValue, 'og:image:alt', gc);
-      metaData.twitterTitle = metaValue('twitterTitle') || headline || websiteName;
+      metaData.twitterTitle = metaValue('twitter:title') || headline || websiteName;
       metaData.twitterImage = getImgURL(metaValue, 'twitterImage', gc, resizerURL) || metaData.fallbackImage;
 
       // Keywords could be comma delimited string or array of string or an array of objects
@@ -231,9 +225,11 @@ const MetaData: React.FC<Props> = ({
     }
   } else if (pageType === 'author') {
     const author = (gc && gc.authors && gc.authors.length) ? gc.authors[0] : {};
+    const fallbackTitle = (author.byline && `${author.byline} - ${websiteName}`) || websiteName;
     metaData.description = metaValue('description') || author.bio || null;
-    metaData.ogTitle = metaValue('og:title') || author.byline || '';
-    metaData.twitterTitle = metaValue('twitterTitle') || author.byline || '';
+    metaData.ogTitle = metaValue('og:title') || fallbackTitle;
+    metaData.twitterTitle = metaValue('twitter:title') || fallbackTitle;
+    metaData.title = metaValue('title') || fallbackTitle;
     const { name: authorName } = author;
     const authorImageUrl = (typeof author.image === 'string')
       ? author.image
@@ -242,19 +238,6 @@ const MetaData: React.FC<Props> = ({
       ? author.image.alt_text
       : author.byline || authorName;
 
-    if (metaData.ogTitle === '') {
-      metaData.title = websiteName;
-      metaData.ogTitle = websiteName;
-    } else {
-      metaData.title = `${metaData.ogTitle} - ${websiteName}`;
-      metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
-    }
-
-    if (metaData.twitterTitle === '') {
-      metaData.twitterTitle = websiteName;
-    } else {
-      metaData.twitterTitle = `${metaData.twitterTitle} - ${websiteName}`;
-    }
     const authorPhoto = authorImageUrl || metaData.fallbackImage;
     const authorAlt = authorAltText || authorName || author.byline || websiteName;
 
@@ -286,34 +269,24 @@ const MetaData: React.FC<Props> = ({
       </>
     );
   } else if (pageType === 'search') {
-    metaData.title = `Search - ${websiteName}`;
-    metaData.ogTitle = `Search - ${websiteName}`;
+    const fallbackTitle = `Search - ${websiteName}`;
+    metaData.title = metaValue('title') || fallbackTitle;
+    metaData.ogTitle = metaValue('og:title') || fallbackTitle;
+    metaData.twitterTitle = metaValue('twitter:title') || fallbackTitle;
 
     searchMetaDataTags = (
       <>
         <meta property="og:title" content={metaData.ogTitle} />
-        <meta name="twitter:title" content={metaData.ogTitle} />
+        <meta name="twitter:title" content={metaData.twitterTitle} />
       </>
     );
   } else if (pageType === 'tag') {
     const payload = (gc && gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
+    const fallbackTitle = (payload.name && `${payload.name} - ${websiteName}`) || websiteName;
     metaData.description = metaValue('description') || payload.description || null;
-    metaData.ogTitle = metaValue('og:title') || payload.name || '';
-    metaData.twitterTitle = metaValue('twitterTitle') || payload.name || '';
-
-    if (metaData.ogTitle === '') {
-      metaData.title = websiteName;
-      metaData.ogTitle = websiteName;
-    } else {
-      metaData.title = `${metaData.ogTitle} - ${websiteName}`;
-      metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
-    }
-
-    if (metaData.twitterTitle === '') {
-      metaData.twitterTitle = websiteName;
-    } else {
-      metaData.twitterTitle = `${metaData.twitterTitle} - ${websiteName}`;
-    }
+    metaData.title = metaValue('title') || fallbackTitle;
+    metaData.ogTitle = metaValue('og:title') || fallbackTitle;
+    metaData.twitterTitle = metaValue('twitter:title') || fallbackTitle;
 
     tagMetaDataTags = (
       <>
@@ -345,26 +318,11 @@ const MetaData: React.FC<Props> = ({
   } else if (pageType === 'section') {
     const payload = (gc && gc.name) ? gc : {};
     const gcMetadata = (gc && gc.metadata) ? gc.metadata : {};
+    const fallbackTitle = (payload.name && `${payload.name} - ${websiteName}`) || websiteName;
     metaData.description = metaValue('description') || gcMetadata.metadata_description || null;
-    metaData.ogTitle = metaValue('og:title') || payload.name || '';
-    metaData.title = metaValue('title') || gcMetadata.metadata_title || payload.name || '';
-    metaData.twitterTitle = metaValue('twitterTitle') || payload.name || '';
-
-    if (metaData.ogTitle === '') {
-      metaData.ogTitle = websiteName;
-    } else {
-      metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
-    }
-    if (metaData.title === '') {
-      metaData.title = metaData.ogTitle;
-    } else if (metaData.title === payload.name) {
-      metaData.title = `${metaData.title} - ${websiteName}`;
-    }
-    if (metaData.twitterTitle === '') {
-      metaData.twitterTitle = websiteName;
-    } else {
-      metaData.twitterTitle = `${metaData.twitterTitle} - ${websiteName}`;
-    }
+    metaData.title = metaValue('title') || gcMetadata.metadata_title || fallbackTitle;
+    metaData.ogTitle = metaValue('og:title') || fallbackTitle;
+    metaData.twitterTitle = metaValue('twitter:title') || fallbackTitle;
 
     sectionMetaDataTags = (
       <>
@@ -395,12 +353,6 @@ const MetaData: React.FC<Props> = ({
       </>
     );
   } else if (pageType === 'homepage') {
-    const pageTitle = metaValue('title');
-    if (pageTitle) {
-      metaData.title = `${pageTitle}`;
-      metaData.ogTitle = `${pageTitle}`;
-      metaData.twitterTitle = `${pageTitle}`;
-    }
     homepageMetaDataTags = (
       <>
         <meta property="og:title" content={metaData.ogTitle} />
@@ -431,8 +383,8 @@ const MetaData: React.FC<Props> = ({
   } else {
     sectionMetaDataTags = (
       <>
-        <meta property="og:title" content={metaData.title} />
-        <meta name="twitter:title" content={metaData.title} />
+        <meta property="og:title" content={metaData.ogTitle} />
+        <meta name="twitter:title" content={metaData.twitterTitle} />
       </>
     );
   }
