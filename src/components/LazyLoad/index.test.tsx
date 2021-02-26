@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { ReactElement } from 'react';
 import { mount } from 'enzyme';
 import LazyLoad from './index';
