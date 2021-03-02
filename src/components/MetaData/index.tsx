@@ -140,11 +140,11 @@ const MetaData: React.FC<Props> = ({
     url: generateUrl(arcSite, websiteDomain, gc),
     'page-type': pageType,
     title: metaValue('title') || websiteName,
-    ogTitle: metaValue('og:title') || websiteName,
+    'og:title': metaValue('og:title') || websiteName,
     ogSiteName: websiteName,
     twitterUsername: twitterUsername ? `@${twitterUsername}` : null,
     twitterCard: 'summary_large_image',
-    twitterTitle: metaValue('twitter:title') || websiteName,
+    'twitter:title': metaValue('twitter:title') || websiteName,
     twitterImage: null,
     fallbackImage: normalizeFallbackImage(websiteDomain, fallbackImage),
   };
@@ -156,10 +156,10 @@ const MetaData: React.FC<Props> = ({
 
       metaData.title = metaValue('title') || (headline && `${headline} – ${websiteName}`) || websiteName;
       metaData.description = metaValue('description') || description || null;
-      metaData.ogTitle = metaValue('og:title') || headline || websiteName;
+      metaData['og:title'] = metaValue('og:title') || headline || websiteName;
       metaData.ogImage = getImgURL(metaValue, 'og:image', gc, resizerURL) || metaData.fallbackImage;
       metaData.ogImageAlt = getImgAlt(metaValue, 'og:image:alt', gc);
-      metaData.twitterTitle = metaValue('twitter:title') || headline || websiteName;
+      metaData['twitter:title'] = metaValue('twitter:title') || headline || websiteName;
       metaData.twitterImage = getImgURL(metaValue, 'twitterImage', gc, resizerURL) || metaData.fallbackImage;
 
       // Keywords could be comma delimited string or array of string or an array of objects
@@ -197,8 +197,8 @@ const MetaData: React.FC<Props> = ({
             && <meta name="keywords" content={metaData.keywords} />
           }
 
-          <meta property="og:title" content={metaData.ogTitle} />
-          <meta name="twitter:title" content={metaData.twitterTitle} />
+          <meta property="og:title" content={metaData['og:title']} />
+          <meta name="twitter:title" content={metaData['twitter:title']} />
 
           {
             metaData.ogImage
@@ -227,8 +227,8 @@ const MetaData: React.FC<Props> = ({
     const author = (gc && gc.authors && gc.authors.length) ? gc.authors[0] : {};
     const fallbackTitle = (author.byline && `${author.byline} - ${websiteName}`) || websiteName;
     metaData.description = metaValue('description') || author.bio || null;
-    metaData.ogTitle = metaValue('og:title') || fallbackTitle;
-    metaData.twitterTitle = metaValue('twitter:title') || fallbackTitle;
+    metaData['og:title'] = metaValue('og:title') || fallbackTitle;
+    metaData['twitter:title'] = metaValue('twitter:title') || fallbackTitle;
     metaData.title = metaValue('title') || fallbackTitle;
     const { name: authorName } = author;
     const authorImageUrl = (typeof author.image === 'string')
@@ -253,8 +253,8 @@ const MetaData: React.FC<Props> = ({
             </>
           )
         }
-        <meta property="og:title" content={metaData.ogTitle} />
-        <meta name="twitter:title" content={metaData.twitterTitle} />
+        <meta property="og:title" content={metaData['og:title']} />
+        <meta name="twitter:title" content={metaData['twitter:title']} />
         {
           authorPhoto
           && (
@@ -271,13 +271,13 @@ const MetaData: React.FC<Props> = ({
   } else if (pageType === 'search') {
     const fallbackTitle = `Search - ${websiteName}`;
     metaData.title = metaValue('title') || fallbackTitle;
-    metaData.ogTitle = metaValue('og:title') || fallbackTitle;
-    metaData.twitterTitle = metaValue('twitter:title') || fallbackTitle;
+    metaData['og:title'] = metaValue('og:title') || fallbackTitle;
+    metaData['twitter:title'] = metaValue('twitter:title') || fallbackTitle;
 
     searchMetaDataTags = (
       <>
-        <meta property="og:title" content={metaData.ogTitle} />
-        <meta name="twitter:title" content={metaData.twitterTitle} />
+        <meta property="og:title" content={metaData['og:title']} />
+        <meta name="twitter:title" content={metaData['twitter:title']} />
       </>
     );
   } else if (pageType === 'tag') {
@@ -285,8 +285,8 @@ const MetaData: React.FC<Props> = ({
     const fallbackTitle = (payload.name && `${payload.name} - ${websiteName}`) || websiteName;
     metaData.description = metaValue('description') || payload.description || null;
     metaData.title = metaValue('title') || fallbackTitle;
-    metaData.ogTitle = metaValue('og:title') || fallbackTitle;
-    metaData.twitterTitle = metaValue('twitter:title') || fallbackTitle;
+    metaData['og:title'] = metaValue('og:title') || fallbackTitle;
+    metaData['twitter:title'] = metaValue('twitter:title') || fallbackTitle;
 
     tagMetaDataTags = (
       <>
@@ -300,16 +300,16 @@ const MetaData: React.FC<Props> = ({
             </>
           )
         }
-        <meta property="og:title" content={metaData.ogTitle} />
-        <meta name="twitter:title" content={metaData.twitterTitle} />
+        <meta property="og:title" content={metaData['og:title']} />
+        <meta name="twitter:title" content={metaData['twitter:title']} />
         {
           metaData.fallbackImage
           && (
             <>
               <meta property="og:image" content={metaData.fallbackImage} />
-              <meta property="og:image:alt" content={metaData.ogTitle} />
+              <meta property="og:image:alt" content={metaData['og:title']} />
               <meta name="twitter:image" content={metaData.fallbackImage} />
-              <meta name="twitter:image:alt" content={metaData.twitterTitle} />
+              <meta name="twitter:image:alt" content={metaData['twitter:title']} />
             </>
           )
         }
@@ -321,8 +321,8 @@ const MetaData: React.FC<Props> = ({
     const fallbackTitle = (payload.name && `${payload.name} - ${websiteName}`) || websiteName;
     metaData.description = metaValue('description') || gcMetadata.metadata_description || null;
     metaData.title = metaValue('title') || gcMetadata.metadata_title || fallbackTitle;
-    metaData.ogTitle = metaValue('og:title') || fallbackTitle;
-    metaData.twitterTitle = metaValue('twitter:title') || fallbackTitle;
+    metaData['og:title'] = metaValue('og:title') || fallbackTitle;
+    metaData['twitter:title'] = metaValue('twitter:title') || fallbackTitle;
 
     sectionMetaDataTags = (
       <>
@@ -336,17 +336,17 @@ const MetaData: React.FC<Props> = ({
             </>
           )
         }
-        <meta property="og:title" content={metaData.ogTitle} />
-        <meta name="twitter:title" content={metaData.twitterTitle} />
+        <meta property="og:title" content={metaData['og:title']} />
+        <meta name="twitter:title" content={metaData['twitter:title']} />
 
         {
           metaData.fallbackImage
           && (
             <>
               <meta property="og:image" content={metaData.fallbackImage} />
-              <meta property="og:image:alt" content={metaData.ogTitle} />
+              <meta property="og:image:alt" content={metaData['og:title']} />
               <meta name="twitter:image" content={metaData.fallbackImage} />
-              <meta name="twitter:image:alt" content={metaData.twitterTitle} />
+              <meta name="twitter:image:alt" content={metaData['twitter:title']} />
             </>
           )
         }
@@ -355,8 +355,8 @@ const MetaData: React.FC<Props> = ({
   } else if (pageType === 'homepage') {
     homepageMetaDataTags = (
       <>
-        <meta property="og:title" content={metaData.ogTitle} />
-        <meta name="twitter:title" content={metaData.twitterTitle} />
+        <meta property="og:title" content={metaData['og:title']} />
+        <meta name="twitter:title" content={metaData['twitter:title']} />
         {
           metaData.fallbackImage
           && (
@@ -383,8 +383,8 @@ const MetaData: React.FC<Props> = ({
   } else {
     sectionMetaDataTags = (
       <>
-        <meta property="og:title" content={metaData.ogTitle} />
-        <meta name="twitter:title" content={metaData.twitterTitle} />
+        <meta property="og:title" content={metaData['og:title']} />
+        <meta name="twitter:title" content={metaData['twitter:title']} />
       </>
     );
   }
