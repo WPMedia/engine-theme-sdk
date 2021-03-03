@@ -7,6 +7,12 @@ describe('the PreviousIcon component', () => {
     const wrapper = shallow(<PreviousIcon />);
     expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('viewBox')).toEqual('0 0 448 512');
+    expect(wrapper.prop('role')).not.toBeDefined();
+  });
+
+  it('should render as an "img" SVG', () => {
+    const wrapper = shallow(<PreviousIcon context="image" />);
+    expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('role')).toEqual('img');
   });
 
@@ -48,19 +54,19 @@ describe('the PreviousIcon component', () => {
 
   describe('the title prop', () => {
     it('should set the title of the svg element', () => {
-      const wrapper = shallow(<PreviousIcon title="an icon!" />);
+      const wrapper = shallow(<PreviousIcon title="an icon!" context="image" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
   });
 
   describe('the description prop', () => {
     it('should set the description of the svg element', () => {
-      const wrapper = shallow(<PreviousIcon description="this is an icon!" />);
+      const wrapper = shallow(<PreviousIcon description="this is an icon!" context="image" />);
       expect(wrapper.find('desc').text()).toEqual('this is an icon!');
     });
 
     it('should default to an empty string', () => {
-      const wrapper = shallow(<PreviousIcon />);
+      const wrapper = shallow(<PreviousIcon context="image" />);
       expect(wrapper.find('desc').text()).toEqual('');
     });
   });
