@@ -9,6 +9,13 @@ function localizeDateHelper(
   timeZone: string,
 ): string {
   let locale = null;
+  // locale is the language, like English has January
+  // language list can be found here https://github.com/bigeasy/timezone/tree/master/src/locales
+  // all languages are being imported
+  // but catching ones not matched to english or specified one to language
+  // country and language can affect translations as well
+  // eg, spain spanish and mexican spanish can be different
+  // todo: language should be able to pass in anything
   switch (language) {
     case 'sv':
       locale = 'sv_SE';
@@ -37,6 +44,9 @@ function localizeDateHelper(
   }
   // Convert to UTC date
   const utc = tz(date);
+
+  // timezone is the TZ database name https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  // all timezones currently work
   return tz(utc, targetDateFormat, locale, timeZone);
 }
 
