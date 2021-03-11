@@ -11,7 +11,7 @@ it('returns us east expected output with at', () => {
   ).toMatchInlineSnapshot('"January 01, 2000 at  8:00 pm EST"');
 });
 
-it('returns time zone for unspecified locale but falls back to english language for month names if not matched', () => {
+it('returns American english language for not found locale, but uses correct time zone passed in', () => {
   expect(
     localizeDateHelper(
       '2000-01-02 01:00',
