@@ -1,7 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const tz = require('timezone')(require('timezone/zones'), require('timezone/en_US.js'), require('timezone/sv_SE.js'), require('timezone/fr_FR.js'), require('timezone/nb_NO.js'), require('timezone/de_DE'), require('timezone/es_ES'), require('timezone/ja_JP'), require('timezone/ko_KR'));
-
+/* eslint-disable @typescript-eslint/no-var-requires,global-require */
 // tz docs https://bigeasy.github.io/timezone/
+import tz from 'timezone';
+
 function localizeDateHelper(
   date: string,
   targetDateFormat: string,
@@ -9,13 +9,6 @@ function localizeDateHelper(
   timeZone: string,
 ): string {
   let locale = null;
-  // locale is the language, like English has January
-  // language list can be found here https://github.com/bigeasy/timezone/tree/master/src/locales
-  // all languages are being imported
-  // but catching ones not matched to english or specified one to language
-  // country and language can affect translations as well
-  // eg, spain spanish and mexican spanish can be different
-  // todo: language should be able to pass in anything
   switch (language) {
     case 'sv':
       locale = 'sv_SE';
@@ -42,11 +35,46 @@ function localizeDateHelper(
     default:
       locale = 'en_US';
   }
+
   // Convert to UTC date
   const utc = tz(date);
 
+  if (locale === 'en_US') {
+    const NYC = tz(require('timezone/America/New_York'));
+    return NYC(utc, 'America/New_York', targetDateFormat);
+  }
+
+  if (locale === 'ko_KR') {
+    const KOREA = tz(require('timezone/Asia/Seoul'));
+    return KOREA(utc, 'Asia/Seoul', targetDateFormat);
+  }
+
+  if (locale === 'ja_JP') {
+    const JAPAN = tz(require('timezone/Asia/Tokyo'));
+    return JAPAN(utc, 'Asia/Tokyo', targetDateFormat);
+  }
+
+  if (locale === 'es_ES') {
+    const MADRID = tz(require('timezone/Europe/Madrid'));
+    return MADRID(utc, 'Europe/Madrid', targetDateFormat);
+  }
+
+  if (locale === 'de_DE') {
+    const BUSINGEN = tz(require('timezone/Europe/Busingen'));
+    return BUSINGEN(utc, 'Europe/Busingen', targetDateFormat);
+  }
+
+  if (locale === 'fr_FR') {
+    const PARIS = tz(require('timezone/Europe/Paris'));
+    return PARIS(utc, 'Europe/Paris', targetDateFormat);
+  }
+
+  if (locale === 'sv_SE') {
+    const STOCKHOLM = tz(require('timezone/Europe/Stockholm'));
+    return STOCKHOLM(utc, 'timezone/Stockholm', targetDateFormat);
+  }
+
   // timezone is the TZ database name https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  // all timezones currently work
   return tz(utc, targetDateFormat, locale, timeZone);
 }
 
