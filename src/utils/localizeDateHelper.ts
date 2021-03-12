@@ -39,43 +39,51 @@ function localizeDateHelper(
   // Convert to UTC date
   const utc = tz(date);
 
-  if (locale === 'en_US') {
-    const NYC = tz(require('timezone/America/New_York'));
-    return NYC(utc, 'America/New_York', targetDateFormat);
-  }
+  // performance improvement via https://github.com/bigeasy/timezone/issues/292#issuecomment-354597725
+
+  // 1. match locale.
+  // locale is related to language and place (eg, Spanish and Mexico)
+  // 2. require target locale and timezone
+  // timezone is the quirks of the area time-wise (eg daylight savings)
+  // 3. use the function along with utc time and target date format
+  // utc time is not region-specific
+  // targetDateFormat is like "%d %m" for day month, formatting
 
   if (locale === 'ko_KR') {
-    const KOREA = tz(require('timezone/Asia/Seoul'));
-    return KOREA(utc, 'Asia/Seoul', targetDateFormat);
+    const SEOUL = tz(require('timezone/Asia/Seoul'), require('ko_KR'));
+    return SEOUL(utc, 'Asia/Seoul', targetDateFormat);
   }
 
   if (locale === 'ja_JP') {
-    const JAPAN = tz(require('timezone/Asia/Tokyo'));
-    return JAPAN(utc, 'Asia/Tokyo', targetDateFormat);
+    const TOKYO = tz(require('timezone/Asia/Tokyo'), require('timezone/ja_JP'));
+    return TOKYO(utc, 'Asia/Tokyo', targetDateFormat);
   }
 
   if (locale === 'es_ES') {
-    const MADRID = tz(require('timezone/Europe/Madrid'));
-    return MADRID(utc, 'Europe/Madrid', targetDateFormat);
+    const MADRID = tz(require('timezone/Europe/Madrid'), require('timezone/es_ES'));
+    return MADRID(utc, locale, 'Europe/Madrid', targetDateFormat);
   }
 
   if (locale === 'de_DE') {
-    const BUSINGEN = tz(require('timezone/Europe/Busingen'));
-    return BUSINGEN(utc, 'Europe/Busingen', targetDateFormat);
+    const BUSINGEN = tz(require('timezone/Europe/Busingen'), require('timezone/de_DE'));
+    return BUSINGEN(utc, locale, 'Europe/Busingen', targetDateFormat);
   }
 
   if (locale === 'fr_FR') {
-    const PARIS = tz(require('timezone/Europe/Paris'));
-    return PARIS(utc, 'Europe/Paris', targetDateFormat);
+    const PARIS = tz(require('timezone/Europe/Paris'), require('timezone/fr_FR'));
+    return PARIS(utc, locale, 'Europe/Paris', targetDateFormat);
   }
 
   if (locale === 'sv_SE') {
-    const STOCKHOLM = tz(require('timezone/Europe/Stockholm'));
-    return STOCKHOLM(utc, 'timezone/Stockholm', targetDateFormat);
+    const STOCKHOLM = tz(require('timezone/Europe/Stockholm'), require('timezone/sv_SE'));
+    return STOCKHOLM(utc, locale, 'timezone/Stockholm', targetDateFormat);
   }
 
-  // timezone is the TZ database name https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  return tz(utc, targetDateFormat, locale, timeZone);
+  // default case
+  // if (locale === 'en_US') {
+  const NYC = tz(require('timezone/America/New_York'), require('timezone/en_US'));
+  return NYC(utc, locale, 'America/New_York', targetDateFormat);
+  // }
 }
 
 export default localizeDateHelper;
