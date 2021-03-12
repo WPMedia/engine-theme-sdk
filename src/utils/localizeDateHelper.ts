@@ -50,7 +50,7 @@ function localizeDateHelper(
   // targetDateFormat is like "%d %m" for day month, formatting
 
   if (locale === 'ko_KR') {
-    const SEOUL = tz(require('timezone/Asia/Seoul'), require('ko_KR'));
+    const SEOUL = tz(require('timezone/Asia/Seoul'), require('timezone/ko_KR'));
     return SEOUL(utc, 'Asia/Seoul', targetDateFormat);
   }
 
