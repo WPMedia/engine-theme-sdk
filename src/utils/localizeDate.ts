@@ -6,7 +6,6 @@ const DATE_FORMAT_FALLBACK = '%B %d, %Y';
 
 // date comes in Thu Mar 11 2021 17:27:24 GMT-0600 (Central Standard Time)
 const localizeDate = (date,
-  // fallback not working %B NaN, %Y
   dateFormat = DATE_FORMAT_FALLBACK,
   language = 'en',
   timeZone = 'America/New_York'): string => {
