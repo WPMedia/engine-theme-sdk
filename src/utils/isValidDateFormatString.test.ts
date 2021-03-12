@@ -9,7 +9,6 @@ describe('Date format validater', () => {
     expect(isValidDateFormatString('%dffff')).toBe(true);
   });
   it('allows a date format with many %{letter}%{letter} valid options', () => {
-    // will return '1fffff'
     expect(isValidDateFormatString('%d%d')).toBe(true);
   });
   it('disallows a date format that is null', () => {
