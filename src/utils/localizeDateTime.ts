@@ -1,11 +1,20 @@
+import isValidDateFormatString from './isValidDateFormatString';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const tz = require('timezone')(require('timezone/zones'), require('timezone/en_US.js'), require('timezone/sv_SE.js'), require('timezone/fr_FR.js'), require('timezone/nb_NO.js'), require('timezone/de_DE'), require('timezone/es_ES'), require('timezone/ja_JP'), require('timezone/ko_KR'));
 
+const DATE_TIME_FORMAT_FALLBACK = '%B %d, %Y at %l:%M %P %Z';
+
 const localizeDateTime = (date,
-  dateFormat = '%B %d, %Y at %l:%M %P %Z',
+  dateFormat = DATE_TIME_FORMAT_FALLBACK,
   language = 'en',
   timeZone = 'America/New_York'): string => {
   if (!date) return '';
+
+  let validDateFormat = dateFormat;
+
+  if (!isValidDateFormatString(dateFormat)) {
+    validDateFormat = DATE_TIME_FORMAT_FALLBACK;
+  }
 
   let locale = null;
   switch (language) {
@@ -35,7 +44,7 @@ const localizeDateTime = (date,
   }
   // Convert to UTC date
   const utc = tz(date);
-  return tz(utc, dateFormat, locale, timeZone);
+  return tz(utc, validDateFormat, locale, timeZone);
 };
 
 export default localizeDateTime;
