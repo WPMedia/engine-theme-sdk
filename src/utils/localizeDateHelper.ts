@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires,global-require */
+/* eslint-disable @typescript-eslint/no-var-requires */
 // tz docs https://bigeasy.github.io/timezone/
 const tz = require('timezone')(
   // supported timezones
