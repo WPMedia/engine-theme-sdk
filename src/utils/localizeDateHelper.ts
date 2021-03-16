@@ -3,14 +3,28 @@
 const tz = require('timezone')(
   // supported timezones
   // timezone is the quirks of the area time-wise (eg daylight savings) and timezone
-  require('timezone/Asia/Seoul'),
-  require('timezone/Asia/Tokyo'),
-  require('timezone/Europe/Madrid'),
-  require('timezone/Europe/Busingen'),
+
+  // Asia
+  // client not actively using
+  // require('timezone/Asia/Seoul'),
+  // require('timezone/Asia/Tokyo'),
+
+  // Europe
+  // client not actively using
+  // require('timezone/Europe/Busingen'),
+  // require('timezone/Europe/Madrid'),
   require('timezone/Europe/Paris'),
-  require('timezone/Europe/Stockholm'),
-  require('timezone/America/New_York'),
   require('timezone/Europe/Oslo'),
+  require('timezone/Europe/Stockholm'),
+
+  // Americas
+  require('timezone/America/New_York'),
+  require('timezone/America/Chicago'),
+  require('timezone/America/Los_Angeles'),
+  require('timezone/America/Mexico_City'),
+
+  // Pacific
+  require('timezone/Pacific/Auckland'),
 
   // supported locales
   // locale is related to language and place (eg, Spanish and Mexico)
