@@ -10,12 +10,12 @@ const tz = require('timezone')(
   // require('timezone/Asia/Tokyo'),
 
   // Europe
-  // client not actively using
-  // require('timezone/Europe/Busingen'),
-  // require('timezone/Europe/Madrid'),
   require('timezone/Europe/Paris'),
   require('timezone/Europe/Oslo'),
   require('timezone/Europe/Stockholm'),
+  // client not actively using
+  // require('timezone/Europe/Busingen'),
+  // require('timezone/Europe/Madrid'),
 
   // Americas
   require('timezone/America/New_York'),
