@@ -13,13 +13,22 @@ const tz = require('timezone')(
 
   // supported locales
   // locale is related to language and place (eg, Spanish and Mexico)
+  // korean
   require('timezone/ko_KR'),
+  // japanese
   require('timezone/ja_JP'),
+  // Spain Spanish
   require('timezone/es_ES'),
+  // Swedish
   require('timezone/sv_SE'),
+  // American English
   require('timezone/en_US'),
+  // german
   require('timezone/de_DE'),
+  // french
   require('timezone/fr_FR'),
+  // norwegian
+  require('timezone/nb_NO'),
 );
 
 function localizeDateHelper(
