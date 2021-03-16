@@ -21,12 +21,10 @@ it('returns American english language and utc date for timezone not found', () =
       // india standard time
       'Asia/Kolkata',
     ),
-  ).toMatchInlineSnapshot(
-    '"January 02, 2000  1:00 am UTC"',
-  );
+  ).toMatchInlineSnapshot('"January 02, 2000  1:00 am UTC"');
 });
 
-it('returns seoul for locale ko', () => {
+it('returns correct Korean language for locale ko but falls back to UTC', () => {
   expect(
     localizeDateHelper(
       '2000-01-02 01:00',
@@ -34,5 +32,27 @@ it('returns seoul for locale ko', () => {
       'ko',
       'Asia/Seoul',
     ),
-  ).toMatchInlineSnapshot('"1월 02, 2000 10:00 오전 KST"');
+  ).toMatchInlineSnapshot('"1월 02, 2000  1:00 오전 UTC"');
+});
+
+it('supports language and timezone for Kiwis speaking Spain Spanish', () => {
+  expect(
+    localizeDateHelper(
+      '2000-01-02 01:00',
+      '%B %d, %Y %l:%M %P %Z',
+      'es',
+      'Pacific/Auckland',
+    ),
+  ).toMatchInlineSnapshot('"enero 02, 2000  2:00  NZDT"');
+});
+
+it('Supports french-speakers in Paris', () => {
+  expect(
+    localizeDateHelper(
+      '2000-01-02 01:00',
+      '%B %d, %Y %l:%M %P %Z',
+      'fr',
+      'Europe/Paris',
+    ),
+  ).toMatchInlineSnapshot('"janvier 02, 2000  2:00  CET"');
 });
