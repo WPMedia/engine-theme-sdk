@@ -10,6 +10,7 @@ const tz = require('timezone')(
   require('timezone/Europe/Paris'),
   require('timezone/Europe/Stockholm'),
   require('timezone/America/New_York'),
+  require('timezone/Europe/Oslo'),
 
   // supported locales
   // locale is related to language and place (eg, Spanish and Mexico)
