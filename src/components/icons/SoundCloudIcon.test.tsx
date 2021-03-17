@@ -7,6 +7,13 @@ describe('the SoundCloudIcon component', () => {
     const wrapper = shallow(<SoundCloudIcon />);
     expect(wrapper.prop('viewBox')).toEqual('0 0 640 512');
     expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).not.toBeDefined();
+  });
+
+  it('should render as an "img" SVG', () => {
+    const wrapper = shallow(<SoundCloudIcon context="image" />);
+    expect(wrapper.name()).toEqual('svg');
+    expect(wrapper.prop('role')).toEqual('img');
   });
 
   describe('the width prop', () => {
@@ -47,19 +54,19 @@ describe('the SoundCloudIcon component', () => {
 
   describe('the title prop', () => {
     it('should set the title of the svg element', () => {
-      const wrapper = shallow(<SoundCloudIcon title="an icon!" />);
+      const wrapper = shallow(<SoundCloudIcon title="an icon!" context="image" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
   });
 
   describe('the description prop', () => {
     it('should set the description of the svg element', () => {
-      const wrapper = shallow(<SoundCloudIcon description="this is an icon!" />);
+      const wrapper = shallow(<SoundCloudIcon description="this is an icon!" context="image" />);
       expect(wrapper.find('desc').text()).toEqual('this is an icon!');
     });
 
     it('should default to an empty string', () => {
-      const wrapper = shallow(<SoundCloudIcon />);
+      const wrapper = shallow(<SoundCloudIcon context="image" />);
       expect(wrapper.find('desc').text()).toEqual('');
     });
   });

@@ -7,6 +7,12 @@ describe('the PauseIcon component', () => {
     const wrapper = shallow(<PauseIcon />);
     expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('viewBox')).toEqual('2 1 22 22');
+    expect(wrapper.prop('role')).not.toBeDefined();
+  });
+
+  it('should render as an "img" SVG', () => {
+    const wrapper = shallow(<PauseIcon context="image" />);
+    expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('role')).toEqual('img');
   });
 
@@ -48,19 +54,19 @@ describe('the PauseIcon component', () => {
 
   describe('the title prop', () => {
     it('should set the title of the svg element', () => {
-      const wrapper = shallow(<PauseIcon title="an icon!" />);
+      const wrapper = shallow(<PauseIcon title="an icon!" context="image" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
   });
 
   describe('the description prop', () => {
     it('should set the description of the svg element', () => {
-      const wrapper = shallow(<PauseIcon description="this is an icon!" />);
+      const wrapper = shallow(<PauseIcon description="this is an icon!" context="image" />);
       expect(wrapper.find('desc').text()).toEqual('this is an icon!');
     });
 
     it('should default to an empty string', () => {
-      const wrapper = shallow(<PauseIcon />);
+      const wrapper = shallow(<PauseIcon context="image" />);
       expect(wrapper.find('desc').text()).toEqual('');
     });
   });

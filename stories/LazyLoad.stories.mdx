@@ -1,0 +1,144 @@
+import LazyLoad from "../src/components/LazyLoad";
+import Image from "../src/components/Image";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+
+<Meta title="LazyLoad" component={LazyLoad} />
+
+# LazyLoad
+
+The `LazyLoad` component is used to add lazy-loading functionality to any valid React component by wrapping the target component as a child. This allows the child component to only load once the reader has scrolled to within a certain threshold of the component. Once they have passed this threshold while scrolling, the child component will by loaded.
+
+## Lazy Loading
+
+This component uses [`lazy-child`](https://www.npmjs.com/package/lazy-child) which has a dependency on IntersectionObserver which is not supported in all browsers [see support](https://caniuse.com/#feat=intersectionobserver) - if you need to support browsers that do not have IntersectionObserver you will need to use a polyfill.
+The IntersectionObserver polyfill is already included with the theme blocks output types.
+
+At this time, all images are lazy loaded, however the lazyOptions param
+object can be used to adjust when the image is loaded when it enters the viewport. The lazyOptions param object allows for checks against the bottom, left, right and top.
+The default is 0 for all 4 options. By adjusting those values, you can force an image to load sooner or later as it approaches the viewport. You also have an option of specifying a custom `throttle` prop that allows you to modify the rate at which the scroll value is recalculated.
+
+# Use
+
+Import it into a block:
+
+```
+import { LazyLoad } from '@wpmedia/engine-theme-sdk';
+
+...
+
+const ChildComponent = () => <div id="test-child-component" />;
+
+<LazyLoad
+  enabled={true}
+  offsetTop={200}
+  offsetBottom={200}
+  offsetLeft={0}
+  offsetRight={0}
+  throttle={50}
+>
+  <ChildComponent />
+</LazyLoad>
+
+...
+
+```
+
+# ArgsTable
+
+<ArgsTable of={LazyLoad} />
+
+## Stories
+
+### **Basic**
+<Canvas>
+  <Story name="Basic">
+    <div style={{ margin: '30px' }}>
+      <div style={{
+        backgroundColor: 'blue',
+        color: 'white',
+        textAlign: 'center',
+        padding: '30px',
+        height: '3000px',
+        borderRadius: '6px',
+        fontFamily: 'sans-serif',
+        marginBottom: '30px',
+      }}>
+        Scroll down to view lazy-loaded image
+      </div>
+      <LazyLoad enabled={true}>
+        <Image
+          url={
+            "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
+          }
+          alt={"Aerial view of bridge"}
+          smallWidth={158}
+          smallHeight={89}
+          mediumWidth={274}
+          mediumHeight={154}
+          largeWidth={274}
+          largeHeight={154}
+          resizedImageOptions={{
+            "158x89":
+              "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
+            "274x154":
+              "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
+          }}
+          resizerURL={
+            "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
+          }
+        />
+      </LazyLoad>
+    </div>
+  </Story>
+</Canvas>
+
+### **With custom fields**
+
+<Canvas>
+  <Story name="With custom fields">
+    <div style={{ margin: '30px' }}>
+      <div style={{
+        backgroundColor: 'blue',
+        color: 'white',
+        textAlign: 'center',
+        padding: '30px',
+        height: '3000px',
+        borderRadius: '6px',
+        fontFamily: 'sans-serif',
+        marginBottom: '30px',
+      }}>
+        Scroll down to view lazy-loaded image
+      </div>
+      <LazyLoad
+        enabled={true}
+        offsetTop={50}
+        offsetBottom={50}
+        offsetLeft={0}
+        offsetRight={0}
+        throttle={50}
+      >
+        <Image
+          url={
+            "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
+          }
+          alt={"Aerial view of bridge"}
+          smallWidth={158}
+          smallHeight={89}
+          mediumWidth={274}
+          mediumHeight={154}
+          largeWidth={274}
+          largeHeight={154}
+          resizedImageOptions={{
+            "158x89":
+              "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
+            "274x154":
+              "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
+          }}
+          resizerURL={
+            "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
+          }
+        />
+      </LazyLoad>
+    </div>
+  </Story>
+</Canvas>

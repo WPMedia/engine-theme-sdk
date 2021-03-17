@@ -23,7 +23,6 @@
  * EventEmitter.subscribe('galleryImageNext', (event) => galleryImageNext(event));
  */
 
-/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable camelcase */
 import React, { useRef, useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
@@ -97,7 +96,6 @@ interface GalleryProps {
   pageCountPhrase?: (current: number, total: number) => string;
   interstitialClicks?: number;
   adElement?: Function;
-  autoplayAmount?: number;
 }
 
 declare interface EventOptionsInterface {
@@ -115,7 +113,6 @@ const Gallery: React.FC<GalleryProps> = ({
   pageCountPhrase,
   interstitialClicks,
   adElement: AdElement,
-  autoplayAmount = null,
 }) => {
   const galleryRef = useRef(null);
   const carouselRef = useRef(null);
@@ -127,7 +124,7 @@ const Gallery: React.FC<GalleryProps> = ({
     delta: 0,
   });
   const [isOpen, setIsOpen] = useState(false);
-  const [autoDuration, setAutoDuration] = useState(autoplayAmount);
+  const [autoDuration, setAutoDuration] = useState(null);
   const [adHidding, setAdHidding] = useState(false);
   const [adDone, setAdDone] = useState(false);
 

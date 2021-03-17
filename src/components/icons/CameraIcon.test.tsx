@@ -7,6 +7,12 @@ describe('the CameraIcon component', () => {
     const wrapper = shallow(<CameraIcon />);
     expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('viewBox')).toEqual('0 -256 1950 1950');
+    expect(wrapper.prop('role')).not.toBeDefined();
+  });
+
+  it('should render as an "img" SVG', () => {
+    const wrapper = shallow(<CameraIcon context="image" />);
+    expect(wrapper.name()).toEqual('svg');
     expect(wrapper.prop('role')).toEqual('img');
   });
 
@@ -48,19 +54,19 @@ describe('the CameraIcon component', () => {
 
   describe('the title prop', () => {
     it('should set the title of the svg element', () => {
-      const wrapper = shallow(<CameraIcon title="an icon!" />);
+      const wrapper = shallow(<CameraIcon title="an icon!" context="image" />);
       expect(wrapper.find('title').text()).toEqual('an icon!');
     });
   });
 
   describe('the description prop', () => {
     it('should set the description of the svg element', () => {
-      const wrapper = shallow(<CameraIcon description="this is an icon!" />);
+      const wrapper = shallow(<CameraIcon description="this is an icon!" context="image" />);
       expect(wrapper.find('desc').text()).toEqual('this is an icon!');
     });
 
     it('should default to an empty string', () => {
-      const wrapper = shallow(<CameraIcon />);
+      const wrapper = shallow(<CameraIcon context="image" />);
       expect(wrapper.find('desc').text()).toEqual('');
     });
   });
