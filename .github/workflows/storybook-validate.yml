@@ -3,6 +3,8 @@ name: Deploy storybook
 on:
   pull_request:
     types: [synchronize, opened]
+    branches-ignore:
+      - "dependabot/*"
 
 jobs:
   chromatic_publish_validate:
