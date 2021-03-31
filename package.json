@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.9.4-canary.4",
+  "version": "2.9.4-canary.6",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -51,7 +51,7 @@
     "@storybook/addon-a11y": "^6.1.14",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "^6.1.14",
-    "@storybook/addon-knobs": "^6.1.14",
+    "@storybook/addon-knobs": "^6.2.1",
     "@storybook/addons": "^6.1.14",
     "@storybook/react": "^6.1.14",
     "@testing-library/react": "^11.2.3",
