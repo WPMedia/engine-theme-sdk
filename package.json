@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.9.2-rc.5",
+  "version": "2.9.4-canary.6",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/WPMedia/engine-theme-sdk#readme",
   "devDependencies": {
-    "@babel/cli": "^7.12.13",
+    "@babel/cli": "^7.13.14",
     "@babel/core": "^7.10.3",
     "@babel/plugin-proposal-class-properties": "^7.12.13",
     "@babel/plugin-proposal-decorators": "^7.12.12",
@@ -61,7 +61,7 @@
     "@types/node": "^12.12.11",
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.11",
-    "@types/react-dom": "^16.9.4",
+    "@types/react-dom": "^16.9.12",
     "@types/styled-components": "^4.4.1",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
@@ -76,7 +76,7 @@
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-react-hooks": "^4.1.0",
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
@@ -97,6 +97,6 @@
     "react-swipeable": "^5.5.0",
     "styled-components": "^4.4.1",
     "thumbor-lite": "^0.1.6",
-    "timezone": "^1.0.23"
+    "timezone": "1.0.23"
   }
 }
