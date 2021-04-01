@@ -1,3 +1,4 @@
+// this was copy-pasted from https://github.com/treyhuffine/lightbox-react and modified previously, Brent said
 /* eslint-disable react/sort-comp */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint react/destructuring-assignment: "off", no-mixed-operators: "off", max-len: "off", comma-dangle: "off" */
