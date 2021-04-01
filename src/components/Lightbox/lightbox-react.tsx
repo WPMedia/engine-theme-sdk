@@ -1708,9 +1708,17 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
         );
       };
 
+      // todo: this global variable scope displayItems should be handled with utils and helper
       const addItem = (srcType, imageClass, baseStyle = {}): void => {
-        const DisplayItem = this.props[srcType];
-        if (!DisplayItem) {
+        const targetImage = this.props[srcType];
+        // if falsy or invalid item, then don't show image potentially
+        // or maybe just let the image shown and then have the broken image icon
+        // we can never know if a string is actually a valid image
+
+        // if empty string, then image not found
+        // see lightboxHandler
+        if (targetImage === '') {
+          // pushing to global scoped display items
           displayItems.push(
             <LightboxImage
               as="div"
@@ -1721,15 +1729,16 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
               <ErrorContainer className="errorContainer">{this.props.imageLoadErrorMessage}</ErrorContainer>
             </LightboxImage>,
           );
-
-          return;
-        }
-
-        if (typeof DisplayItem === 'string') {
+        } else if (typeof targetImage === 'string') {
+          // addImage is a helper component that adds an image to displayItems
           addImage(srcType, imageClass, baseStyle);
-        }
-        if (isReact.component(DisplayItem) || isReact.element(DisplayItem)) {
+        } else if (targetImage === null) {
+          // then there's no prev image or next image, like for a lone lightbox
+          // will not show error for no image found
+        } else if (isReact.component(targetImage) || isReact.element(targetImage)) {
           addComponent(srcType, imageClass, baseStyle);
+        } else {
+          throw new Error('Could not recognize lightbox image');
         }
       };
 
