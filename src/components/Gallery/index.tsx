@@ -240,6 +240,8 @@ const Gallery: React.FC<GalleryProps> = ({
     }
   };
 
+  // see error handling in lightbox for empty string
+  // empty string means that the image is invalid
   const lightboxHandler = (pageNo, operation): string => {
     const nodeList = galleryRef.current.querySelectorAll('img');
     if (nodeList && nodeList.length) {
@@ -257,15 +259,32 @@ const Gallery: React.FC<GalleryProps> = ({
 
     // querySelectorAll looks like not rendered next image
     // and we getting empty data for lightBox
-    if (galleryElements[pageNo]) {
+
+    // all lightbox images are that size 1600 wide, native whatever height (0)
+    const targetLightboxDimensions = `${1600}x${0}`;
+
+    const lightboxHashString = galleryElements[pageNo]?.resized_params[targetLightboxDimensions];
+
+    // should be a non-empty string
+    if (lightboxHashString) {
       const galleryElement = galleryElements[pageNo];
+
+      // if invalid image then we wouldn't want to try to resize at all
       const imageSourceWithoutProtocol = galleryElement.url.replace('https://', '');
-      const imageSrc = buildThumborURL(galleryElement.resized_params[`${1600}x${0}`], `${1600}x${0}`,
+
+      // reconstructs valid image url just for target dimensions
+      const imageSrc = buildThumborURL(
+        lightboxHashString,
+        targetLightboxDimensions,
         imageSourceWithoutProtocol,
-        resizerURL);
+        resizerURL,
+      );
       return imageSrc;
     }
 
+    // will return an empty string if no image found
+    // if empty string, then lightbox will show error string
+    // shows "Image not found" by default, see Lightbox
     return '';
   };
 
