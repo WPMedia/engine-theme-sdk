@@ -55,6 +55,8 @@ import {
 } from '../icons';
 
 const greyFill = '#6B6B6B';
+const PREVIOUS_IMAGE_TEXT = 'Switch to the previous image';
+const NEXT_IMAGE_TEXT = 'Switch to the next image';
 
 interface ImageAttribution {
   name?: string;
@@ -418,13 +420,11 @@ const Gallery: React.FC<GalleryProps> = ({
                 : `${page + 1} of ${galleryElements.length}`
             }
           </ImageCountText>
-          <ControlsButton type="button" onClick={(): void => prevHandler()}>
+          <ControlsButton type="button" aria-label={PREVIOUS_IMAGE_TEXT} onClick={(): void => prevHandler()}>
             <ChevronLeftIcon fill={greyFill} />
-            <span className="sr-only">Move Left</span>
           </ControlsButton>
-          <ControlsButton type="button" onClick={(): void => nextHandler()}>
+          <ControlsButton type="button" aria-label={NEXT_IMAGE_TEXT} onClick={(): void => nextHandler()}>
             <ChevronRightIcon fill={greyFill} />
-            <span className="sr-only">Move Right</span>
           </ControlsButton>
         </ControlContainer>
       </ControlsDiv>
@@ -432,13 +432,11 @@ const Gallery: React.FC<GalleryProps> = ({
         { galleryElements.map((imgContent, index): React.ReactElement => (
           renderImage(imgContent, index, isAdActive() && isAdInPage(index))
         ))}
-        <CarouselButton type="button" className="prev-button" onClick={(): void => prevHandler()}>
+        <CarouselButton type="button" aria-label={PREVIOUS_IMAGE_TEXT} className="prev-button" onClick={(): void => prevHandler()}>
           <ChevronLeftIcon width="100%" height="100%" fill="white" />
-          <span className="sr-only">Move Left</span>
         </CarouselButton>
-        <CarouselButton type="button" className="next-button" onClick={(): void => nextHandler()}>
+        <CarouselButton type="button" aria-label={NEXT_IMAGE_TEXT} className="next-button" onClick={(): void => nextHandler()}>
           <ChevronRightIcon width="100%" height="100%" fill="white" />
-          <span className="sr-only">Move Right</span>
         </CarouselButton>
       </CarouselContainer>
       {
