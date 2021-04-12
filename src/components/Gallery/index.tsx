@@ -98,6 +98,8 @@ interface GalleryProps {
   pageCountPhrase?: (current: number, total: number) => string;
   interstitialClicks?: number;
   adElement?: Function;
+  previousImagePhrase?: string;
+  nextImagePhrase?: string;
 }
 
 declare interface EventOptionsInterface {
@@ -115,6 +117,8 @@ const Gallery: React.FC<GalleryProps> = ({
   pageCountPhrase,
   interstitialClicks,
   adElement: AdElement,
+  previousImagePhrase = PREVIOUS_IMAGE_TEXT,
+  nextImagePhrase = NEXT_IMAGE_TEXT,
 }) => {
   const galleryRef = useRef(null);
   const carouselRef = useRef(null);
@@ -420,10 +424,10 @@ const Gallery: React.FC<GalleryProps> = ({
                 : `${page + 1} of ${galleryElements.length}`
             }
           </ImageCountText>
-          <ControlsButton type="button" aria-label={PREVIOUS_IMAGE_TEXT} onClick={(): void => prevHandler()}>
+          <ControlsButton type="button" aria-label={previousImagePhrase} onClick={(): void => prevHandler()}>
             <ChevronLeftIcon fill={greyFill} />
           </ControlsButton>
-          <ControlsButton type="button" aria-label={NEXT_IMAGE_TEXT} onClick={(): void => nextHandler()}>
+          <ControlsButton type="button" aria-label={nextImagePhrase} onClick={(): void => nextHandler()}>
             <ChevronRightIcon fill={greyFill} />
           </ControlsButton>
         </ControlContainer>
@@ -432,10 +436,10 @@ const Gallery: React.FC<GalleryProps> = ({
         { galleryElements.map((imgContent, index): React.ReactElement => (
           renderImage(imgContent, index, isAdActive() && isAdInPage(index))
         ))}
-        <CarouselButton type="button" aria-label={PREVIOUS_IMAGE_TEXT} className="prev-button" onClick={(): void => prevHandler()}>
+        <CarouselButton type="button" aria-label={previousImagePhrase} className="prev-button" onClick={(): void => prevHandler()}>
           <ChevronLeftIcon width="100%" height="100%" fill="white" />
         </CarouselButton>
-        <CarouselButton type="button" aria-label={NEXT_IMAGE_TEXT} className="next-button" onClick={(): void => nextHandler()}>
+        <CarouselButton type="button" aria-label={nextImagePhrase} className="next-button" onClick={(): void => nextHandler()}>
           <ChevronRightIcon width="100%" height="100%" fill="white" />
         </CarouselButton>
       </CarouselContainer>
