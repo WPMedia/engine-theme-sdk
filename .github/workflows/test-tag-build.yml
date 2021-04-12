@@ -38,20 +38,16 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Git config
-      - run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "JackHowa"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       # Prerelease (tests and lint)
       - run: npm version prerelease --preid=test
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Publish
-      - run: npm publish --tag test
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # doesn't need to publish for test's sake
+      # - run: npm publish --tag test
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Push tag
       - run: git push origin test-tag-publish
