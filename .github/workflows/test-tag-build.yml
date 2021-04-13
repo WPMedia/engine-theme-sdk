@@ -11,9 +11,6 @@ jobs:
     name: Test tag build publish
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -39,7 +36,7 @@ jobs:
       - run: npm ci
 
       # Git config
-      - run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "GitHub Token Scope"
+      - run: git config --global user.name "GitHub Token Scope"
 
       # Prerelease (tests and lint)
       - run: npm version prerelease --preid=test
