@@ -22,9 +22,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repo
         uses: actions/checkout@v2
-        with:
-          # via https://github.com/cycjimmy/semantic-release-action#basic-usage
-          persist-credentials: false
 
       # Caches NPM files
       - name: Cache NPM files
