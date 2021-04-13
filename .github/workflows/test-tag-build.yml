@@ -42,6 +42,7 @@ jobs:
       - run: npm version prerelease --preid=test
 
       # Publish
+      # Need github token specifically here
       - run: npm publish --tag test
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
