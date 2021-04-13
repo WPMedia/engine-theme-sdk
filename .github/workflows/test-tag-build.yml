@@ -11,6 +11,8 @@ jobs:
     name: Test tag build publish
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -35,25 +37,15 @@ jobs:
 
       # NPM ci init
       - run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Git config
       - run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "JackHowa"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Prerelease (tests and lint)
       - run: npm version prerelease --preid=test
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Publish
-      # - run: npm publish --tag test
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.JACK_PUSH_PUBLISH_TOKEN }}
+      - run: npm publish --tag test
 
       # Push tag
       - run: git push origin test-tag-publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
