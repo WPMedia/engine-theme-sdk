@@ -55,6 +55,8 @@ import {
 } from '../icons';
 
 const greyFill = '#6B6B6B';
+const PREVIOUS_IMAGE_TEXT = 'Switch to the previous image';
+const NEXT_IMAGE_TEXT = 'Switch to the next image';
 
 interface ImageAttribution {
   name?: string;
@@ -96,6 +98,8 @@ interface GalleryProps {
   pageCountPhrase?: (current: number, total: number) => string;
   interstitialClicks?: number;
   adElement?: Function;
+  previousImagePhrase?: string;
+  nextImagePhrase?: string;
 }
 
 declare interface EventOptionsInterface {
@@ -113,6 +117,8 @@ const Gallery: React.FC<GalleryProps> = ({
   pageCountPhrase,
   interstitialClicks,
   adElement: AdElement,
+  previousImagePhrase = PREVIOUS_IMAGE_TEXT,
+  nextImagePhrase = NEXT_IMAGE_TEXT,
 }) => {
   const galleryRef = useRef(null);
   const carouselRef = useRef(null);
@@ -418,13 +424,11 @@ const Gallery: React.FC<GalleryProps> = ({
                 : `${page + 1} of ${galleryElements.length}`
             }
           </ImageCountText>
-          <ControlsButton type="button" onClick={(): void => prevHandler()}>
+          <ControlsButton type="button" aria-label={previousImagePhrase} onClick={(): void => prevHandler()}>
             <ChevronLeftIcon fill={greyFill} />
-            <span className="sr-only">Move Left</span>
           </ControlsButton>
-          <ControlsButton type="button" onClick={(): void => nextHandler()}>
+          <ControlsButton type="button" aria-label={nextImagePhrase} onClick={(): void => nextHandler()}>
             <ChevronRightIcon fill={greyFill} />
-            <span className="sr-only">Move Right</span>
           </ControlsButton>
         </ControlContainer>
       </ControlsDiv>
@@ -432,13 +436,11 @@ const Gallery: React.FC<GalleryProps> = ({
         { galleryElements.map((imgContent, index): React.ReactElement => (
           renderImage(imgContent, index, isAdActive() && isAdInPage(index))
         ))}
-        <CarouselButton type="button" className="prev-button" onClick={(): void => prevHandler()}>
+        <CarouselButton type="button" aria-label={previousImagePhrase} className="prev-button" onClick={(): void => prevHandler()}>
           <ChevronLeftIcon width="100%" height="100%" fill="white" />
-          <span className="sr-only">Move Left</span>
         </CarouselButton>
-        <CarouselButton type="button" className="next-button" onClick={(): void => nextHandler()}>
+        <CarouselButton type="button" aria-label={nextImagePhrase} className="next-button" onClick={(): void => nextHandler()}>
           <ChevronRightIcon width="100%" height="100%" fill="white" />
-          <span className="sr-only">Move Right</span>
         </CarouselButton>
       </CarouselContainer>
       {
