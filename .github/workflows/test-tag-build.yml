@@ -39,7 +39,7 @@ jobs:
       - run: npm ci
 
       # Git config
-      - run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "JackHowa"
+      - run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "GitHub Token Scope"
 
       # Prerelease (tests and lint)
       - run: npm version prerelease --preid=test
