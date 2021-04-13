@@ -36,17 +36,17 @@ jobs:
       # NPM ci init
       - run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.JACK_PUSH_PUBLISH_TOKEN }}
 
       # Git config
-      - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
+      - run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "JackHowa"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.JACK_PUSH_PUBLISH_TOKEN }}
 
       # Prerelease (tests and lint)
       - run: npm version prerelease --preid=test
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.JACK_PUSH_PUBLISH_TOKEN }}
 
       # Publish
       # - run: npm publish --tag test
@@ -56,4 +56,4 @@ jobs:
       # Push tag
       - run: git push origin test-tag-publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.JACK_PUSH_PUBLISH_TOKEN }}
