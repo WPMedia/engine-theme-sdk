@@ -46,6 +46,8 @@ jobs:
 
       # Publish
       - run: npm publish --tag test
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Push tag
       - run: git push origin test-tag-publish
