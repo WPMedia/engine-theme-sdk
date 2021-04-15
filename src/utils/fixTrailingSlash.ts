@@ -1,4 +1,4 @@
-function getLocation(uri: string) : URL {
+function getLocation(uri: string): URL {
   let url;
 
   if (typeof window === 'undefined') {
@@ -14,11 +14,11 @@ function getLocation(uri: string) : URL {
       url.href = `${url.href}`;
     }
   }
-  
+
   return url;
 }
 
-function fixTrailingSlash(item: string) : string {
+function fixTrailingSlash(item: string): string {
   const url = getLocation(item);
 
   if (url.hash || url.search || url.pathname.match(/\./)) {
