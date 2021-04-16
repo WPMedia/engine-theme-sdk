@@ -1,24 +1,36 @@
 import formatURL from './formatURL';
 
-it('should not add a slash at the end of the link if already has one', () => {
-  const linkWithSlash = '/test/';
+describe('Format url should add a slash on the end of a link if', () => {
+  it('it is an internal url without an ending slash', () => {
+    const linkWithoutEndingSlash = '/test';
 
-  expect(formatURL(linkWithSlash)).toStrictEqual('/test/');
+    expect(formatURL(linkWithoutEndingSlash)).toStrictEqual(`${linkWithoutEndingSlash}/`);
+  });
 });
 
-it('should add a slash at the end of the link', () => {
-  const linkWithoutEndingSlash = '/test';
+describe('Format url should not add a slash at the end if', () => {
+  it('hash params', () => {
+    const linkWithHashParams = '/test/page#section';
+    expect(formatURL(linkWithHashParams)).toStrictEqual(linkWithHashParams);
+  });
 
-  expect(formatURL(linkWithoutEndingSlash)).toStrictEqual('/test/');
-});
+  it('it has extension .html', () => {
+    const linkWithHtmlExtension = '/entertaiment/page.html';
+    expect(formatURL(linkWithHtmlExtension)).toStrictEqual(linkWithHtmlExtension);
+  });
 
-it('should not add a slash at the end of the link with query params', () => {
-  const linkWithQuery = '/test?query=a';
+  it('is a mailto link', () => {
+    const mailToLink = 'mailto:readers@washpost.com';
+    expect(formatURL(mailToLink)).toStrictEqual(mailToLink);
+  });
+  it('it is with query params', () => {
+    const linkWithQuery = '/test?query=a';
 
-  expect(formatURL(linkWithQuery)).toStrictEqual('/test?query=a');
-});
+    expect(formatURL(linkWithQuery)).toStrictEqual(linkWithQuery);
+  });
+  it('it already has one', () => {
+    const linkWithSlash = '/test/';
 
-it('should not add a slash at the end of the link with hash params', () => {
-  const linkWithHashParams = '/test/page#section';
-  expect(formatURL(linkWithHashParams)).toStrictEqual('/test/page#section');
+    expect(formatURL(linkWithSlash)).toStrictEqual(linkWithSlash);
+  });
 });
