@@ -13,7 +13,7 @@ export enum SocialTypes {
   WhatsApp = 'whatsapp',
 }
 
-function constructSocialURL(type:string, field:string) {
+function constructSocialURL(type: string, field: string): string {
   switch (type) {
     case SocialTypes.Email:
       return `mailto:${field}`;
