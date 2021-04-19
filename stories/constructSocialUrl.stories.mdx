@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Utilities" />
+
+# Utility Methods 
+
+The SDK has a collection of utilities that help reduce redundant code.
+
+## Social Url Utility
+
+Import the `constructSocialUrl` method and `socialTypes`* object into your block
+
+`import { constructSocialUrl, socialTypes } from '@wpmedia/engine-theme-sdk';`
+
+and construct them by using one or more of the following:
+
+```
+constructSocialURL(socialTypes.Email, 'email@domain.tld');
+constructSocialURL(socialTypes.Twitter, '@TwitterUser');
+constructSocialURL(socialTypes.Instagram, 'InstaUser');
+constructSocialURL(socialTypes.Snapchat, 'SnapchatUser');
+constructSocialURL(socialTypes.LinkedIn, 'LinkedInUser');
+constructSocialURL(socialTypes.Reddit, 'RedditUser');
+constructSocialURL(socialTypes.Youtube, 'YoutubeChannel');
+constructSocialURL(socialTypes.Medium, '@MediumUser');
+constructSocialURL(socialTypes.Tumblr, 'TumblrUser');
+constructSocialURL(socialTypes.Pinterest, 'PinterestUser');
+constructSocialURL(socialTypes.SoundCloud, 'SoundCloudUser');
+constructSocialURL(socialTypes.WhatsApp, 'WhatsAppUser');
+```
+
+\* `socialTypes` is strictly a string enumeration of the types of social URLs we directly support.  If you know the exact string value required, you may pass this instead of utilizing the `socialTypes` identifiers, but we prefer if you use `socialTypes` identifiers for consistency and safety.
+
+## Feedback
+
+If you have feedback on this SDK or ideas for new functionality you’d like to see, contact us at https://ideas.arcpublishing.com/
