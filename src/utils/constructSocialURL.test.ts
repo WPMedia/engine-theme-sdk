@@ -1,4 +1,3 @@
-// dup with full author
 import constructSocialURL from './constructSocialURL';
 
 describe('construct social url helper', () => {
