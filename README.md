@@ -4,9 +4,9 @@
 
 This package has been published with a number of dist-tags meant for different purposes:
 
-- `stable`: Client Production environment
-- `beta`: Client Sandbox environment
-- `rc`: Developer environment for testing hotfixes preparing for `beta` or, worst comes to worst, `stable`
+- `stable`: Client Production environment,
+- `beta`: Client Sandbox environment,
+- `rc`: Developer environment for testing hotfixes preparing for `beta` or, worst comes to worst, `stable`,
 - `canary`: For developers to test on core components
 
 ## Preview Components, Functionality
