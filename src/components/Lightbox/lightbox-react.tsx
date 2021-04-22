@@ -1785,7 +1785,8 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
           onAfterOpen={(): void => {
             // Focus on the div with key handlers
             if (this.outerEl) {
-              this.outerEl.querySelector('#lightbox-close').focus();
+              const lightBoxClose: HTMLElement = this.outerEl.querySelector('#lightbox-close') as HTMLElement;
+              lightBoxClose.focus();
             }
 
             onAfterOpen();
