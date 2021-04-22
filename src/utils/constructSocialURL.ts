@@ -1,4 +1,4 @@
-export enum SocialTypes {
+enum SocialTypes {
   Email = 'email',
   Twitter = 'twitter',
   Instagram = 'instagram',
