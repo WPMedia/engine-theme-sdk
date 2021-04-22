@@ -187,6 +187,9 @@ declare interface GalleryEventData {
 }
 
 describe('the gallery block', () => {
+  beforeEach(() => {
+    document.body.innerHTML = '<div id="fusion-app"></div>';
+  });
   describe('the fullscreen button', () => {
     it('should be present with the "FullScreen" svg component with the correct fill', () => {
       const wrapper = shallow(<Gallery galleryElements={mockGallery} resizerURL="" />);
