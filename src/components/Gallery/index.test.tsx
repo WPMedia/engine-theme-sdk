@@ -258,10 +258,13 @@ describe('the gallery block', () => {
     });
 
     it('should accurately reflect the current state during autoplay', () => {
-      const wrapper = mount(<Gallery galleryElements={mockGallery} resizerURL="" />);
+      const wrapper = mount(<Gallery galleryElements={mockGallery} resizerURL="" ansId="abc" />);
+
+      expect(wrapper.find('#gallery-images-abc').at(0).prop('aria-live')).toBe('polite');
       const autoButtonWrapper = wrapper.find('styled__ControlContainer').find('button').at(1);
       expect(autoButtonWrapper.childAt(1).text()).toBe('Autoplay');
       autoButtonWrapper.simulate('click');
+      expect(wrapper.find('#gallery-images-abc').at(0).prop('aria-live')).toBe('off');
       expect(autoButtonWrapper.childAt(1).text()).toMatch(/Pause\sautoplay/);
       autoButtonWrapper.simulate('click');
       expect(autoButtonWrapper.childAt(1).text()).toMatch(/Autoplay/);
@@ -383,6 +386,14 @@ describe('the gallery block', () => {
 
     afterEach(() => {
       document.body.removeChild(outerNode);
+    });
+
+    it('should have aria label and roledescription on container', () => {
+      const ansHeadlineText = 'Headline Text';
+      const wrapper = shallow(<Gallery galleryElements={mockGallery} resizerURL="" ansHeadline={ansHeadlineText} />);
+
+      expect(wrapper.at(0).prop('aria-label')).toBe(ansHeadlineText);
+      expect(wrapper.at(0).prop('aria-roledescription')).toBe('carousel');
     });
 
     it('should render all the images with the correct inital x offset', () => {
