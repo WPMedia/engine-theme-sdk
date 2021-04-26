@@ -41,7 +41,6 @@ import {
   ControlsButton,
   PlaybackText,
   ImageCountText,
-  ScreenReaderText,
   CarouselContainer,
   CarouselButton,
   ImageWrapper,
