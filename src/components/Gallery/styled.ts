@@ -75,9 +75,6 @@ export const ImageCountText = styled.p`
   }
 `;
 
-export const ScreenReaderText = styled.span`
-`;
-
 export const CarouselContainer = styled.div`
   position: relative;
   overflow: hidden;
