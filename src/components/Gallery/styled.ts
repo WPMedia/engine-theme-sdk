@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import rem from 'polished/lib/helpers/rem';
 
-export const GalleryDiv = styled.div`
+export const GalleryDiv = styled.section`
   display: block;
   width: 100%;
   overflow: hidden;
@@ -61,8 +61,18 @@ export const PlaybackText = styled.span`
   margin: 0 30px 0 4px;
 `;
 
-export const ImageCountText = styled.span`
-  margin-left: 12px;
+export const ImageCountText = styled.p`
+  display: inline-block;
+  margin: 0 0 0 12px;
+
+  span {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+  }
 `;
 
 export const CarouselContainer = styled.div`
