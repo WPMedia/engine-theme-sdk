@@ -359,6 +359,7 @@ const Gallery: React.FC<GalleryProps> = ({
           ? `translate(calc(${-100 * page}% - ${slide.delta}px), 0)`
           : `translate(${-100 * page}%, 0)`,
         transitionDuration: slide.isSliding ? '0s' : '1s',
+        visibility: (index !== page && !slide.isSliding) ? 'hidden' : null,
       }}
       role="group"
       aria-roledescription="slide"
