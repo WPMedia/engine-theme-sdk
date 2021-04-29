@@ -2,7 +2,14 @@ import Video from '../src/components/Video';
 import { text } from "@storybook/addon-knobs";
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
-<Meta title="Video" component={Video} />
+<Meta
+    title="Video"
+    component={Video}
+    parameters={{
+        // Setting a high threshold to over come noise created in chromatic
+        chromatic: { diffThreshold: 1 }
+    }}
+/>
 
 # Video
 
@@ -15,7 +22,7 @@ The playerRoot and videoOrg Fusion environment variables must be defined in orde
 
 ## Use
 
-Import it into a block: 
+Import it into a block:
 
 ```
 import { Video } from '@wpmedia/engine-theme-sdk';
