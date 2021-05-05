@@ -55,6 +55,8 @@ import {
 } from '../icons';
 
 const greyFill = '#6B6B6B';
+const PREVIOUS_IMAGE_TEXT = 'Switch to the previous image';
+const NEXT_IMAGE_TEXT = 'Switch to the next image';
 
 interface ImageAttribution {
   name?: string;
@@ -91,11 +93,17 @@ interface GalleryProps {
   ansHeadline?: string;
   galleryElements?: GalleryElement[];
   expandPhrase?: string;
+  autoplayPhraseLabels?: {
+    start?: string;
+    stop?: string;
+  };
   autoplayPhrase?: string;
   pausePhrase?: string;
   pageCountPhrase?: (current: number, total: number) => string;
   interstitialClicks?: number;
   adElement?: Function;
+  previousImagePhrase?: string;
+  nextImagePhrase?: string;
 }
 
 declare interface EventOptionsInterface {
@@ -109,10 +117,13 @@ const Gallery: React.FC<GalleryProps> = ({
   ansHeadline = '',
   expandPhrase,
   autoplayPhrase,
+  autoplayPhraseLabels = {},
   pausePhrase,
   pageCountPhrase,
   interstitialClicks,
   adElement: AdElement,
+  previousImagePhrase = PREVIOUS_IMAGE_TEXT,
+  nextImagePhrase = NEXT_IMAGE_TEXT,
 }) => {
   const galleryRef = useRef(null);
   const carouselRef = useRef(null);
@@ -240,6 +251,8 @@ const Gallery: React.FC<GalleryProps> = ({
     }
   };
 
+  // see error handling in lightbox for empty string
+  // empty string means that the image is invalid
   const lightboxHandler = (pageNo, operation): string => {
     const nodeList = galleryRef.current.querySelectorAll('img');
     if (nodeList && nodeList.length) {
@@ -257,15 +270,32 @@ const Gallery: React.FC<GalleryProps> = ({
 
     // querySelectorAll looks like not rendered next image
     // and we getting empty data for lightBox
-    if (galleryElements[pageNo]) {
+
+    // all lightbox images are that size 1600 wide, native whatever height (0)
+    const targetLightboxDimensions = `${1600}x${0}`;
+
+    const lightboxHashString = galleryElements[pageNo]?.resized_params[targetLightboxDimensions];
+
+    // should be a non-empty string
+    if (lightboxHashString) {
       const galleryElement = galleryElements[pageNo];
+
+      // if invalid image then we wouldn't want to try to resize at all
       const imageSourceWithoutProtocol = galleryElement.url.replace('https://', '');
-      const imageSrc = buildThumborURL(galleryElement.resized_params[`${1600}x${0}`], `${1600}x${0}`,
+
+      // reconstructs valid image url just for target dimensions
+      const imageSrc = buildThumborURL(
+        lightboxHashString,
+        targetLightboxDimensions,
         imageSourceWithoutProtocol,
-        resizerURL);
+        resizerURL,
+      );
       return imageSrc;
     }
 
+    // will return an empty string if no image found
+    // if empty string, then lightbox will show error string
+    // shows "Image not found" by default, see Lightbox
     return '';
   };
 
@@ -318,6 +348,7 @@ const Gallery: React.FC<GalleryProps> = ({
     imgContent: GalleryElement,
     index: number,
     showAd: boolean,
+    totalImages: number,
   ): React.ReactElement => (
     <ImageWrapper
       key={`gallery-image-${imgContent._id}`}
@@ -328,7 +359,12 @@ const Gallery: React.FC<GalleryProps> = ({
           ? `translate(calc(${-100 * page}% - ${slide.delta}px), 0)`
           : `translate(${-100 * page}%, 0)`,
         transitionDuration: slide.isSliding ? '0s' : '1s',
+        visibility: (index !== page && !slide.isSliding) ? 'hidden' : null,
       }}
+      role="group"
+      aria-roledescription="slide"
+      aria-label={`${index + 1} of ${totalImages}`}
+      aria-hidden={index !== page}
     >
       { showAd && renderAd() }
       <Image
@@ -369,8 +405,20 @@ const Gallery: React.FC<GalleryProps> = ({
     };
   });
 
+  const ImageCountTextOutput = {
+    __html: (pageCountPhrase
+      ? pageCountPhrase(page + 1, galleryElements.length)
+      : (
+        `<span>Image</span> ${page + 1} of ${galleryElements.length}`
+      )),
+  };
+
   return (
-    <GalleryDiv ref={galleryRef}>
+    <GalleryDiv
+      ref={galleryRef}
+      aria-roledescription="carousel"
+      aria-label={ansHeadline}
+    >
       <ControlsDiv>
         <ControlContainer>
           <ControlsButton type="button" onClick={(): void => fullScreen()}>
@@ -381,45 +429,39 @@ const Gallery: React.FC<GalleryProps> = ({
             {autoDuration ? (
               <>
                 <PauseIcon fill={greyFill} />
-                <PlaybackText>{pausePhrase || 'Pause autoplay'}</PlaybackText>
+                <PlaybackText aria-label={autoplayPhraseLabels.stop || 'Stop automatic slide show'}>{pausePhrase || 'Pause autoplay'}</PlaybackText>
               </>
             ) : (
               <>
                 <PlayIcon fill={greyFill} />
-                <PlaybackText>{autoplayPhrase || 'Autoplay'}</PlaybackText>
+                <PlaybackText aria-label={autoplayPhraseLabels.start || 'Start automatic slide show'}>{autoplayPhrase || 'Autoplay'}</PlaybackText>
               </>
             )}
           </ControlsButton>
         </ControlContainer>
         <ControlContainer>
-          <ImageCountText>
-            {
-              pageCountPhrase
-                ? pageCountPhrase(page + 1, galleryElements.length)
-                : `${page + 1} of ${galleryElements.length}`
-            }
-          </ImageCountText>
-          <ControlsButton type="button" onClick={(): void => prevHandler()}>
+          <ImageCountText dangerouslySetInnerHTML={ImageCountTextOutput} />
+          <ControlsButton type="button" aria-label={previousImagePhrase} onClick={(): void => prevHandler()}>
             <ChevronLeftIcon fill={greyFill} />
-            <span className="sr-only">Move Left</span>
           </ControlsButton>
-          <ControlsButton type="button" onClick={(): void => nextHandler()}>
+          <ControlsButton type="button" aria-label={nextImagePhrase} onClick={(): void => nextHandler()}>
             <ChevronRightIcon fill={greyFill} />
-            <span className="sr-only">Move Right</span>
           </ControlsButton>
         </ControlContainer>
       </ControlsDiv>
-      <CarouselContainer {...handlers}>
+      <CarouselContainer
+        id={`gallery-images-${ansId}`}
+        {...handlers}
+        aria-live={autoDuration ? 'off' : 'polite'}
+      >
         { galleryElements.map((imgContent, index): React.ReactElement => (
-          renderImage(imgContent, index, isAdActive() && isAdInPage(index))
+          renderImage(imgContent, index, isAdActive() && isAdInPage(index), galleryElements.length)
         ))}
-        <CarouselButton type="button" className="prev-button" onClick={(): void => prevHandler()}>
+        <CarouselButton type="button" aria-label={previousImagePhrase} className="prev-button" onClick={(): void => prevHandler()}>
           <ChevronLeftIcon width="100%" height="100%" fill="white" />
-          <span className="sr-only">Move Left</span>
         </CarouselButton>
-        <CarouselButton type="button" className="next-button" onClick={(): void => nextHandler()}>
+        <CarouselButton type="button" aria-label={nextImagePhrase} className="next-button" onClick={(): void => nextHandler()}>
           <ChevronRightIcon width="100%" height="100%" fill="white" />
-          <span className="sr-only">Move Right</span>
         </CarouselButton>
       </CarouselContainer>
       {
@@ -472,6 +514,11 @@ Gallery.propTypes = {
   expandPhrase: PropTypes.string,
   /** Autoplay phrase text for internationalization */
   autoplayPhrase: PropTypes.string,
+  /** Object of phases for stop and start labels of Autoplay button */
+  autoplayPhraseLabels: PropTypes.shape({
+    start: PropTypes.string,
+    stop: PropTypes.string,
+  }),
   /** Pause phrase text for internationalization */
   pausePhrase: PropTypes.string,
   /** Page count phrase text for internationalization */

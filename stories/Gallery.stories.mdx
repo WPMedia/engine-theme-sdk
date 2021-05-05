@@ -10,7 +10,7 @@ The `Gallery` component is used to display galleries created in [Photo Center](h
 
 ## Use
 
-Import it into a block: 
+Import it into a block:
 
 ```
 import { Gallery } from '@wpmedia/engine-theme-sdk';
@@ -24,6 +24,7 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
     ansHeadline={item.headlines.basic ? item.headlines.basic : ''}
     expandPhrase={phrases.t('global.gallery-expand-button')}
     autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
+    autoplayPhraseLabels={{ start: phrases.t('global.gallery-autoplay-phrase-start'), stop: phrases.t('global.gallery-autoplay-phrase-stop') }}
     pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
     pageCountPhrase={(current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
     interstitialClicks={2}
@@ -198,7 +199,7 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 0,
                 },
                 address: {},
-                alt_text: text("Alt Text", "This is an alt text"),
+                alt_text: 'This is an alt text for image 2',
                 caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 credits: {
                 affiliation: [],
@@ -310,7 +311,7 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 0,
                 },
                 address: {},
-                alt_text: text("Alt Text", "This is an alt text"),
+                alt_text: 'This is an alt text for image 3',
                 caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 created_date: '2019-07-09T22:26:02Z',
                 credits: {
@@ -440,7 +441,7 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
                 version: 1,
                 },
                 address: {},
-                alt_text: text("Alt Text", "This is an alt text"),
+                alt_text: 'This is an alt text for image 4',
                 caption: text("Caption", "Override the caption on this image for this particular gallery"),
                 created_date: '2019-07-09T23:03:02Z',
                 credits: {
@@ -3465,5 +3466,3 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
         />
     </Story>
 </Canvas>
-
-

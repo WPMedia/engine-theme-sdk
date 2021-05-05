@@ -12,6 +12,7 @@
           "fusion:environment": "./.storybook/environment.json"
         }
       }
-    ]
+    ],
+    "@babel/plugin-proposal-optional-chaining"
   ]
 }

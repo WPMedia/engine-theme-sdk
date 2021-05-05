@@ -1,3 +1,4 @@
+// this was copy-pasted from https://github.com/treyhuffine/lightbox-react and modified previously, Brent said
 /* eslint-disable react/sort-comp */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint react/destructuring-assignment: "off", no-mixed-operators: "off", max-len: "off", comma-dangle: "off" */
@@ -867,8 +868,6 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
      * Handle user keyboard actions
      */
     handleKeyInput(event): void {
-      event.stopPropagation();
-
       // Ignore key input during animations
       if (this.isAnimating()) {
         return;
@@ -900,7 +899,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
           this.requestClose(event);
           break;
 
-          // Left arrow key moves to previous image
+        // Left arrow key moves to previous image
         case KEYS.LEFT_ARROW:
           if (!this.props.prevSrc) {
             return;
@@ -911,7 +910,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
           this.requestMovePrev(event);
           break;
 
-          // Right arrow key moves to next image
+        // Right arrow key moves to next image
         case KEYS.RIGHT_ARROW:
           if (!this.props.nextSrc) {
             return;
@@ -1707,9 +1706,17 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
         );
       };
 
+      // todo: this global variable scope displayItems should be handled with utils and helper
       const addItem = (srcType, imageClass, baseStyle = {}): void => {
-        const DisplayItem = this.props[srcType];
-        if (!DisplayItem) {
+        const targetImage = this.props[srcType];
+        // if falsy or invalid item, then don't show image potentially
+        // or maybe just let the image shown and then have the broken image icon
+        // we can never know if a string is actually a valid image
+
+        // if empty string, then image not found
+        // see lightboxHandler
+        if (targetImage === '') {
+          // pushing to global scoped display items
           displayItems.push(
             <LightboxImage
               as="div"
@@ -1720,15 +1727,16 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
               <ErrorContainer className="errorContainer">{this.props.imageLoadErrorMessage}</ErrorContainer>
             </LightboxImage>,
           );
-
-          return;
-        }
-
-        if (typeof DisplayItem === 'string') {
+        } else if (typeof targetImage === 'string') {
+          // addImage is a helper component that adds an image to displayItems
           addImage(srcType, imageClass, baseStyle);
-        }
-        if (isReact.component(DisplayItem) || isReact.element(DisplayItem)) {
+        } else if (targetImage === null) {
+          // then there's no prev image or next image, like for a lone lightbox
+          // will not show error for no image found
+        } else if (isReact.component(targetImage) || isReact.element(targetImage)) {
           addComponent(srcType, imageClass, baseStyle);
+        } else {
+          throw new Error('Could not recognize lightbox image');
         }
       };
 
@@ -1768,6 +1776,8 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
         },
       };
 
+      Modal.setAppElement('#fusion-app');
+
       return (
         <Modal
           isOpen
@@ -1775,14 +1785,14 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
           onAfterOpen={(): void => {
             // Focus on the div with key handlers
             if (this.outerEl) {
-              this.outerEl.focus();
+              const lightBoxClose: HTMLElement = this.outerEl.querySelector('#lightbox-close') as HTMLElement;
+              lightBoxClose.focus();
             }
 
             onAfterOpen();
           }}
           style={modalStyle}
           contentLabel={translate('Lightbox')}
-          appElement={typeof window !== 'undefined' ? window.document.body : undefined}
           {...reactModalProps}
         >
           <LightboxContainer // eslint-disable-line jsx-a11y/no-static-element-interactions
@@ -1802,12 +1812,11 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
             onMouseDown={this.handleMouseDown}
             onTouchStart={this.handleTouchStart}
             onTouchMove={this.handleTouchMove}
-            tabIndex={-1} // Enables key handlers on div
             onKeyDown={this.handleKeyInput}
             onKeyUp={this.handleKeyInput}
           >
             <LightboxInnerDiv // eslint-disable-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
-                        // Image holder
+              // Image holder
               className="ril-inner"
               onClick={clickOutsideToClose ? this.closeIfClickInner : undefined}
             >
@@ -1847,11 +1856,11 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 
               <ul className="toolbarSide rightSide">
                 {toolbarButtons
-                            && toolbarButtons.map((button, i) => (
-                              <li key={`button_${i + 1}`} className="toolbarItem">
-                                {button}
-                              </li>
-                            ))}
+                  && toolbarButtons.map((button, i) => (
+                    <li key={`button_${i + 1}`} className="toolbarItem">
+                      {button}
+                    </li>
+                  ))}
 
                 {enableZoom && (
                 <li className="toolbarItem">
@@ -1869,10 +1878,10 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                     }}
                     disabled={this.isAnimating() || zoomLevel === MAX_ZOOM_LEVEL}
                     onClick={
-                                            !this.isAnimating() && zoomLevel !== MAX_ZOOM_LEVEL
-                                              ? this.handleZoomInButtonClick
-                                              : undefined
-                                        }
+                      !this.isAnimating() && zoomLevel !== MAX_ZOOM_LEVEL
+                        ? this.handleZoomInButtonClick
+                        : undefined
+                    }
                   >
                     <ZoomInIcon width="100%" height="100%" fill="#fff" />
                   </button>
@@ -1895,10 +1904,10 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                     }}
                     disabled={this.isAnimating() || zoomLevel === MIN_ZOOM_LEVEL}
                     onClick={
-                                            !this.isAnimating() && zoomLevel !== MIN_ZOOM_LEVEL
-                                              ? this.handleZoomOutButtonClick
-                                              : undefined
-                                        }
+                      !this.isAnimating() && zoomLevel !== MIN_ZOOM_LEVEL
+                        ? this.handleZoomOutButtonClick
+                        : undefined
+                    }
                   >
                     <ZoomOutIcon width="100%" height="100%" fill="#fff" />
                   </button>
@@ -1909,7 +1918,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                   <button // Lightbox close button
                     type="button"
                     key="close"
-                    title={this.props.closeLabel}
+                    id="lightbox-close"
                     aria-label={this.props.closeLabel}
                     className="itemChild builtinButton"
                     onClick={!this.isAnimating() ? this.requestClose : undefined}
