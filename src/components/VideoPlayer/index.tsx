@@ -77,7 +77,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         if (window.powaBoot) window.powaBoot();
       }
     }
-    // only run on mount with []
   }, [shouldRender]);
 
   const getEmbedHTMLWithPlayStatus = (): string => (
