@@ -3,21 +3,6 @@ import EmbedContainer from 'react-oembed-container';
 import styled from 'styled-components';
 import formatEmbedMarkup from './formatEmbedMarkup';
 
-/**
-    autoplay,
-    // can't support global content
-    // inheritGlobalContent,
-    playthrough,
-    alertBadge,
-    title,
-    description,
-
-    // can't support websiteURL and
-    // i think it's deprecated anyway
-    // bc fetching
-    // websiteURL,
-  * */
-
 interface CustomFields {
   /* @deprecated Use isPlaythrough prop directly instead */
   playthrough?: boolean;
