@@ -72,4 +72,16 @@ describe('If the embed html is valid', () => {
       '"<div class=\\"powa\\" id=\\"powa-e924\\" data-org=\\"corecomponents\\" data-env=\\"prod\\" data-uuid=\\"e924e51b\\" data-aspect-ratio=\\"0.562\\" data-api=\\"prod\\"><script src=\\"//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents\\"></script></div>"',
     );
   });
+  it('passes in an override aspect ratio', () => {
+    const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
+    + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
+    + 'src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+
+    // 0.3 target aspect ratio
+    const embedHTMLOutput = formatEmbedMarkup(testEmbed, false, false, 0.3);
+
+    expect(embedHTMLOutput).toMatch(/data-aspect-ratio="0.3"/i);
+    // 0.562 was passed in default
+    expect(embedHTMLOutput).not.toMatch(/data-aspect-ratio="0.562"/i);
+  });
 });

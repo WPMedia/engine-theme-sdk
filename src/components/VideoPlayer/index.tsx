@@ -47,6 +47,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   enableAutoplay = false,
   customFields = {},
   isPlaythrough = false,
+  aspectRatio: overrideAspectRatio,
 }) => {
   const { playthrough = false, autoplay = false } = customFields;
   const videoRef = useRef(id);
@@ -69,6 +70,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       embedMarkup,
       enableAutoplay || autoplay,
       isPlaythrough || playthrough,
+      overrideAspectRatio,
     )
   );
 
