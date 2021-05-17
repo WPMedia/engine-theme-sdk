@@ -8,6 +8,9 @@ module.exports = (api) => {
       },
     ],
     '@babel/plugin-proposal-optional-chaining',
+    [
+      '@babel/plugin-proposal-private-methods', { loose: true },
+    ],
   ];
 
   if (api.env('commonjs') || api.env('test')) {
