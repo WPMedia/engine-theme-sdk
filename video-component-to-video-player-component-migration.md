@@ -22,8 +22,3 @@ Furthermore, the `<VideoPlayer />` only loads on the client-side. A server-side 
 ## Breaking Changes 
 
 - `aspectRatio` will default to what's passed inside the embed markup script rather than defaulting to `0.562`. You can still override the `aspectRatio` if specified.
-
-
-
-
-
