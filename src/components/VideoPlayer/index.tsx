@@ -3,21 +3,6 @@ import EmbedContainer from 'react-oembed-container';
 import styled from 'styled-components';
 import formatEmbedMarkup from './formatEmbedMarkup';
 
-/**
-    autoplay,
-    // can't support global content
-    // inheritGlobalContent,
-    playthrough,
-    alertBadge,
-    title,
-    description,
-
-    // can't support websiteURL and
-    // i think it's deprecated anyway
-    // bc fetching
-    // websiteURL,
-  * */
-
 interface CustomFields {
   /* @deprecated Use isPlaythrough prop directly instead */
   playthrough?: boolean;
@@ -31,10 +16,13 @@ interface CustomFields {
 
 interface VideoPlayerProps {
   embedMarkup: string;
-  id: string;
+  id?: string;
   enableAutoplay?: boolean;
   customFields?: CustomFields;
   isPlaythrough?: boolean;
+  /* @deprecated Use id prop instead */
+  uuid?: string;
+  aspectRatio?: number;
 }
 
 const EmbedVideoContainer = styled.div`
@@ -55,16 +43,23 @@ const EmbedVideoContainer = styled.div`
  * @param {boolean} enableAutoplay sets video to autoplay per user settings
  * @param {boolean} isPlaythrough is preferred way of setting playthrough in video
  * @param {object} customFields is deprecated but takes in values like the block video player.
+ * @param {string} uuid corresponds to the video-{id} player loaded by powa video player
  */
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   embedMarkup,
-  id,
+  id = '',
+  uuid = '',
   enableAutoplay = false,
   customFields = {},
   isPlaythrough = false,
+  aspectRatio: overrideAspectRatio,
 }) => {
+  // migration from video component
+  // will fallback to uuid if id is undefined with defaulting to falsy ''
+  const targetId = id || uuid;
+
   const { playthrough = false, autoplay = false } = customFields;
-  const videoRef = useRef(id);
+  const videoRef = useRef(targetId);
   const shouldRender = !!(
     typeof window !== 'undefined'
     && typeof document !== 'undefined'
@@ -77,7 +72,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         if (window.powaBoot) window.powaBoot();
       }
     }
-    // only run on mount with []
   }, [shouldRender]);
 
   const getEmbedHTMLWithPlayStatus = (): string => (
@@ -85,6 +79,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       embedMarkup,
       enableAutoplay || autoplay,
       isPlaythrough || playthrough,
+      overrideAspectRatio,
     )
   );
 
