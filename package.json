@@ -24,7 +24,8 @@
     "preversion": "npm run lint",
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "postinstall": "node scripts/postinstall.js"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
