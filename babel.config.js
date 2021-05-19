@@ -7,6 +7,7 @@ module.exports = (api) => {
         loose: true,
       },
     ],
+    '@babel/plugin-proposal-optional-chaining',
   ];
 
   if (api.env('commonjs') || api.env('test')) {
