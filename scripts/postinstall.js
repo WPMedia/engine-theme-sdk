@@ -210,34 +210,63 @@ function loopAndSetTimezoneContinents(incomeTargetTimezones) {
 
   const incomingTimezonesArray = Object.keys(incomingTimezonesObject);
 
-  incomingTimezonesArray.forEach((topLevelTimezoneFolder) => {
-    const targetNestedTimezones = incomingTimezonesObject[topLevelTimezoneFolder];
-    fs.readdirSync(`${dirPath}${topLevelTimezoneFolder}`).forEach((nestedFile) => {
-      const fileNameWithoutExtension = nestedFile.split('.')[0];
-      // want to keep index files
-      const targetFilePath = `${dirPath}${topLevelTimezoneFolder}/${nestedFile}`;
+  const ALL_TOPLEVEL_TIMEZONES = [
+    'Africa',
+    'America',
+    'Antarctica',
+    'Arctic',
+    'Asia',
+    'Atlantic',
+    'Australia',
+    'Brazil',
+    'Canada',
+    'Chile',
+    'Etc',
+    'Europe',
+    'Indian',
+    'Mexico',
+    'Pacific',
+    'US',
+  ];
 
-      if (!targetNestedTimezones.includes(fileNameWithoutExtension) && fileNameWithoutExtension !== 'index') {
-        if (fs.lstatSync(targetFilePath).isFile()) {
-          fs.unlinkSync(targetFilePath);
-        } else {
-          // else
-          // could be nested america's obj like kentucky or argentina
-          // via https://attacomsian.com/blog/nodejs-delete-directory
-          // need node 12 for https://stackoverflow.com/questions/65931745/node-fs-rmdir-typeerror-callback-must-be-a-function
-          fs.rmdir(targetFilePath, { recursive: true }, (err) => {
-            if (err) {
-              throw err;
-            }
-          });
+  ALL_TOPLEVEL_TIMEZONES.forEach((topLevelTimezoneFolder) => {
+    if (!incomingTimezonesArray.includes(topLevelTimezoneFolder)) {
+      // delete any top-level timezone folder that's not used
+      fs.rmdir(`${dirPath}${topLevelTimezoneFolder}`, { recursive: true }, (err) => {
+        if (err) {
+          throw err;
         }
-      }
+      });
+    } else {
+      const targetNestedTimezones = incomingTimezonesObject[topLevelTimezoneFolder];
+      fs.readdirSync(`${dirPath}${topLevelTimezoneFolder}`).forEach((nestedFile) => {
+        const fileNameWithoutExtension = nestedFile.split('.')[0];
+        // want to keep index files
+        const targetFilePath = `${dirPath}${topLevelTimezoneFolder}/${nestedFile}`;
 
-      if (fileNameWithoutExtension === 'index') {
-        fs.writeFileSync(targetFilePath, outputExportsString(targetNestedTimezones, '.js'));
-      }
-    });
+        if (!targetNestedTimezones.includes(fileNameWithoutExtension) && fileNameWithoutExtension !== 'index') {
+          if (fs.lstatSync(targetFilePath).isFile()) {
+            fs.unlinkSync(targetFilePath);
+          } else {
+            // else
+            // could be nested america's obj like kentucky or argentina
+            // via https://attacomsian.com/blog/nodejs-delete-directory
+            // need node 12 for https://stackoverflow.com/questions/65931745/node-fs-rmdir-typeerror-callback-must-be-a-function
+            fs.rmdir(targetFilePath, { recursive: true }, (err) => {
+              if (err) {
+                throw err;
+              }
+            });
+          }
+        }
+
+        if (fileNameWithoutExtension === 'index') {
+          fs.writeFileSync(targetFilePath, outputExportsString(targetNestedTimezones, '.js'));
+        }
+      });
+    }
   });
+  // output what should be required
   const allRequireStatementsArray = [...TIMEZONE_CODES, ...incomingTimezonesArray];
   return outputExportsString(allRequireStatementsArray);
 }
