@@ -4,13 +4,46 @@
 
 const fs = require('fs');
 
+// input: themes locale
+// output: timezone-compatible locale
+function mapThemesLocales(themesLocaleString) {
+  let locale = '';
+
+  // via localizeDateHelper
+  switch (themesLocaleString) {
+    case 'sv':
+      locale = 'sv_SE';
+      break;
+    case 'fr':
+      locale = 'fr_FR';
+      break;
+    case 'no':
+      locale = 'nb_NO';
+      break;
+    case 'de':
+      locale = 'de_DE';
+      break;
+    case 'es':
+      locale = 'es_ES';
+      break;
+    case 'ja':
+      locale = 'ja_JP';
+      break;
+    case 'ko':
+      locale = 'ko_KR';
+      break;
+    case 'en':
+    default:
+      locale = 'en_US';
+  }
+  return locale;
+}
+
 const DELETABLE_FILES = [
   'CHANGELOG',
   'README.md',
-  'locales.js', // requires all locales
-  'loaded.js', // loads everything
+
   'synopsis.js', // used for tutorial purposes
-  'zones.js', // loads all timezones
 
   // unavailable locales
   'af_ZA.js',
@@ -81,43 +114,58 @@ const DELETABLE_FILES = [
   'zh_TW.js',
 ];
 
+const themesLocaleList = [
+  'en',
+  'sv',
+  'no',
+  'fr',
+  'de',
+  'es',
+  'ja',
+  'ko',
+];
+
+const targetTimeZones = [
+  'Europe/Paris',
+  'Europe/Oslo',
+  'Europe/Stockholm',
+  'America/New_York',
+  'America/Chicago',
+  'America/Los_Angeles',
+  'America/Mexico_City',
+  'Pacific/Auckland',
+];
+
+// the timezones require these base timezone files
+const TIMEZONE_CODES = [
+  'CET.js',
+  'CST6CDT.js',
+  'EET.js',
+  'EST.js',
+  'EST5EDT.js',
+  'HST.js',
+  'MET.js',
+  'MST.js',
+  'MST7MDT.js',
+  'PST8PDT.js',
+  'WET.js',
+];
+
+// all keeping js
+const packageKeepLocaleList = themesLocaleList.map((themeLocale) => `${mapThemesLocales(themeLocale)}.js`);
+
 const packageName = 'timezone';
 
 const dirPath = `node_modules/${packageName}/`;
 
-// input: themes locale
-// output: timezone-compatible locale
-function mapThemesLocales(themesLocaleString) {
-  let locale = '';
+function outputExportsString(targetFileNamesArray, fileExtension = '') {
+  let requireStatements = '';
 
-  // via localizeDateHelper
-  switch (themesLocaleString) {
-    case 'sv':
-      locale = 'sv_SE';
-      break;
-    case 'fr':
-      locale = 'fr_FR';
-      break;
-    case 'no':
-      locale = 'nb_NO';
-      break;
-    case 'de':
-      locale = 'de_DE';
-      break;
-    case 'es':
-      locale = 'es_ES';
-      break;
-    case 'ja':
-      locale = 'ja_JP';
-      break;
-    case 'ko':
-      locale = 'ko_KR';
-      break;
-    case 'en':
-    default:
-      locale = 'en_US';
-  }
-  return locale;
+  targetFileNamesArray.forEach((targetFileNameWithExtension) => {
+    requireStatements += `require("./${targetFileNameWithExtension}${fileExtension}"),`;
+  });
+
+  return `module.exports = [${requireStatements}]`;
 }
 
 // many files have no chance of being picked in blocks.json
@@ -127,40 +175,14 @@ function deleteUnnecessaryFiles() {
 
 function deleteUnusedFiles() {
   // take in locale list
-  const themesLocaleList = [
-    'en',
-    'sv',
-    'no',
-    'fr',
-    'de',
-    'es',
-    'ja',
-    'ko',
-  ];
-
-  // all keeping js
-  const packageKeepLocaleList = themesLocaleList.map((themeLocale) => `${mapThemesLocales(themeLocale)}.js`);
 
   const TIMEZONE_ALLOW_LIST = [
-    // entry
-    'index.js',
+    'index.js', // entry
     'package.json',
     'rfc822.js',
-  ];
-
-  // the timezones require these base timezone files
-  const TIMEZONE_CODES = [
-    'CET.js',
-    'CST6CDT.js',
-    'EET.js',
-    'EST.js',
-    'EST5EDT.js',
-    'HST.js',
-    'MET.js',
-    'MST.js',
-    'MST7MDT.js',
-    'PST8PDT.js',
-    'WET.js',
+    'locales.js', // requires all locales
+    'loaded.js', // loads everything
+    'zones.js', // loads all timezones
   ];
 
   fs.readdirSync(dirPath).forEach((fileName) => {
@@ -175,8 +197,64 @@ function deleteUnusedFiles() {
   });
 }
 
+// incoming ['Pacific/Auckland',]
+
+function loopAndSetTimezoneContinents(incomeTargetTimezones) {
+  const incomingTimezonesObject = incomeTargetTimezones.reduce((outputObject, currentItem) => {
+    const [topLevelTimezone, nestedTimezone] = currentItem.split('/');
+    const newOutputObject = outputObject;
+    newOutputObject[topLevelTimezone] = [...(outputObject[topLevelTimezone] || []), nestedTimezone];
+
+    return newOutputObject;
+  }, {});
+
+  const incomingTimezonesArray = Object.keys(incomingTimezonesObject);
+
+  incomingTimezonesArray.forEach((topLevelTimezoneFolder) => {
+    const targetNestedTimezones = incomingTimezonesObject[topLevelTimezoneFolder];
+    fs.readdirSync(`${dirPath}${topLevelTimezoneFolder}`).forEach((nestedFile) => {
+      const fileNameWithoutExtension = nestedFile.split('.')[0];
+      // want to keep index files
+      const targetFilePath = `${dirPath}${topLevelTimezoneFolder}/${nestedFile}`;
+
+      if (!targetNestedTimezones.includes(fileNameWithoutExtension) && fileNameWithoutExtension !== 'index') {
+        if (fs.lstatSync(targetFilePath).isFile()) {
+          fs.unlinkSync(targetFilePath);
+        } else {
+          // else
+          // could be nested america's obj like kentucky or argentina
+          // via https://attacomsian.com/blog/nodejs-delete-directory
+          // need node 12 for https://stackoverflow.com/questions/65931745/node-fs-rmdir-typeerror-callback-must-be-a-function
+          fs.rmdir(targetFilePath, { recursive: true }, (err) => {
+            if (err) {
+              throw err;
+            }
+          });
+        }
+      }
+
+      if (fileNameWithoutExtension === 'index') {
+        fs.writeFileSync(targetFilePath, outputExportsString(targetNestedTimezones, '.js'));
+      }
+    });
+  });
+  const allRequireStatementsArray = [...TIMEZONE_CODES, ...incomingTimezonesArray];
+  return outputExportsString(allRequireStatementsArray);
+}
+
+function updateEntryFileRequiredFiles() {
+  // only add back the the locales used
+
+  const startingLocaleString = outputExportsString(packageKeepLocaleList);
+  const startingOutputString = loopAndSetTimezoneContinents(targetTimeZones);
+  fs.writeFileSync('node_modules/timezone/zones.js', startingOutputString);
+  fs.writeFileSync('node_modules/timezone/locales.js', startingLocaleString);
+}
+
 // delete files that are never used
 deleteUnnecessaryFiles();
 
 // delete files that may be needed
 deleteUnusedFiles();
+
+updateEntryFileRequiredFiles();
