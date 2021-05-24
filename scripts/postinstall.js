@@ -3,6 +3,7 @@
 */
 
 const fs = require('fs');
+const rimraf = require('rimraf');
 
 // input: themes locale
 // output: timezone-compatible locale
@@ -231,8 +232,9 @@ function loopAndSetTimezoneContinents(incomeTargetTimezones) {
 
   ALL_TOPLEVEL_TIMEZONES.forEach((topLevelTimezoneFolder) => {
     if (!incomingTimezonesArray.includes(topLevelTimezoneFolder)) {
-      // delete any top-level timezone folder that's not used
-      fs.rmdir(`${dirPath}${topLevelTimezoneFolder}`, { recursive: true }, (err) => {
+      // todo: when we upgrade to node 12 fully
+      // use fs.rmdir for recursive folder deletion
+      rimraf(`${dirPath}${topLevelTimezoneFolder}`, (err) => {
         if (err) {
           throw err;
         }
@@ -248,11 +250,7 @@ function loopAndSetTimezoneContinents(incomeTargetTimezones) {
           if (fs.lstatSync(targetFilePath).isFile()) {
             fs.unlinkSync(targetFilePath);
           } else {
-            // else
-            // could be nested america's obj like kentucky or argentina
-            // via https://attacomsian.com/blog/nodejs-delete-directory
-            // need node 12 for https://stackoverflow.com/questions/65931745/node-fs-rmdir-typeerror-callback-must-be-a-function
-            fs.rmdir(targetFilePath, { recursive: true }, (err) => {
+            rimraf(targetFilePath, (err) => {
               if (err) {
                 throw err;
               }
