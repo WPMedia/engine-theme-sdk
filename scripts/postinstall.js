@@ -45,6 +45,7 @@ const DELETABLE_FILES = [
   'README.md',
 
   'synopsis.js', // used for tutorial purposes
+  'loaded.js', // loads everything, we're only using zones.js and locales.js
 
   // unavailable locales
   'af_ZA.js',
@@ -182,7 +183,6 @@ function deleteUnusedFiles() {
     'package.json',
     'rfc822.js',
     'locales.js', // requires all locales
-    'loaded.js', // loads everything
     'zones.js', // loads all timezones
   ];
 

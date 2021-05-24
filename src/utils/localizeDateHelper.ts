@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // tz docs https://bigeasy.github.io/timezone/
-const tz = require('timezone/loaded');
+const tz = require('timezone')(
+  require('timezone/zones'),
+  require('timezone/locales'),
+);
 
 function localizeDateHelper(
   date: string,
