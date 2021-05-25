@@ -5,6 +5,43 @@
 const fs = require('fs');
 const rimraf = require('rimraf');
 
+// get blocks json allowed strings
+
+const themesLocaleList = [
+  'en',
+  'sv',
+  'no',
+  'fr',
+  'de',
+  'es',
+  'ja',
+  'ko',
+];
+
+const targetTimeZones = [
+  'Europe/Paris',
+  'Europe/Oslo',
+  'Europe/Stockholm',
+  'America/New_York',
+  'America/Chicago',
+  'America/Los_Angeles',
+  'America/Mexico_City',
+  'Pacific/Auckland',
+];
+
+// in this case, wherever npm i was called
+// init cwd is the filepath of the initiating command
+const dirPath = `${process.env.INIT_CWD}/node_modules/${packageName}/`;
+
+// try {
+//   // eslint-disable-next-line global-require
+//   themesLocaleList = require('./src/blocks.json').localeList;
+//   console.log('locale list via ./src/blocks.json');
+//   console.log(themesLocaleList.toString());
+// } catch (e) {
+//   console.log('installing locally', e);
+// }
+
 // input: themes locale
 // output: timezone-compatible locale
 function mapThemesLocales(themesLocaleString) {
@@ -116,27 +153,7 @@ const DELETABLE_FILES = [
   'zh_TW.js',
 ];
 
-const themesLocaleList = [
-  'en',
-  'sv',
-  'no',
-  'fr',
-  'de',
-  'es',
-  'ja',
-  'ko',
-];
 
-const targetTimeZones = [
-  'Europe/Paris',
-  'Europe/Oslo',
-  'Europe/Stockholm',
-  'America/New_York',
-  'America/Chicago',
-  'America/Los_Angeles',
-  'America/Mexico_City',
-  'Pacific/Auckland',
-];
 
 // the timezones require these base timezone files
 const TIMEZONE_CODES = [
@@ -158,7 +175,6 @@ const packageKeepLocaleList = themesLocaleList.map((themeLocale) => `${mapThemes
 
 const packageName = 'timezone';
 
-const dirPath = `node_modules/${packageName}/`;
 
 function outputExportsString(targetFileNamesArray, fileExtension = '') {
   let requireStatements = '';
@@ -274,8 +290,8 @@ function updateEntryFileRequiredFiles() {
 
   const startingLocaleString = outputExportsString(packageKeepLocaleList);
   const startingOutputString = loopAndSetTimezoneContinents(targetTimeZones);
-  fs.writeFileSync('node_modules/timezone/zones.js', startingOutputString);
-  fs.writeFileSync('node_modules/timezone/locales.js', startingLocaleString);
+  fs.writeFileSync(`${dirPath}zones.js`, startingOutputString);
+  fs.writeFileSync(`${dirPath}locales.js`, startingLocaleString);
 }
 
 // delete files that are never used
