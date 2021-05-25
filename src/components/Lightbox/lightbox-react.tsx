@@ -868,8 +868,6 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
      * Handle user keyboard actions
      */
     handleKeyInput(event): void {
-      event.stopPropagation();
-
       // Ignore key input during animations
       if (this.isAnimating()) {
         return;
@@ -901,7 +899,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
           this.requestClose(event);
           break;
 
-          // Left arrow key moves to previous image
+        // Left arrow key moves to previous image
         case KEYS.LEFT_ARROW:
           if (!this.props.prevSrc) {
             return;
@@ -912,7 +910,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
           this.requestMovePrev(event);
           break;
 
-          // Right arrow key moves to next image
+        // Right arrow key moves to next image
         case KEYS.RIGHT_ARROW:
           if (!this.props.nextSrc) {
             return;
@@ -1778,6 +1776,8 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
         },
       };
 
+      Modal.setAppElement('#fusion-app');
+
       return (
         <Modal
           isOpen
@@ -1785,14 +1785,14 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
           onAfterOpen={(): void => {
             // Focus on the div with key handlers
             if (this.outerEl) {
-              this.outerEl.focus();
+              const lightBoxClose: HTMLElement = this.outerEl.querySelector('#lightbox-close') as HTMLElement;
+              lightBoxClose.focus();
             }
 
             onAfterOpen();
           }}
           style={modalStyle}
           contentLabel={translate('Lightbox')}
-          appElement={typeof window !== 'undefined' ? window.document.body : undefined}
           {...reactModalProps}
         >
           <LightboxContainer // eslint-disable-line jsx-a11y/no-static-element-interactions
@@ -1812,12 +1812,11 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
             onMouseDown={this.handleMouseDown}
             onTouchStart={this.handleTouchStart}
             onTouchMove={this.handleTouchMove}
-            tabIndex={-1} // Enables key handlers on div
             onKeyDown={this.handleKeyInput}
             onKeyUp={this.handleKeyInput}
           >
             <LightboxInnerDiv // eslint-disable-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
-                        // Image holder
+              // Image holder
               className="ril-inner"
               onClick={clickOutsideToClose ? this.closeIfClickInner : undefined}
             >
@@ -1857,11 +1856,11 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 
               <ul className="toolbarSide rightSide">
                 {toolbarButtons
-                            && toolbarButtons.map((button, i) => (
-                              <li key={`button_${i + 1}`} className="toolbarItem">
-                                {button}
-                              </li>
-                            ))}
+                  && toolbarButtons.map((button, i) => (
+                    <li key={`button_${i + 1}`} className="toolbarItem">
+                      {button}
+                    </li>
+                  ))}
 
                 {enableZoom && (
                 <li className="toolbarItem">
@@ -1879,10 +1878,10 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                     }}
                     disabled={this.isAnimating() || zoomLevel === MAX_ZOOM_LEVEL}
                     onClick={
-                                            !this.isAnimating() && zoomLevel !== MAX_ZOOM_LEVEL
-                                              ? this.handleZoomInButtonClick
-                                              : undefined
-                                        }
+                      !this.isAnimating() && zoomLevel !== MAX_ZOOM_LEVEL
+                        ? this.handleZoomInButtonClick
+                        : undefined
+                    }
                   >
                     <ZoomInIcon width="100%" height="100%" fill="#fff" />
                   </button>
@@ -1905,10 +1904,10 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                     }}
                     disabled={this.isAnimating() || zoomLevel === MIN_ZOOM_LEVEL}
                     onClick={
-                                            !this.isAnimating() && zoomLevel !== MIN_ZOOM_LEVEL
-                                              ? this.handleZoomOutButtonClick
-                                              : undefined
-                                        }
+                      !this.isAnimating() && zoomLevel !== MIN_ZOOM_LEVEL
+                        ? this.handleZoomOutButtonClick
+                        : undefined
+                    }
                   >
                     <ZoomOutIcon width="100%" height="100%" fill="#fff" />
                   </button>
@@ -1919,7 +1918,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
                   <button // Lightbox close button
                     type="button"
                     key="close"
-                    title={this.props.closeLabel}
+                    id="lightbox-close"
                     aria-label={this.props.closeLabel}
                     className="itemChild builtinButton"
                     onClick={!this.isAnimating() ? this.requestClose : undefined}

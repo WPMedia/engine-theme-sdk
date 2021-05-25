@@ -12,6 +12,15 @@ test('renders id with video tag to match with powa player', () => {
   expect(matchingVideoTargetIdDiv.getAttribute('id')).toBe('video-matching123');
 });
 
+test('renders uuid with video tag to match with powa player', () => {
+  const targetId = 'matching123';
+  const videoPlayer = render(<VideoPlayer embedMarkup="" uuid={targetId} />);
+
+  // id not usually important in rtl but this is an exception
+  const matchingVideoTargetIdDiv = videoPlayer.container.querySelector(`#video-${targetId}`);
+  expect(matchingVideoTargetIdDiv.getAttribute('id')).toBe('video-matching123');
+});
+
 test('renders embed markup in container', () => {
   const targetId = '';
   const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'

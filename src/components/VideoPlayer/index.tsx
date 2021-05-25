@@ -4,21 +4,6 @@ import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
 import formatEmbedMarkup from './formatEmbedMarkup';
 
-/**
-    autoplay,
-    // can't support global content
-    // inheritGlobalContent,
-    playthrough,
-    alertBadge,
-    title,
-    description,
-
-    // can't support websiteURL and
-    // i think it's deprecated anyway
-    // bc fetching
-    // websiteURL,
-  * */
-
 interface CustomFields {
   /* @deprecated Use isPlaythrough prop directly instead */
   playthrough?: boolean;
@@ -32,12 +17,14 @@ interface CustomFields {
 
 interface VideoPlayerProps {
   embedMarkup: string;
-  id: string;
+  id?: string;
   enableAutoplay?: boolean;
   customFields?: CustomFields;
   isPlaythrough?: boolean;
   shrinkToFit?: boolean;
   viewportPercentage?: number;
+  /* @deprecated Use id prop instead */
+  uuid?: string;
 }
 
 const EmbedVideoContainer = styled.div`
@@ -74,18 +61,24 @@ const EmbedContainerStyle = styled(EmbedContainer)`
  * @param {boolean} enableAutoplay sets video to autoplay per user settings
  * @param {boolean} isPlaythrough is preferred way of setting playthrough in video
  * @param {object} customFields is deprecated but takes in values like the block video player.
+ * @param {string} uuid corresponds to the video-{id} player loaded by powa video player
  */
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   embedMarkup,
-  id,
+  id = '',
+  uuid = '',
   enableAutoplay = false,
   customFields = {},
   isPlaythrough = false,
   shrinkToFit = false,
   viewportPercentage = 75,
 }) => {
+  // migration from video component
+  // will fallback to uuid if id is undefined with defaulting to falsy ''
+  const targetId = id || uuid;
+
   const { playthrough = false, autoplay = false } = customFields;
-  const videoRef = useRef(id);
+  const videoRef = useRef(targetId);
   const containerRef = useRef();
   const [aspectRatio, setAspectRatio] = useState(9 / 16); // default 16:9
 
@@ -101,7 +94,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         if (window.powaBoot) window.powaBoot();
       }
     }
-    // only run on mount with []
   }, [shouldRender]);
 
   useEffect(() => {

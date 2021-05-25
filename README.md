@@ -4,9 +4,9 @@
 
 This package has been published with a number of dist-tags meant for different purposes:
 
-- `stable`: Client Production environment
-- `beta`: Client Sandbox environment
-- `rc`: Developer environment for testing hotfixes preparing for `beta` or, worst comes to worst, `stable`
+- `stable`: Client Production environment,
+- `beta`: Client Sandbox environment,
+- `rc`: Developer environment for testing hotfixes preparing for `beta` or, worst comes to worst, `stable`,
 - `canary`: For developers to test on core components
 
 ## Preview Components, Functionality
@@ -51,7 +51,11 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 
 ## How To Publish To RC
 
-- Merge into `rc` branch. You can watch the github publish action [here](https://github.com/WPMedia/engine-theme-sdk/actions?query=workflow%3A%22Release+candidate+build%22).
+- Force-push into the `rc` branch from `canary` like so: 
+
+1. update the base branch `git checkout canary && git remote update --prune origin && git reset --hard origin/canary`
+2. Force push base branch into target: `git push origin canary:rc -f`
+3. You can watch the github publish action [here](https://github.com/WPMedia/engine-theme-sdk/actions?query=workflow%3A%22Release+candidate+build%22).
 
 ## How To Publish To Beta
 
