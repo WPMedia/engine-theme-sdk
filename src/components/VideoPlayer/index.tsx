@@ -1,5 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import EmbedContainer from 'react-oembed-container';
+import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
 import formatEmbedMarkup from './formatEmbedMarkup';
 
@@ -35,6 +36,8 @@ interface VideoPlayerProps {
   enableAutoplay?: boolean;
   customFields?: CustomFields;
   isPlaythrough?: boolean;
+  shrinkToFit?: boolean;
+  viewportPercentage?: number;
 }
 
 const EmbedVideoContainer = styled.div`
@@ -46,6 +49,22 @@ const EmbedVideoContainer = styled.div`
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
+
+  background-color: black;
+`;
+
+const EmbedContainerStyle = styled(EmbedContainer)`
+  ${({
+    aspectRatio,
+    viewportPercentage,
+    shrinkToFit,
+  }): string => (shrinkToFit ? `
+    max-width: calc(${1 / aspectRatio} * ${viewportPercentage}vh);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  ` : '')
+}
 `;
 
 /**
@@ -62,9 +81,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   enableAutoplay = false,
   customFields = {},
   isPlaythrough = false,
+  shrinkToFit = false,
+  viewportPercentage = 75,
 }) => {
   const { playthrough = false, autoplay = false } = customFields;
   const videoRef = useRef(id);
+  const containerRef = useRef();
+  const [aspectRatio, setAspectRatio] = useState(9 / 16); // default 16:9
+
   const shouldRender = !!(
     typeof window !== 'undefined'
     && typeof document !== 'undefined'
@@ -80,6 +104,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     // only run on mount with []
   }, [shouldRender]);
 
+  useEffect(() => {
+    const observer = new MutationObserver((() => {
+      const bounds = containerRef.current.getBoundingClientRect();
+      if (bounds.height > 0 && bounds.width > 0) {
+        setAspectRatio(bounds.height / bounds.width);
+      }
+    }));
+    observer.observe(containerRef.current, { subtree: true, childList: true });
+  }, [containerRef]);
+
   const getEmbedHTMLWithPlayStatus = (): string => (
     formatEmbedMarkup(
       embedMarkup,
@@ -89,16 +123,53 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   );
 
   return shouldRender ? (
-    <EmbedVideoContainer>
-      <EmbedContainer markup={getEmbedHTMLWithPlayStatus()}>
+    <EmbedVideoContainer ref={containerRef} aspectRatio={aspectRatio}>
+      <EmbedContainerStyle
+        markup={getEmbedHTMLWithPlayStatus()}
+        aspectRatio={aspectRatio}
+        viewportPercentage={viewportPercentage}
+        shrinkToFit={shrinkToFit}
+      >
         <div
           id={`video-${videoRef.current}`}
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: getEmbedHTMLWithPlayStatus() }}
         />
-      </EmbedContainer>
+      </EmbedContainerStyle>
     </EmbedVideoContainer>
   ) : null;
 };
+
+export const videoPlayerCustomFieldTags = {
+  shrinkToFit: {
+    type: PropTypes.bool,
+    group: 'Video Settings',
+    name: 'Shrink video to fit screen',
+    description: 'Will shrink the video width to keep the video in screen while keeping it horizontally centered to content.',
+    defaultValue: false,
+  },
+  viewportPercentage: {
+    type: PropTypes.number,
+    group: 'Video Settings',
+    name: 'Percentage of viewport height',
+    description: 'With Shrink Video enabled, this determines how much vertical viewport real estate the video will occupy.',
+    min: 0,
+    max: 150,
+    defaultValue: 75,
+  },
+};
+
+export const videoPlayerCustomFields = (): object => ({
+  shrinkToFit: PropTypes.bool.tag({
+    ...(videoPlayerCustomFieldTags.shrinkToFit),
+    defaultValue: false,
+    group: 'Video Settings',
+  }),
+  viewportPercentage: PropTypes.number.tag({
+    ...(videoPlayerCustomFieldTags.viewportPercentage),
+    defaultValue: 75,
+    group: 'Video Settings',
+  }),
+});
 
 export default VideoPlayer;

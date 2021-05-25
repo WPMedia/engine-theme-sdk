@@ -1,6 +1,7 @@
 import React from 'react';
+import { mount } from 'enzyme';
 import { render } from '@testing-library/react';
-import VideoPlayer from '.';
+import VideoPlayer, { videoPlayerCustomFields } from '.';
 
 test('renders id with video tag to match with powa player', () => {
   const targetId = 'matching123';
@@ -25,4 +26,63 @@ test('renders embed markup in container', () => {
   expect(videoPlayerPowaContainer.outerHTML).toMatchInlineSnapshot(
     '"<div class=\\"powa\\" id=\\"powa-e924\\" data-org=\\"corecomponents\\" data-env=\\"prod\\" data-uuid=\\"e924e51b\\" data-aspect-ratio=\\"0.562\\" data-api=\\"prod\\"><script src=\\"//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents\\"></script></div>"',
   );
+});
+
+describe('Styling', () => {
+  describe('shrinkToFit flag on Video', () => {
+    it('not included, the video should still render with a false flag passed to the wrapper', () => {
+      const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
+        + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
+        + 'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+      const wrapper = mount(
+        <VideoPlayer embedMarkup={testEmbed} id="targetId" />,
+      );
+      expect(wrapper.find('VideoPlayer__EmbedContainerStyle').prop('shrinkToFit')).toBe(false);
+    });
+
+    it('included, the video should still render with a true flag passed to the wrapper', () => {
+      const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
+        + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
+        + 'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+      const wrapper = mount(
+        <VideoPlayer embedMarkup={testEmbed} id="targetId" shrinkToFit />,
+      );
+      expect(wrapper.find('VideoPlayer__EmbedContainerStyle').prop('shrinkToFit')).toBe(true);
+    });
+  });
+  describe('PageBuilder settings', () => {
+    it('should return an object with settings defined', () => {
+      const result = videoPlayerCustomFields();
+      expect(result).toHaveProperty('shrinkToFit');
+      expect(result).toHaveProperty('viewportPercentage');
+    });
+  });
+});
+
+describe('MutationObserver', () => {
+  describe('video aspect ratio', () => {
+    it('should not be calculated given a zero dimension video', () => {
+      global.MutationObserver = jest.fn((observe) => ({ observe }));
+      Element.prototype.getBoundingClientRect = jest.fn(() => ({ width: 0, height: 0 }));
+      const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
+        + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
+        + 'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+      const wrapper = mount(
+        <VideoPlayer embedMarkup={testEmbed} id="targetId" />,
+      );
+      expect(wrapper.find('VideoPlayer__EmbedVideoContainer').prop('aspectRatio')).toBe(0.5625); // default aspect ratio
+    });
+
+    it('should be calculated given a known dimension video', () => {
+      global.MutationObserver = jest.fn((observe) => ({ observe }));
+      Element.prototype.getBoundingClientRect = jest.fn(() => ({ width: 10, height: 10 }));
+      const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
+        + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
+        + 'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+      const wrapper = mount(
+        <VideoPlayer embedMarkup={testEmbed} id="targetId" />,
+      );
+      expect(wrapper.find('VideoPlayer__EmbedVideoContainer').prop('aspectRatio')).toBe(1); // square aspect ratio
+    });
+  });
 });
