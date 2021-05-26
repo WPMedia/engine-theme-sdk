@@ -27,17 +27,36 @@ const Video: React.FC<VideoProps> = (props) => {
   } = props;
   const muted = autoplay;
   const containerRef = useRef();
-  const [aspectRatio, setAspectRatio] = useState(9 / 16); // default 16:9
+  const [aspectRatio, setAspectRatio] = useState(9 / 16); // default 16:9 (ratio is height / width)
+  const [videoShadowDom, setVideoShadowDom] = useState();
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
-    const observer = new MutationObserver((() => {
-      const bounds = containerRef.current.getBoundingClientRect();
-      if (bounds.height > 0 && bounds.width > 0) {
-        setAspectRatio(bounds.height / bounds.width);
-      }
-    }));
-    observer.observe(containerRef.current, { subtree: true, childList: true });
+    if (containerRef.current) {
+      const observer = new MutationObserver((() => {
+        const element = containerRef.current.querySelector('.powa');
+        if (element && element.shadowRoot) {
+          setVideoShadowDom(element.shadowRoot);
+        }
+      }));
+      observer.observe(containerRef.current, { subtree: true, childList: true });
+      return (): void => observer.disconnect();
+    }
   }, [containerRef]);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (videoShadowDom) {
+      const observer = new MutationObserver((() => {
+        const bounds = videoShadowDom.firstElementChild.getBoundingClientRect();
+        if (bounds && bounds.height > 0 && bounds.width > 0) {
+          setAspectRatio(bounds.height / bounds.width);
+        }
+      }));
+      observer.observe(videoShadowDom, { subtree: true, childList: true });
+      return (): void => observer.disconnect();
+    }
+  }, [videoShadowDom]);
 
   useEffect(() => {
     if (window.powaBoot) {
@@ -46,9 +65,8 @@ const Video: React.FC<VideoProps> = (props) => {
   }, []);
 
   return (
-    <VideoContainer className="video-container">
+    <VideoContainer ref={containerRef} className="video-container">
       <VideoWrap
-        ref={containerRef}
         aspectRatio={aspectRatio}
         viewportPercentage={viewportPercentage}
         shrinkToFit={shrinkToFit}

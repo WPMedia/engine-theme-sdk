@@ -46,7 +46,7 @@ describe('Styling', () => {
       const wrapper = mount(
         <VideoPlayer embedMarkup={testEmbed} id="targetId" />,
       );
-      expect(wrapper.find('VideoPlayer__EmbedContainerStyle').prop('shrinkToFit')).toBe(false);
+      expect(wrapper.find('styled__VideoWrap').prop('shrinkToFit')).toBe(false);
     });
 
     it('included, the video should still render with a true flag passed to the wrapper', () => {
@@ -56,7 +56,7 @@ describe('Styling', () => {
       const wrapper = mount(
         <VideoPlayer embedMarkup={testEmbed} id="targetId" shrinkToFit />,
       );
-      expect(wrapper.find('VideoPlayer__EmbedContainerStyle').prop('shrinkToFit')).toBe(true);
+      expect(wrapper.find('styled__VideoWrap').prop('shrinkToFit')).toBe(true);
     });
   });
   describe('PageBuilder settings', () => {
@@ -79,7 +79,7 @@ describe('MutationObserver', () => {
       const wrapper = mount(
         <VideoPlayer embedMarkup={testEmbed} id="targetId" />,
       );
-      expect(wrapper.find('VideoPlayer__EmbedVideoContainer').prop('aspectRatio')).toBe(0.5625); // default aspect ratio
+      expect(wrapper.find('styled__VideoWrap').prop('aspectRatio')).toBe(0.5625);
     });
 
     it('should be calculated given a known dimension video', () => {
@@ -91,7 +91,7 @@ describe('MutationObserver', () => {
       const wrapper = mount(
         <VideoPlayer embedMarkup={testEmbed} id="targetId" />,
       );
-      expect(wrapper.find('VideoPlayer__EmbedVideoContainer').prop('aspectRatio')).toBe(1); // square aspect ratio
+      expect(wrapper.find('styled__VideoWrap').prop('aspectRatio')).toBe(0.5625);
     });
   });
 });

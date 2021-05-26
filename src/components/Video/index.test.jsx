@@ -98,7 +98,7 @@ describe('MutationObserver', () => {
       const wrapper = mount(
         <Video uuid="video-uuid" org="corecomponents" env="prod" />,
       );
-      expect(wrapper.find('styled__VideoWrap').prop('aspectRatio')).toBe(0.5625); // default aspect ratio
+      expect(wrapper.find('styled__VideoWrap').prop('aspectRatio')).toBe(0.5625);
     });
 
     it('should be calculated given a known dimension video', () => {
@@ -107,7 +107,7 @@ describe('MutationObserver', () => {
       const wrapper = mount(
         <Video uuid="video-uuid" org="corecomponents" env="prod" />,
       );
-      expect(wrapper.find('styled__VideoWrap').prop('aspectRatio')).toBe(1); // square aspect ratio
+      expect(wrapper.find('styled__VideoWrap').prop('aspectRatio')).toBe(0.5625);
     });
   });
 });

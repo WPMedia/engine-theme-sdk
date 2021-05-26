@@ -2,6 +2,15 @@
 import styled from 'styled-components';
 
 export const VideoContainer = styled.div`
+  @media screen and (min-width: 48rem) {
+    margin-bottom: 1.5rem;
+  }
+
+  margin-bottom: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+
   background-color: black;
 `;
 
