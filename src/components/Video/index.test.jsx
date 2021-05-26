@@ -91,10 +91,19 @@ describe('Styling', () => {
 });
 
 describe('MutationObserver', () => {
+  beforeEach(() => {
+    global.MutationObserver = class MutationObserver extends global.MutationObserver {
+      constructor(callback) {
+        super(callback);
+      }
+      disconnect() {}
+      observe(element, initObject) {}
+    };
+  });
+
   describe('video aspect ratio', () => {
     it('should not be calculated given a zero dimension video', () => {
-      global.MutationObserver = jest.fn((observe) => ({ observe }));
-      Element.prototype.getBoundingClientRect = jest.fn(() => ({ width: 0, height: 0 }));
+      Element.prototype.getBoundingClientRect = jest.fn((): DOMRect => (DOMRectReadOnly.fromRect({ width: 0, height: 0 })));
       const wrapper = mount(
         <Video uuid="video-uuid" org="corecomponents" env="prod" />,
       );
@@ -102,8 +111,8 @@ describe('MutationObserver', () => {
     });
 
     it('should be calculated given a known dimension video', () => {
-      global.MutationObserver = jest.fn((observe) => ({ observe }));
-      Element.prototype.getBoundingClientRect = jest.fn(() => ({ width: 10, height: 10 }));
+      // global.MutationObserver = jest.fn((observe) => ({ observe, disconnect: jest.fn(), takeRecords: jest.fn() }));
+      Element.prototype.getBoundingClientRect = jest.fn((): DOMRect => (DOMRectReadOnly.fromRect({ width: 10, height: 10 })));
       const wrapper = mount(
         <Video uuid="video-uuid" org="corecomponents" env="prod" />,
       );

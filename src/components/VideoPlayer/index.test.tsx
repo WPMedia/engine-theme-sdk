@@ -69,10 +69,18 @@ describe('Styling', () => {
 });
 
 describe('MutationObserver', () => {
+  beforeEach(() => {
+    global.MutationObserver = class MutationObserver extends global.MutationObserver {
+      constructor(callback) {
+        super(callback);
+      }
+      disconnect() {}
+      observe(element, initObject) {}
+    };
+  });
   describe('video aspect ratio', () => {
     it('should not be calculated given a zero dimension video', () => {
-      global.MutationObserver = jest.fn((observe) => ({ observe }));
-      Element.prototype.getBoundingClientRect = jest.fn(() => ({ width: 0, height: 0 }));
+      Element.prototype.getBoundingClientRect = jest.fn((): DOMRect => (DOMRectReadOnly.fromRect({ width: 0, height: 0 })));
       const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
         + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
         + 'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
@@ -83,8 +91,7 @@ describe('MutationObserver', () => {
     });
 
     it('should be calculated given a known dimension video', () => {
-      global.MutationObserver = jest.fn((observe) => ({ observe }));
-      Element.prototype.getBoundingClientRect = jest.fn(() => ({ width: 10, height: 10 }));
+      Element.prototype.getBoundingClientRect = jest.fn((): DOMRect => (DOMRectReadOnly.fromRect({ width: 10, height: 10 })));
       const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
         + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
         + 'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';

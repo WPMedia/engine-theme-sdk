@@ -74,14 +74,15 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (containerRef.current) {
+    if (containerRef?.current) {
       const observer = new MutationObserver((() => {
-        const element = containerRef.current.querySelector('.powa-shadow');
+        // @ts-ignore: Object is possibly 'undefined'.
+        const element = containerRef?.current?.querySelector('.powa-shadow');
         if (element && element.shadowRoot) {
           setVideoShadowDom(element.shadowRoot);
         }
       }));
-      observer.observe(containerRef.current, { subtree: true, childList: true });
+      observer.observe(containerRef?.current, { subtree: true, childList: true });
       return (): void => observer.disconnect();
     }
   }, [containerRef]);
@@ -90,7 +91,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   useEffect(() => {
     if (videoShadowDom) {
       const observer = new MutationObserver((() => {
-        const bounds = videoShadowDom.firstElementChild.getBoundingClientRect();
+        // @ts-ignore: Object is possibly 'undefined'.
+        const bounds = videoShadowDom?.firstElementChild?.getBoundingClientRect();
         if (bounds && bounds.height > 0 && bounds.width > 0) {
           setAspectRatio(bounds.height / bounds.width);
         }
