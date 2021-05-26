@@ -29,6 +29,8 @@ const targetTimeZones = [
   'Pacific/Auckland',
 ];
 
+const packageName = 'timezone';
+
 // in this case, wherever npm i was called
 // init cwd is the filepath of the initiating command
 const dirPath = `${process.env.INIT_CWD}/node_modules/${packageName}/`;
@@ -153,8 +155,6 @@ const DELETABLE_FILES = [
   'zh_TW.js',
 ];
 
-
-
 // the timezones require these base timezone files
 const TIMEZONE_CODES = [
   'CET.js',
@@ -172,9 +172,6 @@ const TIMEZONE_CODES = [
 
 // all keeping js
 const packageKeepLocaleList = themesLocaleList.map((themeLocale) => `${mapThemesLocales(themeLocale)}.js`);
-
-const packageName = 'timezone';
-
 
 function outputExportsString(targetFileNamesArray, fileExtension = '') {
   let requireStatements = '';
