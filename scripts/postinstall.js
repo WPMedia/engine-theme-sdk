@@ -36,15 +36,13 @@ const packageName = 'timezone';
 const dirPath = `${process.env.INIT_CWD}/node_modules/${packageName}/`;
 
 try {
-  // eslint-disable-next-line global-require
+  // eslint-disable-next-line global-require,import/no-absolute-path
   themesLocaleList = require('/opt/engine/bundle/src/blocks.json').localeList;
   console.log('locale list via ./src/blocks.json');
   console.log(themesLocaleList.toString());
 } catch (e) {
   console.log('installing locally', e);
 }
-
-
 
 // input: themes locale
 // output: timezone-compatible locale
