@@ -71,16 +71,25 @@ describe('Styling', () => {
 describe('MutationObserver', () => {
   beforeEach(() => {
     global.MutationObserver = class MutationObserver extends global.MutationObserver {
+      // eslint-disable-next-line no-useless-constructor, class-methods-use-this
       constructor(callback) {
         super(callback);
       }
+
+      // eslint-disable-next-line max-len
+      // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-empty-function, @typescript-eslint/explicit-function-return-type
       disconnect() {}
-      observe(element, initObject) {}
+
+      // eslint-disable-next-line max-len
+      // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-empty-function, @typescript-eslint/explicit-function-return-type
+      observe() {}
     };
   });
   describe('video aspect ratio', () => {
     it('should not be calculated given a zero dimension video', () => {
-      Element.prototype.getBoundingClientRect = jest.fn((): DOMRect => (DOMRectReadOnly.fromRect({ width: 0, height: 0 })));
+      Element.prototype.getBoundingClientRect = jest.fn(
+        (): DOMRect => (DOMRectReadOnly.fromRect({ width: 0, height: 0 })),
+      );
       const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
         + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
         + 'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
@@ -91,7 +100,9 @@ describe('MutationObserver', () => {
     });
 
     it('should be calculated given a known dimension video', () => {
-      Element.prototype.getBoundingClientRect = jest.fn((): DOMRect => (DOMRectReadOnly.fromRect({ width: 10, height: 10 })));
+      Element.prototype.getBoundingClientRect = jest.fn(
+        (): DOMRect => (DOMRectReadOnly.fromRect({ width: 10, height: 10 })),
+      );
       const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
         + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
         + 'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';

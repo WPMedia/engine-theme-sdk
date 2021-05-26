@@ -93,17 +93,26 @@ describe('Styling', () => {
 describe('MutationObserver', () => {
   beforeEach(() => {
     global.MutationObserver = class MutationObserver extends global.MutationObserver {
+      // eslint-disable-next-line no-useless-constructor, class-methods-use-this
       constructor(callback) {
         super(callback);
       }
+
+      // eslint-disable-next-line max-len
+      // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-empty-function, @typescript-eslint/explicit-function-return-type
       disconnect() {}
-      observe(element, initObject) {}
+
+      // eslint-disable-next-line max-len
+      // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-empty-function, @typescript-eslint/explicit-function-return-type
+      observe() {}
     };
   });
 
   describe('video aspect ratio', () => {
     it('should not be calculated given a zero dimension video', () => {
-      Element.prototype.getBoundingClientRect = jest.fn((): DOMRect => (DOMRectReadOnly.fromRect({ width: 0, height: 0 })));
+      Element.prototype.getBoundingClientRect = jest.fn(
+        (): DOMRect => (DOMRectReadOnly.fromRect({ width: 0, height: 0 })),
+      );
       const wrapper = mount(
         <Video uuid="video-uuid" org="corecomponents" env="prod" />,
       );
@@ -111,8 +120,9 @@ describe('MutationObserver', () => {
     });
 
     it('should be calculated given a known dimension video', () => {
-      // global.MutationObserver = jest.fn((observe) => ({ observe, disconnect: jest.fn(), takeRecords: jest.fn() }));
-      Element.prototype.getBoundingClientRect = jest.fn((): DOMRect => (DOMRectReadOnly.fromRect({ width: 10, height: 10 })));
+      Element.prototype.getBoundingClientRect = jest.fn(
+        (): DOMRect => (DOMRectReadOnly.fromRect({ width: 10, height: 10 })),
+      );
       const wrapper = mount(
         <Video uuid="video-uuid" org="corecomponents" env="prod" />,
       );

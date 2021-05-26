@@ -76,6 +76,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   useEffect(() => {
     if (containerRef?.current) {
       const observer = new MutationObserver((() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore: Object is possibly 'undefined'.
         const element = containerRef?.current?.querySelector('.powa-shadow');
         if (element && element.shadowRoot) {
@@ -91,6 +92,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   useEffect(() => {
     if (videoShadowDom) {
       const observer = new MutationObserver((() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore: Object is possibly 'undefined'.
         const bounds = videoShadowDom?.firstElementChild?.getBoundingClientRect();
         if (bounds && bounds.height > 0 && bounds.width > 0) {
