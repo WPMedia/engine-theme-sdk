@@ -1,0 +1,91 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { number, select, text } from "@storybook/addon-knobs";
+
+import ThemeStyle from '../../src/elements/ThemeStyle'
+
+<Meta title="Elements/ThemeStyle" component={ThemeStyle} />
+
+# ThemeStyle
+
+A Polymorphic Styled Component wrapper to provide the ability to use theme
+settings `font-family`, `color` and `background-color` on an element.
+
+The `ThemeStyle` can be used to render as *any* HTML element by using the
+property `element` to denote the HTML element to use. By default the component
+will render as a `<div>`.
+
+
+## ArgsTable
+
+<ArgsTable of={ThemeStyle} />
+
+
+## Stories
+
+export const fontOptions = {
+  primary: 'primary',
+  secondary: 'secondary',
+};
+export const colorOptions = {
+  '': '',
+  ...fontOptions
+};
+
+<Canvas>
+  <Story name="Heading">
+    <ThemeStyle
+      element={text("as", "h1")}
+      font={select('Font', fontOptions, 'primary')}
+      color={select('Color', colorOptions, '')}
+      bgColor={select('Background Color', colorOptions, '')}
+    >
+      Engine Theme SDK Font Component
+    </ThemeStyle>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Heading - Secondary">
+    <ThemeStyle
+      element={text("as", "h1")}
+      font={select('Font', fontOptions, 'secondary')}
+      color={select('Color', colorOptions, '')}
+    >
+      Engine Theme SDK Font Component
+    </ThemeStyle>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Link">
+    <ThemeStyle
+      element={text("as", "a")}
+      href={text("href", "https://arcxp.com")}
+    >
+      https://arcxp.com
+    </ThemeStyle>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Link - Secondary Font">
+    <ThemeStyle
+      element={text("as", "a")}
+      href={text("href", "https://arcxp.com")}
+      font="secondary"
+    >
+      https://arcxp.com
+    </ThemeStyle>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Paragraph - Secondary Font Color">
+    <ThemeStyle
+      element={text("as", "p")}
+      color="secondary"
+    >
+      Display using the secondary font color
+    </ThemeStyle>
+  </Story>
+</Canvas>

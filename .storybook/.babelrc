@@ -7,9 +7,12 @@
           "."
         ],
         "alias": {
-          "fusion:themes": "./.storybook/themes.js",
-          "fusion:context": "./.storybook/context.js",
-          "fusion:environment": "./.storybook/environment.json"
+          "fusion:content": "./.storybook/alias/content.js",
+          "fusion:context": "./.storybook/alias/context.js",
+          "fusion:environment": "./.storybook/alias/environment.json",
+          "fusion:properties": "./.storybook/alias/properties.js",
+          "fusion:intl": "./.storybook/alias/intl.js",
+          "fusion:themes": "./.storybook/alias/themes.js"
         }
       }
     ],
