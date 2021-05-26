@@ -7,7 +7,7 @@ const rimraf = require('rimraf');
 
 // get blocks json allowed strings
 
-const themesLocaleList = [
+let themesLocaleList = [
   'en',
   'sv',
   'no',
@@ -35,14 +35,16 @@ const packageName = 'timezone';
 // init cwd is the filepath of the initiating command
 const dirPath = `${process.env.INIT_CWD}/node_modules/${packageName}/`;
 
-// try {
-//   // eslint-disable-next-line global-require
-//   themesLocaleList = require('./src/blocks.json').localeList;
-//   console.log('locale list via ./src/blocks.json');
-//   console.log(themesLocaleList.toString());
-// } catch (e) {
-//   console.log('installing locally', e);
-// }
+try {
+  // eslint-disable-next-line global-require
+  themesLocaleList = require('/opt/engine/bundle/src/blocks.json').localeList;
+  console.log('locale list via ./src/blocks.json');
+  console.log(themesLocaleList.toString());
+} catch (e) {
+  console.log('installing locally', e);
+}
+
+
 
 // input: themes locale
 // output: timezone-compatible locale
