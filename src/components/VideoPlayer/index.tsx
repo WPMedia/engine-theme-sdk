@@ -116,7 +116,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   return shouldRender ? (
     <VideoContainer ref={containerRef}>
       <VideoWrap
-        aspectRatio={aspectRatio}
+        aspectRatio={overrideAspectRatio || aspectRatio}
         viewportPercentage={viewportPercentage}
         shrinkToFit={shrinkToFit}
       >

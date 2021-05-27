@@ -15,6 +15,7 @@ interface VideoProps {
   playthrough?: boolean;
   viewportPercentage?: number;
   shrinkToFit?: boolean;
+  aspectRatio?: number;
 }
 
 const Video: React.FC<VideoProps> = (props) => {
@@ -26,6 +27,7 @@ const Video: React.FC<VideoProps> = (props) => {
     playthrough = false,
     viewportPercentage = 75,
     shrinkToFit = false,
+    aspectRatio: overrideAspectRatio,
   } = props;
   const muted = autoplay;
   const containerRef = useRef();
@@ -73,7 +75,7 @@ const Video: React.FC<VideoProps> = (props) => {
   return (
     <VideoContainer ref={containerRef} className="video-container">
       <VideoWrap
-        aspectRatio={aspectRatio}
+        aspectRatio={overrideAspectRatio || aspectRatio}
         viewportPercentage={viewportPercentage}
         shrinkToFit={shrinkToFit}
       >
@@ -86,7 +88,7 @@ const Video: React.FC<VideoProps> = (props) => {
           data-autoplay={autoplay}
           data-playthrough={playthrough}
           data-muted={muted}
-          data-aspect-ratio={aspectRatio}
+          data-aspect-ratio={overrideAspectRatio || aspectRatio}
         />
       </VideoWrap>
     </VideoContainer>
