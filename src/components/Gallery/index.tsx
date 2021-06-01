@@ -27,6 +27,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import PropTypes from 'prop-types';
+import getThemeStyle from 'fusion:themes';
+import { useAppContext } from 'fusion:context';
 import Image from '../Image';
 import buildThumborURL from '../Image/thumbor-image-url';
 import Lightbox from '../Lightbox/index';
@@ -413,6 +415,8 @@ const Gallery: React.FC<GalleryProps> = ({
       )),
   };
 
+  const { arcSite } = useAppContext();
+
   return (
     <GalleryDiv
       ref={galleryRef}
@@ -423,24 +427,38 @@ const Gallery: React.FC<GalleryProps> = ({
         <ControlContainer>
           <ControlsButton type="button" onClick={(): void => fullScreen()}>
             <FullscreenIcon fill={greyFill} />
-            <PlaybackText>{expandPhrase || 'Expand'}</PlaybackText>
+            <PlaybackText
+              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            >
+              {expandPhrase || 'Expand'}
+            </PlaybackText>
           </ControlsButton>
           <ControlsButton type="button" onClick={(): void => onPlayHandler()}>
             {autoDuration ? (
               <>
                 <PauseIcon fill={greyFill} />
-                <PlaybackText aria-label={autoplayPhraseLabels.stop || 'Stop automatic slide show'}>{pausePhrase || 'Pause autoplay'}</PlaybackText>
+                <PlaybackText
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                  aria-label={autoplayPhraseLabels.stop || 'Stop automatic slide show'}
+                >
+                  {pausePhrase || 'Pause autoplay'}
+                </PlaybackText>
               </>
             ) : (
               <>
                 <PlayIcon fill={greyFill} />
-                <PlaybackText aria-label={autoplayPhraseLabels.start || 'Start automatic slide show'}>{autoplayPhrase || 'Autoplay'}</PlaybackText>
+                <PlaybackText
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                  aria-label={autoplayPhraseLabels.start || 'Start automatic slide show'}
+                >
+                  {autoplayPhrase || 'Autoplay'}
+                </PlaybackText>
               </>
             )}
           </ControlsButton>
         </ControlContainer>
         <ControlContainer>
-          <ImageCountText dangerouslySetInnerHTML={ImageCountTextOutput} />
+          <ImageCountText primaryFont={getThemeStyle(arcSite)['primary-font-family']} dangerouslySetInnerHTML={ImageCountTextOutput} />
           <ControlsButton type="button" aria-label={previousImagePhrase} onClick={(): void => prevHandler()}>
             <ChevronLeftIcon fill={greyFill} />
           </ControlsButton>
