@@ -2,7 +2,6 @@
 import React, { ReactElement } from 'react';
 import { mount } from 'enzyme';
 import LazyLoad from './index';
-import Lazy from 'lazy-child';
 
 const TestComponent = (): ReactElement => (
   <div id="test-component">TEST</div>
