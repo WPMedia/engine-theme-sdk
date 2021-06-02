@@ -1,49 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // tz docs https://bigeasy.github.io/timezone/
 const tz = require('timezone')(
-  // supported timezones
-  // timezone is the quirks of the area time-wise (eg daylight savings) and timezone
-
-  // Asia
-  // client not actively using
-  // require('timezone/Asia/Seoul'),
-  // require('timezone/Asia/Tokyo'),
-
-  // Europe
-  require('timezone/Europe/Paris'),
-  require('timezone/Europe/Oslo'),
-  require('timezone/Europe/Stockholm'),
-  // client not actively using
-  // require('timezone/Europe/Busingen'),
-  // require('timezone/Europe/Madrid'),
-
-  // Americas
-  require('timezone/America/New_York'),
-  require('timezone/America/Chicago'),
-  require('timezone/America/Los_Angeles'),
-  require('timezone/America/Mexico_City'),
-
-  // Pacific
-  require('timezone/Pacific/Auckland'),
-
-  // supported locales
-  // locale is related to language and place (eg, Spanish and Mexico)
-  // korean
-  require('timezone/ko_KR'),
-  // japanese
-  require('timezone/ja_JP'),
-  // Spain Spanish
-  require('timezone/es_ES'),
-  // Swedish
-  require('timezone/sv_SE'),
-  // American English
-  require('timezone/en_US'),
-  // german
-  require('timezone/de_DE'),
-  // french
-  require('timezone/fr_FR'),
-  // norwegian
-  require('timezone/nb_NO'),
+  require('timezone/zones'),
+  require('timezone/locales'),
 );
 
 function localizeDateHelper(
