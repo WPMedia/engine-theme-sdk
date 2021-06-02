@@ -6,8 +6,6 @@ import { useEditableContent } from 'fusion:content';
 import { formatURL } from '../..';
 import ThemeStyle, { ThemeStyleProps } from '../ThemeStyle';
 
-// import './overline.scss';
-
 interface OverlineProps {
   className?: string;
   customText?: string;
