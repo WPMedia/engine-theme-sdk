@@ -9,7 +9,8 @@
   "files": [
     "dist",
     "types",
-    "svg"
+    "svg",
+    "scripts"
   ],
   "scripts": {
     "build": "rm -rf dist && npm run build:cjs && npm run build:es && npm run build:dts",
