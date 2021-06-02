@@ -39,24 +39,24 @@ test('renders embed markup in container', () => {
 
 describe('Styling', () => {
   describe('shrinkToFit flag on Video', () => {
-    it('not included, the video should still render with a false flag passed to the wrapper', () => {
+    it('not included, the video should still render with a default true flag passed to the wrapper', () => {
       const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
         + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
         + 'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
       const wrapper = mount(
         <VideoPlayer embedMarkup={testEmbed} id="targetId" />,
       );
-      expect(wrapper.find('styled__VideoWrap').prop('shrinkToFit')).toBe(false);
+      expect(wrapper.find('styled__VideoWrap').prop('shrinkToFit')).toBe(true);
     });
 
-    it('included, the video should still render with a true flag passed to the wrapper', () => {
+    it('included, the video should still render with a false flag passed to the wrapper', () => {
       const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
         + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
         + 'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
       const wrapper = mount(
-        <VideoPlayer embedMarkup={testEmbed} id="targetId" shrinkToFit />,
+        <VideoPlayer embedMarkup={testEmbed} id="targetId" shrinkToFit={false} />,
       );
-      expect(wrapper.find('styled__VideoWrap').prop('shrinkToFit')).toBe(true);
+      expect(wrapper.find('styled__VideoWrap').prop('shrinkToFit')).toBe(false);
     });
   });
   describe('PageBuilder settings', () => {
