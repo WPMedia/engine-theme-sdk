@@ -48,6 +48,7 @@ function unlinkSyncWithErrorLogging(path) {
   try {
     fs.unlinkSync(path);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
   }
 }
