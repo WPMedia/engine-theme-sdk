@@ -45,8 +45,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   customFields = {},
   aspectRatio: overrideAspectRatio,
   isPlaythrough = false,
-  shrinkToFit = false,
-  viewportPercentage = 75,
+  shrinkToFit = true,
+  viewportPercentage = 65,
 }) => {
   // migration from video component
   // will fallback to uuid if id is undefined with defaulting to falsy ''
@@ -138,7 +138,7 @@ export const videoPlayerCustomFieldTags = {
     group: 'Video Settings',
     name: 'Shrink video to fit screen',
     description: 'Will shrink the video width to keep the video in screen while keeping it horizontally centered to content.',
-    defaultValue: false,
+    defaultValue: true,
   },
   viewportPercentage: {
     type: PropTypes.number,
@@ -147,19 +147,21 @@ export const videoPlayerCustomFieldTags = {
     description: 'With Shrink Video enabled, this determines how much vertical viewport real estate the video will occupy.',
     min: 0,
     max: 150,
-    defaultValue: 75,
+    defaultValue: 65,
   },
 };
 
 export const videoPlayerCustomFields = (): object => ({
   shrinkToFit: PropTypes.bool.tag({
     ...(videoPlayerCustomFieldTags.shrinkToFit),
-    defaultValue: false,
+    defaultValue: true,
+    hidden: true,
     group: 'Video Settings',
   }),
   viewportPercentage: PropTypes.number.tag({
     ...(videoPlayerCustomFieldTags.viewportPercentage),
-    defaultValue: 75,
+    defaultValue: 65,
+    hidden: true,
     group: 'Video Settings',
   }),
 });
