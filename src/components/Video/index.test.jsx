@@ -74,18 +74,18 @@ describe('Styling', () => {
   });
 
   describe('shrinkToFit flag on Video', () => {
-    it('not included, the video should still render with a false flag passed to the wrapper', () => {
+    it('not included, the video should still render with a default true flag passed to the wrapper', () => {
       const wrapper = mount(
         <Video uuid="video-uuid" org="corecomponents" env="prod" />,
       );
-      expect(wrapper.find('styled__VideoWrap').prop('shrinkToFit')).toBe(false);
+      expect(wrapper.find('styled__VideoWrap').prop('shrinkToFit')).toBe(true);
     });
 
-    it('included, the video should still render with a true flag passed to the wrapper', () => {
+    it('included, the video should still render with a false flag passed to the wrapper', () => {
       const wrapper = mount(
-        <Video uuid="video-uuid" org="corecomponents" env="prod" shrinkToFit />,
+        <Video uuid="video-uuid" org="corecomponents" env="prod" shrinkToFit={false} />,
       );
-      expect(wrapper.find('styled__VideoWrap').prop('shrinkToFit')).toBe(true);
+      expect(wrapper.find('styled__VideoWrap').prop('shrinkToFit')).toBe(false);
     });
   });
 });

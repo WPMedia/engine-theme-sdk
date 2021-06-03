@@ -25,8 +25,8 @@ const Video: React.FC<VideoProps> = (props) => {
     env,
     autoplay = false,
     playthrough = false,
-    viewportPercentage = 75,
-    shrinkToFit = false,
+    viewportPercentage = 65,
+    shrinkToFit = true,
     aspectRatio: overrideAspectRatio,
   } = props;
   const muted = autoplay;
@@ -109,13 +109,15 @@ Video.propTypes = {
   shrinkToFit: PropTypes.bool.tag({
     name: 'Shrink video to fit screen',
     description: 'Will shrink the video width to keep the video in screen while keeping it horizontally centered to content.',
-    defaultValue: false,
+    defaultValue: true,
+    hidden: true,
     group: 'Video Settings',
   }),
   viewportPercentage: PropTypes.number.tag({
     name: 'Percentage of viewport height',
     description: 'With Shrink Video enabled, this determines how much vertical viewport real estate the video will occupy.',
-    defaultValue: 75,
+    defaultValue: 65,
+    hidden: true,
     group: 'Video Settings',
   }),
 };

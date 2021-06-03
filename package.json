@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.9.8-canary.2",
+  "version": "2.9.8-canary.6",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -9,7 +9,8 @@
   "files": [
     "dist",
     "types",
-    "svg"
+    "svg",
+    "scripts"
   ],
   "scripts": {
     "build": "rm -rf dist && npm run build:cjs && npm run build:es && npm run build:dts",
@@ -24,7 +25,8 @@
     "preversion": "npm run lint",
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "postinstall": "node scripts/postinstall.js"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -98,6 +100,7 @@
     "react-modal": "^3.11.1",
     "react-oembed-container": "^1.0.0",
     "react-swipeable": "^5.5.0",
+    "rimraf": "^3.0.2",
     "styled-components": "^4.4.1",
     "thumbor-lite": "^0.1.6",
     "timezone": "1.0.23"

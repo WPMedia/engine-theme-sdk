@@ -1,8 +1,8 @@
 name: Deploy storybook
 
+# Event for the workflow
 on:
-  pull_request:
-    types: [synchronize, opened]
+  push:
     branches-ignore:
       - "dependabot/**"
 
