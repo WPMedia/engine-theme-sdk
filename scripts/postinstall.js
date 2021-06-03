@@ -49,7 +49,7 @@ function unlinkSyncWithErrorLogging(path) {
     fs.unlinkSync(path);
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error(err);
+    console.log(path, 'not deleted');
   }
 }
 
