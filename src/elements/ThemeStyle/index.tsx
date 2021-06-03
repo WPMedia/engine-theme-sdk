@@ -5,7 +5,7 @@ import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
 
 // Component-specific props
-export type StyledFontProps = {
+type StyledFontProps = {
   fontType?: string;
   fontColor?: string;
   backgroundColor?: string;
