@@ -3,8 +3,6 @@ import React, { ReactElement } from 'react';
 import { mount } from 'enzyme';
 import LazyLoad from './index';
 
-jest.mock('lazy-child');
-
 const TestComponent = (): ReactElement => (
   <div id="test-component">TEST</div>
 );
@@ -18,7 +16,7 @@ describe('LazyLoad Block', () => {
     );
     expect(wrapper).toBeDefined();
     expect(wrapper.prop('enabled')).not.toBeDefined();
-    expect(wrapper.find('Lazy')).toHaveLength(0);
+    expect(wrapper.find('LazyLoad')).toHaveLength(1);
     const testEl = wrapper.find('div#test-component');
     expect(testEl).toHaveLength(1);
     expect(testEl.text()).toEqual('TEST');
@@ -32,7 +30,7 @@ describe('LazyLoad Block', () => {
     );
     expect(wrapper).toBeDefined();
     expect(wrapper.prop('enabled')).toBe(false);
-    expect(wrapper.find('Lazy')).toHaveLength(0);
+    expect(wrapper.find('LazyLoad > TestComponent')).toHaveLength(1);
     const testEl = wrapper.find('div#test-component');
     expect(testEl).toHaveLength(1);
     expect(testEl.text()).toEqual('TEST');
@@ -46,7 +44,7 @@ describe('LazyLoad Block', () => {
     );
     expect(wrapper).toBeDefined();
     expect(wrapper.prop('enabled')).toBe(true);
-    const lazyChildInstance = wrapper.find('Lazy');
+    const lazyChildInstance = wrapper.find('LazyLoad > *:not(TestComponent)');
     expect(lazyChildInstance).toHaveLength(1);
     expect(lazyChildInstance.prop('offsetTop')).toEqual(300);
     expect(lazyChildInstance.prop('offsetBottom')).toEqual(300);
@@ -76,7 +74,7 @@ describe('LazyLoad Block', () => {
     );
     expect(wrapper).toBeDefined();
     expect(wrapper.prop('enabled')).toBe(true);
-    const lazyChildInstance = wrapper.find('Lazy');
+    const lazyChildInstance = wrapper.find('LazyLoad > *:not(TestComponent)');
     expect(lazyChildInstance).toHaveLength(1);
     expect(lazyChildInstance.prop('offsetTop')).toEqual(config.offsetTop);
     expect(lazyChildInstance.prop('offsetBottom')).toEqual(config.offsetBottom);
