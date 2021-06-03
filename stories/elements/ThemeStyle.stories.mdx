@@ -89,3 +89,28 @@ export const colorOptions = {
     </ThemeStyle>
   </Story>
 </Canvas>
+
+<Canvas>
+  <Story name="Nested Secondary Font within Primary">
+    <ThemeStyle
+      element={text("as", "div")}
+    >
+      <p>
+        The parent should always be using the primary font
+      </p>
+      <p>
+        and if you would like to use secondary font within
+        here that is also possible
+      </p>
+      <ThemeStyle
+        element={text("as", "p")}
+        font="secondary"
+      >
+        Display using the secondary font
+      </ThemeStyle>
+      <p>
+        and continue to use primary
+      </p>
+    </ThemeStyle>
+  </Story>
+</Canvas>
