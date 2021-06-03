@@ -69,7 +69,7 @@ const Overline: React.FC<OverlineProps> = ({
   let [text, url] = [sectionText, sectionUrl];
 
   if (sourceContent?.owner?.sponsored) {
-    text = sourceContent?.label?.basic.text || sponsoredContent;
+    text = sourceContent?.label?.basic?.text || sponsoredContent;
     url = null;
   } else if (shouldUseProps) {
     text = customText;
