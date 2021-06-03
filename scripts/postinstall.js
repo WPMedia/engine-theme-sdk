@@ -44,6 +44,15 @@ try {
   // console.log('installing locally', e);
 }
 
+function unlinkSyncWithErrorLogging(path) {
+  try {
+    fs.unlinkSync(path);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(path, 'not deleted');
+  }
+}
+
 // input: themes locale
 // output: timezone-compatible locale
 function mapThemesLocales(themesLocaleString) {
@@ -185,7 +194,7 @@ function outputExportsString(targetFileNamesArray, fileExtension = '') {
 
 // many files have no chance of being picked in blocks.json
 function deleteUnnecessaryFiles() {
-  DELETABLE_FILES.forEach((unnecessaryFileString) => fs.unlinkSync(`${dirPath}${unnecessaryFileString}`));
+  DELETABLE_FILES.forEach((unnecessaryFileString) => unlinkSyncWithErrorLogging(`${dirPath}${unnecessaryFileString}`));
 }
 
 function deleteUnusedFiles() {
@@ -206,7 +215,7 @@ function deleteUnusedFiles() {
         && !TIMEZONE_ALLOW_LIST.includes(fileName)
         && !TIMEZONE_CODES.includes(fileName)
     ) {
-      fs.unlinkSync(`${dirPath}${fileName}`);
+      unlinkSyncWithErrorLogging(`${dirPath}${fileName}`);
     }
   });
 }
@@ -261,7 +270,7 @@ function loopAndSetTimezoneContinents(incomeTargetTimezones) {
 
         if (!targetNestedTimezones.includes(fileNameWithoutExtension) && fileNameWithoutExtension !== 'index') {
           if (fs.lstatSync(targetFilePath).isFile()) {
-            fs.unlinkSync(targetFilePath);
+            unlinkSyncWithErrorLogging(targetFilePath);
           } else {
             rimraf(targetFilePath, (err) => {
               if (err) {
