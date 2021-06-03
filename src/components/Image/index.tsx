@@ -140,7 +140,7 @@ const Image: React.FC<ImageProps> = ({
         offsetLeft={lazyOptions.offsetLeft}
         offsetRight={lazyOptions.offsetRight}
         offsetTop={lazyOptions.offsetTop}
-        renderPlaceholder={(ref): React.ReactElement => (
+        renderPlaceholder={(ref: React.Ref<any>): React.ReactElement => (
           <div
             ref={ref}
             style={{ height: mediumHeight, width: mediumWidth, maxWidth: '50px' }}
