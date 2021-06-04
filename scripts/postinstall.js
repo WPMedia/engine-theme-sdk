@@ -34,7 +34,7 @@ const packageName = 'timezone';
 
 // in this case, wherever npm i was called
 // init cwd is the filepath of the initiating command
-const dirPath = `node_modules/${packageName}/`;
+const dirPath = `${process.env.INIT_CWD}/node_modules/${packageName}/`;
 
 try {
   // eslint-disable-next-line global-require,import/no-absolute-path,import/no-dynamic-require
