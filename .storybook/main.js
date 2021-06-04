@@ -4,5 +4,8 @@ module.exports = {
     '@storybook/addon-a11y',
     '@storybook/addon-essentials',
     '@storybook/addon-knobs'
-  ]
+  ],
+  typescript: {
+    reactDocgen: 'none',
+  },
 };
