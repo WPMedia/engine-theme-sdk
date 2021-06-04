@@ -4,7 +4,6 @@
 
 const fs = require('fs');
 const rimraf = require('rimraf');
-const path = require('path');
 
 // get blocks json allowed strings
 
@@ -37,12 +36,11 @@ const packageName = 'timezone';
 const dirPath = `${process.env.INIT_CWD}/node_modules/${packageName}/`;
 
 try {
-  // eslint-disable-next-line global-require,import/no-absolute-path,import/no-dynamic-require
-  themesLocaleList = require(path.resolve('src/blocks.json')).localeList;
-  // console.log('locale list via ./src/blocks.json');
-  // console.log(themesLocaleList.toString());
-} catch (e) {
-  // console.log('installing locally', e);
+  // eslint-disable-next-line global-require,import/no-dynamic-require
+  themesLocaleList = require(`${process.env.INIT_CWD}/src/blocks.json`).localeList;
+} catch (err) {
+  // eslint-disable-next-line no-console
+  console.log(`${process.env.INIT_CWD}/src/blocks.json`, 'not found');
 }
 
 function unlinkSyncWithErrorLogging(targetPath) {
