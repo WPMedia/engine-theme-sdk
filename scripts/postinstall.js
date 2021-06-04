@@ -37,7 +37,7 @@ const packageName = 'timezone';
 const dirPath = `node_modules/${packageName}/`;
 
 try {
-  // eslint-disable-next-line global-require,import/no-absolute-path
+  // eslint-disable-next-line global-require,import/no-absolute-path,import/no-dynamic-require
   themesLocaleList = require(path.resolve('src/blocks.json')).localeList;
   // console.log('locale list via ./src/blocks.json');
   // console.log(themesLocaleList.toString());
@@ -45,12 +45,12 @@ try {
   // console.log('installing locally', e);
 }
 
-function unlinkSyncWithErrorLogging(path) {
+function unlinkSyncWithErrorLogging(targetPath) {
   try {
-    fs.unlinkSync(path);
+    fs.unlinkSync(targetPath);
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log(path, 'not deleted');
+    console.log(targetPath, 'not deleted');
   }
 }
 
