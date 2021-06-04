@@ -4,6 +4,7 @@
 
 const fs = require('fs');
 const rimraf = require('rimraf');
+const path = require('path');
 
 // get blocks json allowed strings
 
@@ -33,11 +34,11 @@ const packageName = 'timezone';
 
 // in this case, wherever npm i was called
 // init cwd is the filepath of the initiating command
-const dirPath = `${process.env.INIT_CWD}/node_modules/${packageName}/`;
+const dirPath = `node_modules/${packageName}/`;
 
 try {
   // eslint-disable-next-line global-require,import/no-absolute-path
-  themesLocaleList = require('/opt/engine/bundle/src/blocks.json').localeList;
+  themesLocaleList = require(path.resolve('src/blocks.json')).localeList;
   // console.log('locale list via ./src/blocks.json');
   // console.log(themesLocaleList.toString());
 } catch (e) {
