@@ -104,6 +104,7 @@ interface GalleryProps {
   adElement?: Function;
   previousImagePhrase?: string;
   nextImagePhrase?: string;
+  primaryFont?: string;
 }
 
 declare interface EventOptionsInterface {
@@ -124,6 +125,7 @@ const Gallery: React.FC<GalleryProps> = ({
   adElement: AdElement,
   previousImagePhrase = PREVIOUS_IMAGE_TEXT,
   nextImagePhrase = NEXT_IMAGE_TEXT,
+  primaryFont = 'NEXT_IMAGE_TEXT',
 }) => {
   const galleryRef = useRef(null);
   const carouselRef = useRef(null);
@@ -423,24 +425,24 @@ const Gallery: React.FC<GalleryProps> = ({
         <ControlContainer>
           <ControlsButton type="button" onClick={(): void => fullScreen()}>
             <FullscreenIcon fill={greyFill} />
-            <PlaybackText>{expandPhrase || 'Expand'}</PlaybackText>
+            <PlaybackText primaryFont={primaryFont}>{expandPhrase || 'Expand'}</PlaybackText>
           </ControlsButton>
           <ControlsButton type="button" onClick={(): void => onPlayHandler()}>
             {autoDuration ? (
               <>
                 <PauseIcon fill={greyFill} />
-                <PlaybackText aria-label={autoplayPhraseLabels.stop || 'Stop automatic slide show'}>{pausePhrase || 'Pause autoplay'}</PlaybackText>
+                <PlaybackText primaryFont={primaryFont} aria-label={autoplayPhraseLabels.stop || 'Stop automatic slide show'}>{pausePhrase || 'Pause autoplay'}</PlaybackText>
               </>
             ) : (
               <>
                 <PlayIcon fill={greyFill} />
-                <PlaybackText aria-label={autoplayPhraseLabels.start || 'Start automatic slide show'}>{autoplayPhrase || 'Autoplay'}</PlaybackText>
+                <PlaybackText primaryFont={primaryFont} aria-label={autoplayPhraseLabels.start || 'Start automatic slide show'}>{autoplayPhrase || 'Autoplay'}</PlaybackText>
               </>
             )}
           </ControlsButton>
         </ControlContainer>
         <ControlContainer>
-          <ImageCountText dangerouslySetInnerHTML={ImageCountTextOutput} />
+          <ImageCountText primaryFont={primaryFont} dangerouslySetInnerHTML={ImageCountTextOutput} />
           <ControlsButton type="button" aria-label={previousImagePhrase} onClick={(): void => prevHandler()}>
             <ChevronLeftIcon fill={greyFill} />
           </ControlsButton>
@@ -527,6 +529,8 @@ Gallery.propTypes = {
   interstitialClicks: PropTypes.number,
   /** Function element to be rendered as an Ad */
   adElement: PropTypes.func,
+  /** Primary Font */
+  primaryFont: PropTypes.string,
 };
 
 export default Gallery;
