@@ -431,12 +431,22 @@ const Gallery: React.FC<GalleryProps> = ({
             {autoDuration ? (
               <>
                 <PauseIcon fill={greyFill} />
-                <PlaybackText primaryFont={primaryFont} aria-label={autoplayPhraseLabels.stop || 'Stop automatic slide show'}>{pausePhrase || 'Pause autoplay'}</PlaybackText>
+                <PlaybackText
+                  primaryFont={primaryFont}
+                  aria-label={autoplayPhraseLabels.stop || 'Stop automatic slide show'}
+                >
+                  {pausePhrase || 'Pause autoplay'}
+                </PlaybackText>
               </>
             ) : (
               <>
                 <PlayIcon fill={greyFill} />
-                <PlaybackText primaryFont={primaryFont} aria-label={autoplayPhraseLabels.start || 'Start automatic slide show'}>{autoplayPhrase || 'Autoplay'}</PlaybackText>
+                <PlaybackText
+                  primaryFont={primaryFont}
+                  aria-label={autoplayPhraseLabels.start || 'Start automatic slide show'}
+                >
+                  {autoplayPhrase || 'Autoplay'}
+                </PlaybackText>
               </>
             )}
           </ControlsButton>
