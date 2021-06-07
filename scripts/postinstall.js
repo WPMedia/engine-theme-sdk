@@ -7,26 +7,9 @@ const rimraf = require('rimraf');
 
 // get blocks json allowed strings
 
-let themesLocaleList = [
-  'en',
-  'sv',
-  'no',
-  'fr',
-  'de',
-  'es',
-  'ja',
-  'ko',
-];
+let themesLocaleList = [];
 
-const targetTimeZones = [
-  'Europe/Paris',
-  'Europe/Oslo',
-  'Europe/Stockholm',
-  'America/New_York',
-  'America/Chicago',
-  'America/Los_Angeles',
-  'America/Mexico_City',
-  'Pacific/Auckland',
+let targetTimeZones = [
 ];
 
 const packageName = 'timezone';
@@ -35,20 +18,85 @@ const packageName = 'timezone';
 // init cwd is the filepath of the initiating command
 const dirPath = `${process.env.INIT_CWD}/node_modules/${packageName}/`;
 
+let targetBlockValues = {};
 try {
   // eslint-disable-next-line global-require,import/no-dynamic-require
-  themesLocaleList = require(`${process.env.INIT_CWD}/src/blocks.json`).localeList;
+  targetBlockValues = require(`${process.env.INIT_CWD}/src/blocks.json`).values;
+
+  const defaultLocalizationObject = targetBlockValues.default.siteProperties.dateLocalization;
+
+  // must have a default language and timezone
+  // redefining locale list over the defaults
+  themesLocaleList = [defaultLocalizationObject.language];
+  targetTimeZones = [defaultLocalizationObject.timeZone];
+  /*
+    "sites": {
+      "arc-demo-1": {
+      "siteProperties": {
+        "dateLocalization": {
+          "language": "es",
+          "timeZone": "Europe/Madrid"
+        },
+      }
+    }
+  */
+
+  // if sites
+  // obj with key is truthy if sites property exists
+  Object.values(targetBlockValues.sites).forEach(({ siteProperties: sitePropertyObject }) => {
+    // if site has no date localization obj
+    if (sitePropertyObject.dateLocalization) {
+      themesLocaleList.push(sitePropertyObject.dateLocalization.language);
+      targetTimeZones.push(sitePropertyObject.dateLocalization.timeZone);
+    }
+  });
+
+  // dedupe languages and timezones if any added
+  themesLocaleList = [...new Set(themesLocaleList)];
+  targetTimeZones = [...new Set(targetTimeZones)];
 } catch (err) {
-  // eslint-disable-next-line no-console
-  console.log(`${process.env.INIT_CWD}/src/blocks.json`, 'not found');
+  // set themes locale list default if target blocks.json file not found
+  themesLocaleList = [
+    'en',
+    'sv',
+    'no',
+    'fr',
+    'de',
+    'es',
+    'ja',
+    'ko',
+  ];
+
+  // set timezones default if target blocks.json file not found
+  targetTimeZones = [
+    'Europe/Paris',
+    'Europe/Oslo',
+    'Europe/Stockholm',
+    'America/New_York',
+    'America/Chicago',
+    'America/Los_Angeles',
+    'America/Mexico_City',
+    'Pacific/Auckland',
+  ];
+
+  // if debugging file paths locally this could be helpful
+  // nested dependency postinstall logging doesn't bubble up sadly in compiler
+  // installed here https://github.com/WPMedia/fusion/blob/927f59d2723551f3f381363ca74ecaae8dd1ef87/compiler/src/compile.js#L63
+  // console.log(`${process.env.INIT_CWD}/src/blocks.json`, 'not found');
 }
 
 function unlinkSyncWithErrorLogging(targetPath) {
   try {
     fs.unlinkSync(targetPath);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(targetPath, 'not deleted');
+    // if debugging locally, this logging can be helpful
+    // in the fusion compiler, this logging would not bubble up
+    // as far as I understand, nested dependency postinstall scripts don't log
+    // also interestingly, if you run `rm -rf node_modules && npm i && npm i`
+    // you would see this log because the double install
+    // only installs once but the postinstall script runs twice
+    // https://docs.npmjs.com/cli/v7/using-npm/scripts
+    // console.log(targetPath, 'not deleted');
   }
 }
 
