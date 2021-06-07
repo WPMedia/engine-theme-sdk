@@ -452,7 +452,10 @@ const Gallery: React.FC<GalleryProps> = ({
           </ControlsButton>
         </ControlContainer>
         <ControlContainer>
-          <ImageCountText primaryFont={primaryFont} dangerouslySetInnerHTML={ImageCountTextOutput} />
+          <ImageCountText
+            primaryFont={primaryFont}
+            dangerouslySetInnerHTML={ImageCountTextOutput}
+          />
           <ControlsButton type="button" aria-label={previousImagePhrase} onClick={(): void => prevHandler()}>
             <ChevronLeftIcon fill={greyFill} />
           </ControlsButton>
