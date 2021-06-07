@@ -80,6 +80,8 @@ try {
   ];
 
   // if debugging file paths locally this could be helpful
+  // nested dependency postinstall logging doesn't bubble up sadly in compiler
+  // installed here https://github.com/WPMedia/fusion/blob/927f59d2723551f3f381363ca74ecaae8dd1ef87/compiler/src/compile.js#L63
   // console.log(`${process.env.INIT_CWD}/src/blocks.json`, 'not found');
 }
 
