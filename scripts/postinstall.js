@@ -7,26 +7,9 @@ const rimraf = require('rimraf');
 
 // get blocks json allowed strings
 
-let themesLocaleList = [
-  'en',
-  'sv',
-  'no',
-  'fr',
-  'de',
-  'es',
-  'ja',
-  'ko',
-];
+let themesLocaleList = [];
 
 let targetTimeZones = [
-  'Europe/Paris',
-  'Europe/Oslo',
-  'Europe/Stockholm',
-  'America/New_York',
-  'America/Chicago',
-  'America/Los_Angeles',
-  'America/Mexico_City',
-  'Pacific/Auckland',
 ];
 
 const packageName = 'timezone';
@@ -72,7 +55,31 @@ try {
   themesLocaleList = [...new Set(themesLocaleList)];
   targetTimeZones = [...new Set(targetTimeZones)];
 } catch (err) {
-  // eslint-disable-next-line no-console
+  // set themes locale list default if target blocks.json file not found
+  themesLocaleList = [
+    'en',
+    'sv',
+    'no',
+    'fr',
+    'de',
+    'es',
+    'ja',
+    'ko',
+  ];
+
+  // set timezones default if target blocks.json file not found
+  targetTimeZones = [
+    'Europe/Paris',
+    'Europe/Oslo',
+    'Europe/Stockholm',
+    'America/New_York',
+    'America/Chicago',
+    'America/Los_Angeles',
+    'America/Mexico_City',
+    'Pacific/Auckland',
+  ];
+
+  // if debugging file paths locally this could be helpful
   // console.log(`${process.env.INIT_CWD}/src/blocks.json`, 'not found');
 }
 
