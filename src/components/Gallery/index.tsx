@@ -125,7 +125,7 @@ const Gallery: React.FC<GalleryProps> = ({
   adElement: AdElement,
   previousImagePhrase = PREVIOUS_IMAGE_TEXT,
   nextImagePhrase = NEXT_IMAGE_TEXT,
-  primaryFont = 'NEXT_IMAGE_TEXT',
+  primaryFont = null,
 }) => {
   const galleryRef = useRef(null);
   const carouselRef = useRef(null);
