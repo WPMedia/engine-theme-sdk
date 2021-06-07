@@ -89,7 +89,13 @@ function unlinkSyncWithErrorLogging(targetPath) {
   try {
     fs.unlinkSync(targetPath);
   } catch (err) {
-    // eslint-disable-next-line no-console
+    // if debugging locally, this logging can be helpful
+    // in the fusion compiler, this logging would not bubble up
+    // as far as I understand, nested dependency postinstall scripts don't log
+    // also interestingly, if you run `rm -rf node_modules && npm i && npm i`
+    // you would see this log because the double install
+    // only installs once but the postinstall script runs twice
+    // https://docs.npmjs.com/cli/v7/using-npm/scripts
     // console.log(targetPath, 'not deleted');
   }
 }
