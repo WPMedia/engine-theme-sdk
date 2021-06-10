@@ -25,7 +25,7 @@ interface ImageMetadataProps {
 const MetadataParagraph = styled.p<{ primaryFont: string }>`
   font-family: ${(props): string => props.primaryFont};
   font-size: 14px;
-  color: #6C7089;
+  color: #6c7778;
   margin: 8px 0;
   line-height: 16px;
 
@@ -34,7 +34,7 @@ const MetadataParagraph = styled.p<{ primaryFont: string }>`
   }
 
   .title {
-    color: #6C7089;
+    color: #6c7778;
     font-weight: bold;
   }
 `;
