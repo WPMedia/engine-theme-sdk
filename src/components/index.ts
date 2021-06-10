@@ -8,6 +8,10 @@ export { default as LazyLoad } from './LazyLoad';
 export { default as Lightbox } from './Lightbox';
 export { default as MetaData } from './MetaData';
 export { default as EventEmitter } from './EventEmitter';
-export { default as VideoPlayer } from './VideoPlayer';
+export {
+  default as VideoPlayer,
+  videoPlayerCustomFields,
+  videoPlayerCustomFieldTags,
+} from './VideoPlayer';
 
 export * from './icons';

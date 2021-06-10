@@ -10,3 +10,4 @@ storybook-static
 .vscode/*
 /build-storybook.log
 coverage
+src/blocks.json

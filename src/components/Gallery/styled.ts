@@ -57,11 +57,13 @@ export const ControlsButton = styled(GalleryButton as any)`
   }
 `;
 
-export const PlaybackText = styled.span`
+export const PlaybackText = styled.span<{ primaryFont: string }>`
+  font-family: ${(props): string => props.primaryFont};
   margin: 0 30px 0 4px;
 `;
 
-export const ImageCountText = styled.p`
+export const ImageCountText = styled.p<{ primaryFont: string }>`
+  font-family: ${(props): string => props.primaryFont};
   display: inline-block;
   margin: 0 0 0 12px;
 

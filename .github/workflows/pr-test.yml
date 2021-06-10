@@ -8,7 +8,7 @@ on:
 jobs:
   test_and_lint:
     runs-on: ubuntu-latest
-    env: 
+    env:
       SLACK_WEBHOOK_URL: ${{ secrets.THEMES_OPS_SLACK_WEBHOOK_URL }}
 
     steps:
@@ -35,10 +35,13 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run tests with coverage minimum
-        run: npm run test:coverage 
+        run: npm run test:coverage
 
       - name: Check linting
         run: npm run lint
+
+      - name: Typescript Compile
+        run: npm run build:dts
 
       - name: Check failure status and post in themes ops channel
         uses: act10ns/slack@v1
