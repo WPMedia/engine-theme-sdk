@@ -90,7 +90,9 @@ const Image: React.FC<ImageProps> = ({
     return null;
   }
 
-  const imageSourceWithoutProtocol = url.replace('https://', '');
+  const imageSourceWithoutProtocol = url
+    .replace('https://', '')
+    .replace('http://', '');
 
   const {
     // breakpoints default to mobile, tablet, larger screen
