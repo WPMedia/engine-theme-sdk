@@ -670,3 +670,36 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
     />
   </Story>
 </Canvas>
+
+### **For http images**
+
+<Canvas>
+  <Story name="For http images">
+    <Image
+      url={
+        "http://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/XEVN7EOCEZBN5GOPBWQ5NPSW64.JPG"
+      }
+      alt={"brand image"}
+      smallWidth={274}
+      smallHeight={154}
+      mediumWidth={274}
+      mediumHeight={154}
+      largeWidth={274}
+      largeHeight={154}
+      resizedImageOptions={{
+        "274x154": "NnxQC4v8GO_BAbDNdty3Kdb7XtA=filters:format(jpg):quality(70)/",
+      }}
+      resizerURL={
+        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
+      }
+      breakpoints={{
+        small: 420,
+        medium: 768,
+        large: 992,
+      }}
+      lightBoxWidth={274}
+      lightBoxHeight={154}
+      compressedThumborParams={false}
+    />
+  </Story>
+</Canvas>
