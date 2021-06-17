@@ -1,7 +1,14 @@
 import Image from "../src/components/Image";
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 
-<Meta title="Image" component={Image} />
+<Meta
+  title="Image"
+  component={Image}
+  parameters={{
+    // Setting a high threshold to over come noise created in chromatic
+    chromatic: { diffThreshold: 1 }
+  }}
+/>
 
 # Image
 
