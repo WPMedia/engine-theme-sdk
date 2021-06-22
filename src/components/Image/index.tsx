@@ -1,5 +1,8 @@
 /* eslint-disable no-console */
 import React from 'react';
+
+import Static from 'fusion:static';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Lazy from 'lazy-child';
@@ -136,19 +139,8 @@ const Image: React.FC<ImageProps> = ({
   }
 
   return (
-    <StyledPicture>
-      <Lazy
-        offsetBottom={lazyOptions.offsetBottom}
-        offsetLeft={lazyOptions.offsetLeft}
-        offsetRight={lazyOptions.offsetRight}
-        offsetTop={lazyOptions.offsetTop}
-        renderPlaceholder={(ref: React.Ref<any>): React.ReactElement => (
-          <div
-            ref={ref}
-            style={{ height: mediumHeight, width: mediumWidth, maxWidth: '50px' }}
-          />
-        )}
-      >
+    <Static id={url} htmlOnly>
+      <StyledPicture>
         <SourceHandler
           resizedImageOptions={resizedImageOptions}
           width={largeWidth}
@@ -181,6 +173,7 @@ const Image: React.FC<ImageProps> = ({
                 src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
                 width={largeWidth}
                 height={largeHeight}
+                loading="lazy"
               />
             )
             : (
@@ -191,11 +184,12 @@ const Image: React.FC<ImageProps> = ({
                 data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
                 width={largeWidth}
                 height={largeHeight}
+                loading="lazy"
               />
             )
         }
-      </Lazy>
-    </StyledPicture>
+      </StyledPicture>
+    </Static>
   );
 };
 
