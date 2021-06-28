@@ -165,6 +165,7 @@ const Image: React.FC<ImageProps> = ({
               src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
               width={largeWidth}
               height={largeHeight}
+              // todo: opt out of lazy for previous same functionality
               loading="lazy"
             />
           )
@@ -176,6 +177,7 @@ const Image: React.FC<ImageProps> = ({
               data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
               width={largeWidth}
               height={largeHeight}
+              // lightbox lazy not an option
             />
           )
         }
