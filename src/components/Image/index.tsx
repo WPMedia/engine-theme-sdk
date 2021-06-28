@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 import React from 'react';
 import styled from 'styled-components';
@@ -131,25 +132,6 @@ const Image: React.FC<ImageProps> = ({
     );
   }
 
-  const FallbackImages: React.FunctionComponent<{}> = () => (
-    resizedImageOptions ? (
-      <img
-        alt={alt}
-        src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
-        width={largeWidth}
-        height={largeHeight}
-      />
-    ) : (
-      <img
-        alt={alt}
-        src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
-        width={largeWidth}
-        height={largeHeight}
-        loading="lazy"
-      />
-    )
-  );
-
   const ImageSources: React.FunctionComponent<{}> = () => (
     <>
       <SourceHandler
@@ -179,7 +161,22 @@ const Image: React.FC<ImageProps> = ({
       {
         typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
           ? (
-            <FallbackImages />
+            resizedImageOptions ? (
+              <img
+                alt={alt}
+                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+                width={largeWidth}
+                height={largeHeight}
+              />
+            ) : (
+              <img
+                alt={alt}
+                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+                width={largeWidth}
+                height={largeHeight}
+                loading="lazy"
+              />
+            )
           )
           : (
             <img
