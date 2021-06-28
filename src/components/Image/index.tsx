@@ -6,6 +6,8 @@ import Lazy from 'lazy-child';
 import buildThumborURL from './thumbor-image-url';
 import SourceHandler from './SourceHandler';
 
+const LAZY_OPTIONS_DEFAULT = false;
+
 interface LazyProps {
   offsetBottom?: number;
   offsetLeft?: number;
@@ -79,12 +81,7 @@ const Image: React.FC<ImageProps> = ({
   breakpoints,
   lightBoxWidth,
   lightBoxHeight,
-  lazyOptions = {
-    offsetBottom: 0,
-    offsetLeft: 0,
-    offsetRight: 0,
-    offsetTop: 0,
-  },
+  lazyOptions,
 }) => {
   if (typeof url === 'undefined') {
     return null;
@@ -135,66 +132,82 @@ const Image: React.FC<ImageProps> = ({
     );
   }
 
+  const ImageSources: React.FunctionComponent<{}> = () => (
+    <>
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={largeWidth}
+        height={largeHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={largeBreakpoint}
+      />
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={mediumWidth}
+        height={mediumHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={mediumBreakpoint}
+      />
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={smallWidth}
+        height={smallHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={smallBreakpoint}
+      />
+      {
+        typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
+          ? (
+            <img
+              alt={alt}
+              src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              width={largeWidth}
+              height={largeHeight}
+              loading="lazy"
+            />
+          )
+          : (
+            <img
+              alt={alt}
+              src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              // lightbox component reads from this data attribute
+              data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              width={largeWidth}
+              height={largeHeight}
+              loading="lazy"
+            />
+          )
+        }
+    </>
+  );
+
+  if (lazyOptions) {
+    return (
+      <StyledPicture>
+        <Lazy
+          offsetBottom={lazyOptions.offsetBottom}
+          offsetLeft={lazyOptions.offsetLeft}
+          offsetRight={lazyOptions.offsetRight}
+          offsetTop={lazyOptions.offsetTop}
+          renderPlaceholder={(ref: React.Ref<any>): React.ReactElement => (
+            <div
+              ref={ref}
+              style={{ height: mediumHeight, width: mediumWidth, maxWidth: '50px' }}
+            />
+          )}
+        >
+          <ImageSources />
+        </Lazy>
+      </StyledPicture>
+    );
+  }
+
   return (
     <StyledPicture>
-      <Lazy
-        offsetBottom={lazyOptions.offsetBottom}
-        offsetLeft={lazyOptions.offsetLeft}
-        offsetRight={lazyOptions.offsetRight}
-        offsetTop={lazyOptions.offsetTop}
-        renderPlaceholder={(ref: React.Ref<any>): React.ReactElement => (
-          <div
-            ref={ref}
-            style={{ height: mediumHeight, width: mediumWidth, maxWidth: '50px' }}
-          />
-        )}
-      >
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={largeWidth}
-          height={largeHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={largeBreakpoint}
-        />
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={mediumWidth}
-          height={mediumHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={mediumBreakpoint}
-        />
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={smallWidth}
-          height={smallHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={smallBreakpoint}
-        />
-        {
-          typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
-            ? (
-              <img
-                alt={alt}
-                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                width={largeWidth}
-                height={largeHeight}
-              />
-            )
-            : (
-              <img
-                alt={alt}
-                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                // lightbox component reads from this data attribute
-                data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                width={largeWidth}
-                height={largeHeight}
-              />
-            )
-        }
-      </Lazy>
+      <ImageSources />
     </StyledPicture>
   );
 };
