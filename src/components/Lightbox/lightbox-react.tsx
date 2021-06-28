@@ -1675,8 +1675,6 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
               key={imageSrc + keyEndings[srcType]}
               alt={typeof imageTitle === 'string' ? imageTitle : translate('Image')}
               draggable={false}
-              // lazy would go here, but can't validate
-              // loading="lazy"
             />,
           );
         }
