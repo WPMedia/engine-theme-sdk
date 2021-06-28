@@ -383,6 +383,13 @@ const Gallery: React.FC<GalleryProps> = ({
         resizedImageOptions={imgContent.resized_params}
         breakpoints={imgContent.breakpoints || {}}
         resizerURL={resizerURL}
+        // keep lazy options for intersection observer wrapper
+        lazyOptions={{
+          offsetBottom: 0,
+          offsetTop: 0,
+          offsetRight: 0,
+          offsetLeft: 0,
+        }}
       />
     </ImageWrapper>
   );

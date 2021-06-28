@@ -176,7 +176,6 @@ const Image: React.FC<ImageProps> = ({
               data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
               width={largeWidth}
               height={largeHeight}
-              loading="lazy"
             />
           )
         }
