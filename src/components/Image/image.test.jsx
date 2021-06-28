@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import Image from './index';
 
@@ -48,7 +48,7 @@ describe('image component', () => {
     expect(altProperty).toBe(alt);
   });
   it('returns various breakpoints with the widths', () => {
-    const wrapper = shallow(<Image
+    const wrapper = mount(<Image
       url={rawURL}
       alt={alt}
       smallWidth={smallWidth}
