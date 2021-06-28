@@ -131,6 +131,25 @@ const Image: React.FC<ImageProps> = ({
     );
   }
 
+  const FallbackImages: React.FunctionComponent<{}> = () => (
+    resizedImageOptions ? (
+      <img
+        alt={alt}
+        src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+        width={largeWidth}
+        height={largeHeight}
+      />
+    ) : (
+      <img
+        alt={alt}
+        src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+        width={largeWidth}
+        height={largeHeight}
+        loading="lazy"
+      />
+    )
+  );
+
   const ImageSources: React.FunctionComponent<{}> = () => (
     <>
       <SourceHandler
@@ -160,14 +179,7 @@ const Image: React.FC<ImageProps> = ({
       {
         typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
           ? (
-            <img
-              alt={alt}
-              src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
-              width={largeWidth}
-              height={largeHeight}
-              // todo: opt out of lazy for previous same functionality
-              loading="lazy"
-            />
+            <FallbackImages />
           )
           : (
             <img
