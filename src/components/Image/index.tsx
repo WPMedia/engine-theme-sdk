@@ -6,8 +6,6 @@ import Lazy from 'lazy-child';
 import buildThumborURL from './thumbor-image-url';
 import SourceHandler from './SourceHandler';
 
-const LAZY_OPTIONS_DEFAULT = false;
-
 interface LazyProps {
   offsetBottom?: number;
   offsetLeft?: number;
@@ -111,6 +109,7 @@ const Image: React.FC<ImageProps> = ({
           // for fallback width and height
           width={largeWidth}
           height={largeHeight}
+          loading="lazy"
         />
       </StyledPicture>
     );
