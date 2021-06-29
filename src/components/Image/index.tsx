@@ -157,22 +157,14 @@ const Image: React.FC<ImageProps> = ({
           resizerURL={resizerURL}
           breakpointWidth={mediumBreakpoint}
         />
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={smallWidth}
-          height={smallHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={smallBreakpoint}
-        />
         {
           typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
             ? (
               <img
                 alt={alt}
-                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                width={largeWidth}
-                height={largeHeight}
+                src={buildThumborURL(resizedImageOptions[`${smallWidth}x${smallHeight}`], `${smallWidth}x${smallHeight}`, imageSourceWithoutProtocol, resizerURL)}
+                width={smallWidth}
+                height={smallHeight}
                 loading="lazy"
               />
             )
