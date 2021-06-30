@@ -161,6 +161,10 @@ const Image: React.FC<ImageProps> = ({
       {
         typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
           ? (
+            /*
+              if there's options, not null or undefined,
+              we're using intersection observer not loading="lazy"
+            */
             lazyOptions ? (
               <img
                 alt={alt}
