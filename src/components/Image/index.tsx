@@ -161,7 +161,7 @@ const Image: React.FC<ImageProps> = ({
       {
         typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
           ? (
-            resizedImageOptions ? (
+            lazyOptions ? (
               <img
                 alt={alt}
                 src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
