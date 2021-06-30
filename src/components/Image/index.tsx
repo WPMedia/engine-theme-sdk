@@ -5,16 +5,8 @@ import Static from 'fusion:static';
 
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Lazy from 'lazy-child';
 import buildThumborURL from './thumbor-image-url';
 import SourceHandler from './SourceHandler';
-
-interface LazyProps {
-  offsetBottom?: number;
-  offsetLeft?: number;
-  offsetRight?: number;
-  offsetTop?: number;
-}
 
 interface ImageProps {
   url: string;
@@ -36,7 +28,6 @@ interface ImageProps {
   };
   lightBoxWidth?: number;
   lightBoxHeight?: number;
-  lazyOptions?: LazyProps;
 }
 
 /*
@@ -82,12 +73,6 @@ const Image: React.FC<ImageProps> = ({
   breakpoints,
   lightBoxWidth,
   lightBoxHeight,
-  lazyOptions = {
-    offsetBottom: 0,
-    offsetLeft: 0,
-    offsetRight: 0,
-    offsetTop: 0,
-  },
 }) => {
   if (typeof url === 'undefined') {
     return null;
@@ -99,7 +84,6 @@ const Image: React.FC<ImageProps> = ({
 
   const {
     // breakpoints default to mobile, tablet, larger screen
-    small: smallBreakpoint = 0,
     medium: mediumBreakpoint = 768,
     large: largeBreakpoint = 996,
   } = breakpoints || {};
@@ -117,6 +101,7 @@ const Image: React.FC<ImageProps> = ({
           // for fallback width and height
           width={largeWidth}
           height={largeHeight}
+          loading="lazy"
         />
       </StyledPicture>
     );
@@ -171,11 +156,11 @@ const Image: React.FC<ImageProps> = ({
             : (
               <img
                 alt={alt}
-                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+                src={buildThumborURL(resizedImageOptions[`${smallWidth}x${smallHeight}`], `${smallWidth}x${smallHeight}`, imageSourceWithoutProtocol, resizerURL)}
                 // lightbox component reads from this data attribute
                 data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                width={largeWidth}
-                height={largeHeight}
+                width={smallWidth}
+                height={smallHeight}
                 loading="lazy"
               />
             )
@@ -218,13 +203,6 @@ Image.propTypes = {
   lightBoxWidth: PropTypes.number,
   /** Height of the image's lightbox */
   lightBoxHeight: PropTypes.number,
-  /** LazyOptions - offset params for passing to the underlying module */
-  lazyOptions: PropTypes.shape({
-    offsetBottom: PropTypes.number,
-    offsetLeft: PropTypes.number,
-    offsetRight: PropTypes.number,
-    offsetTop: PropTypes.number,
-  }),
 };
 
 export default Image;
