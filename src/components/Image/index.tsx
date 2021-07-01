@@ -1,8 +1,5 @@
 /* eslint-disable no-console */
 import React from 'react';
-
-import Static from 'fusion:static';
-
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import buildThumborURL from './thumbor-image-url';
@@ -124,49 +121,47 @@ const Image: React.FC<ImageProps> = ({
   }
 
   return (
-    <Static id={url} htmlOnly>
-      <StyledPicture>
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={largeWidth}
-          height={largeHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={largeBreakpoint}
-        />
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={mediumWidth}
-          height={mediumHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={mediumBreakpoint}
-        />
-        {
-          typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
-            ? (
-              <img
-                alt={alt}
-                src={buildThumborURL(resizedImageOptions[`${smallWidth}x${smallHeight}`], `${smallWidth}x${smallHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                width={smallWidth}
-                height={smallHeight}
-                loading="lazy"
-              />
-            )
-            : (
-              <img
-                alt={alt}
-                src={buildThumborURL(resizedImageOptions[`${smallWidth}x${smallHeight}`], `${smallWidth}x${smallHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                // lightbox component reads from this data attribute
-                data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                width={smallWidth}
-                height={smallHeight}
-                loading="lazy"
-              />
-            )
+    <StyledPicture key={url}>
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={largeWidth}
+        height={largeHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={largeBreakpoint}
+      />
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={mediumWidth}
+        height={mediumHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={mediumBreakpoint}
+      />
+      {
+        typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
+          ? (
+            <img
+              alt={alt}
+              src={buildThumborURL(resizedImageOptions[`${smallWidth}x${smallHeight}`], `${smallWidth}x${smallHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              width={smallWidth}
+              height={smallHeight}
+              loading="lazy"
+            />
+          )
+          : (
+            <img
+              alt={alt}
+              src={buildThumborURL(resizedImageOptions[`${smallWidth}x${smallHeight}`], `${smallWidth}x${smallHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              // lightbox component reads from this data attribute
+              data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              width={smallWidth}
+              height={smallHeight}
+              loading="lazy"
+            />
+          )
         }
-      </StyledPicture>
-    </Static>
+    </StyledPicture>
   );
 };
 
