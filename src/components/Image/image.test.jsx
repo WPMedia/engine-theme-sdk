@@ -64,7 +64,7 @@ describe('image component', () => {
       breakpoints={breakpoints}
     />);
     const { src, alt: altProperty } = wrapper.find('img').props();
-    expect(src).toBe('https://fake.cdn.arcpublishing.com/resizer/r4YXPy4Eh2thx80bDTxRZM9Syhw=/158x89/filters:format(jpg):quality(70)/fake.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg');
+    expect(src).toBe('https://fake.cdn.arcpublishing.com/resizer/sDwhmVtwayjjDJww8CvlWjpydGM=/274x154/filters:format(jpg):quality(70)/fake.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg');
     expect(altProperty).toBe(alt);
 
     expect(wrapper.find('SourceHandler').length).toBe(3);
