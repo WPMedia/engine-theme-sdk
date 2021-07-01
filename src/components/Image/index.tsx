@@ -72,7 +72,6 @@ const Image: React.FC<ImageProps> = ({
   lightBoxHeight,
   arcStatic = true,
 }) => {
-  console.log('incoming arc static', arcStatic);
   if (typeof url === 'undefined') {
     return null;
   }
