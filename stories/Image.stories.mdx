@@ -16,12 +16,7 @@ The `Image` component is used to replace the `img` tag, providing a fast, respon
 
 ## Lazy Loading
 
-This component uses [`lazy-child`](https://www.npmjs.com/package/lazy-child) which has a dependency on IntersectionObserver which is not supported in all browsers [see support](https://caniuse.com/#feat=intersectionobserver) - if you need to support browsers that do not have IntersectionObserver you will need to use a polyfill.
-The IntersectionObserver polyfill is already included with the theme blocks output types.
-
-At this time, all images are lazy loaded, however the lazyOptions param
-object can be used to adjust when the image is loaded when it enters the viewport. The lazyOptions param object allows for checks against the bottom, left, right and top.
-The default is 0 for all 4 options. By adjusting those values, you can force an image to load sooner or later as it approaches the viewport.
+This component uses `loading="lazy"`. Please see https://web.dev/browser-level-image-lazy-loading/ for more info on the benefits, including dynamic loading based on connection and priority based on placement on the page.
 
 ## Additional general information on images and optimization:
 
@@ -137,94 +132,6 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
         resizerURL={
           "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
         }
-      />
-    </div>
-  </Story>
-</Canvas>
-
-### **With widths and heights**
-
-<Canvas>
-  <Story name="With widths and heights">
-    <div>
-      <p>Scroll down to see lazy loading example</p>
-      <Image
-        url={
-          "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
-        }
-        alt={"Aerial view of bridge"}
-        smallWidth={158}
-        smallHeight={89}
-        mediumWidth={274}
-        mediumHeight={154}
-        largeWidth={274}
-        largeHeight={154}
-        resizedImageOptions={{
-          "158x89":
-            "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
-          "274x154":
-            "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
-        }}
-        resizerURL={
-          "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-        }
-        breakpoints={{
-          small: 420,
-          medium: 768,
-          large: 992,
-        }}
-      />
-      <p style={{ height: "150vh" }}></p>
-      <Image
-        url={
-          "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/P3V3THIJPVGUBLRIIYWKFHZTKA.jpg"
-        }
-        alt={"Surfer paddling out in the ocean"}
-        smallWidth={800}
-        smallHeight={600}
-        mediumWidth={800}
-        mediumHeight={600}
-        largeWidth={800}
-        largeHeight={600}
-        resizedImageOptions={{
-          "800x600":
-            "/ncyEH4gZKt-brhaXCK_GfHw3I6Q=filters:format(jpg):quality(70)/",
-        }}
-        resizerURL={
-          "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-        }
-        breakpoints={{
-          small: 420,
-          medium: 768,
-          large: 992,
-        }}
-      />
-      <p style={{ height: "150vh" }}></p>
-      <Image
-        url={
-          "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
-        }
-        alt={"Aerial view of bridge"}
-        smallWidth={158}
-        smallHeight={89}
-        mediumWidth={274}
-        mediumHeight={154}
-        largeWidth={274}
-        largeHeight={154}
-        resizedImageOptions={{
-          "158x89":
-            "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
-          "274x154":
-            "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
-        }}
-        resizerURL={
-          "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-        }
-        breakpoints={{
-          small: 420,
-          medium: 768,
-          large: 992,
-        }}
       />
     </div>
   </Story>
