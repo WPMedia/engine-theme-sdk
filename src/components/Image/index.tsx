@@ -2,16 +2,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Lazy from 'lazy-child';
+import Static from 'fusion:static';
 import buildThumborURL from './thumbor-image-url';
 import SourceHandler from './SourceHandler';
-
-interface LazyProps {
-  offsetBottom?: number;
-  offsetLeft?: number;
-  offsetRight?: number;
-  offsetTop?: number;
-}
 
 interface ImageProps {
   url: string;
@@ -33,7 +26,7 @@ interface ImageProps {
   };
   lightBoxWidth?: number;
   lightBoxHeight?: number;
-  lazyOptions?: LazyProps;
+  arcStatic?: boolean;
 }
 
 /*
@@ -62,8 +55,6 @@ const StyledPicture = styled.picture`
 * @param {object} resizedImageOptions - Dimensions and thumbor signature and filters
 * @param {string} resizerURL - Link to the assigned resizer url for generating resized url
 * @param {object} breakpoints - Widths to determine small, med, and large breakpoints used
-* @param {object} lazyOptions - Object of offset values for each side (top, right, bottom, left)
-    for the lazy-child moudles
 */
 const Image: React.FC<ImageProps> = ({
   url,
@@ -79,13 +70,9 @@ const Image: React.FC<ImageProps> = ({
   breakpoints,
   lightBoxWidth,
   lightBoxHeight,
-  lazyOptions = {
-    offsetBottom: 0,
-    offsetLeft: 0,
-    offsetRight: 0,
-    offsetTop: 0,
-  },
+  arcStatic = true,
 }) => {
+  console.log('incoming arc static', arcStatic);
   if (typeof url === 'undefined') {
     return null;
   }
@@ -114,6 +101,7 @@ const Image: React.FC<ImageProps> = ({
           // for fallback width and height
           width={largeWidth}
           height={largeHeight}
+          loading="lazy"
         />
       </StyledPicture>
     );
@@ -135,45 +123,33 @@ const Image: React.FC<ImageProps> = ({
     );
   }
 
-  return (
+  const ImageSources: React.FunctionComponent<{}> = () => (
     <StyledPicture>
-      <Lazy
-        offsetBottom={lazyOptions.offsetBottom}
-        offsetLeft={lazyOptions.offsetLeft}
-        offsetRight={lazyOptions.offsetRight}
-        offsetTop={lazyOptions.offsetTop}
-        renderPlaceholder={(ref: React.Ref<any>): React.ReactElement => (
-          <div
-            ref={ref}
-            style={{ height: mediumHeight, width: mediumWidth, maxWidth: '50px' }}
-          />
-        )}
-      >
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={largeWidth}
-          height={largeHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={largeBreakpoint}
-        />
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={mediumWidth}
-          height={mediumHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={mediumBreakpoint}
-        />
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={smallWidth}
-          height={smallHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={smallBreakpoint}
-        />
-        {
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={largeWidth}
+        height={largeHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={largeBreakpoint}
+      />
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={mediumWidth}
+        height={mediumHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={mediumBreakpoint}
+      />
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={smallWidth}
+        height={smallHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={smallBreakpoint}
+      />
+      {
           typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
             ? (
               <img
@@ -181,6 +157,7 @@ const Image: React.FC<ImageProps> = ({
                 src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
                 width={largeWidth}
                 height={largeHeight}
+                loading="lazy"
               />
             )
             : (
@@ -191,11 +168,23 @@ const Image: React.FC<ImageProps> = ({
                 data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
                 width={largeWidth}
                 height={largeHeight}
+                loading="lazy"
               />
             )
         }
-      </Lazy>
     </StyledPicture>
+  );
+
+  if (arcStatic) {
+    return (
+      <Static id={url} htmlOnly>
+        <ImageSources />
+      </Static>
+    );
+  }
+
+  return (
+    <ImageSources />
   );
 };
 
@@ -232,13 +221,6 @@ Image.propTypes = {
   lightBoxWidth: PropTypes.number,
   /** Height of the image's lightbox */
   lightBoxHeight: PropTypes.number,
-  /** LazyOptions - offset params for passing to the underlying module */
-  lazyOptions: PropTypes.shape({
-    offsetBottom: PropTypes.number,
-    offsetLeft: PropTypes.number,
-    offsetRight: PropTypes.number,
-    offsetTop: PropTypes.number,
-  }),
 };
 
 export default Image;
