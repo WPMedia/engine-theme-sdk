@@ -26,7 +26,7 @@ interface ImageProps {
   };
   lightBoxWidth?: number;
   lightBoxHeight?: number;
-  arcStatic?: boolean;
+  disableArcStatic?: boolean;
 }
 
 /*
@@ -70,7 +70,7 @@ const Image: React.FC<ImageProps> = ({
   breakpoints,
   lightBoxWidth,
   lightBoxHeight,
-  arcStatic = true,
+  disableArcStatic,
 }) => {
   if (typeof url === 'undefined') {
     return null;
@@ -174,16 +174,16 @@ const Image: React.FC<ImageProps> = ({
     </StyledPicture>
   );
 
-  if (arcStatic) {
+  if (disableArcStatic) {
     return (
-      <Static id={url} htmlOnly>
-        <ImageSources />
-      </Static>
+      <ImageSources />
     );
   }
 
   return (
-    <ImageSources />
+    <Static id={url} htmlOnly>
+      <ImageSources />
+    </Static>
   );
 };
 
