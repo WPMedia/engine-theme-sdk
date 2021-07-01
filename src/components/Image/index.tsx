@@ -81,6 +81,7 @@ const Image: React.FC<ImageProps> = ({
 
   const {
     // breakpoints default to mobile, tablet, larger screen
+    small: smallBreakpoint = 0,
     medium: mediumBreakpoint = 768,
     large: largeBreakpoint = 996,
   } = breakpoints || {};
@@ -138,25 +139,33 @@ const Image: React.FC<ImageProps> = ({
         resizerURL={resizerURL}
         breakpointWidth={mediumBreakpoint}
       />
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={smallWidth}
+        height={smallHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={smallBreakpoint}
+      />
       {
         typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
           ? (
             <img
               alt={alt}
-              src={buildThumborURL(resizedImageOptions[`${smallWidth}x${smallHeight}`], `${smallWidth}x${smallHeight}`, imageSourceWithoutProtocol, resizerURL)}
-              width={smallWidth}
-              height={smallHeight}
+              src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              width={largeWidth}
+              height={largeHeight}
               loading="lazy"
             />
           )
           : (
             <img
               alt={alt}
-              src={buildThumborURL(resizedImageOptions[`${smallWidth}x${smallHeight}`], `${smallWidth}x${smallHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
               // lightbox component reads from this data attribute
               data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
-              width={smallWidth}
-              height={smallHeight}
+              width={largeWidth}
+              height={largeHeight}
               loading="lazy"
             />
           )
