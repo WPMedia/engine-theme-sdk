@@ -113,23 +113,27 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     )
   );
 
-  return shouldRender ? (
+  return (
     <VideoContainer ref={containerRef}>
       <VideoWrap
         aspectRatio={overrideAspectRatio || aspectRatio}
         viewportPercentage={viewportPercentage}
         shrinkToFit={shrinkToFit}
+        videoLoaded={!!videoShadowDom}
       >
-        <EmbedContainer markup={getEmbedHTMLWithPlayStatus()}>
-          <div
-            id={`video-${videoRef.current}`}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: getEmbedHTMLWithPlayStatus() }}
-          />
-        </EmbedContainer>
+        {shouldRender
+          ? (
+            <EmbedContainer markup={getEmbedHTMLWithPlayStatus()}>
+              <div
+                id={`video-${videoRef.current}`}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: getEmbedHTMLWithPlayStatus() }}
+              />
+            </EmbedContainer>
+          ) : null}
       </VideoWrap>
     </VideoContainer>
-  ) : null;
+  );
 };
 
 export const videoPlayerCustomFieldTags = {
