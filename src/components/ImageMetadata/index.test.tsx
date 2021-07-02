@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import ImageMetadata from '.';
 
 jest.mock('fusion:themes', () => (): object => ({
@@ -30,18 +30,18 @@ describe('the ImageMetadata component', () => {
 
   describe('when no subtitle is passed in the props', () => {
     it('should not include the subtitle span', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         caption="aaaaaa"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(0);
+      expect(wrapper.find('span')).toHaveLength(1);
       expect(wrapper.text()).toBe('aaaaaa (bbbyyy/affff)');
     });
   });
 
   describe('when no caption is passed in the props', () => {
     it('should not include the caption text', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
       />);
@@ -53,11 +53,11 @@ describe('the ImageMetadata component', () => {
 
   describe('when no credits are passed in the props', () => {
     it('should not include the credits string', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu ');
     });
@@ -65,12 +65,12 @@ describe('the ImageMetadata component', () => {
 
   describe('when no byline is passed in the props', () => {
     it('should not include the byline in the credits string', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ affiliation: [{ name: 'affff' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (affff)');
     });
@@ -78,12 +78,12 @@ describe('the ImageMetadata component', () => {
 
   describe('when an empty byline is passed in the props', () => {
     it('should not include the byline in the credits string', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [], affiliation: [{ name: 'affff' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (affff)');
     });
@@ -91,12 +91,12 @@ describe('the ImageMetadata component', () => {
 
   describe('when a nameless byline is passed in the props', () => {
     it('should not include the byline in the credits string', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{}], affiliation: [{ name: 'affff' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (affff)');
     });
@@ -104,12 +104,12 @@ describe('the ImageMetadata component', () => {
 
   describe('when no affiliation is passed in the props', () => {
     it('should not include the affliation in the credits string', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{ name: 'bbbyyy' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (bbbyyy)');
     });
@@ -117,12 +117,12 @@ describe('the ImageMetadata component', () => {
 
   describe('when an empty affiliation is passed in the props', () => {
     it('should not include the affliation in the credits string', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (bbbyyy)');
     });
@@ -130,12 +130,12 @@ describe('the ImageMetadata component', () => {
 
   describe('when a nameless affiliation is passed in the props', () => {
     it('should not include the affliation in the credits string', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{}] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (bbbyyy)');
     });
@@ -143,12 +143,12 @@ describe('the ImageMetadata component', () => {
 
   describe('when all the possible metadata values are included', () => {
     it('should render the metadata string correctly', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (bbbyyy/affff)');
     });
@@ -163,73 +163,73 @@ describe('the ImageMetadata component', () => {
 
   describe('when a vanityCredits is passed in the props', () => {
     it('should hide photographer and credit on image', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
         vanityCredits={{ by: [{}], affiliation: [{}] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu ');
     });
 
     it('should override photographer and credit on image using vanity credits info', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
         vanityCredits={{ by: [{ name: 'vanity photograher' }], affiliation: [{ name: 'vanity credit' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (vanity photograher/vanity credit)');
     });
 
     it('should override photographer on image using vanity credits info', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
         vanityCredits={{ by: [{ name: 'vanity photograher' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (vanity photograher/affff)');
     });
 
     it('should override credit on image using vanity credits info', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
         vanityCredits={{ affiliation: [{ name: 'vanity credit' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (bbbyyy/vanity credit)');
     });
 
     it('should show photographer and hide credit on image using vanity credits info', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
         vanityCredits={{ by: [{ name: 'vanity photograher' }], affiliation: [{}] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (vanity photograher)');
     });
 
     it('should hide photographer and show credit on image using vanity credits info', () => {
-      const wrapper = shallow(<ImageMetadata
+      const wrapper = mount(<ImageMetadata
         subtitle="ffffg"
         caption="ttttu"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
         vanityCredits={{ by: [{}], affiliation: [{ name: 'vanity credit' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span')).toHaveLength(2);
       expect(wrapper.find('span').first().text()).toBe('ffffg ');
       expect(wrapper.text()).toBe('ffffg ttttu (vanity credit)');
     });

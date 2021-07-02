@@ -57,6 +57,8 @@ const ImageMetadata: React.FC<ImageMetadataProps> = ({
       aff = (vanityAff[0] && vanityAff[0].name) || null;
     }
   }
+  const imageCaption = (): html => ({ __html: `${caption} ` });
+
   const credits = (photographer || aff) && `(${[photographer, aff].filter((name) => name).join('/')})`;
 
   return !!(subtitle || caption || credits) && (
@@ -69,7 +71,7 @@ const ImageMetadata: React.FC<ImageMetadataProps> = ({
         )
       }
       {
-        caption && `${caption} `
+        caption && <span dangerouslySetInnerHTML={imageCaption()} />
       }
       {
         credits
