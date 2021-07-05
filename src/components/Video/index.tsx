@@ -78,7 +78,7 @@ const Video: React.FC<VideoProps> = (props) => {
         aspectRatio={overrideAspectRatio || aspectRatio}
         viewportPercentage={viewportPercentage}
         shrinkToFit={shrinkToFit}
-        videoLoaded={!!videoShadowDom}
+        videoLoaded={!videoShadowDom}
       >
         <div
           className="powa"
