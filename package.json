@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.9.9-canary.1",
+  "version": "2.9.9-canary.2",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -71,7 +71,7 @@
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.1.0",
     "babel-plugin-module-resolver": "^4.1.0",
-    "babel-plugin-styled-components": "^1.10.7",
+    "babel-plugin-styled-components": "^1.13.1",
     "chromatic": "^5.6.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.6",
