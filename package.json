@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.9.9-canary.1",
+  "version": "2.9.9-canary.2",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -63,7 +63,7 @@
     "@types/jest": "^26.0.22",
     "@types/node": "^12.12.11",
     "@types/prop-types": "^15.7.3",
-    "@types/react": "^16.14.5",
+    "@types/react": "^16.14.10",
     "@types/react-dom": "^16.9.12",
     "@types/styled-components": "^4.4.1",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
