@@ -36,6 +36,7 @@ function localizeDateHelper(
       break;
     case 'en':
       locale = 'en_US';
+      break;
     default:
       locale = language;
   }
