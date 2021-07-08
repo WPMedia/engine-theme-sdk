@@ -9,8 +9,7 @@ const rimraf = require('rimraf');
 
 let themesLocaleList = [];
 
-let targetTimeZones = [
-];
+let targetTimeZones = [];
 
 const packageName = 'timezone';
 
