@@ -60,6 +60,7 @@ const ImageMetadata: React.FC<ImageMetadataProps> = ({
 
   const credits = (photographer || aff) && `(${[photographer, aff].filter((name) => name).join('/')})`;
 
+  // String literal used for caption in order to keep caption and credits visually separate
   return !!(subtitle || caption || credits) && (
     <MetadataParagraph className="image-metadata" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
       {

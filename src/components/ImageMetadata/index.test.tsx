@@ -34,14 +34,14 @@ describe('the ImageMetadata component', () => {
         caption="aaaaaa"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
       />);
-      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span').hasClass('title')).toBe(false);
       expect(wrapper.text()).toBe('aaaaaa (bbbyyy/affff)');
     });
   });
 
   describe('when no caption is passed in the props', () => {
     it('should not include the caption text', () => {
-      const wrapper = mount(<ImageMetadata
+      const wrapper = shallow(<ImageMetadata
         subtitle="ffffg"
         credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }] }}
       />);
