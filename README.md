@@ -133,6 +133,14 @@ Engine SDK documentation is available [here](https://canary.arcpublishing.com/al
 5. Click on `Next` and go through the uploading process with the default settings.
 6. After a minute your changes will be live on [ALC](https://canary.arcpublishing.com/alc/docs/storybooks/engine-theme-sdk/?path=/story/intro--page).
 
+## How to debug postinstall script 
+
+A postinstall script runs after an install (see [more](https://docs.npmjs.com/cli/v7/using-npm/scripts)). To test this locally, add a `blocks.json` to the `src` folder. You'll already notice that this is ignored by git in the `.gitignore`. You can find a valid blocks.json here: https://github.com/WPMedia/Fusion-News-Theme/blob/master/blocks.json
+
+`rm -rf node_modules && npm ci --production`
+
+`ls node_modules/timezone/`
+
 ## License
 
 Shield: [![CC BY-NC-ND 4.0][cc-by-shield]][cc-by-nc-nd]
