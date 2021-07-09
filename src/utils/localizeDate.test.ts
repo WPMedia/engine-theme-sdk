@@ -67,7 +67,7 @@ it('supports Paris timezone', () => {
 });
 
 // To test this, see debugging-timezone-postinstall-dates.md
-// 1. Add a blocks.json file in the src/ folder from news theme
+// 1. Add a blocks.json file in the src/ folder from above doc
 // 2. run `rm -rf node_modules && npm ci --production`
 // 3. run `ls node_modules/timezone`
 // 4. See pt_PT in the list
