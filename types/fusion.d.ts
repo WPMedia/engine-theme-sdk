@@ -1,16 +1,20 @@
 declare module 'fusion:environment';
 
 declare module 'fusion:static' {
-    const fusionStatic: React.ComponentType<{id: string}>;
-    export default fusionStatic;
+  const fusionStatic: React.ComponentType<{id: string}>;
+  export default fusionStatic;
 }
+
+declare module 'fusion:content';
 
 declare module 'fusion:context';
 
 declare module 'fusion:properties';
 
+declare module 'fusion:intl';
+
 declare module 'fusion:themes';
 
 declare const Fusion: {
-    deployment?: string;
+  deployment?: string;
 };
