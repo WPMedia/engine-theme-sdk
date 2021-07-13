@@ -35,8 +35,10 @@ function localizeDateHelper(
       locale = 'ko_KR';
       break;
     case 'en':
-    default:
       locale = 'en_US';
+      break;
+    default:
+      locale = language;
   }
 
   // Convert to UTC date
