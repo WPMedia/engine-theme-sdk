@@ -141,7 +141,7 @@ To test this locally, add a `blocks.json` to the `src` folder. You'll already no
         "siteProperties": {
           "dateLocalization": {
             "language": "ko",
-            "timeZone": "Asia/Seoul"
+            "timeZone": "America/New_York"
           }
         }
       },
