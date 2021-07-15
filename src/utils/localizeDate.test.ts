@@ -66,13 +66,13 @@ it('supports Paris timezone', () => {
   ).toMatchInlineSnapshot('"January 02, 2000  2:00 am CET"');
 });
 
-it('supports Costa Rica timezone', () => {
+it('supports Costa Rica timezone with 24 hr', () => {
   expect(
     localizeDateHelper(
       '2000-01-02 01:00',
-      '%B %d, %Y %l:%M %P %Z',
-      'en',
+      '%B %d, %Y %H:%M %P %Z',
+      'es',
       'America/Costa_Rica',
     ),
-  ).toMatchInlineSnapshot('January 01, 2000  7:00 pm CST');
+  ).toMatchInlineSnapshot('enero 01, 2000 19:00  CST');
 });
