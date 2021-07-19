@@ -9,17 +9,16 @@ interface ImageAttribution {
   name?: string;
 }
 
+interface Credits {
+  by?: ImageAttribution[];
+  affiliation?: ImageAttribution[];
+}
+
 interface ImageMetadataProps {
   subtitle?: string;
   caption?: string;
-  credits?: {
-    by?: ImageAttribution[];
-    affiliation?: ImageAttribution[];
-  };
-  vanityCredits?: {
-    by?: ImageAttribution[];
-    affiliation?: ImageAttribution[];
-  };
+  credits?: Credits;
+  vanityCredits?: Credits;
 }
 
 const MetadataParagraph = styled.p<{ primaryFont: string }>`
@@ -39,26 +38,27 @@ const MetadataParagraph = styled.p<{ primaryFont: string }>`
   }
 `;
 
+const extract = (key: string) => (item: object): object => item[key];
+
+const formatCredits = (credits: Credits): string => {
+  const creators = credits.by.map(extract('name')).join(', ') || null;
+  const affiliations = credits.affiliation.map(extract('name')).join(', ') || null;
+
+  return (creators || affiliations) && `(${[creators, affiliations].filter(Boolean).join('/')})`;
+};
+
 const ImageMetadata: React.FC<ImageMetadataProps> = ({
   subtitle,
   caption,
-  credits: { by = [{}], affiliation = [{}] } = {},
+  credits,
   vanityCredits,
 }) => {
   const { arcSite } = useAppContext();
-  let photographer = by && by[0] && by[0].name;
-  let aff = affiliation && affiliation[0] && affiliation[0].name;
-  if (vanityCredits) {
-    const { by: vanityBy, affiliation: vanityAff } = vanityCredits;
-    if (vanityBy) {
-      photographer = (vanityBy[0] && vanityBy[0].name) || null;
-    }
-    if (vanityAff) {
-      aff = (vanityAff[0] && vanityAff[0].name) || null;
-    }
-  }
 
-  const credits = (photographer || aff) && `(${[photographer, aff].filter((name) => name).join('/')})`;
+  const preferredCredits = {
+    by: vanityCredits?.by || credits?.by || [],
+    affiliation: vanityCredits?.affiliation || credits?.affiliation || [],
+  };
 
   // String literal used for caption in order to keep caption and credits visually separate
   return !!(subtitle || caption || credits) && (
@@ -74,7 +74,7 @@ const ImageMetadata: React.FC<ImageMetadataProps> = ({
         caption && <span dangerouslySetInnerHTML={{ __html: `${caption} ` }} />
       }
       {
-        credits
+        formatCredits(preferredCredits)
       }
     </MetadataParagraph>
   );

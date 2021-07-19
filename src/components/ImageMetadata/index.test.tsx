@@ -234,4 +234,28 @@ describe('the ImageMetadata component', () => {
       expect(wrapper.text()).toBe('ffffg ttttu (vanity credit)');
     });
   });
+
+  describe('when multiple credits or affiliates are passed in the props', () => {
+    it('should concatenate the creators using a comma', () => {
+      const wrapper = mount(<ImageMetadata
+        subtitle="ffffg"
+        caption="ttttu"
+        credits={{ by: [{ name: 'bbbyyy' }, { name: 'bbbyyy2' }], affiliation: [{ name: 'affff' }] }}
+      />);
+      expect(wrapper.find('span')).toHaveLength(2);
+      expect(wrapper.find('span').first().text()).toBe('ffffg ');
+      expect(wrapper.text()).toBe('ffffg ttttu (bbbyyy, bbbyyy2/affff)');
+    });
+
+    it('should concatenate the affilites using a comma', () => {
+      const wrapper = mount(<ImageMetadata
+        subtitle="ffffg"
+        caption="ttttu"
+        credits={{ by: [{ name: 'bbbyyy' }], affiliation: [{ name: 'affff' }, { name: 'affff2' }] }}
+      />);
+      expect(wrapper.find('span')).toHaveLength(2);
+      expect(wrapper.find('span').first().text()).toBe('ffffg ');
+      expect(wrapper.text()).toBe('ffffg ttttu (bbbyyy/affff, affff2)');
+    });
+  });
 });
