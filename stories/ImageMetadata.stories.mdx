@@ -157,7 +157,7 @@ import { ImageMetadata } from '@wpmedia/engine-theme-sdk';
 ### ** Custom ImageMetadata with Multiple Authors **
 
 <Canvas>
-    <Story name="Custom ImageMetadata with HTML">
+    <Story name="Custom ImageMetadata with Multiple Authors">
         <figure>
             <Image
                 url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
@@ -182,7 +182,7 @@ import { ImageMetadata } from '@wpmedia/engine-theme-sdk';
           <figcaption>
             <ImageMetadata
                 subtitle={text('Subtitle', 'Custom subtitle')}
-                caption={'Custom caption, where the user <i>injects some HTML</i> for more custom subtitles'}
+                caption={'Custom caption'}
                 credits={{
                     affiliation: [
                         {
@@ -192,13 +192,11 @@ import { ImageMetadata } from '@wpmedia/engine-theme-sdk';
                     ],
                     by: [
                         {
-                            byline: text("Byline", "John Doe (Custom credit)"),
-                            name: text("Name", "John Doe"),
+                            name: text("Name", "Jane Doe"),
                             type: 'author',
                         },
                         {
-                            byline: text("Byline", "Jane Doe (Custom credit)"),
-                            name: text("Name", "Jane Doe"),
+                            name: text("Name2", "John Doe"),
                             type: 'author',
                         },
                     ],
@@ -212,7 +210,7 @@ import { ImageMetadata } from '@wpmedia/engine-theme-sdk';
 ### ** Custom ImageMetadata with Multiple Affiliations **
 
 <Canvas>
-    <Story name="Custom ImageMetadata with HTML">
+    <Story name="Custom ImageMetadata with Multiple Affiliations">
         <figure>
             <Image
                 url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
@@ -237,7 +235,7 @@ import { ImageMetadata } from '@wpmedia/engine-theme-sdk';
           <figcaption>
             <ImageMetadata
                 subtitle={text('Subtitle', 'Custom subtitle')}
-                caption={'Custom caption, where the user <i>injects some HTML</i> for more custom subtitles'}
+                caption={'Custom caption'}
                 credits={{
                     affiliation: [
                         {
@@ -245,13 +243,12 @@ import { ImageMetadata } from '@wpmedia/engine-theme-sdk';
                             type: 'author',
                         },
                         {
-                            name: text("Affiliation", "News Place"),
+                            name: text("Affiliation2", "News Place"),
                             type: 'author',
                         },
                     ],
                     by: [
                         {
-                            byline: text("Byline", "John Doe (Custom credit)"),
                             name: text("Name", "John Doe"),
                             type: 'author',
                         },
