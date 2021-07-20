@@ -152,6 +152,113 @@ import { ImageMetadata } from '@wpmedia/engine-theme-sdk';
     </Story>
 </Canvas>
 
+** Custom ImageMetadata with Multiple Authors **
+<Canvas>
+    <Story name="Custom ImageMetadata with HTML">
+        <figure>
+            <Image
+                url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
+                alt={'Aerial view of bridge'}
+                smallWidth={158}
+                smallHeight={89}
+                mediumWidth={274}
+                mediumHeight={154}
+                largeWidth={274}
+                largeHeight={154}
+                resizedImageOptions={{
+                    '158x89': '/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/',
+                    '274x154': '/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/',
+                }}
+                resizerURL={'https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer'}
+                breakpoints={{
+                    small: 420,
+                    medium: 768,
+                    large: 992,
+                }}
+            />
+          <figcaption>
+            <ImageMetadata
+                subtitle={text('Subtitle', 'Custom subtitle')}
+                caption={'Custom caption, where the user <i>injects some HTML</i> for more custom subtitles'}
+                credits={{
+                    affiliation: [
+                        {
+                            name: text("Affiliation", "Death to Stock Photo"),
+                            type: 'author',
+                        },
+                    ],
+                    by: [
+                        {
+                            byline: text("Byline", "John Doe (Custom credit)"),
+                            name: text("Name", "John Doe"),
+                            type: 'author',
+                        },
+                        {
+                            byline: text("Byline", "Jane Doe (Custom credit)"),
+                            name: text("Name", "Jane Doe"),
+                            type: 'author',
+                        },
+                    ],
+                }}
+            />
+          </figcaption>
+        </figure>
+    </Story>
+</Canvas>
+
+** Custom ImageMetadata with Multiple Affiliations **
+<Canvas>
+    <Story name="Custom ImageMetadata with HTML">
+        <figure>
+            <Image
+                url={'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg'}
+                alt={'Aerial view of bridge'}
+                smallWidth={158}
+                smallHeight={89}
+                mediumWidth={274}
+                mediumHeight={154}
+                largeWidth={274}
+                largeHeight={154}
+                resizedImageOptions={{
+                    '158x89': '/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/',
+                    '274x154': '/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/',
+                }}
+                resizerURL={'https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer'}
+                breakpoints={{
+                    small: 420,
+                    medium: 768,
+                    large: 992,
+                }}
+            />
+          <figcaption>
+            <ImageMetadata
+                subtitle={text('Subtitle', 'Custom subtitle')}
+                caption={'Custom caption, where the user <i>injects some HTML</i> for more custom subtitles'}
+                credits={{
+                    affiliation: [
+                        {
+                            name: text("Affiliation", "Death to Stock Photo"),
+                            type: 'author',
+                        },
+                        {
+                            name: text("Affiliation", "News Place"),
+                            type: 'author',
+                        },
+                    ],
+                    by: [
+                        {
+                            byline: text("Byline", "John Doe (Custom credit)"),
+                            name: text("Name", "John Doe"),
+                            type: 'author',
+                        },
+                    ],
+                }}
+            />
+          </figcaption>
+        </figure>
+    </Story>
+</Canvas>
+
 ### **Override photographer and credits on ImageMetadata**
 
 <Canvas>
