@@ -152,6 +152,11 @@ To test this locally, add a `blocks.json` to the `src` folder. You'll already no
             "timeZone": "Pacific/Auckland"
           }
         }
+      },
+      "empty-obj": {
+        "siteProperties": {
+          "dateLocalization": {}
+        }
       }
     }
   }
