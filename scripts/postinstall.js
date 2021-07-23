@@ -45,8 +45,12 @@ try {
   Object.values(targetBlockValues.sites).forEach(({ siteProperties: sitePropertyObject }) => {
     // if site has no date localization obj
     if (sitePropertyObject.dateLocalization) {
-      themesLocaleList.push(sitePropertyObject.dateLocalization.language);
-      targetTimeZones.push(sitePropertyObject.dateLocalization.timeZone);
+      if (typeof sitePropertyObject.dateLocalization.language === 'string') {
+        themesLocaleList.push(sitePropertyObject.dateLocalization.language);
+      }
+      if (typeof sitePropertyObject.dateLocalization.timeZone === 'string') {
+        targetTimeZones.push(sitePropertyObject.dateLocalization.timeZone);
+      }
     }
   });
 
