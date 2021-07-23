@@ -49,7 +49,7 @@ try {
       if (typeof sitePropertyObject.dateLocalization.language === 'string') {
         themesLocaleList.push(sitePropertyObject.dateLocalization.language);
       }
-      // can't use ?. bc node version 
+      // can't use ?. bc node version
       if (typeof sitePropertyObject.dateLocalization.timeZone === 'string') {
         targetTimeZones.push(sitePropertyObject.dateLocalization.timeZone);
       }
