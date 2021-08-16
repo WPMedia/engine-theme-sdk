@@ -107,8 +107,10 @@ const Image: React.FC<ImageProps> = ({
 
   // if url passed in directly without resized params
   if (typeof resizedImageOptions === 'undefined' || typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
-    // todo: remove for prod
     console.error(`no resized options found for url: ${url}.`);
+    console.error(`Target dimensions: ${largeWidth}x${largeHeight}.`);
+    console.error('Please ensure blocks.json aspectRatio and imageWidths create the above dimensions.');
+    console.error('For example, aspectRatios of ["1:0"] and imageWidths of [1440] would create "1440x0".');
     console.error('Please use resized options to save money on serving bigger images than necessary. Consider using resizer content source block or adding the resizer block to content source transform.');
     return (
       <img
