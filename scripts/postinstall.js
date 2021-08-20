@@ -11,7 +11,7 @@ let themesLocaleList = [];
 
 let targetTimeZones = [];
 
-const packageName = 'timezone';
+const packageName = '@wpmedia/timezone';
 
 // in this case, wherever npm i was called
 // init cwd is the filepath of the initiating command
