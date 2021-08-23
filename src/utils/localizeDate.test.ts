@@ -73,9 +73,9 @@ it('handles french meridiems', () => {
       '%B %d, %Y %l:%M %P %Z',
       'fr',
       'Europe/Paris',
-    )).toMatchInlineSnapshot('"janvier 02, 2000  2:00 am CET"');
+    ),
+  ).toMatchInlineSnapshot('"janvier 02, 2000  2:00 am CET"');
 });
-
 
 it('handles spanish meridiems', () => {
   expect(
@@ -84,7 +84,8 @@ it('handles spanish meridiems', () => {
       '%B %d, %Y %l:%M %P %Z',
       'es',
       'Europe/Paris',
-    )).toMatchInlineSnapshot('"enero 02, 2000  2:00 pm CET"');
+    ),
+  ).toMatchInlineSnapshot('"enero 02, 2000  2:00 pm CET"');
 });
 
 // To test this, see debugging-timezone-postinstall-dates.md
