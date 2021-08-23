@@ -276,7 +276,7 @@ To test this live, run
 
 
 To see the included locales (language and country) and folders:
- `ls node_modules/timezone/`
+ `ls node_modules/@wpmedia/timezone/`
 
 To test including blocks.json, use the included blocks.json above and uncomment the following test: 
 

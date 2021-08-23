@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // tz docs https://bigeasy.github.io/timezone/
-const tz = require('timezone')(
-  require('timezone/zones'),
-  require('timezone/locales'),
+const tz = require('@wpmedia/timezone')(
+  require('@wpmedia/timezone/zones'),
+  require('@wpmedia/timezone/locales'),
 );
 
 function localizeDateHelper(
