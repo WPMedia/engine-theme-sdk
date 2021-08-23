@@ -41,7 +41,7 @@ jobs:
       # NPM ci init
       - run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Git config
       - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
