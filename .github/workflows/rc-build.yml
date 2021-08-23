@@ -44,6 +44,13 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Cache Node Modules
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
       # Git config
       - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
         env:
