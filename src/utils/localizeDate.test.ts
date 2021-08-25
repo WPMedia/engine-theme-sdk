@@ -66,6 +66,28 @@ it('supports Paris timezone', () => {
   ).toMatchInlineSnapshot('"January 02, 2000  2:00 am CET"');
 });
 
+it('handles french meridiems', () => {
+  expect(
+    localizeDateHelper(
+      '2000-01-02 01:00',
+      '%B %d, %Y %l:%M %P %Z',
+      'fr',
+      'Europe/Paris',
+    ),
+  ).toMatchInlineSnapshot('"janvier 02, 2000  2:00 am CET"');
+});
+
+it('handles spanish meridiems', () => {
+  expect(
+    localizeDateHelper(
+      '2000-01-02 13:00',
+      '%B %d, %Y %l:%M %P %Z',
+      'es',
+      'Europe/Paris',
+    ),
+  ).toMatchInlineSnapshot('"enero 02, 2000  2:00 pm CET"');
+});
+
 // To test this, see debugging-timezone-postinstall-dates.md
 // 1. Add a blocks.json file in the src/ folder from above doc
 // 2. run `rm -rf node_modules && npm ci --production`

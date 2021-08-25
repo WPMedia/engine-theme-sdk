@@ -32,7 +32,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run tests with coverage minimum
         run: npm run test:coverage
