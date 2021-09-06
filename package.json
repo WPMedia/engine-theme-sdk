@@ -51,7 +51,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@babel/preset-react": "^7.10.1",
     "@babel/preset-typescript": "^7.14.5",
-    "@storybook/addon-a11y": "^6.2.7",
+    "@storybook/addon-a11y": "^6.3.8",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "^6.2.7",
     "@storybook/addon-knobs": "^6.2.7",
