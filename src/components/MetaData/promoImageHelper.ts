@@ -6,10 +6,29 @@ export const getImgURL = (metaValue, metaType = 'og:image', globalContent, resiz
       // eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
       const Thumbor = require('thumbor-lite');
       const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerURL);
-      let imgSrc = _url.replace(/^http[s]?:\/\//, '')
-        .replace(' ', '%20');
-      if (imgSrc.includes('?')) {
-        imgSrc = imgSrc.replace('?', '%3F');
+      const imgSrc = _url
+        .replace(/^http[s]?:\/\//, '')
+        .replace(' ', '%20')
+        .replace('?', '%3F');
+      /*
+        We need the focal point out of the resize options to use as a filter
+        for the thumbor image being used here
+
+        We'll just pull all the filters in case there are additional
+        restraints we want to inact
+
+        Grab the first resize option available because they all seem to have
+        the same filters
+      */
+      const resizedImageOptions = globalContent?.promo_items?.basic?.resized_params
+        || globalContent?.promo_items?.lead_art?.resized_params
+        || {};
+      const [, resizeFilters] = (Object.values(resizedImageOptions)[0] || '').match(/filters:(.*?)\//i) || [];
+      if (resizeFilters) {
+        return thumbor.setImagePath(imgSrc)
+          .resize(1200, 630)
+          .filter(resizeFilters)
+          .buildUrl();
       }
 
       return thumbor.setImagePath(imgSrc)
@@ -23,10 +42,12 @@ export const getImgURL = (metaValue, metaType = 'og:image', globalContent, resiz
     return buildURL(metaValue(metaType));
   }
 
-  if (globalContent && globalContent.promo_items
-    && globalContent.promo_items.basic
-    && globalContent.promo_items.basic.url) {
+  if (globalContent?.promo_items?.basic?.url) {
     return buildURL(globalContent.promo_items.basic.url);
+  }
+
+  if (globalContent?.promo_items?.lead_art?.type === 'image') {
+    return buildURL(globalContent.promo_items.lead_art.url);
   }
 
   return '';
@@ -37,13 +58,5 @@ export const getImgAlt = (metaValue, metaType = 'og:image:alt', globalContent): 
     return metaValue(metaType);
   }
 
-  if (globalContent && globalContent.promo_items
-    && globalContent.promo_items.basic
-    && globalContent.promo_items.basic.alt_text) {
-    if (globalContent.promo_items.basic.alt_text) {
-      return globalContent.promo_items.basic.alt_text;
-    }
-  }
-
-  return null;
+  return globalContent?.promo_items?.basic?.alt_text || null;
 };
