@@ -71,6 +71,27 @@ const globalContentComplete = {
   },
 };
 
+const globalContentLeadArt = {
+  promo_items: {
+    lead_art: {
+      type: 'image',
+      url: 'awesome-url',
+    },
+  },
+};
+
+const globalContentLeadArtWithResize = {
+  promo_items: {
+    lead_art: {
+      resized_params: {
+        0x0: 'I0HK-BD7QKeAN9drBwVrYoryXDE=filters:format(jpg):quality(70):focal(3699x534:3709x544)/',
+      },
+      type: 'image',
+      url: 'awesome-url',
+    },
+  },
+};
+
 const globalContentAuthor = {
   authors: [
     {
@@ -306,6 +327,24 @@ const ogImageTest = (pageType: string): void => {
       expect(
         wrapper.find("meta[property='og:image']").prop('content'),
       ).toEqual(`${websiteDomain}${fallbackImageLocal}`);
+    });
+    it('must add og:image using lead art', () => {
+      const metaValue = metaValues({
+        'page-type': pageType,
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentLeadArt);
+      expect(
+        wrapper.find("meta[property='og:image']").prop('content'),
+      ).toMatch(/awesome-url/i);
+    });
+    it('must add og:image using lead art carrying resize options', () => {
+      const metaValue = metaValues({
+        'page-type': pageType,
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentLeadArtWithResize);
+      expect(
+        wrapper.find("meta[property='og:image']").prop('content'),
+      ).toMatch(/filters:format\(jpg\):quality\(70\):focal\(3699x534:3709x544\)/i);
     });
   });
 };
