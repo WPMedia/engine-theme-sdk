@@ -23,7 +23,8 @@ export const getImgURL = (metaValue, metaType = 'og:image', globalContent, resiz
       const resizedImageOptions = globalContent?.promo_items?.basic?.resized_params
         || globalContent?.promo_items?.lead_art?.resized_params
         || {};
-      const [, resizeFilters] = (Object.values(resizedImageOptions)[0] || '').match(/filters:(.*?)\//i) || [];
+      const firstResizeOption = String(Object.values(resizedImageOptions)[0] || '');
+      const [, resizeFilters] = firstResizeOption.match(/filters:(.*?)\//i) || [];
       if (resizeFilters) {
         return thumbor.setImagePath(imgSrc)
           .resize(1200, 630)
