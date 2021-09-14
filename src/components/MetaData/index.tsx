@@ -96,6 +96,7 @@ interface Props {
       metadata_description?: string;
       metadata_title?: string;
     };
+    canonical_url?: string | null;
   } | null;
   websiteName?: string | null;
   websiteDomain?: string | null;
@@ -129,6 +130,7 @@ const MetaData: React.FC<Props> = ({
   let homepageMetaDataTags = null;
   let nativoMetaDataTags = null;
   let commonTagsOnPage = true;
+  let canonicalLink = null;
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
   const { getImgURL, getImgAlt } = require('./promoImageHelper');
@@ -222,6 +224,13 @@ const MetaData: React.FC<Props> = ({
           }
         </>
       );
+
+      if (gc) {
+        const canonicalUrl = gc.canonical_url || '';
+        canonicalLink = (
+          <link rel="canonical" href={`${websiteDomain}${canonicalUrl}`} />
+        );
+      }
     }
   } else if (pageType === 'author') {
     const author = (gc && gc.authors && gc.authors.length) ? gc.authors[0] : {};
@@ -428,6 +437,7 @@ const MetaData: React.FC<Props> = ({
       {customMetaTags}
       {commonTagsOnPage && twitterTags}
       {nativoMetaDataTags}
+      {canonicalLink}
     </>
   );
 };
@@ -461,6 +471,7 @@ MetaData.propTypes = {
       metadata_description: PropTypes.string,
       metadata_title: PropTypes.string,
     }),
+    canonical_url: PropTypes.string,
   }),
   /** The name of the website */
   websiteName: PropTypes.string,

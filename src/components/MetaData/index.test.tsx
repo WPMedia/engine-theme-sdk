@@ -1833,6 +1833,44 @@ describe('the meta data', () => {
     });
   });
 
+  describe('Canonical links', () => {
+    it('must have canonical tag for article pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'article',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('link[rel="canonical"]').length).toBe(1);
+    });
+
+    it('must have canonical tag for video pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'video',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('link[rel="canonical"]').length).toBe(1);
+    });
+
+    it('must have canonical tag for gallery pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'gallery',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('link[rel="canonical"]').length).toBe(1);
+    });
+
+    it('must NOT have canonical tag for pages other than gallery, video or article', () => {
+      const metaValue = metaValues({
+        'page-type': 'homepage',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+    });
+  });
+
   describe('facebook article meta', () => {
     it('articles pages must have og:type = article', () => {
       const metaValue = metaValues({
