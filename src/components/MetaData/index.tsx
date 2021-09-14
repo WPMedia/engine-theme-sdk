@@ -96,7 +96,6 @@ interface Props {
       metadata_description?: string;
       metadata_title?: string;
     };
-    canonical_website?: string | null;
     canonical_url?: string | null;
   } | null;
   websiteName?: string | null;
@@ -472,7 +471,6 @@ MetaData.propTypes = {
       metadata_description: PropTypes.string,
       metadata_title: PropTypes.string,
     }),
-    canonical_website: PropTypes.string,
     canonical_url: PropTypes.string,
   }),
   /** The name of the website */
