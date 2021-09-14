@@ -26,6 +26,12 @@ export const ControlsDiv = styled.div`
 `;
 
 export const ControlContainer = styled.div`
+  @media screen and (max-width: 48rem) {
+    .gallery--top-control-button {
+      display: none;
+    }
+  }
+
   flex: 0 0 auto;
   line-height: ${rem('16px')};
   margin: 6px 0;
@@ -62,7 +68,7 @@ export const PlaybackText = styled.span<{ primaryFont: string }>`
   margin: 0 30px 0 4px;
 `;
 
-export const ImageCountText = styled.p<{ primaryFont: string }>`
+export const ImageCountText = styled.span<{ primaryFont: string }>`
   font-family: ${(props): string => props.primaryFont};
   display: inline-block;
   margin: 0 0 0 12px;

@@ -456,10 +456,20 @@ const Gallery: React.FC<GalleryProps> = ({
             primaryFont={controlsFont}
             dangerouslySetInnerHTML={ImageCountTextOutput}
           />
-          <ControlsButton type="button" aria-label={previousImagePhrase} onClick={(): void => prevHandler()}>
+          <ControlsButton
+            aria-label={previousImagePhrase}
+            className="gallery--top-control-button"
+            onClick={(): void => prevHandler()}
+            type="button"
+          >
             <ChevronLeftIcon fill={greyFill} />
           </ControlsButton>
-          <ControlsButton type="button" aria-label={nextImagePhrase} onClick={(): void => nextHandler()}>
+          <ControlsButton
+            aria-label={nextImagePhrase}
+            className="gallery--top-control-button"
+            onClick={(): void => nextHandler()}
+            type="button"
+          >
             <ChevronRightIcon fill={greyFill} />
           </ControlsButton>
         </ControlContainer>
