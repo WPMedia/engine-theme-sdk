@@ -190,6 +190,9 @@ const Gallery: React.FC<GalleryProps> = ({
 
   const prevHandler = (): void => {
     if (page <= 0) {
+      if (isAdActive()) {
+        setAdDone(true);
+      }
       return;
     }
     const pg = page - 1;
@@ -206,6 +209,9 @@ const Gallery: React.FC<GalleryProps> = ({
 
   const nextHandler = (): void => {
     if (page >= galleryElements.length - 1) {
+      if (isAdActive()) {
+        setAdDone(true);
+      }
       return;
     }
     const pg = page + 1;
@@ -396,9 +402,11 @@ const Gallery: React.FC<GalleryProps> = ({
       return undefined;
     }
 
-    const handler = (): void => {
-      setAdHidding(false);
-      setAdDone(true);
+    const handler = (event): void => {
+      if (event.propertyName === 'transform') {
+        setAdHidding(false);
+        setAdDone(true);
+      }
     };
 
     carousel.addEventListener('transitionend', handler);
