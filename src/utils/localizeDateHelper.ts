@@ -34,6 +34,9 @@ function localizeDateHelper(
     case 'ko':
       locale = 'ko_KR';
       break;
+    case 'pt':
+      locale = 'pt_PT';
+      break;
     case 'en':
       locale = 'en_US';
       break;
