@@ -62,9 +62,16 @@ const normalizeFallbackImage = (websiteDomain: string, url: string): string | nu
 };
 
 interface Props {
+  /** The MetaTag function that is passed into an output type */
   MetaTag: Function;
+  /** The MetaTags function that is passed into an output type */
   MetaTags: Function;
+  /** The metaValue function that is passed into an output type */
   metaValue: Function;
+  /**
+   * The globalContent object that is obtained from the
+   * useFusionContext() in the fusion:context module
+   * */
   globalContent?: {
     name?: string;
     description?: {
@@ -98,12 +105,27 @@ interface Props {
     };
     canonical_url?: string | null;
   } | null;
+  /** The name of the website */
   websiteName?: string | null;
+  /** The domain name of the website */
   websiteDomain?: string | null;
+  /** The canonical domain name to be used for article, video and gallery pages */
+  canonicalDomain?: string | null;
+  /**
+   * The twitter user name to be output within the twitter:site meta tag -
+   * Do not include the @ at the start of the name
+   * */
   twitterUsername?: string | null;
+  /** Resizer URL - Full Domain */
   resizerURL?: string | null;
+  /** The arcSite ID */
   arcSite?: string | null;
+  /** Used to set the value of the fb:admins meta property */
   facebookAdmins?: string | null;
+  /**
+   * Image to be used in situations where an image can not be found, used in locations
+   * such as og:image, twitter image, etc
+   * */
   fallbackImage?: string | null;
 }
 
@@ -114,6 +136,7 @@ const MetaData: React.FC<Props> = ({
   globalContent: gc,
   websiteName,
   websiteDomain,
+  canonicalDomain,
   twitterUsername,
   resizerURL,
   arcSite,
@@ -224,13 +247,6 @@ const MetaData: React.FC<Props> = ({
           }
         </>
       );
-
-      if (gc) {
-        const canonicalUrl = gc.canonical_url || '';
-        canonicalLink = (
-          <link rel="canonical" href={`${websiteDomain}${canonicalUrl}`} />
-        );
-      }
     }
   } else if (pageType === 'author') {
     const author = (gc && gc.authors && gc.authors.length) ? gc.authors[0] : {};
@@ -423,6 +439,25 @@ const MetaData: React.FC<Props> = ({
     </>
   );
 
+  // Canonical Link
+  const canonicalDomainMapping = {
+    article: canonicalDomain,
+    video: canonicalDomain,
+    gallery: canonicalDomain,
+    tag: websiteDomain,
+    author: websiteDomain,
+    section: websiteDomain,
+    search: websiteDomain,
+    homepage: websiteDomain,
+  };
+
+  if (canonicalDomainMapping[pageType]) {
+    const canonicalUrl = gc?.canonical_url || '';
+    canonicalLink = (
+      <link rel="canonical" href={`${canonicalDomainMapping[pageType]}${canonicalUrl}`} />
+    );
+  }
+
   const customMetaTags = generateCustomMetaTags(metaData, MetaTag, MetaTags);
 
   return (
@@ -443,16 +478,9 @@ const MetaData: React.FC<Props> = ({
 };
 
 MetaData.propTypes = {
-  /** The MetaTag function that is passed into an output type */
   MetaTag: PropTypes.func,
-  /** The MetaTags function that is passed into an output type */
   MetaTags: PropTypes.func,
-  /** The metaValue function that is passed into an output type */
   metaValue: PropTypes.func,
-  /**
-   * The globalContent object that is obtained from the
-   * useFusionContext() in the fusion:context module
-   * */
   globalContent: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.shape({
@@ -473,10 +501,14 @@ MetaData.propTypes = {
     }),
     canonical_url: PropTypes.string,
   }),
-  /** The name of the website */
   websiteName: PropTypes.string,
-  /** The corresponding twitter site name */
+  websiteDomain: PropTypes.string,
+  canonicalDomain: PropTypes.string,
   twitterUsername: PropTypes.string,
+  resizerURL: PropTypes.string,
+  arcSite: PropTypes.string,
+  facebookAdmins: PropTypes.string,
+  fallbackImage: PropTypes.string,
 };
 
 export default MetaData;
