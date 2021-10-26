@@ -444,17 +444,12 @@ const MetaData: React.FC<Props> = ({
     article: canonicalDomain,
     video: canonicalDomain,
     gallery: canonicalDomain,
-    tag: websiteDomain,
-    author: websiteDomain,
-    section: websiteDomain,
-    search: websiteDomain,
-    homepage: websiteDomain,
   };
 
   if (canonicalDomainMapping[pageType]) {
-    const canonicalUrl = gc?.canonical_url || '';
+    const pathURL = gc?.canonical_url || '';
     canonicalLink = (
-      <link rel="canonical" href={`${canonicalDomainMapping[pageType]}${canonicalUrl}`} />
+      <link rel="canonical" href={`${canonicalDomainMapping[pageType]}${pathURL}`} />
     );
   }
 
