@@ -32,6 +32,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - name: Cache Node Modules
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
       # Sets up Node v12
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -39,10 +46,11 @@ jobs:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
 
-      # NPM ci init
-      - run: npm ci
+      - name: Clean install dependencies if lockfile changed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Git config
       - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"

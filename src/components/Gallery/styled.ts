@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import rem from 'polished/lib/helpers/rem';
 
-export const GalleryDiv = styled.div`
+export const GalleryDiv = styled.section`
   display: block;
   width: 100%;
   overflow: hidden;
@@ -26,6 +26,12 @@ export const ControlsDiv = styled.div`
 `;
 
 export const ControlContainer = styled.div`
+  @media screen and (max-width: 48rem) {
+    .gallery--top-control-button {
+      display: none;
+    }
+  }
+
   flex: 0 0 auto;
   line-height: ${rem('16px')};
   margin: 6px 0;
@@ -57,12 +63,24 @@ export const ControlsButton = styled(GalleryButton as any)`
   }
 `;
 
-export const PlaybackText = styled.span`
+export const PlaybackText = styled.span<{ primaryFont: string }>`
+  font-family: ${(props): string => props.primaryFont};
   margin: 0 30px 0 4px;
 `;
 
-export const ImageCountText = styled.span`
-  margin-left: 12px;
+export const ImageCountText = styled.span<{ primaryFont: string }>`
+  font-family: ${(props): string => props.primaryFont};
+  display: inline-block;
+  margin: 0 0 0 12px;
+
+  span {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+  }
 `;
 
 export const CarouselContainer = styled.div`
@@ -96,7 +114,7 @@ export const ImageWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: inline-block;
-  transition-property: transform;
+  transition-property: transform, visibility;
 
   img {
     object-fit: contain;

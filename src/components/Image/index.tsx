@@ -2,16 +2,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Lazy from 'lazy-child';
 import buildThumborURL from './thumbor-image-url';
 import SourceHandler from './SourceHandler';
-
-interface LazyProps {
-  offsetBottom?: number;
-  offsetLeft?: number;
-  offsetRight?: number;
-  offsetTop?: number;
-}
 
 interface ImageProps {
   url: string;
@@ -33,7 +25,6 @@ interface ImageProps {
   };
   lightBoxWidth?: number;
   lightBoxHeight?: number;
-  lazyOptions?: LazyProps;
 }
 
 /*
@@ -79,18 +70,14 @@ const Image: React.FC<ImageProps> = ({
   breakpoints,
   lightBoxWidth,
   lightBoxHeight,
-  lazyOptions = {
-    offsetBottom: 0,
-    offsetLeft: 0,
-    offsetRight: 0,
-    offsetTop: 0,
-  },
 }) => {
   if (typeof url === 'undefined') {
     return null;
   }
 
-  const imageSourceWithoutProtocol = url.replace('https://', '');
+  const imageSourceWithoutProtocol = url
+    .replace('https://', '')
+    .replace('http://', '');
 
   const {
     // breakpoints default to mobile, tablet, larger screen
@@ -112,6 +99,7 @@ const Image: React.FC<ImageProps> = ({
           // for fallback width and height
           width={largeWidth}
           height={largeHeight}
+          loading="lazy"
         />
       </StyledPicture>
     );
@@ -119,8 +107,10 @@ const Image: React.FC<ImageProps> = ({
 
   // if url passed in directly without resized params
   if (typeof resizedImageOptions === 'undefined' || typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
-    // todo: remove for prod
     console.error(`no resized options found for url: ${url}.`);
+    console.error(`Target dimensions: ${largeWidth}x${largeHeight}.`);
+    console.error('Please ensure blocks.json aspectRatio and imageWidths create the above dimensions.');
+    console.error('For example, aspectRatios of ["1:0"] and imageWidths of [1440] would create "1440x0".');
     console.error('Please use resized options to save money on serving bigger images than necessary. Consider using resizer content source block or adding the resizer block to content source transform.');
     return (
       <img
@@ -134,65 +124,54 @@ const Image: React.FC<ImageProps> = ({
   }
 
   return (
-    <StyledPicture>
-      <Lazy
-        offsetBottom={lazyOptions.offsetBottom}
-        offsetLeft={lazyOptions.offsetLeft}
-        offsetRight={lazyOptions.offsetRight}
-        offsetTop={lazyOptions.offsetTop}
-        renderPlaceholder={(ref): React.ReactElement => (
-          <div
-            ref={ref}
-            style={{ height: mediumHeight, width: mediumWidth, maxWidth: '50px' }}
-          />
-        )}
-      >
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={largeWidth}
-          height={largeHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={largeBreakpoint}
-        />
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={mediumWidth}
-          height={mediumHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={mediumBreakpoint}
-        />
-        <SourceHandler
-          resizedImageOptions={resizedImageOptions}
-          width={smallWidth}
-          height={smallHeight}
-          imageSourceWithoutProtocol={imageSourceWithoutProtocol}
-          resizerURL={resizerURL}
-          breakpointWidth={smallBreakpoint}
-        />
-        {
-          typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
-            ? (
-              <img
-                alt={alt}
-                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                width={largeWidth}
-                height={largeHeight}
-              />
-            )
-            : (
-              <img
-                alt={alt}
-                src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                // lightbox component reads from this data attribute
-                data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
-                width={largeWidth}
-                height={largeHeight}
-              />
-            )
+    <StyledPicture key={url}>
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={largeWidth}
+        height={largeHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={largeBreakpoint}
+      />
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={mediumWidth}
+        height={mediumHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={mediumBreakpoint}
+      />
+      <SourceHandler
+        resizedImageOptions={resizedImageOptions}
+        width={smallWidth}
+        height={smallHeight}
+        imageSourceWithoutProtocol={imageSourceWithoutProtocol}
+        resizerURL={resizerURL}
+        breakpointWidth={smallBreakpoint}
+      />
+      {
+        typeof lightBoxWidth === 'undefined' || typeof lightBoxHeight === 'undefined'
+          ? (
+            <img
+              alt={alt}
+              src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              width={largeWidth}
+              height={largeHeight}
+              loading="lazy"
+            />
+          )
+          : (
+            <img
+              alt={alt}
+              src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              // lightbox component reads from this data attribute
+              data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
+              width={largeWidth}
+              height={largeHeight}
+              loading="lazy"
+            />
+          )
         }
-      </Lazy>
     </StyledPicture>
   );
 };
@@ -230,13 +209,6 @@ Image.propTypes = {
   lightBoxWidth: PropTypes.number,
   /** Height of the image's lightbox */
   lightBoxHeight: PropTypes.number,
-  /** LazyOptions - offset params for passing to the underlying module */
-  lazyOptions: PropTypes.shape({
-    offsetBottom: PropTypes.number,
-    offsetLeft: PropTypes.number,
-    offsetRight: PropTypes.number,
-    offsetTop: PropTypes.number,
-  }),
 };
 
 export default Image;

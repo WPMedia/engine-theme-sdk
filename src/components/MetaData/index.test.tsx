@@ -64,10 +64,32 @@ const globalContentComplete = {
       description: 'payload description',
     },
   ],
+  canonical_url: '/path/to/global-content/',
   name: 'section name',
   metadata: {
     metadata_description: 'metadata section description',
     metadata_title: 'metadata section title',
+  },
+};
+
+const globalContentLeadArt = {
+  promo_items: {
+    lead_art: {
+      type: 'image',
+      url: 'awesome-url',
+    },
+  },
+};
+
+const globalContentLeadArtWithResize = {
+  promo_items: {
+    lead_art: {
+      resized_params: {
+        0x0: 'I0HK-BD7QKeAN9drBwVrYoryXDE=filters:format(jpg):quality(70):focal(3699x534:3709x544)/',
+      },
+      type: 'image',
+      url: 'awesome-url',
+    },
   },
 };
 
@@ -131,6 +153,7 @@ const wrapperGenerator = (
   metaValue: MetaValuesReturnInterface,
   globalContent: GlobalContentBag,
   fallbackImage: string = fallbackImageLocal,
+  canonicalDomain = null,
 ): ShallowWrapper => (
   shallow(
     <MetaData
@@ -145,6 +168,7 @@ const wrapperGenerator = (
       websiteDomain={websiteDomain}
       facebookAdmins={facebookAdmins}
       fallbackImage={fallbackImage}
+      canonicalDomain={canonicalDomain}
     />,
   )
 );
@@ -306,6 +330,24 @@ const ogImageTest = (pageType: string): void => {
       expect(
         wrapper.find("meta[property='og:image']").prop('content'),
       ).toEqual(`${websiteDomain}${fallbackImageLocal}`);
+    });
+    it('must add og:image using lead art', () => {
+      const metaValue = metaValues({
+        'page-type': pageType,
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentLeadArt);
+      expect(
+        wrapper.find("meta[property='og:image']").prop('content'),
+      ).toMatch(/awesome-url/i);
+    });
+    it('must add og:image using lead art carrying resize options', () => {
+      const metaValue = metaValues({
+        'page-type': pageType,
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentLeadArtWithResize);
+      expect(
+        wrapper.find("meta[property='og:image']").prop('content'),
+      ).toMatch(/filters:format\(jpg\):quality\(70\):focal\(3699x534:3709x544\)/i);
     });
   });
 };
@@ -1791,6 +1833,111 @@ describe('the meta data', () => {
       />);
 
       expectDefaultMetaMissing(wrapper);
+    });
+  });
+
+  describe('Canonical links', () => {
+    const canonicalDomainName = 'http://canonical.com/';
+    it('must have canonical tag for article pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'article',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', canonicalDomainName);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${canonicalDomainName}${globalContentComplete.canonical_url}`);
+    });
+
+    it('does not have canonical tag for article pages if not canonicalDomain', () => {
+      const metaValue = metaValues({
+        'page-type': 'article',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+    });
+
+    it('must have canonical tag for video pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'video',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', canonicalDomainName);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${canonicalDomainName}${globalContentComplete.canonical_url}`);
+    });
+
+    it('must have canonical tag for gallery pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'gallery',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', canonicalDomainName);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${canonicalDomainName}${globalContentComplete.canonical_url}`);
+    });
+
+    // The follow tests are not working as we don't have the logic for the path URL part
+    /*
+    it('must have canonical tag for tag pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'tag',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
+    });
+
+    it('must have canonical tag for author pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'author',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
+    });
+
+    it('must have canonical tag for section pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'section',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
+    });
+
+    it('must have canonical tag for search pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'search',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
+    });
+
+    it('must have canonical tag for homepage pages', () => {
+      const metaValue = metaValues({
+        'page-type': 'homepage',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, {});
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
+    });
+
+    it('only output domain if no global content and pageType should have canonical link', () => {
+      const metaValue = metaValues({
+        'page-type': 'homepage',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, {});
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
+    });
+    */
+
+    it('does not output for an unknown page type', () => {
+      const metaValue = metaValues({
+        'page-type': 'comic',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, {});
+      expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
     });
   });
 

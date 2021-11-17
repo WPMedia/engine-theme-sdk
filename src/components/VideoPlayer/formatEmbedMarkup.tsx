@@ -16,11 +16,13 @@ function convertStringToNode(string: string): HTMLElement {
  * @param {string} embedHTML is html that has powa info
  * @param {boolean} enableAutoplay sets video to autoplay
  * @param {boolean} playthrough sets video to continue playing through
+ * @param {number} overrideAspectRatio overrides aspect ratio. Could be undefined
  */
 function formatEmbedMarkup(
   embedHTML: string,
   enableAutoplay: boolean,
   playthrough: boolean,
+  overrideAspectRatio?: number,
 ): string {
   if (embedHTML) {
     const embedHTMLWithPlayStatus = convertStringToNode(embedHTML).querySelector('div');
@@ -32,6 +34,10 @@ function formatEmbedMarkup(
 
     if (playthrough) {
       embedHTMLWithPlayStatus.setAttribute('data-playthrough', 'true');
+    }
+
+    if (overrideAspectRatio) {
+      embedHTMLWithPlayStatus.setAttribute('data-aspect-ratio', overrideAspectRatio.toString());
     }
 
     return embedHTMLWithPlayStatus.outerHTML;
