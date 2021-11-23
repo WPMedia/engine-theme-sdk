@@ -3,14 +3,55 @@
 import React, { ReactElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
+import { URL } from 'url';
 
 interface CustomMetaData {
   metaName: string;
   metaValue: string;
 }
 
-interface GlobalContentBag {
-  [x: string]: unknown;
+interface GlobalContent {
+  _id?: string;
+  authors?: Array<{
+    bio?: string;
+    bio_page?: string;
+    byline?: string;
+    image?: string | {
+      alt_text?: string;
+      url?: string;
+    };
+    name?: string;
+  }>;
+  canonical_url?: string;
+  canonical_website?: string;
+  description?: {
+    basic?: string;
+  };
+  headlines?: {
+    basic?: string;
+  };
+  metadata?: {
+    metadata_description?: string;
+    metadata_title?: string;
+    q?: string;
+  };
+  name?: string;
+  Payload?: Array<{
+    description?: string;
+    name?: string;
+    slug?: string;
+  }>;
+  taxonomy?: {
+    seo_keywords?: Array<string>;
+    tags?: Array<{
+        slug?: string;
+    }>;
+  };
+  websites?: {
+    [x: string]: {
+      website_url?: string;
+    };
+  };
 }
 
 const getCustomMetaData = (metaHTMLString: string): Array<CustomMetaData> => {
@@ -42,7 +83,35 @@ const generateCustomMetaTags = (metaData, MetaTag, MetaTags): ReactElement => {
   );
 };
 
-const generateUrl = (arcSite: string, websiteDomain: string, gc: GlobalContentBag): string => {
+const buildUrl = (domain, path) => {
+  try {
+    const url = new URL(path || '', domain);
+    return url.href;
+  } catch {
+    return null;
+  }
+};
+
+const getPageCanonicalUrl = (pageType, domain, globalContent) => {
+  const globalCanonicalPath = globalContent?.canonical_url;
+  const authorCanonicalPath = globalContent?.authors ? globalContent?.authors[0]?.bio_page : '';
+  const searchCanonicalPath = globalContent?.metadata ? `search/${globalContent?.metadata.q}` : '';
+  const tagCanonicalPath = globalContent?.Payload ? `tags/${globalContent?.Payload[0]?.slug}` : '';
+
+  const canonicalUrlMapping = {
+    article: buildUrl(domain, globalCanonicalPath),
+    author: buildUrl(domain, authorCanonicalPath),
+    gallery: buildUrl(domain, globalCanonicalPath),
+    homepage: domain,
+    search: buildUrl(domain, searchCanonicalPath),
+    section: buildUrl(domain, globalContent?._id || ''),
+    tag: buildUrl(domain, tagCanonicalPath),
+    video: buildUrl(domain, globalCanonicalPath),
+  };
+  return canonicalUrlMapping[pageType];
+};
+
+const generateUrl = (arcSite: string, websiteDomain: string, gc: GlobalContent): string => {
   const siteData = gc && gc.websites && gc.websites[arcSite];
   if (!siteData) {
     return null;
@@ -61,65 +130,17 @@ const normalizeFallbackImage = (websiteDomain: string, url: string): string | nu
   return url;
 };
 
+interface CanonicalResolver {
+  (pageType: string, defaultResolution: string): string | null;
+}
+
 interface Props {
-  /** The MetaTag function that is passed into an output type */
-  MetaTag: Function;
-  /** The MetaTags function that is passed into an output type */
-  MetaTags: Function;
-  /** The metaValue function that is passed into an output type */
-  metaValue: Function;
-  /**
-   * The globalContent object that is obtained from the
-   * useFusionContext() in the fusion:context module
-   * */
-  globalContent?: {
-    name?: string;
-    description?: {
-      basic?: string;
-    };
-    headlines?: {
-      basic?: string;
-    };
-    taxonomy?: {
-      seo_keywords?: Array<string>;
-      tags?: Array<{
-          slug?: string;
-      }>;
-    };
-    authors?: Array<{
-      bio?: string;
-      byline?: string;
-      image?: string | {
-        url?: string;
-        alt_text?: string;
-      };
-      name?: string;
-    }>;
-    Payload?: Array<{
-      description?: string;
-      name?: string;
-    }>;
-    metadata?: {
-      metadata_description?: string;
-      metadata_title?: string;
-    };
-    canonical_url?: string | null;
-  } | null;
-  /** The name of the website */
-  websiteName?: string | null;
-  /** The domain name of the website */
-  websiteDomain?: string | null;
-  /** The canonical domain name to be used for article, video and gallery pages */
-  canonicalDomain?: string | null;
-  /**
-   * The twitter user name to be output within the twitter:site meta tag -
-   * Do not include the @ at the start of the name
-   * */
-  twitterUsername?: string | null;
-  /** Resizer URL - Full Domain */
-  resizerURL?: string | null;
   /** The arcSite ID */
   arcSite?: string | null;
+  /** The canonical domain name to be used for article, video and gallery pages */
+  canonicalDomain?: string | null;
+  /** A resolver function that allows a caller to override the canonical resolution */
+  canonicalResolver?: CanonicalResolver | null;
   /** Used to set the value of the fb:admins meta property */
   facebookAdmins?: string | null;
   /**
@@ -127,21 +148,47 @@ interface Props {
    * such as og:image, twitter image, etc
    * */
   fallbackImage?: string | null;
+  /**
+   * The globalContent object that is obtained from the
+   * useFusionContext() in the fusion:context module
+   * */
+  globalContent?: GlobalContent | null;
+  /** The MetaTag function that is passed into an output type */
+  MetaTag: Function;
+  /** The MetaTags function that is passed into an output type */
+  MetaTags: Function;
+  /** The metaValue function that is passed into an output type */
+  metaValue: Function;
+  /** A flag to determine if a canonical link should be included in the ouput head */
+  outputCanonicalLink?: boolean | false;
+  /** Resizer URL - Full Domain */
+  resizerURL?: string | null;
+  /**
+   * The twitter user name to be output within the twitter:site meta tag -
+   * Do not include the @ at the start of the name
+   * */
+  twitterUsername?: string | null;
+  /** The domain name of the website */
+  websiteDomain?: string | null;
+  /** The name of the website */
+  websiteName?: string | null;
 }
 
 const MetaData: React.FC<Props> = ({
+  arcSite,
+  canonicalDomain,
+  canonicalResolver,
+  facebookAdmins,
+  fallbackImage,
+  globalContent: gc,
   MetaTag,
   MetaTags,
   metaValue,
-  globalContent: gc,
-  websiteName,
-  websiteDomain,
-  canonicalDomain,
-  twitterUsername,
+  outputCanonicalLink,
   resizerURL,
-  arcSite,
-  facebookAdmins,
-  fallbackImage,
+  twitterUsername,
+  websiteDomain,
+  websiteName,
 }) => {
   const pageType = metaValue('page-type');
 
@@ -439,18 +486,17 @@ const MetaData: React.FC<Props> = ({
     </>
   );
 
-  // Canonical Link
-  const canonicalDomainMapping = {
-    article: canonicalDomain,
-    video: canonicalDomain,
-    gallery: canonicalDomain,
-  };
+  if (outputCanonicalLink) {
+    const defaultResolution = getPageCanonicalUrl(pageType, canonicalDomain || websiteDomain, gc);
+    const canonicalUrl = canonicalResolver
+      ? canonicalResolver(pageType, defaultResolution)
+      : defaultResolution;
 
-  if (canonicalDomainMapping[pageType]) {
-    const pathURL = gc?.canonical_url || '';
-    canonicalLink = (
-      <link rel="canonical" href={`${canonicalDomainMapping[pageType]}${pathURL}`} />
-    );
+    if (canonicalUrl) {
+      canonicalLink = (
+        <link rel="canonical" href={canonicalUrl} />
+      );
+    }
   }
 
   const customMetaTags = generateCustomMetaTags(metaData, MetaTag, MetaTags);
@@ -473,9 +519,10 @@ const MetaData: React.FC<Props> = ({
 };
 
 MetaData.propTypes = {
-  MetaTag: PropTypes.func,
-  MetaTags: PropTypes.func,
-  metaValue: PropTypes.func,
+  arcSite: PropTypes.string,
+  canonicalDomain: PropTypes.string,
+  facebookAdmins: PropTypes.string,
+  fallbackImage: PropTypes.string,
   globalContent: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.shape({
@@ -496,14 +543,14 @@ MetaData.propTypes = {
     }),
     canonical_url: PropTypes.string,
   }),
-  websiteName: PropTypes.string,
-  websiteDomain: PropTypes.string,
-  canonicalDomain: PropTypes.string,
-  twitterUsername: PropTypes.string,
+  MetaTag: PropTypes.func,
+  MetaTags: PropTypes.func,
+  metaValue: PropTypes.func,
+  outputCanonicalLink: PropTypes.bool,
   resizerURL: PropTypes.string,
-  arcSite: PropTypes.string,
-  facebookAdmins: PropTypes.string,
-  fallbackImage: PropTypes.string,
+  twitterUsername: PropTypes.string,
+  websiteDomain: PropTypes.string,
+  websiteName: PropTypes.string,
 };
 
 export default MetaData;
