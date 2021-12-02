@@ -93,7 +93,9 @@ const buildUrl = (domain, path) => {
 };
 
 const getUrlParameters = (requestUri = ''): {[key: string]: string | [string]} => {
-  const matches = Array.from(requestUri.matchAll(/(?:[\&\?]?([\w\d\%\-\.\_\~]+)=([\w\d\%\-\.\_\~]+)){:10}?/gi));
+  const matches = Array.from(
+    requestUri.matchAll(/(?:[\&\?]?([\w\d\%\-\.\_\~]{1:100})=([\w\d\%\-\.\_\~]{1:100})){:10}?/gi)
+  );
   return matches.reduce((accumulator, [, key, value]) => {
     if (accumulator.hasOwnProperty(key)) {
       return ({
