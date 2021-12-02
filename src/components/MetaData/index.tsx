@@ -92,18 +92,40 @@ const buildUrl = (domain, path) => {
   }
 };
 
-const getPageCanonicalUrl = (pageType, domain, globalContent) => {
-  const globalCanonicalPath = globalContent?.canonical_url;
+const getUrlParameters = (requestUri = ''): {[key: string]: string | [string]} => {
+  const matches = Array.from(requestUri.matchAll(/(?:[\&\?]?([a-z0-9\-\.\_\~]+)=([a-z0-9\-\.\_\~]+))+?/g));
+  return matches.reduce((accumulator, [, key, value]) => {
+    if (accumulator.hasOwnProperty(key)) {
+      return ({
+        ...accumulator,
+        [key]: [...(
+          typeof accumulator[key] === 'object'
+            ? accumulator[key]
+            : [accumulator[key]]
+        ), value],
+      });
+    }
+    return ({ ...accumulator, [key]: value });
+  }, {});
+};
+
+const getPageCanonicalUrl = (pageType, domain, globalContent, requestUri) => {
+  const urlParameters = getUrlParameters(requestUri);
   const authorCanonicalPath = globalContent?.authors ? globalContent?.authors[0]?.bio_page : '';
-  const searchCanonicalPath = globalContent?.metadata ? `search/${globalContent?.metadata.q}` : '';
-  const tagCanonicalPath = globalContent?.Payload ? `tags/${globalContent?.Payload[0]?.slug}` : '';
+  const globalCanonicalPath = globalContent?.canonical_url;
+  const querylyCanonicalPath = urlParameters.query
+    ? `${requestUri.replace(/\?.*/, '')}?query=${urlParameters.query}`
+    : '';
+  const searchCanonicalPath = globalContent?.metadata ? `search/${globalContent?.metadata.q}/` : '';
+  const tagCanonicalPath = globalContent?.Payload ? `tags/${globalContent?.Payload[0]?.slug}/` : '';
 
   const canonicalUrlMapping = {
     article: buildUrl(domain, globalCanonicalPath),
     author: buildUrl(domain, authorCanonicalPath),
     gallery: buildUrl(domain, globalCanonicalPath),
     homepage: domain,
-    search: buildUrl(domain, searchCanonicalPath),
+    'queryly-search': buildUrl(domain, querylyCanonicalPath),
+    search: buildUrl(domain, searchCanonicalPath), // arc search
     section: buildUrl(domain, globalContent?._id || ''),
     tag: buildUrl(domain, tagCanonicalPath),
     video: buildUrl(domain, globalCanonicalPath),
@@ -161,6 +183,8 @@ interface Props {
   metaValue: Function;
   /** A flag to determine if a canonical link should be included in the ouput head */
   outputCanonicalLink?: boolean | false;
+  /** requestUri from the Fusion Context: the path, parameters, and anchor from the http request */
+  requestUri?: string | null;
   /** Resizer URL - Full Domain */
   resizerURL?: string | null;
   /**
@@ -185,6 +209,7 @@ const MetaData: React.FC<Props> = ({
   MetaTags,
   metaValue,
   outputCanonicalLink,
+  requestUri,
   resizerURL,
   twitterUsername,
   websiteDomain,
@@ -487,7 +512,7 @@ const MetaData: React.FC<Props> = ({
   );
 
   if (outputCanonicalLink) {
-    const defaultResolution = getPageCanonicalUrl(pageType, canonicalDomain || websiteDomain, gc);
+    const defaultResolution = getPageCanonicalUrl(pageType, canonicalDomain || websiteDomain, gc, requestUri);
     const canonicalUrl = canonicalResolver
       ? canonicalResolver(pageType, defaultResolution)
       : defaultResolution;

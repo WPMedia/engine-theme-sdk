@@ -172,6 +172,7 @@ const wrapperGenerator = (
       MetaTags={jest.fn()}
       metaValue={metaValue}
       outputCanonicalLink={outputCanonicalLink}
+      requestUri="/test/?fizz=buzz&query=search&foo=bar&foo=baz"
       resizerURL={resizerURL}
       twitterUsername={twitterUsername}
       websiteDomain={websiteDomain}
@@ -1887,7 +1888,7 @@ describe('the meta data', () => {
         title: 'the-sun',
       });
       const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', null, null, true);
-      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}/tags/${globalContentComplete.Payload[0].slug}`);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}/tags/${globalContentComplete.Payload[0].slug}/`);
     });
 
     it('must have canonical tag for author pages', () => {
@@ -1914,7 +1915,7 @@ describe('the meta data', () => {
         title: 'the-sun',
       });
       const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', null, null, true);
-      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}/search/${globalContentComplete.metadata.q}`);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}/search/${globalContentComplete.metadata.q}/`);
     });
 
     it('must have canonical tag for homepage pages', () => {
