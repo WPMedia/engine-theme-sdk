@@ -83,7 +83,7 @@ const generateCustomMetaTags = (metaData, MetaTag, MetaTags): ReactElement => {
   );
 };
 
-const buildUrl = (domain, path) => {
+const buildUrl = (domain, path): string => {
   try {
     const url = new URL(path || '', domain);
     return url.href;
@@ -92,12 +92,12 @@ const buildUrl = (domain, path) => {
   }
 };
 
-const getUrlParameters = (requestUri = ''): {[key: string]: string | [string]} => {
+const getUrlParameters = (requestUri = ''): {[key: string]: string | string[]} => {
   const matches = Array.from(
-    requestUri.matchAll(/(?:[\&\?]?([\w\d\%\-\.\_\~]{1:100})=([\w\d\%\-\.\_\~]{1:100})){:10}?/gi)
+    requestUri.matchAll(/(?:[&?]?([\w\d%\-._~]{1:100})=([\w\d%\-._~]{1:100})){:10}?/gi),
   );
   return matches.reduce((accumulator, [, key, value]) => {
-    if (accumulator.hasOwnProperty(key)) {
+    if (accumulator[key]) {
       return ({
         ...accumulator,
         [key]: [...(
@@ -111,7 +111,7 @@ const getUrlParameters = (requestUri = ''): {[key: string]: string | [string]} =
   }, {});
 };
 
-const getPageCanonicalUrl = (pageType, domain, globalContent, requestUri) => {
+const getPageCanonicalUrl = (pageType, domain, globalContent, requestUri): string => {
   const urlParameters = getUrlParameters(requestUri);
   const authorCanonicalPath = globalContent?.authors ? globalContent?.authors[0]?.bio_page : '';
   const globalCanonicalPath = globalContent?.canonical_url;
@@ -514,7 +514,12 @@ const MetaData: React.FC<Props> = ({
   );
 
   if (outputCanonicalLink) {
-    const defaultResolution = getPageCanonicalUrl(pageType, canonicalDomain || websiteDomain, gc, requestUri);
+    const defaultResolution = getPageCanonicalUrl(
+      pageType,
+      canonicalDomain || websiteDomain,
+      gc,
+      requestUri,
+    );
     const canonicalUrl = canonicalResolver
       ? canonicalResolver(pageType, defaultResolution)
       : defaultResolution;
