@@ -31,6 +31,7 @@ const fallbackImageRemote = 'https://remote-site.com/images/fallback_image_remot
 
 /* eslint-disable @typescript-eslint/camelcase */
 const globalContentComplete = {
+  _id: '/section/url',
   description: {
     basic: 'this is a description',
   },
@@ -62,6 +63,7 @@ const globalContentComplete = {
     {
       name: 'payload name',
       description: 'payload description',
+      slug: 'tagSlug',
     },
   ],
   canonical_url: '/path/to/global-content/',
@@ -69,6 +71,7 @@ const globalContentComplete = {
   metadata: {
     metadata_description: 'metadata section description',
     metadata_title: 'metadata section title',
+    q: 'searchQuery',
   },
 };
 
@@ -154,21 +157,26 @@ const wrapperGenerator = (
   globalContent: GlobalContentBag,
   fallbackImage: string = fallbackImageLocal,
   canonicalDomain = null,
+  canonicalResolver = null,
+  outputCanonicalLink = false,
 ): ShallowWrapper => (
   shallow(
     <MetaData
-      metaValue={metaValue}
-      MetaTag={jest.fn()}
-      MetaTags={jest.fn()}
-      globalContent={globalContent}
-      twitterUsername={twitterUsername}
-      websiteName={websiteName}
-      resizerURL={resizerURL}
       arcSite={arcSite}
-      websiteDomain={websiteDomain}
+      canonicalDomain={canonicalDomain}
+      canonicalResolver={canonicalResolver}
       facebookAdmins={facebookAdmins}
       fallbackImage={fallbackImage}
-      canonicalDomain={canonicalDomain}
+      globalContent={globalContent}
+      MetaTag={jest.fn()}
+      MetaTags={jest.fn()}
+      metaValue={metaValue}
+      outputCanonicalLink={outputCanonicalLink}
+      requestUri="/test/?fizz=buzz&query=search&foo=bar&foo=baz"
+      resizerURL={resizerURL}
+      twitterUsername={twitterUsername}
+      websiteDomain={websiteDomain}
+      websiteName={websiteName}
     />,
   )
 );
@@ -1837,13 +1845,13 @@ describe('the meta data', () => {
   });
 
   describe('Canonical links', () => {
-    const canonicalDomainName = 'http://canonical.com/';
+    const canonicalDomainName = 'http://canonical.com';
     it('must have canonical tag for article pages', () => {
       const metaValue = metaValues({
         'page-type': 'article',
         title: 'the-sun',
       });
-      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', canonicalDomainName);
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', canonicalDomainName, null, true);
       expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${canonicalDomainName}${globalContentComplete.canonical_url}`);
     });
 
@@ -1861,7 +1869,7 @@ describe('the meta data', () => {
         'page-type': 'video',
         title: 'the-sun',
       });
-      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', canonicalDomainName);
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', canonicalDomainName, null, true);
       expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${canonicalDomainName}${globalContentComplete.canonical_url}`);
     });
 
@@ -1870,19 +1878,17 @@ describe('the meta data', () => {
         'page-type': 'gallery',
         title: 'the-sun',
       });
-      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', canonicalDomainName);
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', canonicalDomainName, null, true);
       expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${canonicalDomainName}${globalContentComplete.canonical_url}`);
     });
 
-    // The follow tests are not working as we don't have the logic for the path URL part
-    /*
     it('must have canonical tag for tag pages', () => {
       const metaValue = metaValues({
         'page-type': 'tag',
         title: 'the-sun',
       });
-      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', null, null, true);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}/tags/${globalContentComplete.Payload[0].slug}/`);
     });
 
     it('must have canonical tag for author pages', () => {
@@ -1890,8 +1896,8 @@ describe('the meta data', () => {
         'page-type': 'author',
         title: 'the-sun',
       });
-      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
+      const wrapper = wrapperGenerator(metaValue, globalContentAuthor, '', null, null, true);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}${globalContentAuthor.authors[0].bio_page}`);
     });
 
     it('must have canonical tag for section pages', () => {
@@ -1899,8 +1905,8 @@ describe('the meta data', () => {
         'page-type': 'section',
         title: 'the-sun',
       });
-      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', null, null, true);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}${globalContentComplete._id}`);
     });
 
     it('must have canonical tag for search pages', () => {
@@ -1908,8 +1914,8 @@ describe('the meta data', () => {
         'page-type': 'search',
         title: 'the-sun',
       });
-      const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', null, null, true);
+      expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}/search/${globalContentComplete.metadata.q}/`);
     });
 
     it('must have canonical tag for homepage pages', () => {
@@ -1917,7 +1923,7 @@ describe('the meta data', () => {
         'page-type': 'homepage',
         title: 'the-sun',
       });
-      const wrapper = wrapperGenerator(metaValue, {});
+      const wrapper = wrapperGenerator(metaValue, {}, '', null, null, true);
       expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
     });
 
@@ -1926,10 +1932,27 @@ describe('the meta data', () => {
         'page-type': 'homepage',
         title: 'the-sun',
       });
-      const wrapper = wrapperGenerator(metaValue, {});
+      const wrapper = wrapperGenerator(metaValue, {}, '', null, null, true);
       expect(wrapper.find('link[rel="canonical"]').prop('href')).toBe(`${websiteDomain}`);
     });
-    */
+
+    it('will not output canonical link if outputCanonicalLink is false', () => {
+      const metaValue = metaValues({
+        'page-type': 'homepage',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, {}, '', null, null, false);
+      expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+    });
+
+    it('will not output canonical link if canonicalDomain does not resolve to a valid url', () => {
+      const metaValue = metaValues({
+        'page-type': 'section',
+        title: 'the-sun',
+      });
+      const wrapper = wrapperGenerator(metaValue, globalContentComplete, '', 'invalidDomain', null, true);
+      expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+    });
 
     it('does not output for an unknown page type', () => {
       const metaValue = metaValues({
