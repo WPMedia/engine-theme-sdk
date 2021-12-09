@@ -60,7 +60,7 @@
     "@testing-library/react": "^12.1.2",
     "@types/babel__core": "^7.1.3",
     "@types/enzyme": "^3.10.9",
-    "@types/jest": "^27.0.2",
+    "@types/jest": "^27.0.3",
     "@types/node": "^12.12.11",
     "@types/prop-types": "^15.7.4",
     "@types/react": "^16.14.15",
