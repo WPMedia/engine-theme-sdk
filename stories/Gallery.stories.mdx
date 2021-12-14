@@ -1,5 +1,5 @@
 import Gallery from '../src/components/Gallery';
-import { number, select, text } from "@storybook/addon-knobs";
+import { number, select, text, boolean } from "@storybook/addon-knobs";
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 <Meta title="Gallery" component={Gallery} />
@@ -29,6 +29,9 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
     pageCountPhrase={(current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
     interstitialClicks={2}
     adElement={() => <div className="ad-wrapper">...</div>}
+    displayTitle={true}
+    displayCaption={true}
+    displayCredits={true}
 />
 
 ...
@@ -1178,6 +1181,9 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
             expandPhrase={text('Expand phrase', 'Expand')}
             autoplayPhrase={text('Autoplay phrase', 'Autoplay')}
             pausePhrase={text('Pause phrase', 'Pause')}
+            displayTitle={boolean('Display Title', true)}
+            displayCaption={boolean('Display Caption', true)}
+            displayCredits={boolean('Display Credits', true)}
         />
     </Story>
 </Canvas>
@@ -3450,6 +3456,9 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
             expandPhrase={text('Expand phrase', 'Expand')}
             autoplayPhrase={text('Autoplay phrase', 'Autoplay')}
             pausePhrase={text('Pause phrase', 'Pause')}
+            displayTitle={boolean('Display Title', true)}
+            displayCaption={boolean('Display Caption', true)}
+            displayCredits={boolean('Display Credits', true)}
             interstitialClicks={2}
             adElement={() => (
               <div className="arcad_feature">
