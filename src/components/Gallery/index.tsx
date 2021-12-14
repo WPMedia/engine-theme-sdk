@@ -105,6 +105,9 @@ interface GalleryProps {
   previousImagePhrase?: string;
   nextImagePhrase?: string;
   controlsFont?: string;
+  displayTitle?: boolean;
+  displayCaption?: boolean;
+  displayCredits?: boolean;
 }
 
 declare interface EventOptionsInterface {
@@ -126,6 +129,9 @@ const Gallery: React.FC<GalleryProps> = ({
   previousImagePhrase = PREVIOUS_IMAGE_TEXT,
   nextImagePhrase = NEXT_IMAGE_TEXT,
   controlsFont = null,
+  displayTitle = true,
+  displayCaption = true,
+  displayCredits = true,
 }) => {
   const galleryRef = useRef(null);
   const carouselRef = useRef(null);
@@ -500,9 +506,9 @@ const Gallery: React.FC<GalleryProps> = ({
       {
         galleryElements[page] && (
           <ImageMetadata
-            subtitle={galleryElements[page].subtitle}
-            caption={galleryElements[page].caption}
-            credits={galleryElements[page].credits}
+            subtitle={displayTitle ? galleryElements[page].subtitle : null}
+            caption={displayCaption ? galleryElements[page].caption : null}
+            credits={displayCredits ? galleryElements[page].credits : null}
           />
         )
       }
@@ -521,9 +527,9 @@ const Gallery: React.FC<GalleryProps> = ({
         {
         galleryElements[page] && (
           <ImageMetadata
-            subtitle={galleryElements[page].subtitle}
-            caption={galleryElements[page].caption}
-            credits={galleryElements[page].credits}
+            subtitle={displayTitle ? galleryElements[page].subtitle : null}
+            caption={displayCaption ? galleryElements[page].caption : null}
+            credits={displayCredits ? galleryElements[page].credits : null}
           />
         )
       }
@@ -562,6 +568,12 @@ Gallery.propTypes = {
   adElement: PropTypes.func,
   /** Primary Font */
   controlsFont: PropTypes.string,
+  /** Display Title */
+  displayTitle: PropTypes.bool,
+  /** Display Caption */
+  displayCaption: PropTypes.bool,
+  /** Display Credits */
+  displayCredits: PropTypes.bool,
 };
 
 export default Gallery;
