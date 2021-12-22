@@ -5,6 +5,11 @@ import PropTypes from 'prop-types';
 import buildThumborURL from './thumbor-image-url';
 import SourceHandler from './SourceHandler';
 
+enum LoadingTypes {
+  Eager = 'eager',
+  Lazy = 'lazy',
+}
+
 interface ImageProps {
   url: string;
   alt?: string;
@@ -25,6 +30,7 @@ interface ImageProps {
   };
   lightBoxWidth?: number;
   lightBoxHeight?: number;
+  loading?: 'eager' | 'lazy' | undefined;
 }
 
 /*
@@ -53,8 +59,7 @@ const StyledPicture = styled.picture`
 * @param {object} resizedImageOptions - Dimensions and thumbor signature and filters
 * @param {string} resizerURL - Link to the assigned resizer url for generating resized url
 * @param {object} breakpoints - Widths to determine small, med, and large breakpoints used
-* @param {object} lazyOptions - Object of offset values for each side (top, right, bottom, left)
-    for the lazy-child moudles
+* @param {string} loading - Loading strategy to use - using loading attribute on img tags
 */
 const Image: React.FC<ImageProps> = ({
   url,
@@ -70,6 +75,7 @@ const Image: React.FC<ImageProps> = ({
   breakpoints,
   lightBoxWidth,
   lightBoxHeight,
+  loading = 'lazy',
 }) => {
   if (typeof url === 'undefined') {
     return null;
@@ -99,7 +105,7 @@ const Image: React.FC<ImageProps> = ({
           // for fallback width and height
           width={largeWidth}
           height={largeHeight}
-          loading="lazy"
+          loading={loading}
         />
       </StyledPicture>
     );
@@ -107,11 +113,11 @@ const Image: React.FC<ImageProps> = ({
 
   // if url passed in directly without resized params
   if (typeof resizedImageOptions === 'undefined' || typeof resizedImageOptions[`${largeWidth}x${largeHeight}`] === 'undefined') {
-    console.error(`no resized options found for url: ${url}.`);
-    console.error(`Target dimensions: ${largeWidth}x${largeHeight}.`);
-    console.error('Please ensure blocks.json aspectRatio and imageWidths create the above dimensions.');
-    console.error('For example, aspectRatios of ["1:0"] and imageWidths of [1440] would create "1440x0".');
-    console.error('Please use resized options to save money on serving bigger images than necessary. Consider using resizer content source block or adding the resizer block to content source transform.');
+    console.error(`no resized options found for url: ${url}.
+    \n Target dimensions: ${largeWidth}x${largeHeight}.
+    \n Please ensure blocks.json aspectRatio and imageWidths create the above dimensions.
+    \n For example, aspectRatios of ["1:0"] and imageWidths of [1440] would create "1440x0".
+    \n Please use resized options to save money on serving bigger images than necessary. Consider using resizer content source block or adding the resizer block to content source transform.`);
     return (
       <img
         // will not serve image raw
@@ -157,7 +163,7 @@ const Image: React.FC<ImageProps> = ({
               src={buildThumborURL(resizedImageOptions[`${largeWidth}x${largeHeight}`], `${largeWidth}x${largeHeight}`, imageSourceWithoutProtocol, resizerURL)}
               width={largeWidth}
               height={largeHeight}
-              loading="lazy"
+              loading={loading}
             />
           )
           : (
@@ -168,7 +174,7 @@ const Image: React.FC<ImageProps> = ({
               data-lightbox={buildThumborURL(resizedImageOptions[`${lightBoxWidth}x${lightBoxHeight}`], `${lightBoxWidth}x${lightBoxHeight}`, imageSourceWithoutProtocol, resizerURL)}
               width={largeWidth}
               height={largeHeight}
-              loading="lazy"
+              loading={loading}
             />
           )
         }
@@ -209,6 +215,10 @@ Image.propTypes = {
   lightBoxWidth: PropTypes.number,
   /** Height of the image's lightbox */
   lightBoxHeight: PropTypes.number,
+  /** Loading type - lazy or eager */
+  loading: PropTypes.oneOf<LoadingTypes>(
+    [LoadingTypes.Eager, LoadingTypes.Lazy],
+  ),
 };
 
 export default Image;
