@@ -122,6 +122,8 @@ export const ImageWrapper = styled.div`
   img {
     object-fit: contain;
     height: auto;
+    min-height: 25vh;
+    max-height: 75vh;
   }
 `;
 
