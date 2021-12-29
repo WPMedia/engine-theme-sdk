@@ -1,0 +1,2923 @@
+Searching 2217 files for "<ArticleBody" (case sensitive)
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/article-body-block/index.story.jsx:
+  302  
+  303    return (
+  304:     <ArticleBodyChainPresentation
+  305        context={mockContext}
+  306      />
+  ...
+  330  
+  331    return (
+  332:     <ArticleBodyChainPresentation
+  333        context={mockContext}
+  334        customFields={mockCustomFields}
+  ...
+  362  
+  363    return (
+  364:     <ArticleBodyChainPresentation
+  365        context={mockContext}
+  366        customFields={mockCustomFields}
+  ...
+  400  
+  401    return (
+  402:     <ArticleBodyChainPresentation
+  403        context={mockContext}
+  404      />
+  ...
+  434  
+  435    return (
+  436:     <ArticleBodyChainPresentation
+  437        context={mockContext}
+  438      />
+  ...
+  452  
+  453    return (
+  454:     <ArticleBodyChainPresentation
+  455        context={mockContext}
+  456      />
+  ...
+  470  
+  471    return (
+  472:     <ArticleBodyChainPresentation
+  473        context={mockContext}
+  474      />
+  ...
+  488  
+  489    return (
+  490:     <ArticleBodyChainPresentation
+  491        context={mockContext}
+  492      />
+  ...
+  506  
+  507    return (
+  508:     <ArticleBodyChainPresentation
+  509        context={mockContext}
+  510      />
+  ...
+  524  
+  525    return (
+  526:     <ArticleBodyChainPresentation
+  527        context={mockContext}
+  528      />
+  ...
+  542  
+  543    return (
+  544:     <ArticleBodyChainPresentation
+  545        context={mockContext}
+  546      />
+  ...
+  560  
+  561    return (
+  562:     <ArticleBodyChainPresentation
+  563        context={mockContext}
+  564      />
+  ...
+  578  
+  579    return (
+  580:     <ArticleBodyChainPresentation
+  581        context={mockContext}
+  582      />
+  ...
+  596  
+  597    return (
+  598:     <ArticleBodyChainPresentation
+  599        context={mockContext}
+  600      />
+  ...
+  614  
+  615    return (
+  616:     <ArticleBodyChainPresentation
+  617        context={mockContext}
+  618      />
+  ...
+  632  
+  633    return (
+  634:     <ArticleBodyChainPresentation
+  635        context={mockContext}
+  636      />
+  ...
+  650  
+  651    return (
+  652:     <ArticleBodyChainPresentation
+  653        context={mockContext}
+  654      />
+  ...
+  668  
+  669    return (
+  670:     <ArticleBodyChainPresentation
+  671        context={mockContext}
+  672      />
+  ...
+  686  
+  687    return (
+  688:     <ArticleBodyChainPresentation
+  689        context={mockContext}
+  690      />
+  ...
+  704  
+  705    return (
+  706:     <ArticleBodyChainPresentation
+  707        context={mockContext}
+  708      />
+  ...
+  722  
+  723    return (
+  724:     <ArticleBodyChainPresentation
+  725        context={mockContext}
+  726      />
+  ...
+  740  
+  741    return (
+  742:     <ArticleBodyChainPresentation
+  743        context={mockContext}
+  744      />
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/article-body-block/chains/article-body/default.jsx:
+  358  
+  359    return (
+  360:     <ArticleBody
+  361        className="article-body-wrapper"
+  362        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+  ...
+  379    return (
+  380      <LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
+  381:       <ArticleBodyChainPresentation
+  382          context={context}
+  383          customFields={customFields}
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/article-body-block/chains/article-body/default.test.jsx:
+   78        const { default: ArticleBodyChain } = require('./default');
+   79        const wrapper = mount(
+   80:         <ArticleBodyChain customFields={customFields}>
+   81            <div>1</div>
+   82            <div>2</div>
+   ..
+  145        const { default: ArticleBodyChain } = require('./default');
+  146        const wrapper = mount(
+  147:         <ArticleBodyChain customFields={customFields}>
+  148            <div>1</div>
+  149            <div>2</div>
+  ...
+  223        const { default: ArticleBodyChain } = require('./default');
+  224        const wrapper = mount(
+  225:         <ArticleBodyChain customFields={customFields}>
+  226            <div>1</div>
+  227            <div>2</div>
+  ...
+  287        const { default: ArticleBodyChain } = require('./default');
+  288        const wrapper = mount(
+  289:         <ArticleBodyChain customFields={customFields}>
+  290            <div>1</div>
+  291            <div>2</div>
+  ...
+  349        const { default: ArticleBodyChain } = require('./default');
+  350        const wrapper = mount(
+  351:         <ArticleBodyChain>
+  352            <div>1</div>
+  353            <div>2</div>
+  ...
+  391      it('should render an empty string', () => {
+  392        const { default: ArticleBodyChain } = require('./default');
+  393:       const wrapper = mount(<ArticleBodyChain><div>1</div></ArticleBodyChain>);
+  394        expect(wrapper.find('article.article-body-wrapper').text()).toMatch('');
+  395      });
+  ...
+  504        const { default: Quote } = require('./_children/quote');
+  505        const wrapper = mount(
+  506:         <ArticleBodyChain>
+  507            <div>1</div>
+  508            <div>2</div>
+  ...
+  653        const { default: Table } = require('./_children/table');
+  654        const wrapper = mount(
+  655:         <ArticleBodyChain>
+  656            <div>1</div>
+  657            <div>2</div>
+  ...
+  711        const { default: Table } = require('./_children/table');
+  712        const wrapper = mount(
+  713:         <ArticleBodyChain>
+  714            <div>1</div>
+  715            <div>2</div>
+  ...
+  779        const { default: Oembed } = require('./_children/oembed');
+  780        const wrapper = mount(
+  781:         <ArticleBodyChain>
+  782            <div>1</div>
+  783            <div>2</div>
+  ...
+  824        const { default: Oembed } = require('./_children/oembed');
+  825        const wrapper = mount(
+  826:         <ArticleBodyChain>
+  827            <div>1</div>
+  828            <div>2</div>
+  ...
+  863        const { default: Header } = require('./_children/heading');
+  864        const wrapper = mount(
+  865:         <ArticleBodyChain>
+  866            <div>1</div>
+  867            <div>2</div>
+  ...
+  900        const { default: Header } = require('./_children/heading');
+  901        const wrapper = mount(
+  902:         <ArticleBodyChain>
+  903            <div>1</div>
+  904            <div>2</div>
+  ...
+  952        const { default: ArticleBodyChain } = require('./default');
+  953        const wrapper = mount(
+  954:         <ArticleBodyChain>
+  955            <div>1</div>
+  956            <div>2</div>
+  ...
+  994        const { default: ArticleBodyChain } = require('./default');
+  995        const wrapper = mount(
+  996:         <ArticleBodyChain />,
+  997        );
+  998        expect(wrapper.find('.correction')).toHaveLength(1);
+  ...
+ 1028        const { default: ArticleBodyChain } = require('./default');
+ 1029        const wrapper = mount(
+ 1030:         <ArticleBodyChain>
+ 1031            <div>1</div>
+ 1032            <div>2</div>
+ ....
+ 1094        const { default: List } = require('./_children/list');
+ 1095        const wrapper = mount(
+ 1096:         <ArticleBodyChain>
+ 1097            <div>1</div>
+ 1098            <div>2</div>
+ ....
+ 1124        const { default: List } = require('./_children/list');
+ 1125        const wrapper = mount(
+ 1126:         <ArticleBodyChain>
+ 1127            <div>1</div>
+ 1128            <div>2</div>
+ ....
+ 1161        const { default: ArticleBodyChain } = require('./default');
+ 1162        const wrapper = mount(
+ 1163:         <ArticleBodyChain>
+ 1164            <div>1</div>
+ 1165            <div>2</div>
+ ....
+ 1195        const { default: ArticleBodyChain } = require('./default');
+ 1196        const wrapper = mount(
+ 1197:         <ArticleBodyChain>
+ 1198            <div>1</div>
+ 1199            <div>2</div>
+ ....
+ 1233        const { default: ArticleBodyChain } = require('./default');
+ 1234        const wrapper = mount(
+ 1235:         <ArticleBodyChain>
+ 1236            <div>1</div>
+ 1237            <div>2</div>
+ ....
+ 1269        const { default: ArticleBodyChain } = require('./default');
+ 1270        const wrapper = mount(
+ 1271:         <ArticleBodyChain>
+ 1272            <div>1</div>
+ 1273            <div>2</div>
+ ....
+ 1391        const { default: ArticleBodyChain } = require('./default');
+ 1392        const wrapper = mount(
+ 1393:         <ArticleBodyChain>
+ 1394            <div>1</div>
+ 1395            <div>2</div>
+ ....
+ 1499        const { default: ArticleBodyChain } = require('./default');
+ 1500        const wrapper = mount(
+ 1501:         <ArticleBodyChain>
+ 1502            <div>1</div>
+ 1503            <div>2</div>
+ ....
+ 1626        const { default: ArticleBodyChain } = require('./default');
+ 1627        const wrapper = mount(
+ 1628:         <ArticleBodyChain>
+ 1629            <div>1</div>
+ 1630            <div>2</div>
+ ....
+ 1771        const { default: ArticleBodyChain } = require('./default');
+ 1772        const wrapper = mount(
+ 1773:         <ArticleBodyChain>
+ 1774            <div>1</div>
+ 1775            <div>2</div>
+ ....
+ 1910  
+ 1911        const wrapper = mount(
+ 1912:         <ArticleBodyChain />,
+ 1913        );
+ 1914  
+ ....
+ 2037  
+ 2038        const wrapper = mount(
+ 2039:         <ArticleBodyChain />,
+ 2040        );
+ 2041  
+ ....
+ 2124        const { default: ArticleBodyChain } = require('./default');
+ 2125        const wrapper = mount(
+ 2126:         <ArticleBodyChain>
+ 2127            <div>1</div>
+ 2128            <div>2</div>
+ ....
+ 2161        const { default: ArticleBodyChain } = require('./default');
+ 2162        const wrapper = mount(
+ 2163:         <ArticleBodyChain>
+ 2164            <div>1</div>
+ 2165            <div>2</div>
+ ....
+ 2193        const { default: ArticleBodyChain } = require('./default');
+ 2194        const wrapper = mount(
+ 2195:         <ArticleBodyChain>
+ 2196            <div>1</div>
+ 2197            <div>2</div>
+
+55 matches across 3 files
+
+
+Searching 2231 files for "@media" (case sensitive)
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/article-body-block/chains/article-body/_articlebody.scss:
+   41      margin-top: 0;
+   42  
+   43:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   44        font-size: calculateRem(20px);
+   45        line-height: calculateRem(40px);
+   ..
+   53        margin: 8px 0;
+   54  
+   55:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   56          line-height: calculateRem(20px);
+   57        }
+   ..
+  103      line-height: calculateRem(32px);
+  104      margin: 0;
+  105:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  106        font-size: calculateRem(20px);
+  107        line-height: calculateRem(40px);
+  ...
+  167        font-style: italic;
+  168        font-weight: normal;
+  169:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  170          line-height: calculateRem(32px);
+  171        }
+  ...
+  201        line-height: calculateRem(24px);
+  202        text-align: center;
+  203:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  204          font-size: calculateRem(26px);
+  205          line-height: calculateRem(32px);
+  ...
+  211        line-height: calculateRem(32px);
+  212        text-align: center;
+  213:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  214          font-size: calculateRem(16px);
+  215          line-height: calculateRem(24px);
+  ...
+  217      }
+  218  
+  219:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  220        font-size: calculateRem(26px);
+  221        line-height: calculateRem(32px);
+  ...
+  238  
+  239      }
+  240:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  241        margin-bottom: map-get($spacers, 'lg');
+  242      }
+  ...
+  284  
+  285  .article-body-image-container--mobile-left-float {
+  286:   @media screen and (min-width: 48rem) {
+  287      width: 50%;
+  288      float: left;
+  ...
+  292  
+  293  .article-body-image-container--mobile-right-float {
+  294:   @media screen and (min-width: 48rem) {
+  295      width: 50%;
+  296      float: right;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/article-tag-block/features/tag/tags.scss:
+   23    padding: 0 0.9375rem;
+   24    text-decoration: none;
+   25:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   26      line-height: 0.875rem;
+   27    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/author-bio-block/features/author-bio/author-bio.scss:
+   21  
+   22    .descriptions {
+   23:     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+   24        width: 100%; //For IE 11
+   25      }
+   ..
+   49      line-height: calculateRem(32px);
+   50      margin: map-get($spacers, 'xxs') 0;
+   51:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   52        font-size: calculateRem(14px);
+   53        line-height: calculateRem(24px);
+   ..
+   57    p {
+   58      margin: map-get($spacers, 'xxs') 0;
+   59:     @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+   60        font-size: calculateRem(18px);
+   61        line-height: calculateRem(32px);
+   62      }
+   63:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   64        font-size: calculateRem(14px);
+   65        line-height: calculateRem(24px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/date-block/features/date/date.scss:
+    4    font-size: calculateRem(18px);
+    5    line-height: calculateRem(32px);
+    6:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    7      font-size: calculateRem(20px);
+    8      line-height: calculateRem(40px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/double-chain-block/chains/double-chain/default.scss:
+    1  .double-chain {
+    2    .small-promo {
+    3:     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    4        .row.sm-promo-padding-btm {
+    5          padding-top: 0;
+    .
+   11        text-align: right;
+   12      }
+   13:     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   14        display: inline-block;
+   15      }
+   ..
+   17      &:nth-child(2n+0) {
+   18        margin-right: 0;
+   19:       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   20          margin-right: map-get($spacers, 'md');
+   21        }
+   ..
+   23  
+   24      .row {
+   25:       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
+   26          grid-column-gap: 0;
+   27  
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/footer-block/features/footer/footer.scss:
+   14  
+   15    .container {
+   16:     @media screen and (max-width: 95rem) and (min-width: 90rem) {
+   17        margin-left: 5%;
+   18        margin-right: 5%;
+   ..
+   30      text-align: center;
+   31      vertical-align: middle;
+   32:     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   33        margin-bottom: map-get($spacers, 'md');
+   34        margin-top: map-get($spacers, 'md');
+   ..
+   37  
+   38    #copyright-top {
+   39:     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   40        display: none;
+   41      }
+   ..
+   43  
+   44    #copyright-bottom {
+   45:     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   46        display: block;
+   47      }
+   ..
+   60  
+   61    .social-column {
+   62:     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   63        display: table-cell;
+   64        text-align: center;
+   ..
+   71  
+   72    .copyright-column {
+   73:     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   74        display: table-cell;
+   75        text-align: center;
+   ..
+  121      width: auto;
+  122  
+  123:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  124        height: 32px;
+  125      }
+  ...
+  131      justify-self: left;
+  132  
+  133:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  134        justify-self: left;
+  135      }
+  136:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+  137        justify-self: center;
+  138      }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/full-author-bio-block/features/full-author-bio/full-author-bio.scss:
+    1  .image-container {
+    2:   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+    3      float: none;
+    4      text-align: center;
+    .
+   18  
+   19  .author-content {
+   20:   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+   21      width: 100%;
+   22    }
+   ..
+   26  
+   27  .author-name {
+   28:   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+   29      margin-top: map-get($spacers, 'sm');
+   30    }
+   ..
+   38  
+   39  .social-container {
+   40:   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+   41      justify-content: flex-start;
+   42      padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
+   ..
+   55  
+   56  .social-items {
+   57:   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+   58      justify-content: center;
+   59    }
+   ..
+   66  
+   67  .social-column {
+   68:   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+   69      margin: 0 map-get($spacers, 'xs');
+   70    }
+   ..
+   96  
+   97  .connect-label {
+   98:   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+   99      flex: 0 0 100%;
+  100      text-align: center;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/header-nav-block/features/navigation/header-nav.scss:
+   58  
+   59  .news-theme-navigation-container {
+   60:   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   61      .nav-block-search {
+   62        display: none;
+   ..
+   90    }
+   91  
+   92:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   93      .nav-block-search {
+   94        display: none;
+   ..
+  100    }
+  101  
+  102:   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+  103      .submenu-caret,
+  104      .subsection-container {
+  ...
+  152          text-decoration: none;
+  153  
+  154:         @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+  155            padding: 12px 0;
+  156          }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/header-nav-chain-block/chains/header-nav-chain-block/default.jsx:
+   39  
+   40    .news-theme-navigation-bar {
+   41:     @media screen and (max-width: ${(props) => props.breakpoint}px) {
+   42        height: ${standardNavHeight}px;
+   43      }
+   44:     @media screen and (min-width: ${(props) => props.breakpoint}px) {
+   45        height: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+   46      }
+   ..
+   57        transition: 0.5s;
+   58  
+   59:       @media screen and (max-width: ${(props) => props.breakpoint}px) {
+   60          max-height: 40px;
+   61          max-width: 100%;
+   62        }
+   63:       @media screen and (min-width: ${(props) => props.breakpoint}px) {
+   64          max-height: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
+   65        }
+   ..
+   70  const StyledSectionDrawer = styled.div`
+   71    z-index: ${sectionZIdx};
+   72:   @media screen and (max-width: ${(props) => props.breakpoint}px) {
+   73      margin-top: ${standardNavHeight}px;
+   74    }
+   75:   @media screen and (min-width: ${(props) => props.breakpoint}px) {
+   76      margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+   77    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/header-nav-chain-block/chains/header-nav-chain-block/_children/horizontal-links/links-bar.scss:
+   10    margin-right: calculateRem(16px);
+   11  
+   12:   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   13      display: none;
+   14    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/identity-block/features/header-account-action/styles.scss:
+   12    }
+   13  
+   14:   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   15      display: none;
+   16    }
+   ..
+   18  
+   19  .xpmedia-subs-header--mobile-header {
+   20:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   21      display: none;
+   22    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/lead-art-block/features/leadart/leadart.scss:
+   18        margin: 8px 0;
+   19  
+   20:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   21          line-height: calculateRem(20px);
+   22        }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/links-bar-block/features/links-bar/links-bar.scss:
+    4    text-align: left;
+    5    width: 100%;
+    6:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    7      text-align: center;
+    8    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/masthead-block/features/masthead-block/_children/HeaderContainerHideMobile.js:
+    2  
+    3  const HeaderContainerHideMobile = styled.div`
+    4:   @media (max-width: 768px) {
+    5      display: none;
+    6    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/numbered-list-block/features/numbered-list/numbered-list.scss:
+   62  
+   63  .numbered-item-margins {
+   64:   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+   65      margin-bottom: 1rem;
+   66      margin-top: 1rem;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/right-rail-advanced-block/layouts/right-rail-advanced/default.scss:
+   24  
+   25  
+   26:   @media screen and (max-width: 95rem) and (min-width: 90rem) {
+   27      .container {
+   28        margin-left: 5%;
+   ..
+   34  .advanced-grid-desktop-main-area {
+   35    padding: 0;
+   36:   @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   37      border-right: 1px solid $border-rule-color;
+   38      padding: 0 map-get($spacers, 'lg') 0 0;
+   ..
+   41  
+   42  
+   43: @media (max-width: 64rem) {
+   44    .row.advanced-grid {
+   45      grid-template-columns: auto;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/right-rail-block/layouts/right-rail/default.scss:
+   23  
+   24  
+   25:     @media screen and (max-width: 95rem) and (min-width: 90rem) {
+   26        .container {
+   27          margin-left: 5%;
+   ..
+   33    .left-article-section {
+   34      padding: 0;
+   35:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   36        border-right: 1px solid $border-rule-color;
+   37        padding: 0 map-get($spacers, 'lg') 0 0;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/share-bar-block/features/share-bar/share-bar.scss:
+   11    width: 44px;
+   12  
+   13:   @media screen and (max-width: #{map-get($grid-breakpoints, 'lg') - 1rem}) {
+   14      visibility: hidden;
+   15    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/_children/byline/index.scss:
+    7    margin-bottom: 0;
+    8  
+    9:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   10      font-size: 1.25rem;
+   11      line-height: 2.5rem;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/_children/promo-date/index.scss:
+    5    line-height: calculateRem(14px);
+    6  
+    7:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    8      font-size: calculateRem(14px);
+    9      line-height: calculateRem(16px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_author-bio.scss:
+    1  .author-bio {
+    2:   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    3      margin-top: map-get($spacers, 'md');
+    4    }
+    5:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    6      margin-top: map-get($spacers, 'sm');
+    7    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_extra-large-promo.scss:
+   31      width: 100%;
+   32  
+   33:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   34        font-size: calculateRem(52px);
+   35        line-height: calculateRem(56px);
+   ..
+   44      margin-top: map-get($spacers, 'xs');
+   45  
+   46:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   47        font-size: calculateRem(16px);
+   48        line-height: calculateRem(24px);
+   ..
+   60        line-height: calculateRem(14px);
+   61  
+   62:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   63          font-size: calculateRem(14px);
+   64          line-height: calculateRem(16px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_header-nav.scss:
+   34  }
+   35  
+   36: @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   37    .section-menu--bottom-placeholder {
+   38      // ensure bottom item is visible on mobile
+   ..
+  182      }
+  183  
+  184:     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+  185        .nav-components--mobile {
+  186          display: inherit;
+  ...
+  238          justify-content: flex-start;
+  239  
+  240:         @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+  241            flex: 1;
+  242          }
+  ...
+  283    }
+  284  
+  285:   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+  286      .subsection-container {
+  287        display: none;
+  ...
+  334          }
+  335  
+  336:         @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+  337            &--desktop {
+  338              display: none;
+  ...
+  387      width: 100%;
+  388  
+  389:     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+  390        // on mobile, show dark background everywhere
+  391        background: $section-bg;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_large-promo.scss:
+   17      padding-bottom: map-get($spacers, 'sm');
+   18  
+   19:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   20        font-size: calculateRem(16px);
+   21        line-height: calculateRem(22px);
+   ..
+   30      margin-bottom: map-get($spacers, 'xs');
+   31      text-decoration: none;
+   32:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   33        font-size: calculateRem(26px);
+   34        line-height: calculateRem(32px);
+   ..
+   41      margin-bottom: map-get($spacers, 'xs');
+   42  
+   43:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   44        font-size: calculateRem(16px);
+   45        line-height: calculateRem(24px);
+   ..
+   57        line-height: calculateRem(16px);
+   58  
+   59:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   60          font-size: calculateRem(14px);
+   61          line-height: calculateRem(14px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_medium-promo.scss:
+   18      text-decoration: none;
+   19  
+   20:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   21        margin-bottom: map-get($spacers, 'md');
+   22      }
+   ..
+   29      line-height: calculateRem(24px);
+   30  
+   31:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   32        font-size: calculateRem(24px);
+   33        line-height: calculateRem(34px);
+   ..
+   40      margin-bottom: map-get($spacers, 'xxs');
+   41  
+   42:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   43        font-size: calculateRem(16px);
+   44        line-height: calculateRem(24px);
+   ..
+   48    .image-link {
+   49      float: right;
+   50:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   51        float: left;
+   52        max-width: calc(35%);
+   ..
+   57      height: auto;
+   58      max-width: 100px;
+   59:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   60        max-width: calc(100%);
+   61      }
+   ..
+   67        line-height: calculateRem(16px);
+   68  
+   69:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   70          font-size: calculateRem(14px);
+   71          line-height: calculateRem(14px);
+   ..
+   86    }
+   87  
+   88:   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   89      .promo-label {
+   90        bottom: unset;
+   ..
+  102      .md-promo-headline {
+  103        width: 68%;
+  104:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  105          margin-left: 39%;
+  106          width: 60%;
+  ...
+  109  
+  110      .description-text {
+  111:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  112          margin-left: 39%;
+  113        }
+  ...
+  115  
+  116      .article-meta {
+  117:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  118          margin-left: 39%;
+  119        }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_results-list-desktop.scss:
+    1: @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+    2    .list-item {
+    3      column-gap: map-get($spacers, 'lg');
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_results-list-mobile.scss:
+    1: @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+    2    .list-item {
+    3      column-gap: 12px;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_small-promo.scss:
+    3    margin-top: 0;
+    4  
+    5:   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    6      .row {
+    7        grid-gap: 1rem;
+    .
+    9    }
+   10  
+   11:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   12      min-height: calculateRem(80px);
+   13    }
+   ..
+   35      padding: 0 map-get($spacers, 'xxs') 0 0;
+   36      text-decoration: none;
+   37:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   38        padding: 0;
+   39      }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/simple-list-block/features/simple-list/simple-list.scss:
+   59  
+   60  .simple-list-item-margins {
+   61:   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+   62      margin-bottom: 1rem;
+   63      margin-top: 1rem;
+   64    }
+   65:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   66      margin-bottom: 1rem;
+   67      margin-top: 1rem;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/subheadline-block/features/subheadline/subheadline.scss:
+    6    line-height: calculateRem(24px);
+    7    margin-bottom: map-get($spacers, 'xl');
+    8:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    9      font-size: calculateRem(26px);
+   10      line-height: calculateRem(32px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/subscriptions-block/components/GridList/styles.scss:
+    5    justify-content: center;
+    6  
+    7:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    8      &--1 {
+    9        grid-template-columns: minmax(auto, 600px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/subscriptions-block/components/SubscriptionDialog/styles.scss:
+    5    margin: map-get($spacers, 'xxl') auto;
+    6    text-align: center;
+    7:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    8      grid-template-columns: repeat(12, 1fr);
+    9      margin: map-get($spacers, 'xl') auto;
+   ..
+   16      line-height: 1rem;
+   17      font-size: 0.875rem;
+   18:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   19        font-size: 1rem;
+   20        grid-column: 4/10;
+   21        line-height: 1.5rem;
+   22      }
+   23:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   24        grid-column: 5/9;
+   25      }
+   ..
+   51      grid-column: 2/12;
+   52      margin: map-get($spacers, 'sm') 0 0 0;
+   53:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   54        font-size: 2.5rem;
+   55        line-height: 3rem;
+   56      }
+   57:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   58        grid-column: 4/10;
+   59      }
+   ..
+   65      grid-column: 2/12;
+   66      margin: map-get($spacers, 'sm') 0 0 0;
+   67:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   68        font-size: 1.25rem;
+   69      }
+   70:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   71        grid-column: 4/10;
+   72      }
+   ..
+   76      grid-column: 2/12;
+   77      margin-top: map-get($spacers, 'lg');
+   78:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   79        grid-column: 4/10;
+   80      }
+   81:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   82        grid-column: 5/9;
+   83      }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/subscriptions-block/features/offer/styles.scss:
+   15    text-align: center;
+   16  
+   17:   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   18      margin-top: 2rem;
+   19      max-width: 90%;
+   ..
+   26      line-height: 3.5rem;
+   27      margin-bottom: 1rem;
+   28:     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   29        font-size: 2.25rem;
+   30        line-height: 2.5rem;
+   ..
+   36      font-size: 1.875rem;
+   37      line-height: 2rem;
+   38:     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   39        font-size: 1.19rem;
+   40        line-height: 1.5rem;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/top-table-list-block/features/top-table-list/default.scss:
+    2    .xl-large-promo {
+    3      .xl-promo-headline {
+    4:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    5          margin-bottom: map-get($spacers, 'xs');
+    6        }
+    .
+   13    .large-promo {
+   14      .lg-promo-headline {
+   15:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   16          margin-top: - map-get($spacers, 'xs');
+   17        }
+   ..
+   23    .medium-promo {
+   24      .md-promo-headline {
+   25:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   26          margin-bottom: map-get($spacers, 'xs');
+   27          margin-top: - map-get($spacers, 'xs');
+   ..
+   73  
+   74      &.sm-promo-padding-btm {
+   75:       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   76          padding-top: 0;
+   77        }
+   ..
+   92      margin-bottom: 0 !important;
+   93  
+   94:     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   95        margin-bottom: inherit;
+   96      }
+   ..
+  117  
+  118  .promo-item-margins {
+  119:   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+  120      margin-bottom: 1rem;
+  121      margin-top: 1rem;
+  122    }
+  123:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  124      margin-bottom: 1.5rem;
+  125      margin-top: 1.5rem;
+
+/Users/schubachn/Source/engine-theme-sdk/src/components/Gallery/styled.ts:
+   27  
+   28  export const ControlContainer = styled.div`
+   29:   @media screen and (max-width: 48rem) {
+   30      .gallery--top-control-button {
+   31        display: none;
+
+/Users/schubachn/Source/engine-theme-sdk/src/components/VideoPlayer/styled.ts:
+    2  
+    3  export const VideoContainer = styled.div`
+    4:   @media screen and (min-width: 48rem) {
+    5      margin-bottom: 1.5rem;
+    6    }
+
+/Users/schubachn/Source/news-theme-css/index.html:
+   39  
+   40              /****
+   41:             @media (min-width: 1440px){
+   42                width: 380px;
+   43              }
+   44  
+   45:             @media (min-width: 1024px){
+   46                width: 265px;
+   47              }
+
+/Users/schubachn/Source/news-theme-css/michelangelo/kss_styleguide/custom-template/index.hbs:
+   27      }
+   28  
+   29:     @media only screen and (max-width: 800px) {
+   30  
+   31        .kss-header {
+   ..
+   68      }
+   69  
+   70:     @media only screen and (min-width: 90.0625em) {
+   71        .kss-documentation {
+   72          padding-left: calc(18% + 20px);
+   ..
+   74      }
+   75  
+   76:     @media only screen and (min-width: 90.0625em) {
+   77        .kss-navigation {
+   78          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/michelangelo/kss_styleguide/custom-template/kss-assets/css/kss-tools.scss:
+   16    // min-width > max-width.
+   17    @if $min-max == min and $max == max {
+   18:     @media only screen and (min-width: mq-unit($width1 + 1)) and (max-width: mq-unit($width2)) { @content; }
+   19    }
+   20  
+   21    // min-width.
+   22    @else if $min-max == min {
+   23:     @media only screen and (min-width: mq-unit($width1 + 1)) { @content; }
+   24    }
+   25  
+   26    // max-width.
+   27    @else if $min-max == max {
+   28:     @media only screen and (max-width: mq-unit($width1)) { @content; }
+   29    }
+   30  }
+
+/Users/schubachn/Source/news-theme-css/michelangelo/kss_styleguide/custom-template/kss-assets/css/kss.css:
+   28    font-family: 'Lato', sans-serif;
+   29    font-weight: 400; }
+   30:   @media only screen and (min-width: 64.125em) {
+   31      .kss-header {
+   32        display: none; } }
+   ..
+   39    line-height: 25px;
+   40    text-align: left; }
+   41:   @media only screen and (min-width: 35.5625em) {
+   42      .kss-header__title {
+   43        font-size: 1.25rem; } }
+   ..
+  104    transform: translateX(-100%);
+  105    transition: transform 0.3s ease-out; }
+  106:   @media only screen and (min-width: 48.0625em) {
+  107      .kss-navigation {
+  108        width: 35%; } }
+  109:   @media only screen and (min-width: 64.0625em) {
+  110      .kss-navigation {
+  111        width: 25%;
+  112        transform: translateX(0); } }
+  113:   @media only screen and (min-width: 80.0625em) {
+  114      .kss-navigation {
+  115        width: 20%; } }
+  116:   @media only screen and (min-width: 90.0625em) {
+  117      .kss-navigation {
+  118        width: 15%; } }
+  ...
+  124    box-sizing: border-box;
+  125    padding: 20px 10px; }
+  126:   @media only screen and (min-width: 64.0625em) {
+  127      .kss-navigation__title {
+  128        display: block; } }
+  ...
+  139    padding-left: 0;
+  140    list-style-type: none; }
+  141:   @media only screen and (min-width: 64.0625em) {
+  142      .kss-nav {
+  143        padding-top: 0; } }
+  ...
+  303    .kss-documentation.kss-state-active {
+  304      opacity: 0.1; }
+  305:   @media only screen and (min-width: 64.0625em) {
+  306      .kss-documentation {
+  307        padding-top: 20px;
+  308        padding-left: calc(25% + 20px); } }
+  309:   @media only screen and (min-width: 80.0625em) {
+  310      .kss-documentation {
+  311        padding-left: calc(20% + 20px); } }
+  312:   @media only screen and (min-width: 90.0625em) {
+  313      .kss-documentation {
+  314        padding-left: calc(15% + 20px); } }
+  ...
+  472    margin: 0;
+  473    padding-left: 0; }
+  474:   @media only screen and (min-width: 35.5625em) {
+  475      .kss-colors-container {
+  476        margin-left: -10px; } }
+  ...
+  486    border: 1px solid #CCCCCC;
+  487    border-radius: 2px; }
+  488:   @media only screen and (min-width: 35.5625em) {
+  489      .kss-color {
+  490        display: inline-block;
+
+/Users/schubachn/Source/news-theme-css/michelangelo/kss_styleguide/custom-template/kss-assets/vendor/prism.css:
+   40  }
+   41  
+   42: @media print {
+   43  	code[class*="language-"],
+   44  	pre[class*="language-"] {
+
+/Users/schubachn/Source/news-theme-css/scss/_margins.scss:
+   58    margin-bottom: map-get($spacers, 'sm');
+   59  
+   60:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   61      margin-bottom: map-get($spacers, 'md');
+   62    }
+
+/Users/schubachn/Source/news-theme-css/scss/_mixins.scss:
+   12    margin-bottom: map-get($spacers, 'sm');
+   13  
+   14:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   15      margin-bottom: map-get($spacers, 'md');
+   16    }
+   ..
+   64    margin-bottom: map-get($spacers, 'sm');
+   65  
+   66:   @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+   67      margin-bottom: map-get($spacers, 'sm');
+   68    }
+   ..
+   88    }
+   89  
+   90:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   91      > * {
+   92        margin-bottom: map-get($spacers, 'md');
+   ..
+  108    }
+  109  
+  110:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  111      > * {
+  112        margin-bottom: map-get($spacers, 'md');
+
+/Users/schubachn/Source/news-theme-css/scss/components/_chain_spacing.scss:
+   13  .wrap-bottom {
+   14    margin-bottom: -#{map-get($spacers, 'lg')} !important;
+   15:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   16      margin-bottom: -#{map-get($spacers, 'md')} !important;
+   17    }
+
+/Users/schubachn/Source/news-theme-css/scss/components/_figure_caption.scss:
+   11      margin: 0;
+   12    }
+   13:   @media screen and (max-width: map-get($grid-breakpoints, 'sm')) {
+   14      font-size: calculateRem(14px);
+   15      line-height: calculateRem(20px);
+   ..
+   17    }
+   18  
+   19:   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+   20      font-size: calculateRem(14px);
+   21      line-height: calculateRem(20px);
+
+/Users/schubachn/Source/news-theme-css/scss/grid/_grid_column.scss:
+   35  // Styleguide 2.4.0
+   36  @for $i from 1 through $grid-columns {
+   37:   @media (min-width: map-get($grid-breakpoints, 'sm')) and (max-width: map-get($grid-breakpoints-max, 'sm')) {
+   38      .col-sm-#{$i} {
+   39        max-width: ($base-col-percent * $i);
+   ..
+   48      }
+   49    }
+   50:   @media (min-width: map-get($grid-breakpoints, 'sm')) and (max-width: map-get($grid-breakpoints-max, 'md')) {
+   51      .col-sm-md-#{$i} {
+   52        max-width: ($base-col-percent * $i);
+   ..
+   61      }
+   62    }
+   63:   @media (min-width: map-get($grid-breakpoints, 'sm')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
+   64      .col-sm-lg-#{$i} {
+   65        max-width: ($base-col-percent * $i);
+   ..
+   74      }
+   75    }
+   76:   @media (min-width: map-get($grid-breakpoints, 'sm')) {
+   77      .col-sm-xl-#{$i} {
+   78        max-width: ($base-col-percent * $i);
+   ..
+   89  }
+   90  @for $i from 1 through $grid-columns {
+   91:   @media (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'md')) {
+   92      .col-md-#{$i} {
+   93        max-width: ($base-col-percent * $i);
+   ..
+  102      }
+  103    }
+  104:   @media (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
+  105      .col-md-lg-#{$i} {
+  106        max-width: ($base-col-percent * $i);
+  ...
+  115      }
+  116    }
+  117:   @media (min-width: map-get($grid-breakpoints, 'md')) {
+  118      .col-md-xl-#{$i} {
+  119        max-width: ($base-col-percent * $i);
+  ...
+  130  }
+  131  @for $i from 1 through $grid-columns {
+  132:   @media (min-width: map-get($grid-breakpoints, 'lg')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
+  133      .col-lg-#{$i} {
+  134        max-width: ($base-col-percent * $i);
+  ...
+  143      }
+  144    }
+  145:   @media (min-width: map-get($grid-breakpoints, 'lg')) {
+  146      .col-lg-xl-#{$i} {
+  147        max-width: ($base-col-percent * $i);
+  ...
+  158  }
+  159  @for $i from 1 through $grid-columns {
+  160:   @media (min-width: map-get($grid-breakpoints, 'xl')) {
+  161      .col-xl-#{$i} {
+  162        max-width: ($base-col-percent * $i);
+  ...
+  186  //IE flex fix
+  187  .ie-flex-100-percent-sm {
+  188:   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  189:     @media (min-width: map-get($grid-breakpoints, 'sm')) and (max-width: map-get($grid-breakpoints-max, 'sm')) {
+  190        flex: 1 0 100% !important;
+  191      }
+
+/Users/schubachn/Source/news-theme-css/scss/grid/_grid_column_offset.scss:
+   24  ****/
+   25  @each $label, $breakpoint, $width in $grid-breakpoints {
+   26:   @media (min-width: #{$breakpoint}) {
+   27      @for $i from 1 through $grid-columns {
+   28        @for $y from 1 through $grid-columns {
+
+/Users/schubachn/Source/news-theme-css/scss/grid/_grid_containers.scss:
+   39    //Margins stay at 5% for `sm` and `md` grid breakpoints
+   40    @each $name, $size in $grid-breakpoints {
+   41:     @media (min-width: $size) {
+   42        @if $name == 'lg' {
+   43          margin-left: 8%;
+
+/Users/schubachn/Source/news-theme-css/scss/grid/_grid_row.scss:
+   29  
+   30      @each $name, $size in $grid-breakpoints {
+   31:       @media (min-width: $size) {
+   32          @if $name == 'md' {
+   33            grid-column-gap: map-get($spacers, 'sm');
+   ..
+   46  .reduce-internal-row-col-gap .row {
+   47    grid-column-gap: 3%;
+   48:   @media all and (min-width: map-get($grid-breakpoints, md)) {
+   49      grid-column-gap: 3%;
+   50    }
+
+/Users/schubachn/Source/news-theme-css/scss/typography/_index.scss:
+   23    line-height: $line-height-base;
+   24  
+   25:   @media (min-width: map-get($grid-breakpoints, 'md')) {
+   26      font-size: calculateRem(18px);
+   27    }
+   ..
+   61    line-height: $headings-line-height;
+   62  
+   63:   @media (min-width: map-get($grid-breakpoints, 'md')) {
+   64      font-size: calculateRem(52px);
+   65    }
+   ..
+   74        line-height: calculateRem(32px);
+   75  
+   76:       @media (min-width: map-get($grid-breakpoints, 'md')) {
+   77          font-size: calculateRem(41px);
+   78          line-height: calculateRem(48px);
+   ..
+   83        line-height: calculateRem(32px);
+   84  
+   85:       @media (min-width: map-get($grid-breakpoints, 'md')) {
+   86          font-size: calculateRem(36px);
+   87          line-height: calculateRem(40px);
+   ..
+   92        line-height: calculateRem(24px);
+   93  
+   94:       @media (min-width: map-get($grid-breakpoints, 'md')) {
+   95          font-size: calculateRem(30px);
+   96          line-height: calculateRem(30px);
+   ..
+  101        line-height: $headings-line-height;
+  102  
+  103:       @media (min-width: map-get($grid-breakpoints, 'md')) {
+  104          font-size: calculateRem(26px);
+  105          line-height: calculateRem(32px);
+  ...
+  110        line-height: $headings-line-height;
+  111  
+  112:       @media (min-width: map-get($grid-breakpoints, 'md')) {
+  113          font-size: calculateRem(20px);
+  114        }
+  ...
+  118        line-height: calculateRem(24px);
+  119  
+  120:       @media (min-width: map-get($grid-breakpoints, 'md')) {
+  121          font-size: calculateRem(17px);
+  122          line-height: calculateRem(24px);
+
+/Users/schubachn/Source/news-theme-css/styleguide/index.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1-10.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1-2.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1-3.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1-4.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1-5.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1-6.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1-7.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1-8.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1-9.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-2-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-2-2.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-2.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-3-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-3-2.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-3-3.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-3-4.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-3-5.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1-3.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-2-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-2-2.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-2-3.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-2-4.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-2.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-3-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-3.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-4-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-4-2.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-4-3.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-4.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-5-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-5-2.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-5.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-6.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-7-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-7-2.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-7-3.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-7.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-8.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-9-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/item-9.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/section-1.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/section-2.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/section-3.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/section-4.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/section-5.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/section-6.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/section-7.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/section-8.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/section-9.html:
+   28      }
+   29  
+   30:     @media only screen and (max-width: 800px) {
+   31  
+   32        .kss-header {
+   ..
+   69      }
+   70  
+   71:     @media only screen and (min-width: 90.0625em) {
+   72        .kss-documentation {
+   73          padding-left: calc(18% + 20px);
+   ..
+   75      }
+   76  
+   77:     @media only screen and (min-width: 90.0625em) {
+   78        .kss-navigation {
+   79          width: 18%;
+
+/Users/schubachn/Source/news-theme-css/styleguide/kss-assets/css/kss-tools.scss:
+   16    // min-width > max-width.
+   17    @if $min-max == min and $max == max {
+   18:     @media only screen and (min-width: mq-unit($width1 + 1)) and (max-width: mq-unit($width2)) { @content; }
+   19    }
+   20  
+   21    // min-width.
+   22    @else if $min-max == min {
+   23:     @media only screen and (min-width: mq-unit($width1 + 1)) { @content; }
+   24    }
+   25  
+   26    // max-width.
+   27    @else if $min-max == max {
+   28:     @media only screen and (max-width: mq-unit($width1)) { @content; }
+   29    }
+   30  }
+
+/Users/schubachn/Source/news-theme-css/styleguide/kss-assets/css/kss.css:
+   28    font-family: 'Lato', sans-serif;
+   29    font-weight: 400; }
+   30:   @media only screen and (min-width: 64.125em) {
+   31      .kss-header {
+   32        display: none; } }
+   ..
+   39    line-height: 25px;
+   40    text-align: left; }
+   41:   @media only screen and (min-width: 35.5625em) {
+   42      .kss-header__title {
+   43        font-size: 1.25rem; } }
+   ..
+  104    transform: translateX(-100%);
+  105    transition: transform 0.3s ease-out; }
+  106:   @media only screen and (min-width: 48.0625em) {
+  107      .kss-navigation {
+  108        width: 35%; } }
+  109:   @media only screen and (min-width: 64.0625em) {
+  110      .kss-navigation {
+  111        width: 25%;
+  112        transform: translateX(0); } }
+  113:   @media only screen and (min-width: 80.0625em) {
+  114      .kss-navigation {
+  115        width: 20%; } }
+  116:   @media only screen and (min-width: 90.0625em) {
+  117      .kss-navigation {
+  118        width: 15%; } }
+  ...
+  124    box-sizing: border-box;
+  125    padding: 20px 10px; }
+  126:   @media only screen and (min-width: 64.0625em) {
+  127      .kss-navigation__title {
+  128        display: block; } }
+  ...
+  139    padding-left: 0;
+  140    list-style-type: none; }
+  141:   @media only screen and (min-width: 64.0625em) {
+  142      .kss-nav {
+  143        padding-top: 0; } }
+  ...
+  303    .kss-documentation.kss-state-active {
+  304      opacity: 0.1; }
+  305:   @media only screen and (min-width: 64.0625em) {
+  306      .kss-documentation {
+  307        padding-top: 20px;
+  308        padding-left: calc(25% + 20px); } }
+  309:   @media only screen and (min-width: 80.0625em) {
+  310      .kss-documentation {
+  311        padding-left: calc(20% + 20px); } }
+  312:   @media only screen and (min-width: 90.0625em) {
+  313      .kss-documentation {
+  314        padding-left: calc(15% + 20px); } }
+  ...
+  472    margin: 0;
+  473    padding-left: 0; }
+  474:   @media only screen and (min-width: 35.5625em) {
+  475      .kss-colors-container {
+  476        margin-left: -10px; } }
+  ...
+  486    border: 1px solid #CCCCCC;
+  487    border-radius: 2px; }
+  488:   @media only screen and (min-width: 35.5625em) {
+  489      .kss-color {
+  490        display: inline-block;
+
+/Users/schubachn/Source/news-theme-css/styleguide/kss-assets/vendor/prism.css:
+   40  }
+   41  
+   42: @media print {
+   43  	code[class*="language-"],
+   44  	pre[class*="language-"] {
+
+346 matches across 106 files
+
+
+Searching 2231 files for "@media screen and (min-width: map-get(" (case sensitive)
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/article-body-block/chains/article-body/_articlebody.scss:
+   41      margin-top: 0;
+   42  
+   43:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   44        font-size: calculateRem(20px);
+   45        line-height: calculateRem(40px);
+   ..
+   53        margin: 8px 0;
+   54  
+   55:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   56          line-height: calculateRem(20px);
+   57        }
+   ..
+  103      line-height: calculateRem(32px);
+  104      margin: 0;
+  105:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  106        font-size: calculateRem(20px);
+  107        line-height: calculateRem(40px);
+  ...
+  167        font-style: italic;
+  168        font-weight: normal;
+  169:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  170          line-height: calculateRem(32px);
+  171        }
+  ...
+  201        line-height: calculateRem(24px);
+  202        text-align: center;
+  203:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  204          font-size: calculateRem(26px);
+  205          line-height: calculateRem(32px);
+  ...
+  211        line-height: calculateRem(32px);
+  212        text-align: center;
+  213:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  214          font-size: calculateRem(16px);
+  215          line-height: calculateRem(24px);
+  ...
+  217      }
+  218  
+  219:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  220        font-size: calculateRem(26px);
+  221        line-height: calculateRem(32px);
+  ...
+  238  
+  239      }
+  240:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  241        margin-bottom: map-get($spacers, 'lg');
+  242      }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/article-tag-block/features/tag/tags.scss:
+   23    padding: 0 0.9375rem;
+   24    text-decoration: none;
+   25:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   26      line-height: 0.875rem;
+   27    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/author-bio-block/features/author-bio/author-bio.scss:
+   49      line-height: calculateRem(32px);
+   50      margin: map-get($spacers, 'xxs') 0;
+   51:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   52        font-size: calculateRem(14px);
+   53        line-height: calculateRem(24px);
+   ..
+   57    p {
+   58      margin: map-get($spacers, 'xxs') 0;
+   59:     @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+   60        font-size: calculateRem(18px);
+   61        line-height: calculateRem(32px);
+   62      }
+   63:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   64        font-size: calculateRem(14px);
+   65        line-height: calculateRem(24px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/date-block/features/date/date.scss:
+    4    font-size: calculateRem(18px);
+    5    line-height: calculateRem(32px);
+    6:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    7      font-size: calculateRem(20px);
+    8      line-height: calculateRem(40px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/footer-block/features/footer/footer.scss:
+  121      width: auto;
+  122  
+  123:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  124        height: 32px;
+  125      }
+  ...
+  131      justify-self: left;
+  132  
+  133:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  134        justify-self: left;
+  135      }
+  136:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+  137        justify-self: center;
+  138      }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/header-nav-block/features/navigation/header-nav.scss:
+   90    }
+   91  
+   92:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   93      .nav-block-search {
+   94        display: none;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/identity-block/features/header-account-action/styles.scss:
+   18  
+   19  .xpmedia-subs-header--mobile-header {
+   20:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   21      display: none;
+   22    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/lead-art-block/features/leadart/leadart.scss:
+   18        margin: 8px 0;
+   19  
+   20:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   21          line-height: calculateRem(20px);
+   22        }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/links-bar-block/features/links-bar/links-bar.scss:
+    4    text-align: left;
+    5    width: 100%;
+    6:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    7      text-align: center;
+    8    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/numbered-list-block/features/numbered-list/numbered-list.scss:
+   62  
+   63  .numbered-item-margins {
+   64:   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+   65      margin-bottom: 1rem;
+   66      margin-top: 1rem;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/right-rail-advanced-block/layouts/right-rail-advanced/default.scss:
+   34  .advanced-grid-desktop-main-area {
+   35    padding: 0;
+   36:   @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   37      border-right: 1px solid $border-rule-color;
+   38      padding: 0 map-get($spacers, 'lg') 0 0;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/right-rail-block/layouts/right-rail/default.scss:
+   33    .left-article-section {
+   34      padding: 0;
+   35:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   36        border-right: 1px solid $border-rule-color;
+   37        padding: 0 map-get($spacers, 'lg') 0 0;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/_children/byline/index.scss:
+    7    margin-bottom: 0;
+    8  
+    9:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   10      font-size: 1.25rem;
+   11      line-height: 2.5rem;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/_children/promo-date/index.scss:
+    5    line-height: calculateRem(14px);
+    6  
+    7:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    8      font-size: calculateRem(14px);
+    9      line-height: calculateRem(16px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_author-bio.scss:
+    1  .author-bio {
+    2:   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    3      margin-top: map-get($spacers, 'md');
+    4    }
+    5:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    6      margin-top: map-get($spacers, 'sm');
+    7    }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_extra-large-promo.scss:
+   31      width: 100%;
+   32  
+   33:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   34        font-size: calculateRem(52px);
+   35        line-height: calculateRem(56px);
+   ..
+   44      margin-top: map-get($spacers, 'xs');
+   45  
+   46:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   47        font-size: calculateRem(16px);
+   48        line-height: calculateRem(24px);
+   ..
+   60        line-height: calculateRem(14px);
+   61  
+   62:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   63          font-size: calculateRem(14px);
+   64          line-height: calculateRem(16px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_large-promo.scss:
+   17      padding-bottom: map-get($spacers, 'sm');
+   18  
+   19:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   20        font-size: calculateRem(16px);
+   21        line-height: calculateRem(22px);
+   ..
+   30      margin-bottom: map-get($spacers, 'xs');
+   31      text-decoration: none;
+   32:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   33        font-size: calculateRem(26px);
+   34        line-height: calculateRem(32px);
+   ..
+   41      margin-bottom: map-get($spacers, 'xs');
+   42  
+   43:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   44        font-size: calculateRem(16px);
+   45        line-height: calculateRem(24px);
+   ..
+   57        line-height: calculateRem(16px);
+   58  
+   59:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   60          font-size: calculateRem(14px);
+   61          line-height: calculateRem(14px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_medium-promo.scss:
+   18      text-decoration: none;
+   19  
+   20:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   21        margin-bottom: map-get($spacers, 'md');
+   22      }
+   ..
+   29      line-height: calculateRem(24px);
+   30  
+   31:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   32        font-size: calculateRem(24px);
+   33        line-height: calculateRem(34px);
+   ..
+   40      margin-bottom: map-get($spacers, 'xxs');
+   41  
+   42:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   43        font-size: calculateRem(16px);
+   44        line-height: calculateRem(24px);
+   ..
+   48    .image-link {
+   49      float: right;
+   50:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   51        float: left;
+   52        max-width: calc(35%);
+   ..
+   57      height: auto;
+   58      max-width: 100px;
+   59:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   60        max-width: calc(100%);
+   61      }
+   ..
+   67        line-height: calculateRem(16px);
+   68  
+   69:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   70          font-size: calculateRem(14px);
+   71          line-height: calculateRem(14px);
+   ..
+  102      .md-promo-headline {
+  103        width: 68%;
+  104:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  105          margin-left: 39%;
+  106          width: 60%;
+  ...
+  109  
+  110      .description-text {
+  111:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  112          margin-left: 39%;
+  113        }
+  ...
+  115  
+  116      .article-meta {
+  117:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  118          margin-left: 39%;
+  119        }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_results-list-desktop.scss:
+    1: @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+    2    .list-item {
+    3      column-gap: map-get($spacers, 'lg');
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/shared-styles/scss/_small-promo.scss:
+    3    margin-top: 0;
+    4  
+    5:   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    6      .row {
+    7        grid-gap: 1rem;
+    .
+    9    }
+   10  
+   11:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   12      min-height: calculateRem(80px);
+   13    }
+   ..
+   35      padding: 0 map-get($spacers, 'xxs') 0 0;
+   36      text-decoration: none;
+   37:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   38        padding: 0;
+   39      }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/simple-list-block/features/simple-list/simple-list.scss:
+   59  
+   60  .simple-list-item-margins {
+   61:   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+   62      margin-bottom: 1rem;
+   63      margin-top: 1rem;
+   64    }
+   65:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   66      margin-bottom: 1rem;
+   67      margin-top: 1rem;
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/subheadline-block/features/subheadline/subheadline.scss:
+    6    line-height: calculateRem(24px);
+    7    margin-bottom: map-get($spacers, 'xl');
+    8:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    9      font-size: calculateRem(26px);
+   10      line-height: calculateRem(32px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/subscriptions-block/components/GridList/styles.scss:
+    5    justify-content: center;
+    6  
+    7:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    8      &--1 {
+    9        grid-template-columns: minmax(auto, 600px);
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/subscriptions-block/components/SubscriptionDialog/styles.scss:
+    5    margin: map-get($spacers, 'xxl') auto;
+    6    text-align: center;
+    7:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    8      grid-template-columns: repeat(12, 1fr);
+    9      margin: map-get($spacers, 'xl') auto;
+   ..
+   16      line-height: 1rem;
+   17      font-size: 0.875rem;
+   18:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   19        font-size: 1rem;
+   20        grid-column: 4/10;
+   21        line-height: 1.5rem;
+   22      }
+   23:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   24        grid-column: 5/9;
+   25      }
+   ..
+   51      grid-column: 2/12;
+   52      margin: map-get($spacers, 'sm') 0 0 0;
+   53:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   54        font-size: 2.5rem;
+   55        line-height: 3rem;
+   56      }
+   57:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   58        grid-column: 4/10;
+   59      }
+   ..
+   65      grid-column: 2/12;
+   66      margin: map-get($spacers, 'sm') 0 0 0;
+   67:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   68        font-size: 1.25rem;
+   69      }
+   70:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   71        grid-column: 4/10;
+   72      }
+   ..
+   76      grid-column: 2/12;
+   77      margin-top: map-get($spacers, 'lg');
+   78:     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   79        grid-column: 4/10;
+   80      }
+   81:     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+   82        grid-column: 5/9;
+   83      }
+
+/Users/schubachn/Source/arc-themes-blocks/blocks/top-table-list-block/features/top-table-list/default.scss:
+    2    .xl-large-promo {
+    3      .xl-promo-headline {
+    4:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    5          margin-bottom: map-get($spacers, 'xs');
+    6        }
+    .
+   13    .large-promo {
+   14      .lg-promo-headline {
+   15:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   16          margin-top: - map-get($spacers, 'xs');
+   17        }
+   ..
+   23    .medium-promo {
+   24      .md-promo-headline {
+   25:       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   26          margin-bottom: map-get($spacers, 'xs');
+   27          margin-top: - map-get($spacers, 'xs');
+   ..
+  117  
+  118  .promo-item-margins {
+  119:   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+  120      margin-bottom: 1rem;
+  121      margin-top: 1rem;
+  122    }
+  123:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  124      margin-bottom: 1.5rem;
+  125      margin-top: 1.5rem;
+
+/Users/schubachn/Source/engine-theme-sdk/src/components/Gallery/styled.ts:
+   92    background-color: black;
+   93  
+   94:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   95      height: 450px;
+   96    }
+
+/Users/schubachn/Source/news-theme-css/scss/_margins.scss:
+   58    margin-bottom: map-get($spacers, 'sm');
+   59  
+   60:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   61      margin-bottom: map-get($spacers, 'md');
+   62    }
+
+/Users/schubachn/Source/news-theme-css/scss/_mixins.scss:
+   12    margin-bottom: map-get($spacers, 'sm');
+   13  
+   14:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   15      margin-bottom: map-get($spacers, 'md');
+   16    }
+   ..
+   64    margin-bottom: map-get($spacers, 'sm');
+   65  
+   66:   @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+   67      margin-bottom: map-get($spacers, 'sm');
+   68    }
+   ..
+   88    }
+   89  
+   90:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   91      > * {
+   92        margin-bottom: map-get($spacers, 'md');
+   ..
+  108    }
+  109  
+  110:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+  111      > * {
+  112        margin-bottom: map-get($spacers, 'md');
+
+/Users/schubachn/Source/news-theme-css/scss/components/_chain_spacing.scss:
+   13  .wrap-bottom {
+   14    margin-bottom: -#{map-get($spacers, 'lg')} !important;
+   15:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   16      margin-bottom: -#{map-get($spacers, 'md')} !important;
+   17    }
+
+72 matches across 29 files
+
+
+Searching 274 files for "@media screen" (case sensitive)
+
+/Users/schubachn/Source/engine-theme-sdk/src/components/Gallery/styled.ts:
+   27  
+   28  export const ControlContainer = styled.div`
+   29:   @media screen and (max-width: 48rem) {
+   30      .gallery--top-control-button {
+   31        display: none;
+   ..
+   92    background-color: black;
+   93  
+   94:   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+   95      height: 450px;
+   96    }
+
+/Users/schubachn/Source/engine-theme-sdk/src/components/VideoPlayer/styled.ts:
+    2  
+    3  export const VideoContainer = styled.div`
+    4:   @media screen and (min-width: 48rem) {
+    5      margin-bottom: 1.5rem;
+    6    }
+
+3 matches across 2 files
+
+
+Searching 274 files for "console.log('\n\nEvent:" (case sensitive)
+
+0 matches

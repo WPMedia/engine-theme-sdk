@@ -77,6 +77,7 @@ interface GalleryElement {
     by?: ImageAttribution[];
     affiliation?: ImageAttribution[];
   };
+  height?: number;
   resized_params: {
     [key: string]: string;
   };
@@ -85,6 +86,7 @@ interface GalleryElement {
     medium: number;
     large: number;
   };
+  width?: number;
 }
 
 interface GalleryProps {
@@ -110,6 +112,18 @@ interface GalleryProps {
 declare interface EventOptionsInterface {
   [s: string]: boolean | string | number;
 }
+
+const getClosestValueTo = (x) => (a, b): number => (Math.abs(b - x) < Math.abs(a - x) ? b : a);
+const getNearestResizerHeight = (imgContent: GalleryElement, width: number): number => {
+  const calculatedHeight = width * (imgContent.height / imgContent.width);
+  const closestResizeSupportedHeight = [
+    `${width}x0`,
+    ...(Array.from(Object.keys(imgContent.resized_params))),
+  ].filter((key) => (key.split('x')[0] === width.toString()))
+    .map((key) => parseInt(key.split('x')[1], 10))
+    .reduce(getClosestValueTo(calculatedHeight));
+  return closestResizeSupportedHeight || 0;
+};
 
 const Gallery: React.FC<GalleryProps> = ({
   galleryElements,
@@ -379,13 +393,13 @@ const Gallery: React.FC<GalleryProps> = ({
         url={imgContent.url}
         alt={imgContent.alt_text}
         smallWidth={400}
-        smallHeight={0}
+        smallHeight={getNearestResizerHeight(imgContent, 400)}
         mediumWidth={600}
-        mediumHeight={0}
+        mediumHeight={getNearestResizerHeight(imgContent, 600)}
         largeWidth={800}
-        largeHeight={0}
+        largeHeight={getNearestResizerHeight(imgContent, 800)}
         lightBoxWidth={1600}
-        lightBoxHeight={0}
+        lightBoxHeight={getNearestResizerHeight(imgContent, 1600)}
         resizedImageOptions={imgContent.resized_params}
         breakpoints={imgContent.breakpoints || {}}
         resizerURL={resizerURL}
