@@ -120,8 +120,9 @@ export const ImageWrapper = styled.div`
   font-size: 0;
   margin: auto;
   img {
+    aspect-ratio: ${({aspectRatio}) => aspectRatio};
     object-fit: contain;
-    height: auto;
+    height: 450px;
     min-height: 25vh;
     max-height: 75vh;
   }

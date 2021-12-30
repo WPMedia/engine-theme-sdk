@@ -113,18 +113,6 @@ declare interface EventOptionsInterface {
   [s: string]: boolean | string | number;
 }
 
-const getClosestValueTo = (x) => (a, b): number => (Math.abs(b - x) < Math.abs(a - x) ? b : a);
-const getNearestResizerHeight = (imgContent: GalleryElement, width: number): number => {
-  const calculatedHeight = width * (imgContent.height / imgContent.width);
-  const closestResizeSupportedHeight = [
-    `${width}x0`,
-    ...(Array.from(Object.keys(imgContent.resized_params))),
-  ].filter((key) => (key.split('x')[0] === width.toString()))
-    .map((key) => parseInt(key.split('x')[1], 10))
-    .reduce(getClosestValueTo(calculatedHeight));
-  return closestResizeSupportedHeight || 0;
-};
-
 const Gallery: React.FC<GalleryProps> = ({
   galleryElements,
   resizerURL = '',
@@ -383,6 +371,7 @@ const Gallery: React.FC<GalleryProps> = ({
         transitionDuration: slide.isSliding ? '0s' : '1s',
         visibility: (index !== page && !slide.isSliding) ? 'hidden' : null,
       }}
+      aspectRatio={imgContent.width / imgContent.height}
       role="group"
       aria-roledescription="slide"
       aria-label={`${index + 1} of ${totalImages}`}
@@ -393,13 +382,13 @@ const Gallery: React.FC<GalleryProps> = ({
         url={imgContent.url}
         alt={imgContent.alt_text}
         smallWidth={400}
-        smallHeight={getNearestResizerHeight(imgContent, 400)}
+        smallHeight={0}
         mediumWidth={600}
-        mediumHeight={getNearestResizerHeight(imgContent, 600)}
+        mediumHeight={0}
         largeWidth={800}
-        largeHeight={getNearestResizerHeight(imgContent, 800)}
+        largeHeight={0}
         lightBoxWidth={1600}
-        lightBoxHeight={getNearestResizerHeight(imgContent, 1600)}
+        lightBoxHeight={0}
         resizedImageOptions={imgContent.resized_params}
         breakpoints={imgContent.breakpoints || {}}
         resizerURL={resizerURL}
