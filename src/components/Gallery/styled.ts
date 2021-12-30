@@ -110,7 +110,7 @@ export const CarouselButton = styled(GalleryButton as any)`
   }
 `;
 
-export const ImageWrapper = styled.div`
+export const ImageWrapper = styled.div<{ aspectRatio: number }>`
   text-align: center;
   width: 100%;
   height: auto;
@@ -120,7 +120,7 @@ export const ImageWrapper = styled.div`
   font-size: 0;
   margin: auto;
   img {
-    aspect-ratio: ${({ aspectRatio }) => aspectRatio};
+    aspect-ratio: ${({ aspectRatio }): number => aspectRatio};
     object-fit: contain;
     height: 450px;
     min-height: 25vh;
