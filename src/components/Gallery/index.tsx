@@ -77,6 +77,7 @@ interface GalleryElement {
     by?: ImageAttribution[];
     affiliation?: ImageAttribution[];
   };
+  height?: number;
   resized_params: {
     [key: string]: string;
   };
@@ -85,6 +86,7 @@ interface GalleryElement {
     medium: number;
     large: number;
   };
+  width?: number;
 }
 
 interface GalleryProps {
@@ -375,6 +377,7 @@ const Gallery: React.FC<GalleryProps> = ({
         transitionDuration: slide.isSliding ? '0s' : '1s',
         visibility: (index !== page && !slide.isSliding) ? 'hidden' : null,
       }}
+      aspectRatio={imgContent.width / imgContent.height}
       role="group"
       aria-roledescription="slide"
       aria-label={`${index + 1} of ${totalImages}`}
