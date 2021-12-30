@@ -228,13 +228,13 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 
     listeners: {
         resize(): void;
-        mouseup(ParsedCursorEvent): void;
-        touchend(ParsedCursorEvent): void;
-        touchcancel(ParsedCursorEvent): void;
-        pointerdown(ParsedCursorEvent): void;
-        pointermove(ParsedCursorEvent): void;
-        pointerup(ParsedCursorEvent): void;
-        pointercancel(ParsedCursorEvent): void;
+        mouseup(ParsedCursorEvent: ParsedCursorEvent): void;
+        touchend(ParsedCursorEvent: ParsedCursorEvent): void;
+        touchcancel(ParsedCursorEvent: ParsedCursorEvent): void;
+        pointerdown(ParsedCursorEvent: ParsedCursorEvent): void;
+        pointermove(ParsedCursorEvent: ParsedCursorEvent): void;
+        pointerup(ParsedCursorEvent: ParsedCursorEvent): void;
+        pointercancel(ParsedCursorEvent: ParsedCursorEvent): void;
     }
 
     outerEl: HTMLElement;
