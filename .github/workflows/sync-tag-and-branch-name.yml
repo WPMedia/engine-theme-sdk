@@ -1,0 +1,74 @@
+name: Themes version branch build
+
+on:
+  push:
+    branches:
+      # only run on branch names that match:
+      # arc-themes-release-version-{numbers}.{numbers} per product
+      - arc-themes-release-version-[0-9]+\.[0-9]+
+
+jobs:
+  publish:
+    name: Branch build publish
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.THEMES_OPS_SLACK_WEBHOOK_URL }}
+      SYNCED_RELEASE_TAG: ${{ github.ref_name }} # targets branch name ref_name
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Cache NPM files
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Cache Node Modules
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      # Sets up Node v12
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Clean install dependencies if lockfile changed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Git config
+      - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
+
+      # Prerelease (tests and lint)
+      - run: npm version prerelease --preid=${{ env.SYNCED_RELEASE_TAG }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Publish to branch name 
+      - run: npm publish --tag ${{ env.SYNCED_RELEASE_TAG }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Push tag
+      - run: git push origin ${{ env.SYNCED_RELEASE_TAG }} -f
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check failure status and post in themes ops channel
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+        if: failure()
