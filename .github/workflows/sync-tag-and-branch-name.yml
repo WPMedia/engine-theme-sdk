@@ -93,4 +93,4 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
 
       - name: Tag 1.x release with canary 
-        run: npm dist-tag add @wpmedia/engine-theme-sdk@$(npm view @wpmedia/engine-theme-sdk@${{ env.SYNCED_RELEASE_TAG }} version) canary
+        run: npm dist-tag add @wpmedia/engine-theme-sdk@$(npm view @wpmedia/engine-theme-sdk@${{ env.SYNCED_RELEASE_TAG }} version) canary        
