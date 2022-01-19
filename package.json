@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/engine-theme-sdk",
-  "version": "2.12.6-canary.6",
+  "version": "2.12.6-canary.9",
   "description": "SDK components for the Fusion News theme",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -75,7 +75,7 @@
     "chromatic": "^5.6.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.6",
-    "eslint": "^6.6.0",
+    "eslint": "^8.7.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.2.3",
