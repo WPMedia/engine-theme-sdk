@@ -92,5 +92,10 @@ jobs:
           node-version: '12'
           registry-url: 'https://npm.pkg.github.com'
 
+      # Git config
+      - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
+
       - name: Tag 1.x release with canary 
         run: npm dist-tag add @wpmedia/engine-theme-sdk@$(npm view @wpmedia/engine-theme-sdk@${{ env.SYNCED_RELEASE_TAG }} version) canary        
