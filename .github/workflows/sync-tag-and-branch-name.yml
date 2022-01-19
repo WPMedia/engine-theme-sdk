@@ -1,4 +1,4 @@
-name: Themes version branch build
+name: Themes version sync branch build with canary
 
 on:
   push:
@@ -52,8 +52,17 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
 
+      - name: Format branch name . to - for preid version compatibility
+        id: format_branch_step
+        run: |
+          new_branch_name="${SYNCED_RELEASE_TAG//./-}"
+
+          echo $new_branch_name
+
+          echo "::set-output name=formatted_branch_name::$new_branch_name"
+
       # Prerelease (tests and lint)
-      - run: npm version prerelease --preid=${{ env.SYNCED_RELEASE_TAG }}
+      - run: npm version prerelease --preid=${{ steps.format_branch_step.outputs.formatted_branch_name }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -92,7 +101,7 @@ jobs:
           node-version: '12'
           registry-url: 'https://npm.pkg.github.com'
 
-      # Git config
+      # Git config for authentication
       - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
