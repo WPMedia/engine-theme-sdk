@@ -95,14 +95,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Cache NPM files
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
       - name: Setup Node and NPM
         uses: actions/setup-node@v1
         with:
@@ -116,3 +108,5 @@ jobs:
 
       - name: Tag 1.x release with canary 
         run: npm dist-tag add @wpmedia/engine-theme-sdk@$(npm view @wpmedia/engine-theme-sdk@${{ env.SYNCED_RELEASE_TAG }} version) canary        
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
