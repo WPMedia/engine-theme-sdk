@@ -28,7 +28,9 @@ module.exports = (api) => {
           allExtensions: true,
         },
       ],
-      '@babel/preset-react',
+      ['@babel/preset-react', {
+        runtime: 'automatic',
+      }],
     ],
     plugins,
     env: {
