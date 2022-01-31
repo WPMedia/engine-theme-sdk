@@ -24,7 +24,11 @@
  */
 
 /* eslint-disable camelcase */
-import React, { useRef, useState, useEffect } from 'react';
+import {
+  useRef, useState, useEffect, FC,
+} from 'react';
+
+import * as React from 'react';
 import { useSwipeable } from 'react-swipeable';
 import PropTypes from 'prop-types';
 import Image from '../Image';
@@ -116,7 +120,7 @@ declare interface EventOptionsInterface {
   [s: string]: boolean | string | number;
 }
 
-const Gallery: React.FC<GalleryProps> = ({
+const Gallery: FC<GalleryProps> = ({
   galleryElements,
   resizerURL = '',
   ansId = '',

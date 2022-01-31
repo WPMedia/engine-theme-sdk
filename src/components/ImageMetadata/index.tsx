@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
@@ -47,7 +47,7 @@ const formatCredits = (credits: Credits): string => {
   return (creators || affiliations) && `(${[creators, affiliations].filter(Boolean).join('/')})`;
 };
 
-const ImageMetadata: React.FC<ImageMetadataProps> = ({
+const ImageMetadata: FC<ImageMetadataProps> = ({
   subtitle,
   caption,
   credits,

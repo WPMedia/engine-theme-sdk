@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ReactElement } from 'react';
+import { ReactElement, FC } from 'react';
+
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import Lazy from 'lazy-child';
 
@@ -44,7 +46,7 @@ const defaultRenderPlaceholder = (
   * @param {function} renderPlaceholder - Function that renders a JSX element that will serve
   *   as a placeholder displaying before the lazy-loaded child components have rendered.
 */
-const LazyLoad: React.FC<LazyLoadProps> = ({
+const LazyLoad: FC<LazyLoadProps> = ({
   children,
   enabled = false,
   offsetTop = 300,

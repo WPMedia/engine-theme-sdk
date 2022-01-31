@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import PropTypes from 'prop-types';
 
 interface LogoProps {
@@ -6,7 +6,7 @@ interface LogoProps {
   description?: string;
 }
 
-const ArcLogo: React.FC<LogoProps> = ({
+const ArcLogo: FC<LogoProps> = ({
   title = 'Arc Publishing logo', description = '',
 }) => (
   <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img">

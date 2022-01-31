@@ -1,6 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable @typescript-eslint/camelcase */
-import React, { ReactElement } from 'react';
+import { ReactElement, FC } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { URL } from 'url';
@@ -200,7 +200,7 @@ interface Props {
   websiteName?: string | null;
 }
 
-const MetaData: React.FC<Props> = ({
+const MetaData: FC<Props> = ({
   arcSite,
   canonicalDomain,
   canonicalResolver,

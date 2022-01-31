@@ -4,7 +4,7 @@
  * https://jestjs.io/docs/en/configuration.html#testenvironment-string
  * @jest-environment node
  */
-import React from 'react';
+
 import { shallow, ShallowWrapper } from 'enzyme';
 import MetaData from './index';
 

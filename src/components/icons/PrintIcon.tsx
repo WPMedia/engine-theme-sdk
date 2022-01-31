@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import additionalSVGProps from './Helpers';
 
 type IconProps = import('./types').default;
 
-const PrintIcon: React.FC<IconProps> = ({
+const PrintIcon: FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Print', description = '', context = 'presentational',
 }) => (
   <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" {...additionalSVGProps(context)}>

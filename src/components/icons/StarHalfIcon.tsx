@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import additionalSVGProps from './Helpers';
 
 type IconProps = import('./types').default;
 
-const StarHalfIcon: React.FC<IconProps> = ({
+const StarHalfIcon: FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Half Star', description = '', context = 'presentational',
 }) => (
   <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 536 512" {...additionalSVGProps(context)}>

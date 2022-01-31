@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import pkg from '../../package.json';
 
 const Version: React.SFC = () => (

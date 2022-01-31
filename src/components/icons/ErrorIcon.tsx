@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import additionalSVGProps from './Helpers';
 
 type IconProps = import('./types').default;
 
-const ErrorIcon: React.FC<IconProps> = ({
+const ErrorIcon: FC<IconProps> = ({
   width = '1em', height = '1em', fill = 'currentColor', title = 'Error', description = '', context = 'presentational',
 }) => (
   <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" {...additionalSVGProps(context)}>

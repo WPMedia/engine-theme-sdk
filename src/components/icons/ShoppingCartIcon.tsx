@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import additionalSVGProps from './Helpers';
 
 type IconProps = import('./types').default;
 
-const ShoppingCartIcon: React.FC<IconProps> = ({
+const ShoppingCartIcon: FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Shopping Cart Icon', description = '', context = 'presentational',
 }) => (
   <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" {...additionalSVGProps(context)}>

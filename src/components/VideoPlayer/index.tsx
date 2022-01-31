@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import {
+  useEffect, useState, useRef, FC,
+} from 'react';
 import EmbedContainer from 'react-oembed-container';
 import PropTypes from '@arc-fusion/prop-types';
 import formatEmbedMarkup from './formatEmbedMarkup';
@@ -37,7 +39,7 @@ interface VideoPlayerProps {
  * @param {object} customFields is deprecated but takes in values like the block video player.
  * @param {string} uuid corresponds to the video-{id} player loaded by powa video player
  */
-const VideoPlayer: React.FC<VideoPlayerProps> = ({
+const VideoPlayer: FC<VideoPlayerProps> = ({
   embedMarkup,
   id = '',
   uuid = '',

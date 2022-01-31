@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import buildThumborURL from './thumbor-image-url';
@@ -61,7 +61,7 @@ const StyledPicture = styled.picture`
 * @param {object} breakpoints - Widths to determine small, med, and large breakpoints used
 * @param {string} loading - Loading strategy to use - using loading attribute on img tags
 */
-const Image: React.FC<ImageProps> = ({
+const Image: FC<ImageProps> = ({
   url,
   alt,
   smallWidth,

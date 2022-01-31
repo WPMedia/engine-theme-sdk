@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import buildThumborURL from './thumbor-image-url';
 
 interface SourceImageProps {
@@ -12,7 +12,7 @@ interface SourceImageProps {
   breakpointWidth: number;
 }
 
-const SourceHandler: React.FC<SourceImageProps> = (props) => {
+const SourceHandler: FC<SourceImageProps> = (props) => {
   const {
     resizedImageOptions,
     width,

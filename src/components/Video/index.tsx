@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import {
+  useEffect, useState, useRef, FC,
+} from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 
 import { VideoContainer, VideoWrap } from './styled';
@@ -18,7 +20,7 @@ interface VideoProps {
   aspectRatio?: number;
 }
 
-const Video: React.FC<VideoProps> = (props) => {
+const Video: FC<VideoProps> = (props) => {
   const {
     uuid,
     org,

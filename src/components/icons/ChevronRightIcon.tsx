@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import additionalSVGProps from './Helpers';
 
 type IconProps = import('./types').default;
 
-const ChevronRightIcon: React.FC<IconProps> = ({
+const ChevronRightIcon: FC<IconProps> = ({
   width = 24, height = 24, fill = '#000', title = 'Chevron pointing right', description = '', context = 'presentational',
 }) => (
   <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" {...additionalSVGProps(context)}>

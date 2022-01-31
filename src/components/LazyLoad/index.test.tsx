@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
+
+import * as React from 'react';
 import { mount } from 'enzyme';
 import LazyLoad from './index';
 

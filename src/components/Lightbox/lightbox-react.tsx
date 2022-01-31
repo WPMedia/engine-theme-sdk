@@ -2,7 +2,9 @@
 /* eslint-disable react/sort-comp */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint react/destructuring-assignment: "off", no-mixed-operators: "off", max-len: "off", comma-dangle: "off" */
-import React, { Component } from 'react';
+import { Component } from 'react';
+
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import isReact from 'is-react';
