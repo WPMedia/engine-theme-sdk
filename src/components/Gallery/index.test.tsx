@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/camelcase */
 
-import * as React from 'react';
+import { ReactElement } from 'react';
 import { act } from 'react-dom/test-utils';
 import { shallow, mount } from 'enzyme';
 import Gallery from '.';
@@ -699,7 +699,7 @@ describe('the gallery block', () => {
   });
 
   describe('the interstitialClicks prop', () => {
-    const AdBlock = (): React.ReactElement => (
+    const AdBlock = (): ReactElement => (
       <div className="ad-block">
         <p>AdBlock</p>
       </div>

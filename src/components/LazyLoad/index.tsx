@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactElement, FC } from 'react';
+import {
+  ReactElement, FC, Ref, ReactNode,
+} from 'react';
 
-import * as React from 'react';
 import PropTypes from 'prop-types';
 import Lazy from 'lazy-child';
 
 interface RenderFuncWithRef {
-  (ref: React.Ref<any>): React.ReactNode;
+  (ref: Ref<any>): ReactNode;
 }
 
 interface LazyLoadProps {
@@ -24,7 +25,7 @@ interface LazyLoadProps {
 * to invoke it is deferred to the 'lazy-child' component */
 // istanbul ignore next
 const defaultRenderPlaceholder = (
-  ref: React.Ref<any>,
+  ref: Ref<any>,
   // eslint-disable-next-line arrow-body-style
 ): ReactElement => {
   // istanbul ignore next

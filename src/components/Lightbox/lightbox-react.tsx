@@ -2,9 +2,7 @@
 /* eslint-disable react/sort-comp */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint react/destructuring-assignment: "off", no-mixed-operators: "off", max-len: "off", comma-dangle: "off" */
-import { Component } from 'react';
-
-import * as React from 'react';
+import { Component, MouseEvent, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import isReact from 'is-react';
@@ -1052,7 +1050,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
       this.pointerList = this.pointerList.filter(({ source }) => source === this.eventsSource);
     }
 
-    handleMouseDown(event: React.MouseEvent): void {
+    handleMouseDown(event: MouseEvent): void {
       if (
         this.shouldHandleEvent(SOURCE_MOUSE)
             && ReactImageLightbox.isTargetMatchImage(event.target)
@@ -1543,7 +1541,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
       this.requestMove('prev', event);
     }
 
-    render(): React.ReactNode {
+    render(): ReactNode {
       const {
         animationDisabled,
         animationDuration,

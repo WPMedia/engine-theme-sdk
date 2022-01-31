@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ReactElement } from 'react';
 import { shallow } from 'enzyme';
 import ErrorBoundary from './index';
 
@@ -13,7 +13,7 @@ describe('Error Boundary', () => {
   });
 
   it('renders fallback', () => {
-    const ErrorComponent = (): React.ReactElement => null;
+    const ErrorComponent = (): ReactElement => null;
     const wrapper = shallow(
       <ErrorBoundary fallback={<div>Fallback</div>}>
         <ErrorComponent />

@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactElement } from 'react';
-
-import * as React from 'react';
+import { ReactElement, Ref } from 'react';
 import { mount } from 'enzyme';
 import LazyLoad from './index';
 
@@ -64,7 +62,7 @@ describe('LazyLoad Block', () => {
       offsetRight: 30,
       throttle: 50,
       renderPlaceholder: (
-        ref: React.Ref<any>,
+        ref: Ref<any>,
       ): ReactElement => (
         <div ref={ref} />
       ),

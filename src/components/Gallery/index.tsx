@@ -25,10 +25,9 @@
 
 /* eslint-disable camelcase */
 import {
-  useRef, useState, useEffect, FC,
+  useRef, useState, useEffect, FC, ReactElement,
 } from 'react';
 
-import * as React from 'react';
 import { useSwipeable } from 'react-swipeable';
 import PropTypes from 'prop-types';
 import Image from '../Image';
@@ -343,7 +342,7 @@ const Gallery: FC<GalleryProps> = ({
     preventDefaultTouchmoveEvent: false,
   });
 
-  const renderAd = (): React.ReactElement => {
+  const renderAd = (): ReactElement => {
     let dirFlag = 0;
     if (adHidding) {
       dirFlag = direction === Direction.forward ? -100 : 100;
@@ -369,7 +368,7 @@ const Gallery: FC<GalleryProps> = ({
     index: number,
     showAd: boolean,
     totalImages: number,
-  ): React.ReactElement => (
+  ): ReactElement => (
     <ImageWrapper
       key={`gallery-image-${imgContent._id}`}
       id={`gallery-pos-${index}`}
@@ -500,7 +499,7 @@ const Gallery: FC<GalleryProps> = ({
         {...handlers}
         aria-live={autoDuration ? 'off' : 'polite'}
       >
-        { galleryElements.map((imgContent, index): React.ReactElement => (
+        { galleryElements.map((imgContent, index): ReactElement => (
           renderImage(imgContent, index, isAdActive() && isAdInPage(index), galleryElements.length)
         ))}
         <CarouselButton type="button" aria-label={previousImagePhrase} className="prev-button" onClick={(): void => prevHandler()}>
