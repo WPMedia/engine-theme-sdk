@@ -333,7 +333,7 @@ const Gallery: React.FC<GalleryProps> = ({
     onSwiping: (event) => {
       setSlide({
         isSliding: true,
-        delta: event.deltaX,
+        delta: -event.deltaX,
       });
     },
     preventDefaultTouchmoveEvent: false,
