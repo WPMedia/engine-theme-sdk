@@ -35,7 +35,7 @@ jobs:
         id: cache
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: node-modules-${{ hashFiles('package-lock.json') }}
 
       - name: Clean install dependencies if lockfile changed
         if: steps.cache.outputs.cache-hit != 'true'
