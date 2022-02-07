@@ -23,14 +23,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      # Caches NPM files
-      - name: Cache NPM files
-        uses: actions/cache@v2
+      # Sets up Node v12
+      - name: Setup Node
+        uses: actions/setup-node@v1
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
 
       - name: Cache Node Modules
         id: cache
@@ -39,14 +37,7 @@ jobs:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
-      # Sets up Node v12
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12"
-          registry-url: "https://npm.pkg.github.com"
-
-      - name: Clean install dependencies if lockfile changed
+      - name: Clean install (CI) dependencies if lockfile (above) changed
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
