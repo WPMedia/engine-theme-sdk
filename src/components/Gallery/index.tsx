@@ -383,22 +383,27 @@ const Gallery: React.FC<GalleryProps> = ({
       aria-label={`${index + 1} of ${totalImages}`}
       aria-hidden={index !== page}
     >
-      { showAd && renderAd() }
-      <Image
-        url={imgContent.url}
-        alt={imgContent.alt_text}
-        smallWidth={400}
-        smallHeight={0}
-        mediumWidth={600}
-        mediumHeight={0}
-        largeWidth={800}
-        largeHeight={0}
-        lightBoxWidth={1600}
-        lightBoxHeight={0}
-        resizedImageOptions={imgContent.resized_params}
-        breakpoints={imgContent.breakpoints || {}}
-        resizerURL={resizerURL}
-      />
+      {
+        showAd
+          ? renderAd()
+          : (
+            <Image
+              url={imgContent.url}
+              alt={imgContent.alt_text}
+              smallWidth={400}
+              smallHeight={0}
+              mediumWidth={600}
+              mediumHeight={0}
+              largeWidth={800}
+              largeHeight={0}
+              lightBoxWidth={1600}
+              lightBoxHeight={0}
+              resizedImageOptions={imgContent.resized_params}
+              breakpoints={imgContent.breakpoints || {}}
+              resizerURL={resizerURL}
+            />
+          )
+      }
     </ImageWrapper>
   );
 
