@@ -25,22 +25,24 @@ function formatEmbedMarkup(
   overrideAspectRatio?: number,
 ): string {
   if (embedHTML) {
-    const embedHTMLWithPlayStatus = convertStringToNode(embedHTML).querySelector('div');
+    const embedHTMLWithPlayStatus = convertStringToNode(embedHTML);
 
     if (enableAutoplay) {
-      embedHTMLWithPlayStatus.setAttribute('data-autoplay', 'true');
-      embedHTMLWithPlayStatus.setAttribute('data-muted', 'true');
+      // powa is guaranteed to be in the embedHTML, according to Powa team
+      embedHTMLWithPlayStatus.querySelector('.powa').setAttribute('data-autoplay', 'true');
+      embedHTMLWithPlayStatus.querySelector('.powa').setAttribute('data-muted', 'true');
     }
 
     if (playthrough) {
-      embedHTMLWithPlayStatus.setAttribute('data-playthrough', 'true');
+      embedHTMLWithPlayStatus.querySelector('.powa').setAttribute('data-playthrough', 'true');
     }
 
     if (overrideAspectRatio) {
-      embedHTMLWithPlayStatus.setAttribute('data-aspect-ratio', overrideAspectRatio.toString());
+      embedHTMLWithPlayStatus.querySelector('.powa').setAttribute('data-aspect-ratio', overrideAspectRatio.toString());
     }
 
-    return embedHTMLWithPlayStatus.outerHTML;
+    // innerhtml ensures body tag not rendered
+    return embedHTMLWithPlayStatus.innerHTML;
   }
 
   // if falsy (empty string, undefined, or null), return empty string
