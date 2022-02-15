@@ -119,6 +119,7 @@ export const ImageWrapper = styled.div<{ aspectRatio: number }>`
   transition-property: transform, visibility;
   font-size: 0;
   margin: auto;
+  justify-content: center;
   img {
     aspect-ratio: ${({ aspectRatio }): number => aspectRatio};
     object-fit: contain;
@@ -134,9 +135,6 @@ export const AdWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
 
   .advertisement-label {
