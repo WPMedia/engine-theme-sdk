@@ -81,8 +81,8 @@ const generateCustomMetaTags = (metaData, MetaTag, MetaTags): ReactElement => {
 		<>
 			{customMetaData.length > 0 &&
 				customMetaData.map((metaObj, i) => (
-					// eslint-disable-next-line react/no-array-index-key
 					<MetaTag
+						// eslint-disable-next-line react/no-array-index-key
 						key={`custom-meta-data-${i}`}
 						name={metaObj.metaName}
 						default={metaObj.metaValue}

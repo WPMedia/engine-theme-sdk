@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable react/forbid-prop-types */
 import React from "react";
 import styled from "styled-components";
