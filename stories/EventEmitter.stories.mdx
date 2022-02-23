@@ -1,7 +1,7 @@
-import EventEmitter from '../src/components/EventEmitter';
-import { action } from '@storybook/addon-actions';
-import { withConsole } from '@storybook/addon-console';
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import EventEmitter from "../src/components/EventEmitter";
+import { action } from "@storybook/addon-actions";
+import { withConsole } from "@storybook/addon-console";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 
 <Meta title="EventEmitter" component={EventEmitter} />
 
@@ -28,12 +28,11 @@ const myGalleryImagePrevious = (event) => { console.log('Here is the event: ', e
 Then use you use your callback in subscribing to the event:
 
 ```
-EventEmitter.subscribe('galleryImageNext', (event) => myGalleryImageNext(event)); 
+EventEmitter.subscribe('galleryImageNext', (event) => myGalleryImageNext(event));
 EventEmitter.subscribe('galleryImagePrevious', (event) => myGalleryImagePrevious(event));
 ```
 
 The event object for these events will contain the following information:
-
 
 - **eventName** (string): The event name fired. In this case could be either galleryImageNext or galleryImagePrevious.
 - **ansGalleryId** (string): The id of the gallery.
@@ -49,34 +48,41 @@ The event object for these events will contain the following information:
 <Story name="Basic" />
 
 ### **Event**
+
 <Canvas>
-    <Story name="Event">
-         <div>
-            <button 
-                style={{
-                    backgroundColor: '#4ba2da',
-                    borderColor: 'transparent',
-                    borderRadius: 8,
-                    color: '#fff',
-                    height: 50,
-                    width: 200
-                }}
-                onClick={() => console.log(
-                    {
-                        "eventName": "galleryImageNext",
-                        "ansGalleryId": "HADBIJEFK5G57CXZN7UC7UQHF4",
-                        "ansGalleryHeadline": "A cloudy day",
-                        "ansImageId": "234845884",
-                        "caption": "The rain had chased all the beach-goers away",
-                        "orderPosition": 0,
-                        "totalImages": 4,
-                        "autoplay": false
-                    }
-                )}
-            >
-                Click to view event
-            </button>
-            <p>(Go to the <b><i>Actions</i></b> tab under Canvas)</p>
-        </div>
-    </Story>
+	<Story name="Event">
+		<div>
+			<button
+				style={{
+					backgroundColor: "#4ba2da",
+					borderColor: "transparent",
+					borderRadius: 8,
+					color: "#fff",
+					height: 50,
+					width: 200,
+				}}
+				onClick={() =>
+					console.log({
+						eventName: "galleryImageNext",
+						ansGalleryId: "HADBIJEFK5G57CXZN7UC7UQHF4",
+						ansGalleryHeadline: "A cloudy day",
+						ansImageId: "234845884",
+						caption: "The rain had chased all the beach-goers away",
+						orderPosition: 0,
+						totalImages: 4,
+						autoplay: false,
+					})
+				}
+			>
+				Click to view event
+			</button>
+			<p>
+				(Go to the{" "}
+				<b>
+					<i>Actions</i>
+				</b>{" "}
+				tab under Canvas)
+			</p>
+		</div>
+	</Story>
 </Canvas>

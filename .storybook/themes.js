@@ -1,5 +1,5 @@
 const themes = () => ({
-  primaryFont: ''
-})
+	primaryFont: "",
+});
 
 export default themes;

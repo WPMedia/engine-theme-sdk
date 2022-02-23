@@ -1,80 +1,80 @@
 import {
-  ArrowDownIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
-  BackwardIcon,
-  BellIcon,
-  CalendarIcon,
-  CameraIcon,
-  ChartIcon,
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ChevronUpIcon,
-  ClosedCaptioningIcon,
-  CloseIcon,
-  CogIcon,
-  CommentsIcon,
-  DeleteIcon,
-  DownloadIcon,
-  EditIcon,
-  EllipsisHorizontalIcon,
-  EllipsisVerticalIcon,
-  EnvelopeIcon,
-  EnvelopeOpenIcon,
-  ErrorIcon,
-  ExternalLinkIcon,
-  FacebookAltIcon,
-  FacebookIcon,
-  ForwardIcon,
-  FullscreenIcon,
-  GiftIcon,
-  GridIcon,
-  GripVerticalIcon,
-  HamburgerMenuIcon,
-  HeadphonesIcon,
-  HomeIcon,
-  InstagramIcon,
-  LinkedInAltIcon,
-  LinkedInIcon,
-  LinkIcon,
-  LockIcon,
-  MediumIcon,
-  NextIcon,
-  PageIcon,
-  PauseCircleIcon,
-  PauseIcon,
-  PhoneIcon,
-  PinterestAltIcon,
-  PinterestIcon,
-  PlayCircleIcon,
-  PlayIcon,
-  PlusIcon,
-  PreviousIcon,
-  PrintIcon,
-  RedditIcon,
-  RssIcon,
-  SearchIcon,
-  ShareIcon,
-  SnapchatIcon,
-  SoundCloudIcon,
-  SoundOffIcon,
-  SoundOnIcon,
-  StarHalfIcon,
-  StarIcon,
-  TumblrIcon,
-  TwitchIcon,
-  TwitterAltIcon,
-  TwitterIcon,
-  UnlockIcon,
-  UserIcon,
-  WhatsAppIcon,
-  YoutubeAltIcon,
-  YoutubeIcon,
-  ZoomInIcon,
-  ZoomOutIcon,
+	ArrowDownIcon,
+	ArrowLeftIcon,
+	ArrowRightIcon,
+	ArrowUpIcon,
+	BackwardIcon,
+	BellIcon,
+	CalendarIcon,
+	CameraIcon,
+	ChartIcon,
+	CheckIcon,
+	ChevronDownIcon,
+	ChevronLeftIcon,
+	ChevronRightIcon,
+	ChevronUpIcon,
+	ClosedCaptioningIcon,
+	CloseIcon,
+	CogIcon,
+	CommentsIcon,
+	DeleteIcon,
+	DownloadIcon,
+	EditIcon,
+	EllipsisHorizontalIcon,
+	EllipsisVerticalIcon,
+	EnvelopeIcon,
+	EnvelopeOpenIcon,
+	ErrorIcon,
+	ExternalLinkIcon,
+	FacebookAltIcon,
+	FacebookIcon,
+	ForwardIcon,
+	FullscreenIcon,
+	GiftIcon,
+	GridIcon,
+	GripVerticalIcon,
+	HamburgerMenuIcon,
+	HeadphonesIcon,
+	HomeIcon,
+	InstagramIcon,
+	LinkedInAltIcon,
+	LinkedInIcon,
+	LinkIcon,
+	LockIcon,
+	MediumIcon,
+	NextIcon,
+	PageIcon,
+	PauseCircleIcon,
+	PauseIcon,
+	PhoneIcon,
+	PinterestAltIcon,
+	PinterestIcon,
+	PlayCircleIcon,
+	PlayIcon,
+	PlusIcon,
+	PreviousIcon,
+	PrintIcon,
+	RedditIcon,
+	RssIcon,
+	SearchIcon,
+	ShareIcon,
+	SnapchatIcon,
+	SoundCloudIcon,
+	SoundOffIcon,
+	SoundOnIcon,
+	StarHalfIcon,
+	StarIcon,
+	TumblrIcon,
+	TwitchIcon,
+	TwitterAltIcon,
+	TwitterIcon,
+	UnlockIcon,
+	UserIcon,
+	WhatsAppIcon,
+	YoutubeAltIcon,
+	YoutubeIcon,
+	ZoomInIcon,
+	ZoomOutIcon,
 } from "../src/components/icons";
 import { number, select, text } from "@storybook/addon-knobs";
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
@@ -111,625 +111,433 @@ import { InstagramIcon } from '@wpmedia/engine-theme-sdk';
 ### **Custom Icon**
 
 <Canvas>
-  <Story name="Custom Icon">
-    <SoundCloudIcon
-      fill={text("Fill", "red")}
-      height={number("Height", 200)}
-      width={number("Width", 200)}
-      title={text("Title", "SoundCloud music service logo")}
-      description={text("Description", "This is a description")}
-    />
-  </Story>
+	<Story name="Custom Icon">
+		<SoundCloudIcon
+			fill={text("Fill", "red")}
+			height={number("Height", 200)}
+			width={number("Width", 200)}
+			title={text("Title", "SoundCloud music service logo")}
+			description={text("Description", "This is a description")}
+		/>
+	</Story>
 </Canvas>
 
 ### **With accessible title designated**
 
 <Canvas>
-  <Story name="With accessible title designated">
-    <SoundCloudIcon title="SoundCloud music service logo" />
-  </Story>
+	<Story name="With accessible title designated">
+		<SoundCloudIcon title="SoundCloud music service logo" />
+	</Story>
 </Canvas>
 
 ### **With no title designated**
 
 <Canvas>
-  <Story name="With no title designated">
-    <SoundCloudIcon />
-  </Story>
+	<Story name="With no title designated">
+		<SoundCloudIcon />
+	</Story>
 </Canvas>
 
 ### **With description**
 
 <Canvas>
-  <Story name="With description">
-    <SoundCloudIcon description="Service is a great place to find indie artists and free downloads" />
-  </Story>
+	<Story name="With description">
+		<SoundCloudIcon description="Service is a great place to find indie artists and free downloads" />
+	</Story>
 </Canvas>
 
 ### **With accessible title and description**
 
 <Canvas>
-  <Story name="With accessible title and description">
-    <SoundCloudIcon
-      title="SoundCloud music service logo"
-      description="Service is a great place to find indie artists and free downloads"
-    />
-  </Story>
+	<Story name="With accessible title and description">
+		<SoundCloudIcon
+			title="SoundCloud music service logo"
+			description="Service is a great place to find indie artists and free downloads"
+		/>
+	</Story>
 </Canvas>
 
 ### **With image attributes**
 
 <Canvas>
-  <Story name="With image attributes">
-    <SoundCloudIcon
-      title="SoundCloud music service logo"
-      description="Service is a great place to find indie artists and free downloads"
-      context="image"
-    />
-  </Story>
+	<Story name="With image attributes">
+		<SoundCloudIcon
+			title="SoundCloud music service logo"
+			description="Service is a great place to find indie artists and free downloads"
+			context="image"
+		/>
+	</Story>
 </Canvas>
 
 ### **Custom width**
 
 <Canvas>
-  <Story name="Custom width">
-    <SoundCloudIcon width={100} />
-  </Story>
+	<Story name="Custom width">
+		<SoundCloudIcon width={100} />
+	</Story>
 </Canvas>
 
 ### **Custom height**
 
 <Canvas>
-  <Story name="Custom height">
-    <SoundCloudIcon height={100} />
-  </Story>
+	<Story name="Custom height">
+		<SoundCloudIcon height={100} />
+	</Story>
 </Canvas>
 
 ### **Custom height and width**
 
 <Canvas>
-  <Story name="Custom height and width">
-    <SoundCloudIcon height={100} width={100} />
-  </Story>
+	<Story name="Custom height and width">
+		<SoundCloudIcon height={100} width={100} />
+	</Story>
 </Canvas>
 
 ### **Custom height and width camera**
 
 <Canvas>
-  <Story name="Custom height and width for camera">
-    <CameraIcon height={100} width={100} />
-  </Story>
+	<Story name="Custom height and width for camera">
+		<CameraIcon height={100} width={100} />
+	</Story>
 </Canvas>
 
 ### **Color fill**
 
 <Canvas>
-  <Story name="Color fill">
-    <SoundCloudIcon fill="red" />
-  </Story>
+	<Story name="Color fill">
+		<SoundCloudIcon fill="red" />
+	</Story>
 </Canvas>
 
 ### **Color fill hex code**
 
 <Canvas>
-  <Story name="Color fill hex code">
-    <SoundCloudIcon fill="#ffd1dc" />
-  </Story>
+	<Story name="Color fill hex code">
+		<SoundCloudIcon fill="#ffd1dc" />
+	</Story>
 </Canvas>
 
 ### **No color fill**
 
 <Canvas>
-  <Story name="No color fill">
-    <SoundCloudIcon fill="none" />
-  </Story>
+	<Story name="No color fill">
+		<SoundCloudIcon fill="none" />
+	</Story>
 </Canvas>
 
 ### **All icons resize**
 
 <Canvas>
-  <Story name="All icons resize">
-    <>
-      <>
-        <ArrowDownIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>arrowdown</p>
-      </>
-      <>
-        <ArrowLeftIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>arrowleft</p>
-      </>
-      <>
-        <ArrowRightIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>arrowright</p>
-      </>
-      <>
-        <ArrowUpIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>arrow-up</p>
-      </>
-      <>
-        <BackwardIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>backward</p>
-      </>
-      <>
-        <BellIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>bell</p>
-      </>
-      <>
-        <CalendarIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>calendar</p>
-      </>
-      <>
-        <CameraIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>camera</p>
-      </>
-      <>
-        <ChartIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>chart</p>
-      </>
-      <>
-        <CheckIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>check</p>
-      </>
-      <>
-        <ChevronDownIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>chevrondown</p>
-      </>
-      <>
-        <ChevronLeftIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>chevronleft</p>
-      </>
-      <>
-        <ChevronRightIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>chevronright</p>
-      </>
-      <>
-        <ChevronUpIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>chevronup</p>
-      </>
-      <>
-        <CloseIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>close</p>
-      </>
-      <>
-        <ClosedCaptioningIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>closed</p>
-      </>
-      <>
-        <CogIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>cog</p>
-      </>
-      <>
-        <CommentsIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>comments</p>
-      </>
-      <>
-        <DeleteIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>delete</p>
-      </>
-      <>
-        <DownloadIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>download</p>
-      </>
-      <>
-        <EditIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>edit</p>
-      </>
-      <>
-        <EllipsisHorizontalIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>ellipsishorizontal</p>
-      </>
-      <>
-        <EllipsisVerticalIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>ellipsisvertical</p>
-      </>
-      <>
-        <EnvelopeIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>envelope</p>
-      </>
-      <>
-        <EnvelopeOpenIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>envelopeopen</p>
-      </>
-      <>
-        <ErrorIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>Error</p>
-      </>
-      <>
-        <ExternalLinkIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>externallink</p>
-      </>
-      <>
-        <FacebookAltIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>facebookalt</p>
-      </>
-      <>
-        <FacebookIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>facebook</p>
-      </>
-      <>
-        <ForwardIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>forward</p>
-      </>
-      <>
-        <FullscreenIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>fullscreen</p>
-      </>
-      <>
-        <GiftIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>gift</p>
-      </>
-      <>
-        <GridIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>grid</p>
-      </>
-      <>
-        <GripVerticalIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>gripVertical</p>
-      </>
-      <>
-        <HamburgerMenuIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>hamburger</p>
-      </>
-      <>
-        <HeadphonesIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>headphones</p>
-      </>
-      <>
-        <HomeIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>home</p>
-      </>
-      <>
-        <InstagramIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>instagram</p>
-      </>
-      <>
-        <LinkIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>link</p>
-      </>
-      <>
-        <LinkedInAltIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>linkedinalt</p>
-      </>
-      <>
-        <LinkedInIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>linkedin</p>
-      </>
-      <>
-        <LockIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>lock</p>
-      </>
-      <>
-        <MediumIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>medium</p>
-      </>
-      <>
-        <NextIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>next</p>
-      </>
-      <>
-        <PageIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>page</p>
-      </>
-      <>
-        <PauseCircleIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>pausecircle</p>
-      </>
-      <>
-        <PauseIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>pause</p>
-      </>
-      <>
-        <PhoneIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>phone</p>
-      </>
-      <>
-        <PinterestAltIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>pinterestalt</p>
-      </>
-      <>
-        <PinterestIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>pinterest</p>
-      </>
-      <>
-        <PlayCircleIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>playcircle</p>
-      </>
-      <>
-        <PlayIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>play</p>
-      </>
-      <>
-        <PlusIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>plus</p>
-      </>
-      <>
-        <PreviousIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>previous</p>
-      </>
-      <>
-        <PrintIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>print</p>
-      </>
-      <>
-        <RedditIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>reddit</p>
-      </>
-      <>
-        <RssIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>rss</p>
-      </>
-      <>
-        <SearchIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>search</p>
-      </>
-      <>
-        <ShareIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>share</p>
-      </>
-      <>
-        <ShoppingCartIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>share</p>
-      </>
-      <>
-        <SnapchatIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>snapchat</p>
-      </>
-      <>
-        <SoundCloudIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>soundcloud</p>
-      </>
-      <>
-        <SoundOffIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>soundoff</p>
-      </>
-      <>
-        <SoundOnIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>soundon</p>
-      </>
-      <>
-        <StarHalfIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>starhalf</p>
-      </>
-      <>
-        <StarIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>star</p>
-      </>
-      <>
-        <TumblrIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>tumblr</p>
-      </>
-      <>
-        <TwitchIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>twitch</p>
-      </>
-      <>
-        <TwitterAltIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>twitteralt</p>
-      </>
-      <>
-        <TwitterIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>twitter</p>
-      </>
-      <>
-        <UnlockIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>unlock</p>
-      </>
-      <>
-        <UserIcon height={number("Height", 200)} width={number("Width", 200)} />
-        <p>user</p>
-      </>
-      <>
-        <WhatsAppIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>whatsapp</p>
-      </>
-      <>
-        <YoutubeAltIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>youtubealt</p>
-      </>
-      <>
-        <YoutubeIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>youtube</p>
-      </>
-      <>
-        <ZoomInIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>zoomin</p>
-      </>
-      <>
-        <ZoomOutIcon
-          height={number("Height", 200)}
-          width={number("Width", 200)}
-        />
-        <p>zoomout</p>
-      </>
-    </>
-  </Story>
+	<Story name="All icons resize">
+		<>
+			<>
+				<ArrowDownIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>arrowdown</p>
+			</>
+			<>
+				<ArrowLeftIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>arrowleft</p>
+			</>
+			<>
+				<ArrowRightIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>arrowright</p>
+			</>
+			<>
+				<ArrowUpIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>arrow-up</p>
+			</>
+			<>
+				<BackwardIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>backward</p>
+			</>
+			<>
+				<BellIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>bell</p>
+			</>
+			<>
+				<CalendarIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>calendar</p>
+			</>
+			<>
+				<CameraIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>camera</p>
+			</>
+			<>
+				<ChartIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>chart</p>
+			</>
+			<>
+				<CheckIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>check</p>
+			</>
+			<>
+				<ChevronDownIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>chevrondown</p>
+			</>
+			<>
+				<ChevronLeftIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>chevronleft</p>
+			</>
+			<>
+				<ChevronRightIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>chevronright</p>
+			</>
+			<>
+				<ChevronUpIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>chevronup</p>
+			</>
+			<>
+				<CloseIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>close</p>
+			</>
+			<>
+				<ClosedCaptioningIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>closed</p>
+			</>
+			<>
+				<CogIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>cog</p>
+			</>
+			<>
+				<CommentsIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>comments</p>
+			</>
+			<>
+				<DeleteIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>delete</p>
+			</>
+			<>
+				<DownloadIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>download</p>
+			</>
+			<>
+				<EditIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>edit</p>
+			</>
+			<>
+				<EllipsisHorizontalIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>ellipsishorizontal</p>
+			</>
+			<>
+				<EllipsisVerticalIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>ellipsisvertical</p>
+			</>
+			<>
+				<EnvelopeIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>envelope</p>
+			</>
+			<>
+				<EnvelopeOpenIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>envelopeopen</p>
+			</>
+			<>
+				<ErrorIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>Error</p>
+			</>
+			<>
+				<ExternalLinkIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>externallink</p>
+			</>
+			<>
+				<FacebookAltIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>facebookalt</p>
+			</>
+			<>
+				<FacebookIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>facebook</p>
+			</>
+			<>
+				<ForwardIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>forward</p>
+			</>
+			<>
+				<FullscreenIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>fullscreen</p>
+			</>
+			<>
+				<GiftIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>gift</p>
+			</>
+			<>
+				<GridIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>grid</p>
+			</>
+			<>
+				<GripVerticalIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>gripVertical</p>
+			</>
+			<>
+				<HamburgerMenuIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>hamburger</p>
+			</>
+			<>
+				<HeadphonesIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>headphones</p>
+			</>
+			<>
+				<HomeIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>home</p>
+			</>
+			<>
+				<InstagramIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>instagram</p>
+			</>
+			<>
+				<LinkIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>link</p>
+			</>
+			<>
+				<LinkedInAltIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>linkedinalt</p>
+			</>
+			<>
+				<LinkedInIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>linkedin</p>
+			</>
+			<>
+				<LockIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>lock</p>
+			</>
+			<>
+				<MediumIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>medium</p>
+			</>
+			<>
+				<NextIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>next</p>
+			</>
+			<>
+				<PageIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>page</p>
+			</>
+			<>
+				<PauseCircleIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>pausecircle</p>
+			</>
+			<>
+				<PauseIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>pause</p>
+			</>
+			<>
+				<PhoneIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>phone</p>
+			</>
+			<>
+				<PinterestAltIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>pinterestalt</p>
+			</>
+			<>
+				<PinterestIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>pinterest</p>
+			</>
+			<>
+				<PlayCircleIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>playcircle</p>
+			</>
+			<>
+				<PlayIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>play</p>
+			</>
+			<>
+				<PlusIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>plus</p>
+			</>
+			<>
+				<PreviousIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>previous</p>
+			</>
+			<>
+				<PrintIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>print</p>
+			</>
+			<>
+				<RedditIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>reddit</p>
+			</>
+			<>
+				<RssIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>rss</p>
+			</>
+			<>
+				<SearchIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>search</p>
+			</>
+			<>
+				<ShareIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>share</p>
+			</>
+			<>
+				<ShoppingCartIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>share</p>
+			</>
+			<>
+				<SnapchatIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>snapchat</p>
+			</>
+			<>
+				<SoundCloudIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>soundcloud</p>
+			</>
+			<>
+				<SoundOffIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>soundoff</p>
+			</>
+			<>
+				<SoundOnIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>soundon</p>
+			</>
+			<>
+				<StarHalfIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>starhalf</p>
+			</>
+			<>
+				<StarIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>star</p>
+			</>
+			<>
+				<TumblrIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>tumblr</p>
+			</>
+			<>
+				<TwitchIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>twitch</p>
+			</>
+			<>
+				<TwitterAltIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>twitteralt</p>
+			</>
+			<>
+				<TwitterIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>twitter</p>
+			</>
+			<>
+				<UnlockIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>unlock</p>
+			</>
+			<>
+				<UserIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>user</p>
+			</>
+			<>
+				<WhatsAppIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>whatsapp</p>
+			</>
+			<>
+				<YoutubeAltIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>youtubealt</p>
+			</>
+			<>
+				<YoutubeIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>youtube</p>
+			</>
+			<>
+				<ZoomInIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>zoomin</p>
+			</>
+			<>
+				<ZoomOutIcon height={number("Height", 200)} width={number("Width", 200)} />
+				<p>zoomout</p>
+			</>
+		</>
+	</Story>
 </Canvas>

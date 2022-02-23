@@ -29,7 +29,7 @@ jobs:
         with:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
-      
+
       # Caches NPM files
       - name: Cache NPM files
         uses: actions/cache@v2

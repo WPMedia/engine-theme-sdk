@@ -51,7 +51,7 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 
 ## How To Publish To RC
 
-- Force-push into the `rc` branch from `canary` like so: 
+- Force-push into the `rc` branch from `canary` like so:
 
 1. update the base branch `git checkout canary && git remote update --prune origin && git reset --hard origin/canary`
 2. Force push base branch into target: `git push origin canary:rc -f`
@@ -80,10 +80,10 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 
 ```json
 {
-  "name": "@wpmedia/card-list-block",
-  "dependencies": {
-    "@wpmedia/engine-theme-sdk": "stable"
-  }
+	"name": "@wpmedia/card-list-block",
+	"dependencies": {
+		"@wpmedia/engine-theme-sdk": "stable"
+	}
 }
 ```
 
@@ -93,7 +93,7 @@ If you need to update an existing Engine SDK component, contact the Pagebuilder 
 
 ```json
 {
-  "engineSDK": "@wpmedia/engine-theme-sdk@stable"
+	"engineSDK": "@wpmedia/engine-theme-sdk@stable"
 }
 ```
 

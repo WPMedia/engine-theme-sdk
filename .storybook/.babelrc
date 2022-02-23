@@ -1,18 +1,16 @@
 {
-  "plugins": [
-    [
-      "module-resolver",
-      {
-        "root": [
-          "."
-        ],
-        "alias": {
-          "fusion:themes": "./.storybook/themes.js",
-          "fusion:context": "./.storybook/context.js",
-          "fusion:environment": "./.storybook/environment.json"
-        }
-      }
-    ],
-    "@babel/plugin-proposal-optional-chaining"
-  ]
+	"plugins": [
+		[
+			"module-resolver",
+			{
+				"root": ["."],
+				"alias": {
+					"fusion:themes": "./.storybook/themes.js",
+					"fusion:context": "./.storybook/context.js",
+					"fusion:environment": "./.storybook/environment.json"
+				}
+			}
+		],
+		"@babel/plugin-proposal-optional-chaining"
+	]
 }
