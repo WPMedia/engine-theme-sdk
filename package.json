@@ -26,7 +26,8 @@
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "postinstall": "node scripts/postinstall.js"
+    "postinstall": "node scripts/postinstall.js",
+    "format": "prettier --write ."
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -77,6 +78,7 @@
     "enzyme": "^3.10.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.28.0",
@@ -85,6 +87,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "jest-enzyme": "^7.1.2",
+    "prettier": "^2.5.1",
     "typescript": "^4.1.5"
   },
   "dependencies": {
