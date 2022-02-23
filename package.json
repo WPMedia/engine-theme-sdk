@@ -29,6 +29,9 @@
     "postinstall": "node scripts/postinstall.js",
     "format": "prettier --write ."
   },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown"
+  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
