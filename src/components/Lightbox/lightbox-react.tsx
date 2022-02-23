@@ -635,9 +635,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 	}
 
 	// Get info for the best suited image to display with the given srcType
-	getBestImageForType(
-		srcType: string
-	): {
+	getBestImageForType(srcType: string): {
 		src: string;
 		height: number;
 		width: number;

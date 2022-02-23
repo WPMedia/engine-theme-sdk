@@ -166,7 +166,7 @@ You may notice `"portugal*paper"` has a differently\*formatted `dateLocalization
 That's because it's using the full locale with language and region (`region + language = locale`). We're maintaining the mappings of "en", for example, due to preexisting usage:
 
 | `dateLocalization.language` | Output locale |
-| ****\*\*\***** | ****\*\*\***** |
+| \***\*\*\*\*\*\*** | \***\*\*\*\*\*\*** |
 | sv | sv_SE |
 | fr | fr_FR |
 | no | nb_NO |
