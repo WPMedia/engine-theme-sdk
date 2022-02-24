@@ -2,12 +2,12 @@ import Image from "../src/components/Image";
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 
 <Meta
-  title="Image"
-  component={Image}
-  parameters={{
-    // Setting a high threshold to over come noise created in chromatic
-    chromatic: { diffThreshold: 1 }
-  }}
+	title="Image"
+	component={Image}
+	parameters={{
+		// Setting a high threshold to over come noise created in chromatic
+		chromatic: { diffThreshold: 1 },
+	}}
 />
 
 # Image
@@ -110,193 +110,174 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
 ### **Basic**
 
 <Canvas>
-  <Story name="Basic">
-    <div>
-      <Image
-        url={
-          "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
-        }
-        alt={"Aerial view of bridge"}
-        smallWidth={158}
-        smallHeight={89}
-        mediumWidth={274}
-        mediumHeight={154}
-        largeWidth={274}
-        largeHeight={154}
-        resizedImageOptions={{
-          "158x89":
-            "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
-          "274x154":
-            "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
-        }}
-        resizerURL={
-          "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-        }
-      />
-    </div>
-  </Story>
+	<Story name="Basic">
+		<div>
+			<Image
+				url={
+					"https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
+				}
+				alt={"Aerial view of bridge"}
+				smallWidth={158}
+				smallHeight={89}
+				mediumWidth={274}
+				mediumHeight={154}
+				largeWidth={274}
+				largeHeight={154}
+				resizedImageOptions={{
+					"158x89": "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
+					"274x154": "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
+				}}
+				resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			/>
+		</div>
+	</Story>
 </Canvas>
 
 ### **With widths and heights and lightbox**
 
 <Canvas>
-  <Story name="With widths, heights and lightbox">
-    <Image
-      url={
-        "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
-      }
-      alt={"Aerial view of bridge"}
-      smallWidth={158}
-      smallHeight={89}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={274}
-      largeHeight={154}
-      resizedImageOptions={{
-        "158x89":
-          "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
-        "274x154":
-          "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
-      }}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-    />
-  </Story>
+	<Story name="With widths, heights and lightbox">
+		<Image
+			url={
+				"https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
+			}
+			alt={"Aerial view of bridge"}
+			smallWidth={158}
+			smallHeight={89}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={274}
+			largeHeight={154}
+			resizedImageOptions={{
+				"158x89": "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
+				"274x154": "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
+			}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+		/>
+	</Story>
 </Canvas>
 
 ### **PNG** File
 
 <Canvas>
-  <Story name="Transparent png file">
-    <Image
-      url={
-        "https://s3.amazonaws.com/arc-authors/corecomponents/ddb98950-f6c6-4362-8cf0-5faf0001609a.png"
-      }
-      alt={"Rolling Dice"}
-      smallWidth={158}
-      smallHeight={89}
-      mediumWidth={158}
-      mediumHeight={89}
-      largeWidth={158}
-      largeHeight={89}
-      resizedImageOptions={{
-        "158x89":
-          "BdkyX5wvprEpd8N4tFJxP_fdLfM=filters:format(png):quality(70)/",
-      }}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={158}
-      lightBoxHeight={89}
-    />
-  </Story>
+	<Story name="Transparent png file">
+		<Image
+			url={
+				"https://s3.amazonaws.com/arc-authors/corecomponents/ddb98950-f6c6-4362-8cf0-5faf0001609a.png"
+			}
+			alt={"Rolling Dice"}
+			smallWidth={158}
+			smallHeight={89}
+			mediumWidth={158}
+			mediumHeight={89}
+			largeWidth={158}
+			largeHeight={89}
+			resizedImageOptions={{
+				"158x89": "BdkyX5wvprEpd8N4tFJxP_fdLfM=filters:format(png):quality(70)/",
+			}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={158}
+			lightBoxHeight={89}
+		/>
+	</Story>
 </Canvas>
 
 ### **Without resizer URL, logs error and does not render image**
 
 <Canvas>
-  <Story name="Without resizer URL, logs error and does not render image">
-    <Image
-      url={
-        "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
-      }
-      alt={"Aerial view of bridge"}
-      smallWidth={158}
-      smallHeight={89}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={274}
-      largeHeight={154}
-      resizedImageOptions={{
-        "158x89":
-          "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
-        "274x154":
-          "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
-      }}
-      resizerURL={""}
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-    />
-  </Story>
+	<Story name="Without resizer URL, logs error and does not render image">
+		<Image
+			url={
+				"https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
+			}
+			alt={"Aerial view of bridge"}
+			smallWidth={158}
+			smallHeight={89}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={274}
+			largeHeight={154}
+			resizedImageOptions={{
+				"158x89": "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
+				"274x154": "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
+			}}
+			resizerURL={""}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+		/>
+	</Story>
 </Canvas>
 
 ### **Without breakpoints**
 
 <Canvas>
-  <Story name="Without breakpoints">
-    <Image
-      url={
-        "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
-      }
-      alt={"Aerial view of bridge"}
-      smallWidth={158}
-      smallHeight={89}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={274}
-      largeHeight={154}
-      resizedImageOptions={{
-        "158x89":
-          "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
-        "274x154":
-          "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
-      }}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{}}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-    />
-  </Story>
+	<Story name="Without breakpoints">
+		<Image
+			url={
+				"https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
+			}
+			alt={"Aerial view of bridge"}
+			smallWidth={158}
+			smallHeight={89}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={274}
+			largeHeight={154}
+			resizedImageOptions={{
+				"158x89": "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
+				"274x154": "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
+			}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+		/>
+	</Story>
 </Canvas>
 
 ### **Without resized params, logs error and does not render image**
 
 <Canvas>
-  <Story name="Without resized params, logs error and does not render image">
-    <Image
-      url={
-        "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
-      }
-      alt={"Aerial view of bridge"}
-      smallWidth={158}
-      smallHeight={89}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={274}
-      largeHeight={154}
-      resizedImageOptions={{}}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-    />
-  </Story>
+	<Story name="Without resized params, logs error and does not render image">
+		<Image
+			url={
+				"https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
+			}
+			alt={"Aerial view of bridge"}
+			smallWidth={158}
+			smallHeight={89}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={274}
+			largeHeight={154}
+			resizedImageOptions={{}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+		/>
+	</Story>
 </Canvas>
 
 <!-- // https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/74FUDjj5P9QGqVekHa1JSdaSU1M=/fit-in/274x183/filters:quality(70):fill(white):background_color(white)/arc-anglerfish-staging-staging.s3.amazonaws.com/public/NA6FMAXWP5DR3FDZQ7SGJ3C3FE.png  -->
@@ -304,400 +285,385 @@ For more information on how to setup resizedImageOptions, please see: [Secure Im
 ### **For fit in logic, with placeholder**
 
 <Canvas>
-  <Story name="For fit in logic, with placeholder">
-    <Image
-      url={
-        "https://arc-anglerfish-staging-staging.s3.amazonaws.com/public/NA6FMAXWP5DR3FDZQ7SGJ3C3FE.png"
-      }
-      alt={"brand image"}
-      smallWidth={158}
-      smallHeight={89}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={274}
-      largeHeight={154}
-      resizedImageOptions={{
-        "84x0":
-          "ypPWGXyZQIfvus8XpYlHcz9s-2M=/fit-in/84x0/filters:quality(70):fill(white):background_color(white)/",
-        "84x47":
-          "Gw1ATz6cGk1Op8Yjnb9XBfe-10U=/fit-in/84x47/filters:quality(70):fill(white):background_color(white)/",
-        "84x56":
-          "b5wfZSSCrPhbJrORnvG5FXMoDr4=/fit-in/84x56/filters:quality(70):fill(white):background_color(white)/",
-        "84x63":
-          "CD5KPCY_fwSMCI_xytqY_GFeXO0=/fit-in/84x63/filters:quality(70):fill(white):background_color(white)/",
-        "84x84":
-          "g9s6e6Xg5fUugoCvSi6ozD9U4RA=/fit-in/84x84/filters:quality(70):fill(white):background_color(white)/",
-        "105x0":
-          "OzGNyBo2WPsnUeAg11pcLYsNN7w=/fit-in/105x0/filters:quality(70):fill(white):background_color(white)/",
-        "105x59":
-          "ElJJzRWq1ZB82l4keqayBsGhOhM=/fit-in/105x59/filters:quality(70):fill(white):background_color(white)/",
-        "105x70":
-          "e6iZtVfaJOxIs342PGXoM-Y5Nu4=/fit-in/105x70/filters:quality(70):fill(white):background_color(white)/",
-        "105x79":
-          "MRwmeksbWfCFE523W0vmz2Lvumo=/fit-in/105x79/filters:quality(70):fill(white):background_color(white)/",
-        "105x105":
-          "irmzJqlUTrRGDvY2bMfhcx_5Ahc=/fit-in/105x105/filters:quality(70):fill(white):background_color(white)/",
-        "158x0":
-          "qdxfL8Ms-GjEXSvEPFrR0MMJVfI=/fit-in/158x0/filters:quality(70):fill(white):background_color(white)/",
-        "158x89":
-          "r7SMPMvoPdoraJUSo3Jqo1mhUlY=/fit-in/158x89/filters:quality(70):fill(white):background_color(white)/",
-        "158x105":
-          "ciIbzGLGGntlmMxW-OXZ_OFsQfs=/fit-in/158x105/filters:quality(70):fill(white):background_color(white)/",
-        "158x119":
-          "_r5tCmSEITOO3NTJLBkot61mzBA=/fit-in/158x119/filters:quality(70):fill(white):background_color(white)/",
-        "158x158":
-          "vMMvyypjSX4SntqGzufNzKSlll4=/fit-in/158x158/filters:quality(70):fill(white):background_color(white)/",
-        "274x0":
-          "7lwbXw39fsb7SslOOiUxu1ly4gc=/fit-in/274x0/filters:quality(70):fill(white):background_color(white)/",
-        "274x154":
-          "DdErna-7pp6myk9CrCpHdgiGQrA=/fit-in/274x154/filters:quality(70):fill(white):background_color(white)/",
-        "274x183":
-          "74FUDjj5P9QGqVekHa1JSdaSU1M=/fit-in/274x183/filters:quality(70):fill(white):background_color(white)/",
-        "274x206":
-          "NL8g53815dsUhgTS3jXC7rdAt4U=/fit-in/274x206/filters:quality(70):fill(white):background_color(white)/",
-        "274x274":
-          "MDrtZOPpTHNfaBvyvUpoDRp_Pmw=/fit-in/274x274/filters:quality(70):fill(white):background_color(white)/",
-        "377x0":
-          "akEakgCNST0luHQSfxw9JFGhTI4=/fit-in/377x0/filters:quality(70):fill(white):background_color(white)/",
-        "377x212":
-          "8TDhSLyZg_kUCihvynOQi06pYzg=/fit-in/377x212/filters:quality(70):fill(white):background_color(white)/",
-        "377x251":
-          "CTkC4Qg7ArqcadymT-6hF6kpQcQ=/fit-in/377x251/filters:quality(70):fill(white):background_color(white)/",
-        "377x283":
-          "0u2mo8HtMOnqPnQPtxKoxRqfE04=/fit-in/377x283/filters:quality(70):fill(white):background_color(white)/",
-        "377x377":
-          "ievAZC23UVlp0pDO9i_vYd4Mzns=/fit-in/377x377/filters:quality(70):fill(white):background_color(white)/",
-        "400x0":
-          "v5yK4OiOsizjnS5QUES6os7edxU=/fit-in/400x0/filters:quality(70):fill(white):background_color(white)/",
-        "400x225":
-          "-pXO6s24r9KmlC-6siXm4uzrKxg=/fit-in/400x225/filters:quality(70):fill(white):background_color(white)/",
-        "400x267":
-          "hBPl4S4C9ngZRqmRAJ-Op0njTlo=/fit-in/400x267/filters:quality(70):fill(white):background_color(white)/",
-        "400x300":
-          "Gcq-GY6hHc7VbCX4ZY8PBuqVjF4=/fit-in/400x300/filters:quality(70):fill(white):background_color(white)/",
-        "400x400":
-          "9PtxKndKHARFk6D0ynV-eeWSyow=/fit-in/400x400/filters:quality(70):fill(white):background_color(white)/",
-        "600x0":
-          "OiKZ9gjSp-91zxKMjn6d7I9Xn0Q=/fit-in/600x0/filters:quality(70):fill(white):background_color(white)/",
-        "600x338":
-          "-GfTnJijLXqUVhdTdiyE9l0_yeI=/fit-in/600x338/filters:quality(70):fill(white):background_color(white)/",
-        "600x400":
-          "m617pE8A870PD_Ceg3c8lLzsMY8=/fit-in/600x400/filters:quality(70):fill(white):background_color(white)/",
-        "600x450":
-          "09o5mViAlwuxUTgL6vkoXkCfchE=/fit-in/600x450/filters:quality(70):fill(white):background_color(white)/",
-        "600x600":
-          "rxxPemZQ3CI0OrPBoSnSHQKPhpA=/fit-in/600x600/filters:quality(70):fill(white):background_color(white)/",
-        "768x0":
-          "EzouokEblmG43adARCILjk7ioSg=/fit-in/768x0/filters:quality(70):fill(white):background_color(white)/",
-        "768x432":
-          "vMR3AlfbO_ZZ2FuJYh18eHD7LQM=/fit-in/768x432/filters:quality(70):fill(white):background_color(white)/",
-        "768x512":
-          "42Gq8nwJdwiwDGEjvXIRosQPvKM=/fit-in/768x512/filters:quality(70):fill(white):background_color(white)/",
-        "768x576":
-          "ji27jOy0l-Kaj5T654LhgVRXWpw=/fit-in/768x576/filters:quality(70):fill(white):background_color(white)/",
-        "768x768":
-          "Exeh9lKLfeQ8EY8BFF6MAIWw8f4=/fit-in/768x768/filters:quality(70):fill(white):background_color(white)/",
-        "800x0":
-          "XuPV6Xyq1DZfouUYaTClp4KtmVk=/fit-in/800x0/filters:quality(70):fill(white):background_color(white)/",
-        "800x450":
-          "TJxjOo89SZxFXQZwqRbmk1W62po=/fit-in/800x450/filters:quality(70):fill(white):background_color(white)/",
-        "800x533":
-          "7-ZUOzJOw3UKHN0nCjkYUWYMMhg=/fit-in/800x533/filters:quality(70):fill(white):background_color(white)/",
-        "800x600":
-          "r2VBjzND5c-k4G6JEpzyYpGHngs=/fit-in/800x600/filters:quality(70):fill(white):background_color(white)/",
-        "800x800":
-          "xzLASjSBuaDaTlfQfKRfNx_TXtQ=/fit-in/800x800/filters:quality(70):fill(white):background_color(white)/",
-        "1024x0":
-          "-i8cZWpmS7BVf7n-tGixdIhRdPc=/fit-in/1024x0/filters:quality(70):fill(white):background_color(white)/",
-        "1024x576":
-          "srrkeFOCj6KdudRPul8F6l4vFqs=/fit-in/1024x576/filters:quality(70):fill(white):background_color(white)/",
-        "1024x683":
-          "zxZMYm5rP9oYWRMp7xg_cjqLssM=/fit-in/1024x683/filters:quality(70):fill(white):background_color(white)/",
-        "1024x768":
-          "dLGtbpAl3oNYQ29b8b8vIIW8USg=/fit-in/1024x768/filters:quality(70):fill(white):background_color(white)/",
-        "1024x1024":
-          "RkTnuW6j5K7QDCOkBuXOQNxF0zM=/fit-in/1024x1024/filters:quality(70):fill(white):background_color(white)/",
-        "1440x0":
-          "9dzRorTa9AFZvec138wzfAzZnOs=/fit-in/1440x0/filters:quality(70):fill(white):background_color(white)/",
-        "1440x810":
-          "xjFGAhcROAHGIJjQF0-VXGgP5UA=/fit-in/1440x810/filters:quality(70):fill(white):background_color(white)/",
-        "1440x960":
-          "lM113UEvbUcBQmfUxaxjjvymfL8=/fit-in/1440x960/filters:quality(70):fill(white):background_color(white)/",
-        "1440x1080":
-          "yeoeeTujSHwDjTerpiwXiZziqyg=/fit-in/1440x1080/filters:quality(70):fill(white):background_color(white)/",
-        "1440x1440":
-          "C01cML7mEmfmz3nF_uKCcmQAsdo=/fit-in/1440x1440/filters:quality(70):fill(white):background_color(white)/",
-        "1600x0":
-          "ILJn0fFa7NIsStekj_TtlBCSvBU=/fit-in/1600x0/filters:quality(70):fill(white):background_color(white)/",
-        "1600x900":
-          "_1NLnVpYWGV_sSMu4bNaPViOM-Y=/fit-in/1600x900/filters:quality(70):fill(white):background_color(white)/",
-        "1600x1067":
-          "BP4BtQEHW2PIahEZ0Iha-zIXoFY=/fit-in/1600x1067/filters:quality(70):fill(white):background_color(white)/",
-        "1600x1200":
-          "7PiVpqa_FxTcR0Yj_aLC7WpnjzQ=/fit-in/1600x1200/filters:quality(70):fill(white):background_color(white)/",
-        "1600x1600":
-          "CQcCSFygCQqghFAVoFOYMGePDKg=/fit-in/1600x1600/filters:quality(70):fill(white):background_color(white)/",
-      }}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-    />
-  </Story>
+	<Story name="For fit in logic, with placeholder">
+		<Image
+			url={
+				"https://arc-anglerfish-staging-staging.s3.amazonaws.com/public/NA6FMAXWP5DR3FDZQ7SGJ3C3FE.png"
+			}
+			alt={"brand image"}
+			smallWidth={158}
+			smallHeight={89}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={274}
+			largeHeight={154}
+			resizedImageOptions={{
+				"84x0":
+					"ypPWGXyZQIfvus8XpYlHcz9s-2M=/fit-in/84x0/filters:quality(70):fill(white):background_color(white)/",
+				"84x47":
+					"Gw1ATz6cGk1Op8Yjnb9XBfe-10U=/fit-in/84x47/filters:quality(70):fill(white):background_color(white)/",
+				"84x56":
+					"b5wfZSSCrPhbJrORnvG5FXMoDr4=/fit-in/84x56/filters:quality(70):fill(white):background_color(white)/",
+				"84x63":
+					"CD5KPCY_fwSMCI_xytqY_GFeXO0=/fit-in/84x63/filters:quality(70):fill(white):background_color(white)/",
+				"84x84":
+					"g9s6e6Xg5fUugoCvSi6ozD9U4RA=/fit-in/84x84/filters:quality(70):fill(white):background_color(white)/",
+				"105x0":
+					"OzGNyBo2WPsnUeAg11pcLYsNN7w=/fit-in/105x0/filters:quality(70):fill(white):background_color(white)/",
+				"105x59":
+					"ElJJzRWq1ZB82l4keqayBsGhOhM=/fit-in/105x59/filters:quality(70):fill(white):background_color(white)/",
+				"105x70":
+					"e6iZtVfaJOxIs342PGXoM-Y5Nu4=/fit-in/105x70/filters:quality(70):fill(white):background_color(white)/",
+				"105x79":
+					"MRwmeksbWfCFE523W0vmz2Lvumo=/fit-in/105x79/filters:quality(70):fill(white):background_color(white)/",
+				"105x105":
+					"irmzJqlUTrRGDvY2bMfhcx_5Ahc=/fit-in/105x105/filters:quality(70):fill(white):background_color(white)/",
+				"158x0":
+					"qdxfL8Ms-GjEXSvEPFrR0MMJVfI=/fit-in/158x0/filters:quality(70):fill(white):background_color(white)/",
+				"158x89":
+					"r7SMPMvoPdoraJUSo3Jqo1mhUlY=/fit-in/158x89/filters:quality(70):fill(white):background_color(white)/",
+				"158x105":
+					"ciIbzGLGGntlmMxW-OXZ_OFsQfs=/fit-in/158x105/filters:quality(70):fill(white):background_color(white)/",
+				"158x119":
+					"_r5tCmSEITOO3NTJLBkot61mzBA=/fit-in/158x119/filters:quality(70):fill(white):background_color(white)/",
+				"158x158":
+					"vMMvyypjSX4SntqGzufNzKSlll4=/fit-in/158x158/filters:quality(70):fill(white):background_color(white)/",
+				"274x0":
+					"7lwbXw39fsb7SslOOiUxu1ly4gc=/fit-in/274x0/filters:quality(70):fill(white):background_color(white)/",
+				"274x154":
+					"DdErna-7pp6myk9CrCpHdgiGQrA=/fit-in/274x154/filters:quality(70):fill(white):background_color(white)/",
+				"274x183":
+					"74FUDjj5P9QGqVekHa1JSdaSU1M=/fit-in/274x183/filters:quality(70):fill(white):background_color(white)/",
+				"274x206":
+					"NL8g53815dsUhgTS3jXC7rdAt4U=/fit-in/274x206/filters:quality(70):fill(white):background_color(white)/",
+				"274x274":
+					"MDrtZOPpTHNfaBvyvUpoDRp_Pmw=/fit-in/274x274/filters:quality(70):fill(white):background_color(white)/",
+				"377x0":
+					"akEakgCNST0luHQSfxw9JFGhTI4=/fit-in/377x0/filters:quality(70):fill(white):background_color(white)/",
+				"377x212":
+					"8TDhSLyZg_kUCihvynOQi06pYzg=/fit-in/377x212/filters:quality(70):fill(white):background_color(white)/",
+				"377x251":
+					"CTkC4Qg7ArqcadymT-6hF6kpQcQ=/fit-in/377x251/filters:quality(70):fill(white):background_color(white)/",
+				"377x283":
+					"0u2mo8HtMOnqPnQPtxKoxRqfE04=/fit-in/377x283/filters:quality(70):fill(white):background_color(white)/",
+				"377x377":
+					"ievAZC23UVlp0pDO9i_vYd4Mzns=/fit-in/377x377/filters:quality(70):fill(white):background_color(white)/",
+				"400x0":
+					"v5yK4OiOsizjnS5QUES6os7edxU=/fit-in/400x0/filters:quality(70):fill(white):background_color(white)/",
+				"400x225":
+					"-pXO6s24r9KmlC-6siXm4uzrKxg=/fit-in/400x225/filters:quality(70):fill(white):background_color(white)/",
+				"400x267":
+					"hBPl4S4C9ngZRqmRAJ-Op0njTlo=/fit-in/400x267/filters:quality(70):fill(white):background_color(white)/",
+				"400x300":
+					"Gcq-GY6hHc7VbCX4ZY8PBuqVjF4=/fit-in/400x300/filters:quality(70):fill(white):background_color(white)/",
+				"400x400":
+					"9PtxKndKHARFk6D0ynV-eeWSyow=/fit-in/400x400/filters:quality(70):fill(white):background_color(white)/",
+				"600x0":
+					"OiKZ9gjSp-91zxKMjn6d7I9Xn0Q=/fit-in/600x0/filters:quality(70):fill(white):background_color(white)/",
+				"600x338":
+					"-GfTnJijLXqUVhdTdiyE9l0_yeI=/fit-in/600x338/filters:quality(70):fill(white):background_color(white)/",
+				"600x400":
+					"m617pE8A870PD_Ceg3c8lLzsMY8=/fit-in/600x400/filters:quality(70):fill(white):background_color(white)/",
+				"600x450":
+					"09o5mViAlwuxUTgL6vkoXkCfchE=/fit-in/600x450/filters:quality(70):fill(white):background_color(white)/",
+				"600x600":
+					"rxxPemZQ3CI0OrPBoSnSHQKPhpA=/fit-in/600x600/filters:quality(70):fill(white):background_color(white)/",
+				"768x0":
+					"EzouokEblmG43adARCILjk7ioSg=/fit-in/768x0/filters:quality(70):fill(white):background_color(white)/",
+				"768x432":
+					"vMR3AlfbO_ZZ2FuJYh18eHD7LQM=/fit-in/768x432/filters:quality(70):fill(white):background_color(white)/",
+				"768x512":
+					"42Gq8nwJdwiwDGEjvXIRosQPvKM=/fit-in/768x512/filters:quality(70):fill(white):background_color(white)/",
+				"768x576":
+					"ji27jOy0l-Kaj5T654LhgVRXWpw=/fit-in/768x576/filters:quality(70):fill(white):background_color(white)/",
+				"768x768":
+					"Exeh9lKLfeQ8EY8BFF6MAIWw8f4=/fit-in/768x768/filters:quality(70):fill(white):background_color(white)/",
+				"800x0":
+					"XuPV6Xyq1DZfouUYaTClp4KtmVk=/fit-in/800x0/filters:quality(70):fill(white):background_color(white)/",
+				"800x450":
+					"TJxjOo89SZxFXQZwqRbmk1W62po=/fit-in/800x450/filters:quality(70):fill(white):background_color(white)/",
+				"800x533":
+					"7-ZUOzJOw3UKHN0nCjkYUWYMMhg=/fit-in/800x533/filters:quality(70):fill(white):background_color(white)/",
+				"800x600":
+					"r2VBjzND5c-k4G6JEpzyYpGHngs=/fit-in/800x600/filters:quality(70):fill(white):background_color(white)/",
+				"800x800":
+					"xzLASjSBuaDaTlfQfKRfNx_TXtQ=/fit-in/800x800/filters:quality(70):fill(white):background_color(white)/",
+				"1024x0":
+					"-i8cZWpmS7BVf7n-tGixdIhRdPc=/fit-in/1024x0/filters:quality(70):fill(white):background_color(white)/",
+				"1024x576":
+					"srrkeFOCj6KdudRPul8F6l4vFqs=/fit-in/1024x576/filters:quality(70):fill(white):background_color(white)/",
+				"1024x683":
+					"zxZMYm5rP9oYWRMp7xg_cjqLssM=/fit-in/1024x683/filters:quality(70):fill(white):background_color(white)/",
+				"1024x768":
+					"dLGtbpAl3oNYQ29b8b8vIIW8USg=/fit-in/1024x768/filters:quality(70):fill(white):background_color(white)/",
+				"1024x1024":
+					"RkTnuW6j5K7QDCOkBuXOQNxF0zM=/fit-in/1024x1024/filters:quality(70):fill(white):background_color(white)/",
+				"1440x0":
+					"9dzRorTa9AFZvec138wzfAzZnOs=/fit-in/1440x0/filters:quality(70):fill(white):background_color(white)/",
+				"1440x810":
+					"xjFGAhcROAHGIJjQF0-VXGgP5UA=/fit-in/1440x810/filters:quality(70):fill(white):background_color(white)/",
+				"1440x960":
+					"lM113UEvbUcBQmfUxaxjjvymfL8=/fit-in/1440x960/filters:quality(70):fill(white):background_color(white)/",
+				"1440x1080":
+					"yeoeeTujSHwDjTerpiwXiZziqyg=/fit-in/1440x1080/filters:quality(70):fill(white):background_color(white)/",
+				"1440x1440":
+					"C01cML7mEmfmz3nF_uKCcmQAsdo=/fit-in/1440x1440/filters:quality(70):fill(white):background_color(white)/",
+				"1600x0":
+					"ILJn0fFa7NIsStekj_TtlBCSvBU=/fit-in/1600x0/filters:quality(70):fill(white):background_color(white)/",
+				"1600x900":
+					"_1NLnVpYWGV_sSMu4bNaPViOM-Y=/fit-in/1600x900/filters:quality(70):fill(white):background_color(white)/",
+				"1600x1067":
+					"BP4BtQEHW2PIahEZ0Iha-zIXoFY=/fit-in/1600x1067/filters:quality(70):fill(white):background_color(white)/",
+				"1600x1200":
+					"7PiVpqa_FxTcR0Yj_aLC7WpnjzQ=/fit-in/1600x1200/filters:quality(70):fill(white):background_color(white)/",
+				"1600x1600":
+					"CQcCSFygCQqghFAVoFOYMGePDKg=/fit-in/1600x1600/filters:quality(70):fill(white):background_color(white)/",
+			}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+		/>
+	</Story>
 </Canvas>
 
 ### **For compressed logic opt in**
 
 <Canvas>
-  <Story name="For compressed logic opt in">
-    <Image
-      url={
-        "https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg"
-      }
-      alt={"brand image"}
-      smallWidth={158}
-      smallHeight={89}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={274}
-      largeHeight={154}
-      resizedImageOptions={{
-        "84x56": "Zl9GCeY1h_VWYVOhDEUuZLth_I8=filters:cm=t/",
-        "105x70": "PP7bEkuCBQ9Dv03Ok-8caaFoSI0=filters:cm=t/",
-        "158x105": "xJrEXTFQtbX_9wzUOofp-fza1KM=filters:cm=t/",
-        "274x183": "Wih8X4MVQVGqmtgPxh56zSm1hBI=filters:cm=t/",
-        "377x251": "9E1kgP-s1x2SVRHrNyOWUXXZb14=filters:cm=t/",
-        "400x267": "9mqMCfKgITlEAkfqfSYAtxJKojI=filters:cm=t/",
-        "600x400": "v0KYywyJNbxWTFIopiUnIKDqSVc=filters:cm=t/",
-        "768x512": "k2fO1jsplo0FdIJ-xkilgLiOr7k=filters:cm=t/",
-        "800x533": "cA-eFDnDTUffbO4j9-fCtYPVWsg=filters:cm=t/",
-        "1024x683": "xBIw-6J0kS48A8Wp4_0t4k_Sh4Q=filters:cm=t/",
-        "1440x960": "5f8YWvg-j8LETGuKEOHgDvMTKhE=filters:cm=t/",
-        "1600x1067": "GsY2RpeE1zt2TwbtM1vQYFdf0Io=filters:cm=t/",
-        "84x63": "HAb6iFddFCGoVhcbr7xNKyTjRgU=filters:cm=t/",
-        "105x79": "hog5jqlGvmBYipYSs-vQ_mqMfSg=filters:cm=t/",
-        "158x119": "yayh79Pxt8D13ZugCYEwQoeb05c=filters:cm=t/",
-        "274x206": "xakQmVVXgDLn_b67NfsVl0Twjmc=filters:cm=t/",
-        "377x283": "qxAMOBKiRUx2wvRrNzqwahGYZ3s=filters:cm=t/",
-        "400x300": "vsm27HE9JE3pXQF_Gpv6FPK0EBY=filters:cm=t/",
-        "600x450": "KWhxwTC-IP5O8kgBOxp3HwsNp-Y=filters:cm=t/",
-        "768x576": "kT3kWQHSFwe6dB4twVtf6FkcrLg=filters:cm=t/",
-        "800x600": "zg3-pYTvb0xWPxgOOSmT4onRnrg=filters:cm=t/",
-        "1024x768": "cOuKqIsAoH6b5Mx3iq1Cyz7reuM=filters:cm=t/",
-        "1440x1080": "G6A7rb_rMG77iPaW5YZw_gXHszI=filters:cm=t/",
-        "1600x1200": "D9sD_fHurPMha83DHmSSjhNIWaw=filters:cm=t/",
-        "84x0": "mbFPm2rKjoum_0LYf0At-9eks1Y=filters:cm=t/",
-        "105x0": "x--GwVN904caO9HoQJbnFe5-9zk=filters:cm=t/",
-        "158x0": "d1tUq56ObdJyJtx10EHLN9h5pV8=filters:cm=t/",
-        "274x0": "tpK1bRzCC_yOCaxQNyycbY-zSVQ=filters:cm=t/",
-        "377x0": "kzerxeG43LYGfSASKt4Lj9nmkYM=filters:cm=t/",
-        "400x0": "AtZ9BqFF4EprAbBmeB7_uMhY3xQ=filters:cm=t/",
-        "600x0": "k1OTosfkdEVKawdNm_nWdmxhYvU=filters:cm=t/",
-        "768x0": "6HcJbMw8xmMk5rC1evG3Cfn2Uo8=filters:cm=t/",
-        "800x0": "8UReMwMsznY473xAwq65hACsAbs=filters:cm=t/",
-        "1024x0": "bAZVOYlan4R8bbv6neVRsJ54gWE=filters:cm=t/",
-        "1440x0": "BNHDdO9hc6S2z8eTjAToUmTr-sw=filters:cm=t/",
-        "1600x0": "Ug4rT-_XwKlhjAmLHF1BMRn7bZ8=filters:cm=t/",
-        "84x47": "PC1BvmN31-hCCbJLa8RUBHSQBDU=filters:cm=t/",
-        "105x59": "KNjqmWUkVvo1QqlBECP7n48xzuU=filters:cm=t/",
-        "158x89": "35sg1CpwufCYNN-lff7JXP_9hnQ=filters:cm=t/",
-        "274x154": "YqnGe2BesTKTVSwuIHXXWcQMxTc=filters:cm=t/",
-        "377x212": "jfqSgGMvehhkpZDpXpW8xabaoFE=filters:cm=t/",
-        "400x225": "Mcht0h4pAjl-FyUtzvgnkKKc-i4=filters:cm=t/",
-        "600x338": "kNySm8WmouEddG7L1CAmZYTrP5U=filters:cm=t/",
-        "768x432": "4T6uEz2Kv6Ll1pYsPL9hkxLnguM=filters:cm=t/",
-        "800x450": "uor2swsaUuP6kY5Alxup6lzFpz8=filters:cm=t/",
-        "1024x576": "zP8h9myj7tgjD6JeQ4j615yDi1E=filters:cm=t/",
-        "1440x810": "lpQ1DbyQrPqU9IrlD4ymYBax2_U=filters:cm=t/",
-        "1600x900": "kXIyQvYXN0LK_R-1nj5AV1EaIsk=filters:cm=t/",
-        "84x84": "rO9Zm7S0G0rL3pxlmX9c-dmD4ro=filters:cm=t/",
-        "105x105": "3W_Ga2CyiwnKkTj_tqjE1L80ecg=filters:cm=t/",
-        "158x158": "wRo1EhlirDPXj_oSk3oCIVHDCQo=filters:cm=t/",
-        "274x274": "J_Nb7jZTJdUk-mma0oUFTKRVmG4=filters:cm=t/",
-        "377x377": "MoC1YNbxPMERPhqFOYiIq-C73w8=filters:cm=t/",
-        "400x400": "wOBvZDAal77fnyeRUH3pm3pb2Lo=filters:cm=t/",
-        "600x600": "aYsQE8UUUN5ahgPbOTRQudYfUPc=filters:cm=t/",
-        "768x768": "enUCacYifBe2BZrl2VSpCgD98iQ=filters:cm=t/",
-        "800x800": "-CBUtmcZm00uPEpJOCTUKZq1eWg=filters:cm=t/",
-        "1024x1024": "XdLtY4clVJIPAJqZP5N_fDQ7djI=filters:cm=t/",
-        "1440x1440": "mZEtMmVGWFKu9ufg2eTRgvIcr1U=filters:cm=t/",
-        "1600x1600": "DjfsuZ6YnP9mJhFkdcbzInJQVU0=filters:cm=t/",
-      }}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-      compressedThumborParams={true}
-    />
-  </Story>
+	<Story name="For compressed logic opt in">
+		<Image
+			url={
+				"https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg"
+			}
+			alt={"brand image"}
+			smallWidth={158}
+			smallHeight={89}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={274}
+			largeHeight={154}
+			resizedImageOptions={{
+				"84x56": "Zl9GCeY1h_VWYVOhDEUuZLth_I8=filters:cm=t/",
+				"105x70": "PP7bEkuCBQ9Dv03Ok-8caaFoSI0=filters:cm=t/",
+				"158x105": "xJrEXTFQtbX_9wzUOofp-fza1KM=filters:cm=t/",
+				"274x183": "Wih8X4MVQVGqmtgPxh56zSm1hBI=filters:cm=t/",
+				"377x251": "9E1kgP-s1x2SVRHrNyOWUXXZb14=filters:cm=t/",
+				"400x267": "9mqMCfKgITlEAkfqfSYAtxJKojI=filters:cm=t/",
+				"600x400": "v0KYywyJNbxWTFIopiUnIKDqSVc=filters:cm=t/",
+				"768x512": "k2fO1jsplo0FdIJ-xkilgLiOr7k=filters:cm=t/",
+				"800x533": "cA-eFDnDTUffbO4j9-fCtYPVWsg=filters:cm=t/",
+				"1024x683": "xBIw-6J0kS48A8Wp4_0t4k_Sh4Q=filters:cm=t/",
+				"1440x960": "5f8YWvg-j8LETGuKEOHgDvMTKhE=filters:cm=t/",
+				"1600x1067": "GsY2RpeE1zt2TwbtM1vQYFdf0Io=filters:cm=t/",
+				"84x63": "HAb6iFddFCGoVhcbr7xNKyTjRgU=filters:cm=t/",
+				"105x79": "hog5jqlGvmBYipYSs-vQ_mqMfSg=filters:cm=t/",
+				"158x119": "yayh79Pxt8D13ZugCYEwQoeb05c=filters:cm=t/",
+				"274x206": "xakQmVVXgDLn_b67NfsVl0Twjmc=filters:cm=t/",
+				"377x283": "qxAMOBKiRUx2wvRrNzqwahGYZ3s=filters:cm=t/",
+				"400x300": "vsm27HE9JE3pXQF_Gpv6FPK0EBY=filters:cm=t/",
+				"600x450": "KWhxwTC-IP5O8kgBOxp3HwsNp-Y=filters:cm=t/",
+				"768x576": "kT3kWQHSFwe6dB4twVtf6FkcrLg=filters:cm=t/",
+				"800x600": "zg3-pYTvb0xWPxgOOSmT4onRnrg=filters:cm=t/",
+				"1024x768": "cOuKqIsAoH6b5Mx3iq1Cyz7reuM=filters:cm=t/",
+				"1440x1080": "G6A7rb_rMG77iPaW5YZw_gXHszI=filters:cm=t/",
+				"1600x1200": "D9sD_fHurPMha83DHmSSjhNIWaw=filters:cm=t/",
+				"84x0": "mbFPm2rKjoum_0LYf0At-9eks1Y=filters:cm=t/",
+				"105x0": "x--GwVN904caO9HoQJbnFe5-9zk=filters:cm=t/",
+				"158x0": "d1tUq56ObdJyJtx10EHLN9h5pV8=filters:cm=t/",
+				"274x0": "tpK1bRzCC_yOCaxQNyycbY-zSVQ=filters:cm=t/",
+				"377x0": "kzerxeG43LYGfSASKt4Lj9nmkYM=filters:cm=t/",
+				"400x0": "AtZ9BqFF4EprAbBmeB7_uMhY3xQ=filters:cm=t/",
+				"600x0": "k1OTosfkdEVKawdNm_nWdmxhYvU=filters:cm=t/",
+				"768x0": "6HcJbMw8xmMk5rC1evG3Cfn2Uo8=filters:cm=t/",
+				"800x0": "8UReMwMsznY473xAwq65hACsAbs=filters:cm=t/",
+				"1024x0": "bAZVOYlan4R8bbv6neVRsJ54gWE=filters:cm=t/",
+				"1440x0": "BNHDdO9hc6S2z8eTjAToUmTr-sw=filters:cm=t/",
+				"1600x0": "Ug4rT-_XwKlhjAmLHF1BMRn7bZ8=filters:cm=t/",
+				"84x47": "PC1BvmN31-hCCbJLa8RUBHSQBDU=filters:cm=t/",
+				"105x59": "KNjqmWUkVvo1QqlBECP7n48xzuU=filters:cm=t/",
+				"158x89": "35sg1CpwufCYNN-lff7JXP_9hnQ=filters:cm=t/",
+				"274x154": "YqnGe2BesTKTVSwuIHXXWcQMxTc=filters:cm=t/",
+				"377x212": "jfqSgGMvehhkpZDpXpW8xabaoFE=filters:cm=t/",
+				"400x225": "Mcht0h4pAjl-FyUtzvgnkKKc-i4=filters:cm=t/",
+				"600x338": "kNySm8WmouEddG7L1CAmZYTrP5U=filters:cm=t/",
+				"768x432": "4T6uEz2Kv6Ll1pYsPL9hkxLnguM=filters:cm=t/",
+				"800x450": "uor2swsaUuP6kY5Alxup6lzFpz8=filters:cm=t/",
+				"1024x576": "zP8h9myj7tgjD6JeQ4j615yDi1E=filters:cm=t/",
+				"1440x810": "lpQ1DbyQrPqU9IrlD4ymYBax2_U=filters:cm=t/",
+				"1600x900": "kXIyQvYXN0LK_R-1nj5AV1EaIsk=filters:cm=t/",
+				"84x84": "rO9Zm7S0G0rL3pxlmX9c-dmD4ro=filters:cm=t/",
+				"105x105": "3W_Ga2CyiwnKkTj_tqjE1L80ecg=filters:cm=t/",
+				"158x158": "wRo1EhlirDPXj_oSk3oCIVHDCQo=filters:cm=t/",
+				"274x274": "J_Nb7jZTJdUk-mma0oUFTKRVmG4=filters:cm=t/",
+				"377x377": "MoC1YNbxPMERPhqFOYiIq-C73w8=filters:cm=t/",
+				"400x400": "wOBvZDAal77fnyeRUH3pm3pb2Lo=filters:cm=t/",
+				"600x600": "aYsQE8UUUN5ahgPbOTRQudYfUPc=filters:cm=t/",
+				"768x768": "enUCacYifBe2BZrl2VSpCgD98iQ=filters:cm=t/",
+				"800x800": "-CBUtmcZm00uPEpJOCTUKZq1eWg=filters:cm=t/",
+				"1024x1024": "XdLtY4clVJIPAJqZP5N_fDQ7djI=filters:cm=t/",
+				"1440x1440": "mZEtMmVGWFKu9ufg2eTRgvIcr1U=filters:cm=t/",
+				"1600x1600": "DjfsuZ6YnP9mJhFkdcbzInJQVU0=filters:cm=t/",
+			}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+			compressedThumborParams={true}
+		/>
+	</Story>
 </Canvas>
 
 ### **For compressed logic opt out with first resizer slash fix**
 
 <Canvas>
-  <Story name="For compressed logic opt out with first resizer slash fix">
-    <Image
-      url={
-        "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/PXYWEPTDCJF7JKDLK435PZM7HI.jpg"
-      }
-      alt={"brand image"}
-      smallWidth={400}
-      smallHeight={267}
-      mediumWidth={400}
-      mediumHeight={267}
-      largeWidth={400}
-      largeHeight={267}
-      resizedImageOptions={{
-        "400x267":
-          "ATxBzcGNaQfNiZWOlDXIQu6YFBQ=filters:format(jpg):quality(70)/",
-      }}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-      compressedThumborParams={false}
-    />
-  </Story>
+	<Story name="For compressed logic opt out with first resizer slash fix">
+		<Image
+			url={
+				"https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/PXYWEPTDCJF7JKDLK435PZM7HI.jpg"
+			}
+			alt={"brand image"}
+			smallWidth={400}
+			smallHeight={267}
+			mediumWidth={400}
+			mediumHeight={267}
+			largeWidth={400}
+			largeHeight={267}
+			resizedImageOptions={{
+				"400x267": "ATxBzcGNaQfNiZWOlDXIQu6YFBQ=filters:format(jpg):quality(70)/",
+			}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+			compressedThumborParams={false}
+		/>
+	</Story>
 </Canvas>
 
 ### **For http images**
 
 <Canvas>
-  <Story name="For http images">
-    <Image
-      url={
-        "http://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/XEVN7EOCEZBN5GOPBWQ5NPSW64.JPG"
-      }
-      alt={"brand image"}
-      smallWidth={274}
-      smallHeight={154}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={274}
-      largeHeight={154}
-      resizedImageOptions={{
-        "274x154": "NnxQC4v8GO_BAbDNdty3Kdb7XtA=filters:format(jpg):quality(70)/",
-      }}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-      compressedThumborParams={false}
-    />
-  </Story>
+	<Story name="For http images">
+		<Image
+			url={
+				"http://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/XEVN7EOCEZBN5GOPBWQ5NPSW64.JPG"
+			}
+			alt={"brand image"}
+			smallWidth={274}
+			smallHeight={154}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={274}
+			largeHeight={154}
+			resizedImageOptions={{
+				"274x154": "NnxQC4v8GO_BAbDNdty3Kdb7XtA=filters:format(jpg):quality(70)/",
+			}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+			compressedThumborParams={false}
+		/>
+	</Story>
 </Canvas>
 
 ### **Loading Types**
 
 <Canvas>
-  <Story name="Loading Types">
-    <p>Lazy</p>
-    <Image
-      url={
-        "http://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/XEVN7EOCEZBN5GOPBWQ5NPSW64.JPG"
-      }
-      alt={"brand image"}
-      smallWidth={274}
-      smallHeight={154}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={274}
-      largeHeight={154}
-      resizedImageOptions={{
-        "274x154": "NnxQC4v8GO_BAbDNdty3Kdb7XtA=filters:format(jpg):quality(70)/",
-      }}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-      compressedThumborParams={false}
-      loading="lazy"
-    />
-    <p>Eager</p>
-    <Image
-      url={
-        "http://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/XEVN7EOCEZBN5GOPBWQ5NPSW64.JPG"
-      }
-      alt={"brand image"}
-      smallWidth={274}
-      smallHeight={154}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={274}
-      largeHeight={154}
-      resizedImageOptions={{
-        "274x154": "NnxQC4v8GO_BAbDNdty3Kdb7XtA=filters:format(jpg):quality(70)/",
-      }}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-      compressedThumborParams={false}
-      loading="eager"
-    />
-    <p>None</p>
-    <Image
-      url={
-        "http://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/XEVN7EOCEZBN5GOPBWQ5NPSW64.JPG"
-      }
-      alt={"brand image"}
-      smallWidth={274}
-      smallHeight={154}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={274}
-      largeHeight={154}
-      resizedImageOptions={{
-        "274x154": "NnxQC4v8GO_BAbDNdty3Kdb7XtA=filters:format(jpg):quality(70)/",
-      }}
-      resizerURL={
-        "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"
-      }
-      breakpoints={{
-        small: 420,
-        medium: 768,
-        large: 992,
-      }}
-      lightBoxWidth={274}
-      lightBoxHeight={154}
-      compressedThumborParams={false}
-      loading={null}
-    />
-  </Story>
+	<Story name="Loading Types">
+		<p>Lazy</p>
+		<Image
+			url={
+				"http://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/XEVN7EOCEZBN5GOPBWQ5NPSW64.JPG"
+			}
+			alt={"brand image"}
+			smallWidth={274}
+			smallHeight={154}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={274}
+			largeHeight={154}
+			resizedImageOptions={{
+				"274x154": "NnxQC4v8GO_BAbDNdty3Kdb7XtA=filters:format(jpg):quality(70)/",
+			}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+			compressedThumborParams={false}
+			loading="lazy"
+		/>
+		<p>Eager</p>
+		<Image
+			url={
+				"http://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/XEVN7EOCEZBN5GOPBWQ5NPSW64.JPG"
+			}
+			alt={"brand image"}
+			smallWidth={274}
+			smallHeight={154}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={274}
+			largeHeight={154}
+			resizedImageOptions={{
+				"274x154": "NnxQC4v8GO_BAbDNdty3Kdb7XtA=filters:format(jpg):quality(70)/",
+			}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+			compressedThumborParams={false}
+			loading="eager"
+		/>
+		<p>None</p>
+		<Image
+			url={
+				"http://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/XEVN7EOCEZBN5GOPBWQ5NPSW64.JPG"
+			}
+			alt={"brand image"}
+			smallWidth={274}
+			smallHeight={154}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={274}
+			largeHeight={154}
+			resizedImageOptions={{
+				"274x154": "NnxQC4v8GO_BAbDNdty3Kdb7XtA=filters:format(jpg):quality(70)/",
+			}}
+			resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
+			breakpoints={{
+				small: 420,
+				medium: 768,
+				large: 992,
+			}}
+			lightBoxWidth={274}
+			lightBoxHeight={154}
+			compressedThumborParams={false}
+			loading={null}
+		/>
+	</Story>
 </Canvas>

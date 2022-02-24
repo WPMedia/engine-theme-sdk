@@ -58,7 +58,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Publish to branch name 
+      # Publish to branch name
       - run: npm publish --tag ${{ env.SYNCED_RELEASE_TAG }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -90,10 +90,10 @@ jobs:
       - name: Setup Node and NPM
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
 
-      - name: Tag 1.x release with canary 
-        run: npm dist-tag add @wpmedia/engine-theme-sdk@$(npm view @wpmedia/engine-theme-sdk@${{ env.SYNCED_RELEASE_TAG }} version) canary        
+      - name: Tag 1.x release with canary
+        run: npm dist-tag add @wpmedia/engine-theme-sdk@$(npm view @wpmedia/engine-theme-sdk@${{ env.SYNCED_RELEASE_TAG }} version) canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.JACK_NPM_PERSONAL_AUTH_TOKEN }}

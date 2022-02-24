@@ -1,40 +1,67 @@
-import VideoPlayer from '../src/components/VideoPlayer';
+import VideoPlayer from "../src/components/VideoPlayer";
 import { text } from "@storybook/addon-knobs";
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 
 <Meta
-    title="VideoPlayer"
-    component={VideoPlayer}
-    parameters={{
-        // Setting a high threshold to over come noise created in chromatic
-        chromatic: { diffThreshold: 1 }
-    }}
+	title="VideoPlayer"
+	component={VideoPlayer}
+	parameters={{
+		// Setting a high threshold to over come noise created in chromatic
+		chromatic: { diffThreshold: 1 },
+	}}
 />
 
 ### **Video Player with minimum configurations**
+
 <Canvas>
-    <Story name="Video with minimum configurations">
-        <VideoPlayer id="" embedMarkup={'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'}  />
-    </Story>
+	<Story name="Video with minimum configurations">
+		<VideoPlayer
+			id=""
+			embedMarkup={
+				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
+			}
+		/>
+	</Story>
 </Canvas>
 
 ### **Video Player with autoplay**
+
 <Canvas>
-    <Story name="Video with autoplay">
-        <VideoPlayer id="" enableAutoplay={true} embedMarkup={'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'}  />
-    </Story>
+	<Story name="Video with autoplay">
+		<VideoPlayer
+			id=""
+			enableAutoplay={true}
+			embedMarkup={
+				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
+			}
+		/>
+	</Story>
 </Canvas>
 
 ### **Video Player with playthrough**
+
 <Canvas>
-    <Story name="Video with playthrough">
-        <VideoPlayer id="" isPlaythrough={true} embedMarkup={'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'}  />
-    </Story>
+	<Story name="Video with playthrough">
+		<VideoPlayer
+			id=""
+			isPlaythrough={true}
+			embedMarkup={
+				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
+			}
+		/>
+	</Story>
 </Canvas>
 
 ### **Video Player with autoplay and other div wrapper**
+
 <Canvas>
-    <Story name="Video Player with autoplay and other div wrapper">
-        <VideoPlayer id="" enableAutoplay={true} embedMarkup={'<div class="goldfish-player"><div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div></div>'}  />
-    </Story>
+	<Story name="Video Player with autoplay and other div wrapper">
+		<VideoPlayer
+			id=""
+			enableAutoplay={true}
+			embedMarkup={
+				'<div class="goldfish-player"><div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div></div>'
+			}
+		/>
+	</Story>
 </Canvas>

@@ -1,45 +1,45 @@
 const buildThumborURL = (
-  targetImageKeyWithFilter: string | undefined,
-  targetDimension: string,
-  imageSourceWithoutProtocol: string,
-  resizerURL: string,
+	targetImageKeyWithFilter: string | undefined,
+	targetDimension: string,
+	imageSourceWithoutProtocol: string,
+	resizerURL: string
 ): string => {
-  if (typeof targetImageKeyWithFilter === 'undefined' || resizerURL.length <= 1) {
-    return '';
-  }
+	if (typeof targetImageKeyWithFilter === "undefined" || resizerURL.length <= 1) {
+		return "";
+	}
 
-  /**
-   * In blocks/resizer-image-block/index.js (in fusion-news-theme-blocks),
-   * we are compressing the format and quality params. We add a param 'cm=t' to alert us that
-   * the string is compressed.  We will look for that param to see if we need to
-   * convert the string back to the thumbor format by:
-   * 1) Add back the leading slash
-   * 2) remove the compression flag
-   * 3) Convert the default format and quality params to thumbor params.
-   */
-  let uncompressedTarget = targetImageKeyWithFilter;
-  if (uncompressedTarget.indexOf(':cm=t') !== -1) {
-    uncompressedTarget = uncompressedTarget.replace(':cm=t', ':format(jpg):quality(70)');
-    uncompressedTarget = `/${uncompressedTarget}`;
-  }
+	/**
+	 * In blocks/resizer-image-block/index.js (in fusion-news-theme-blocks),
+	 * we are compressing the format and quality params. We add a param 'cm=t' to alert us that
+	 * the string is compressed.  We will look for that param to see if we need to
+	 * convert the string back to the thumbor format by:
+	 * 1) Add back the leading slash
+	 * 2) remove the compression flag
+	 * 3) Convert the default format and quality params to thumbor params.
+	 */
+	let uncompressedTarget = targetImageKeyWithFilter;
+	if (uncompressedTarget.indexOf(":cm=t") !== -1) {
+		uncompressedTarget = uncompressedTarget.replace(":cm=t", ":format(jpg):quality(70)");
+		uncompressedTarget = `/${uncompressedTarget}`;
+	}
 
-  const splitCompressedTarget = uncompressedTarget.split('=');
+	const splitCompressedTarget = uncompressedTarget.split("=");
 
-  let targetImageKey = splitCompressedTarget[0];
+	let targetImageKey = splitCompressedTarget[0];
 
-  const imageFilter = splitCompressedTarget[1] || '';
+	const imageFilter = splitCompressedTarget[1] || "";
 
-  if (uncompressedTarget.includes('fit-in')) {
-    // https://resizer.com/resizer/OzPtTYdwjA0zqIliyUtp5iuF2Hc=/fit-in/377x283/filters:fill(white):background_color(white)/arc-anglerfish-staging-staging.s3.amazonaws.com/public/NA6FMAXWP5DR3FDZQ7SGJ3C3FE.png
-    return `${resizerURL}/${targetImageKey}=${imageFilter}${imageSourceWithoutProtocol}`;
-  }
+	if (uncompressedTarget.includes("fit-in")) {
+		// https://resizer.com/resizer/OzPtTYdwjA0zqIliyUtp5iuF2Hc=/fit-in/377x283/filters:fill(white):background_color(white)/arc-anglerfish-staging-staging.s3.amazonaws.com/public/NA6FMAXWP5DR3FDZQ7SGJ3C3FE.png
+		return `${resizerURL}/${targetImageKey}=${imageFilter}${imageSourceWithoutProtocol}`;
+	}
 
-  // prevents /resizer missing issue in the keys
-  if (!targetImageKey.startsWith('/') && !resizerURL.endsWith('/')) {
-    targetImageKey = `/${targetImageKey}`;
-  }
+	// prevents /resizer missing issue in the keys
+	if (!targetImageKey.startsWith("/") && !resizerURL.endsWith("/")) {
+		targetImageKey = `/${targetImageKey}`;
+	}
 
-  return `${resizerURL}${targetImageKey}=/${targetDimension}/${imageFilter}${imageSourceWithoutProtocol}`;
+	return `${resizerURL}${targetImageKey}=/${targetDimension}/${imageFilter}${imageSourceWithoutProtocol}`;
 };
 
 export default buildThumborURL;
