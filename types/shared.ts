@@ -1,4 +1,4 @@
-export interface ImageAttribution {
+interface ImageAttribution {
 	name?: string;
 }
 
