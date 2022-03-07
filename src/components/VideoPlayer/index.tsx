@@ -3,6 +3,8 @@ import EmbedContainer from "react-oembed-container";
 import PropTypes from "@arc-fusion/prop-types";
 import formatEmbedMarkup from "./formatEmbedMarkup";
 import { VideoContainer, VideoWrap } from "./styled";
+import ImageMetadata from "../ImageMetadata";
+import { CreditData, CreditOptions } from "../../../types/shared";
 
 interface CustomFields {
 	/* @deprecated Use isPlaythrough prop directly instead */
@@ -15,7 +17,7 @@ interface CustomFields {
 	// description: string;
 }
 
-interface VideoPlayerProps {
+interface VideoPlayerProps extends CreditOptions, CreditData {
 	embedMarkup: string;
 	id?: string;
 	enableAutoplay?: boolean;
@@ -47,6 +49,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 	isPlaythrough = false,
 	shrinkToFit = true,
 	viewportPercentage = 65,
+	displayTitle,
+	displayCaption,
+	displayCredits,
+	subtitle,
+	caption,
+	credits,
 }) => {
 	// migration from video component
 	// will fallback to uuid if id is undefined with defaulting to falsy ''
@@ -110,24 +118,31 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 		);
 
 	return (
-		<VideoContainer ref={containerRef}>
-			<VideoWrap
-				aspectRatio={overrideAspectRatio || aspectRatio}
-				viewportPercentage={viewportPercentage}
-				shrinkToFit={shrinkToFit}
-				videoLoaded={!!videoShadowDom}
-			>
-				{shouldRender ? (
-					<EmbedContainer markup={getEmbedHTMLWithPlayStatus()}>
-						<div
-							id={`video-${videoRef.current}`}
-							// eslint-disable-next-line react/no-danger
-							dangerouslySetInnerHTML={{ __html: getEmbedHTMLWithPlayStatus() }}
-						/>
-					</EmbedContainer>
-				) : null}
-			</VideoWrap>
-		</VideoContainer>
+		<>
+			<VideoContainer ref={containerRef}>
+				<VideoWrap
+					aspectRatio={overrideAspectRatio || aspectRatio}
+					viewportPercentage={viewportPercentage}
+					shrinkToFit={shrinkToFit}
+					videoLoaded={!!videoShadowDom}
+				>
+					{shouldRender ? (
+						<EmbedContainer markup={getEmbedHTMLWithPlayStatus()}>
+							<div
+								id={`video-${videoRef.current}`}
+								// eslint-disable-next-line react/no-danger
+								dangerouslySetInnerHTML={{ __html: getEmbedHTMLWithPlayStatus() }}
+							/>
+						</EmbedContainer>
+					) : null}
+				</VideoWrap>
+			</VideoContainer>
+			<ImageMetadata
+				subtitle={displayTitle ? subtitle : null}
+				caption={displayCaption ? caption : null}
+				credits={displayCredits ? credits : null}
+			/>
+		</>
 	);
 };
 
