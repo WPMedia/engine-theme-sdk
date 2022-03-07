@@ -47,30 +47,21 @@ import {
 	AdWrapper,
 } from "./styled";
 import { ChevronLeftIcon, ChevronRightIcon, FullscreenIcon, PlayIcon, PauseIcon } from "../icons";
+import { CreditOptions, CreditData } from "../../../types/shared";
 
 const greyFill = "#6B6B6B";
 const PREVIOUS_IMAGE_TEXT = "Switch to the previous image";
 const NEXT_IMAGE_TEXT = "Switch to the next image";
-
-interface ImageAttribution {
-	name?: string;
-}
 
 enum Direction {
 	forward = 0,
 	backward = 1,
 }
 
-interface GalleryElement {
+interface GalleryElement extends CreditData {
 	_id: string;
 	url: string;
 	alt_text?: string;
-	subtitle?: string;
-	caption?: string;
-	credits?: {
-		by?: ImageAttribution[];
-		affiliation?: ImageAttribution[];
-	};
 	height?: number;
 	resized_params: {
 		[key: string]: string;
@@ -83,7 +74,7 @@ interface GalleryElement {
 	width?: number;
 }
 
-interface GalleryProps {
+interface GalleryProps extends CreditOptions {
 	resizerURL?: string;
 	ansId?: string;
 	ansHeadline?: string;
@@ -101,9 +92,6 @@ interface GalleryProps {
 	previousImagePhrase?: string;
 	nextImagePhrase?: string;
 	controlsFont?: string;
-	displayTitle?: boolean;
-	displayCaption?: boolean;
-	displayCredits?: boolean;
 }
 
 declare interface EventOptionsInterface {
