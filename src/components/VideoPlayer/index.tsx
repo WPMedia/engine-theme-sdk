@@ -56,6 +56,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 	caption,
 	credits,
 }) => {
+	const hasCaption = displayTitle || displayCaption || displayCredits;
 	// migration from video component
 	// will fallback to uuid if id is undefined with defaulting to falsy ''
 	const targetId = id || uuid;
@@ -119,7 +120,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
 	return (
 		<>
-			<VideoContainer ref={containerRef}>
+			<VideoContainer ref={containerRef} hasCaption={hasCaption}>
 				<VideoWrap
 					aspectRatio={overrideAspectRatio || aspectRatio}
 					viewportPercentage={viewportPercentage}

@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
-export const VideoContainer = styled.div`
+// removing the bottom margin if caption below, ensuring backwards compatibility
+export const VideoContainer = styled.div<{
+	hasCaption: boolean;
+}>`
 	@media screen and (min-width: 48rem) {
-		margin-bottom: 1.5rem;
+		${({ hasCaption }): string => (hasCaption ? "" : `margin-bottom: 1.5rem;`)};
 	}
+	${({ hasCaption }): string => (hasCaption ? "" : `margin-bottom: 1rem;`)};
 
-	margin-bottom: 1rem;
 	margin-left: 0;
 	margin-right: 0;
 	margin-top: 0;
