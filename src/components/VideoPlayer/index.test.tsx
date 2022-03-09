@@ -3,6 +3,12 @@ import { mount } from "enzyme";
 import { render } from "@testing-library/react";
 import VideoPlayer, { videoPlayerCustomFields } from ".";
 
+jest.mock("fusion:context", () => ({
+	useAppContext: jest.fn(() => ({})),
+}));
+jest.mock("fusion:themes", () => (): object => ({
+	"primary-font-family": "futura",
+}));
 test("renders id with video tag to match with powa player", () => {
 	const targetId = "matching123";
 	const videoPlayer = render(<VideoPlayer embedMarkup="" id={targetId} />);
@@ -107,6 +113,159 @@ describe("MutationObserver", () => {
 				'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
 			const wrapper = mount(<VideoPlayer embedMarkup={testEmbed} id="targetId" />);
 			expect(wrapper.find("styled__VideoWrap").prop("aspectRatio")).toBe(0.5625);
+		});
+	});
+	describe("captions", () => {
+		it("takes in caption, title and credits and opts into show them", () => {
+			const testEmbed =
+				'<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"' +
+				' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script ' +
+				'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+			const wrapper = mount(
+				<VideoPlayer
+					embedMarkup={testEmbed}
+					id="targetId"
+					shrinkToFit={false}
+					caption="This is a caption"
+					credits={{
+						affiliation: [
+							{
+								name: "Death to Stock Photo",
+							},
+							{
+								name: "Another Stock Photo",
+							},
+						],
+						by: [
+							{
+								name: "John Doe",
+							},
+							{
+								name: "Jane Doe",
+							},
+						],
+					}}
+					subtitle="This is a title"
+					displayCredits
+					displayCaption
+					displayTitle
+				/>
+			);
+			// shows caption on the page in text
+			expect(wrapper.find("p").text()).toBe(
+				"This is a title This is a caption (John Doe, Jane Doe/Death to Stock Photo, Another Stock Photo)"
+			);
+		});
+		it("takes in caption, title and credits and opts into show only title", () => {
+			const testEmbed =
+				'<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"' +
+				' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script ' +
+				'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+			const wrapper = mount(
+				<VideoPlayer
+					embedMarkup={testEmbed}
+					id="targetId"
+					shrinkToFit={false}
+					caption="This is a caption"
+					credits={{
+						affiliation: [
+							{
+								name: "Death to Stock Photo",
+							},
+							{
+								name: "Another Stock Photo",
+							},
+						],
+						by: [
+							{
+								name: "John Doe",
+							},
+							{
+								name: "Jane Doe",
+							},
+						],
+					}}
+					subtitle="This is a title"
+					displayCredits={false}
+					displayCaption={false}
+					displayTitle
+				/>
+			);
+			expect(wrapper.find("p").text()).toBe("This is a title ");
+		});
+		it("takes in caption, title and credits and opts into show only caption", () => {
+			const testEmbed =
+				'<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"' +
+				' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script ' +
+				'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+			const wrapper = mount(
+				<VideoPlayer
+					embedMarkup={testEmbed}
+					id="targetId"
+					shrinkToFit={false}
+					caption="This is a caption"
+					credits={{
+						affiliation: [
+							{
+								name: "Death to Stock Photo",
+							},
+							{
+								name: "Another Stock Photo",
+							},
+						],
+						by: [
+							{
+								name: "John Doe",
+							},
+							{
+								name: "Jane Doe",
+							},
+						],
+					}}
+					subtitle="This is a title"
+					displayCredits={false}
+					displayCaption
+					displayTitle={false}
+				/>
+			);
+			expect(wrapper.find("p").text()).toBe("This is a caption ");
+		});
+		it("takes in caption, title and credits and opts into show nothing", () => {
+			const testEmbed =
+				'<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"' +
+				' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script ' +
+				'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+			const wrapper = mount(
+				<VideoPlayer
+					embedMarkup={testEmbed}
+					id="targetId"
+					shrinkToFit={false}
+					caption="This is a caption"
+					credits={{
+						affiliation: [
+							{
+								name: "Death to Stock Photo",
+							},
+							{
+								name: "Another Stock Photo",
+							},
+						],
+						by: [
+							{
+								name: "John Doe",
+							},
+							{
+								name: "Jane Doe",
+							},
+						],
+					}}
+					subtitle="This is a title"
+					displayCredits={false}
+					displayCaption={false}
+					displayTitle={false}
+				/>
+			);
+			expect(wrapper.find("p").length).toBe(0);
 		});
 	});
 });
