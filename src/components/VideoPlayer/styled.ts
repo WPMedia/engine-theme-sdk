@@ -5,9 +5,9 @@ export const VideoContainer = styled.div<{
 	hasCaption: boolean;
 }>`
 	@media screen and (min-width: 48rem) {
-		${({ hasCaption }): string => (hasCaption ? "" : `margin-bottom: 1.5rem;`)};
+		${({ hasCaption }): string => (hasCaption ? `margin-bottom: 0rem` : `margin-bottom: 1.5rem;`)};
 	}
-	${({ hasCaption }): string => (hasCaption ? "" : `margin-bottom: 1rem;`)};
+	${({ hasCaption }): string => (hasCaption ? `margin-bottom: 0rem` : `margin-bottom: 1rem;`)};
 
 	margin-left: 0;
 	margin-right: 0;
