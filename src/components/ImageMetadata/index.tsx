@@ -34,8 +34,8 @@ const extract =
 		item[key];
 
 const formatCredits = (credits: Credits): string => {
-	const creators = credits.by.map(extract("name")).join(", ") || null;
-	const affiliations = credits.affiliation.map(extract("name")).join(", ") || null;
+	const creators = credits?.by?.map(extract("name")).join(", ") || null;
+	const affiliations = credits?.affiliation.map(extract("name")).join(", ") || null;
 
 	return (creators || affiliations) && `(${[creators, affiliations].filter(Boolean).join("/")})`;
 };
