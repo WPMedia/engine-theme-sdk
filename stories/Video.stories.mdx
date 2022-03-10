@@ -83,3 +83,128 @@ import { Video } from '@wpmedia/engine-theme-sdk';
 		/>
 	</Story>
 </Canvas>
+
+### **Video with caption, subtitle and credits enabled **
+
+<Canvas>
+	<Story name="Video with caption, subtitle and credits enabled">
+		<Video
+			uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d"
+			org="corecomponents"
+			env="prod"
+			credits={{
+				affiliation: [
+					{
+						name: "Death to Stock Photo",
+						type: "author",
+					},
+				],
+				by: [
+					{
+						name: "John Doe",
+					},
+				],
+			}}
+			subtitle={"Lovely Nature Scene"}
+			caption={"Water flows over rocks"}
+			displayCredits
+			displayCaption
+			displayTitle
+		/>
+	</Story>
+</Canvas>
+
+### **Video with caption and credits enabled **
+
+<Canvas>
+	<Story name="Video with caption and credits enabled">
+		<Video
+			uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d"
+			org="corecomponents"
+			env="prod"
+			credits={{
+				affiliation: [
+					{
+						name: "Death to Stock Photo",
+						type: "author",
+					},
+				],
+				by: [
+					{
+						name: "John Doe",
+					},
+				],
+			}}
+			subtitle={"Lovely Nature Scene"}
+			caption={"Water flows over rocks"}
+			displayCredits
+			displayCaption
+			displayTitle={false}
+		/>
+	</Story>
+</Canvas>
+
+### **Video with caption only enabled **
+
+<Canvas>
+	<Story name="Video with caption only enabled">
+		<Video
+			uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d"
+			org="corecomponents"
+			env="prod"
+			credits={{
+				affiliation: [
+					{
+						name: "Death to Stock Photo",
+						type: "author",
+					},
+				],
+				by: [
+					{
+						name: "John Doe",
+					},
+				],
+			}}
+			subtitle={"Lovely Nature Scene"}
+			caption={"Water flows over rocks"}
+			displayCredits={false}
+			displayCaption
+			displayTitle={false}
+		/>
+	</Story>
+</Canvas>
+
+### **Video with multiple credits **
+
+<Canvas>
+	<Story name="Video with multiple credits">
+		<Video
+			uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d"
+			org="corecomponents"
+			env="prod"
+			credits={{
+				affiliation: [
+					{
+						name: "Death to Stock Photo",
+					},
+					{
+						name: "Another Stock Photo",
+					},
+				],
+				by: [
+					{
+						name: "John Doe",
+					},
+					{
+						name: "Jane Doe",
+					},
+				],
+			}}
+			subtitle={"Lovely Nature Scene"}
+			caption={"Water flows over rocks"}
+			displayCredits
+			displayCaption
+			displayTitle
+		/>
+	</Story>
+</Canvas>

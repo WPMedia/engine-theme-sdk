@@ -2,6 +2,10 @@ import React from "react";
 import { mount } from "enzyme";
 import Video from ".";
 
+jest.mock("fusion:context", () => ({
+	useAppContext: jest.fn(() => ({})),
+}));
+
 describe("Video", () => {
 	beforeEach(() => {
 		global.powaBoot = jest.fn();

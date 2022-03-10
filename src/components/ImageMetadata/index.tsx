@@ -5,20 +5,9 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useAppContext } from "fusion:context";
 import getThemeStyle from "fusion:themes";
+import { CreditData, Credits } from "../../../types/shared";
 
-interface ImageAttribution {
-	name?: string;
-}
-
-interface Credits {
-	by?: ImageAttribution[];
-	affiliation?: ImageAttribution[];
-}
-
-interface ImageMetadataProps {
-	subtitle?: string;
-	caption?: string;
-	credits?: Credits;
+interface ImageMetadataProps extends CreditData {
 	vanityCredits?: Credits;
 }
 
@@ -45,8 +34,8 @@ const extract =
 		item[key];
 
 const formatCredits = (credits: Credits): string => {
-	const creators = credits.by.map(extract("name")).join(", ") || null;
-	const affiliations = credits.affiliation.map(extract("name")).join(", ") || null;
+	const creators = credits?.by?.map(extract("name")).join(", ") || null;
+	const affiliations = credits?.affiliation.map(extract("name")).join(", ") || null;
 
 	return (creators || affiliations) && `(${[creators, affiliations].filter(Boolean).join("/")})`;
 };
