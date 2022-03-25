@@ -4,6 +4,7 @@ import React, { ReactElement } from "react";
 import ReactDOMServer from "react-dom/server";
 import PropTypes from "prop-types";
 import { URL } from "url";
+import fixTrailingSlash from "../../utils/formatURL";
 
 interface CustomMetaData {
 	metaName: string;
@@ -95,7 +96,7 @@ const generateCustomMetaTags = (metaData, MetaTag, MetaTags): ReactElement => {
 const buildUrl = (domain, path): string => {
 	try {
 		const url = new URL(path || "", domain);
-		return url.href;
+		return fixTrailingSlash(url.href);
 	} catch {
 		return null;
 	}

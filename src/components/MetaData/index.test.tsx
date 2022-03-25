@@ -1796,7 +1796,7 @@ describe("the meta data", () => {
 			});
 			const wrapper = wrapperGenerator(metaValue, globalContentComplete, "", null, null, true);
 			expect(wrapper.find('link[rel="canonical"]').prop("href")).toBe(
-				`${websiteDomain}${globalContentComplete._id}`
+				`${websiteDomain}${globalContentComplete._id}/`
 			);
 		});
 
