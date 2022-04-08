@@ -48,8 +48,11 @@ jobs:
 
           echo "::set-output name=formatted_branch_name::$new_branch_name"
 
-      # Prerelease (tests and lint)
-      - run: npm version prerelease --preid=${{ steps.format_branch_step.outputs.formatted_branch_name }}
+      - name: Version with preid for branch name
+        run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npm version prerelease --preid=${{ steps.format_branch_step.outputs.formatted_branch_name }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
