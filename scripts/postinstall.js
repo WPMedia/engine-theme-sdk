@@ -40,19 +40,21 @@ try {
     }
   */
 
-	// if sites
-	// obj with key is truthy if sites property exists
-	Object.values(targetBlockValues.sites).forEach(({ siteProperties: sitePropertyObject }) => {
-		// if site has no date localization obj
-		if (sitePropertyObject.dateLocalization) {
-			if (typeof sitePropertyObject.dateLocalization.language === "string") {
-				themesLocaleList.push(sitePropertyObject.dateLocalization.language);
+	// if sites exists
+	if (targetBlockValues.sites) {
+		// obj with key is truthy if sites property exists
+		Object.values(targetBlockValues.sites).forEach(({ siteProperties: sitePropertyObject }) => {
+			// if site has no date localization obj
+			if (sitePropertyObject.dateLocalization) {
+				if (typeof sitePropertyObject.dateLocalization.language === "string") {
+					themesLocaleList.push(sitePropertyObject.dateLocalization.language);
+				}
+				if (typeof sitePropertyObject.dateLocalization.timeZone === "string") {
+					targetTimeZones.push(sitePropertyObject.dateLocalization.timeZone);
+				}
 			}
-			if (typeof sitePropertyObject.dateLocalization.timeZone === "string") {
-				targetTimeZones.push(sitePropertyObject.dateLocalization.timeZone);
-			}
-		}
-	});
+		});
+	}
 
 	// dedupe languages and timezones if any added
 	themesLocaleList = [...new Set(themesLocaleList)];
