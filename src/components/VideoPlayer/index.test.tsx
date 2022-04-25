@@ -267,5 +267,27 @@ describe("MutationObserver", () => {
 			);
 			expect(wrapper.find("p").length).toBe(0);
 		});
+		it("takes in empty caption, title and credits and renders the video", () => {
+			const testEmbed =
+				'<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"' +
+				' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script ' +
+				'src="//xxx.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+			const wrapper = mount(
+				<VideoPlayer
+					embedMarkup={testEmbed}
+					id="targetId"
+					shrinkToFit={false}
+					caption=""
+					credits={{}}
+					subtitle=""
+					displayCredits={false}
+				/>
+			);
+
+			// doesn't show any caption or credits
+			expect(wrapper.find("p").length).toBe(0);
+			// still renders the video with no errors
+			expect(wrapper.find("styled__VideoWrap").length).toBe(1);
+		});
 	});
 });
