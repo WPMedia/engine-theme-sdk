@@ -23,14 +23,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      # Caches NPM files
-      - name: Cache NPM files
-        uses: actions/cache@v2
+      # Sets up Node v12
+      - name: Setup Node
+        uses: actions/setup-node@v1
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
 
       - name: Cache Node Modules
         id: cache
@@ -39,26 +37,18 @@ jobs:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
-      # Sets up Node v12
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12"
-          registry-url: "https://npm.pkg.github.com"
-
-      - name: Clean install dependencies if lockfile changed
+      - name: Clean install (CI) dependencies if lockfile (above) changed
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Git config
-      - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
-
       # Prerelease (tests and lint)
-      - run: npm version prerelease --preid=canary
+      - name: Iterate version canary
+        run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npm version prerelease --preid=canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -68,7 +58,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Push tag
-      - run: git push origin canary -f
+      - run: git push origin canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

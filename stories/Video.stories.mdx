@@ -1,14 +1,14 @@
-import Video from '../src/components/Video';
+import Video from "../src/components/Video";
 import { text } from "@storybook/addon-knobs";
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 
 <Meta
-    title="Video"
-    component={Video}
-    parameters={{
-        // Setting a high threshold to over come noise created in chromatic
-        chromatic: { diffThreshold: 1 }
-    }}
+	title="Video"
+	component={Video}
+	parameters={{
+		// Setting a high threshold to over come noise created in chromatic
+		chromatic: { diffThreshold: 1 },
+	}}
 />
 
 # Video
@@ -18,7 +18,6 @@ The `Video` component is generally used to display videos created in [Video Cent
 ## Requirement
 
 The playerRoot and videoOrg Fusion environment variables must be defined in order to load the POWA player's library.
-
 
 ## Use
 
@@ -35,37 +34,177 @@ import { Video } from '@wpmedia/engine-theme-sdk';
 
 ```
 
-
 ## ArgsTable
+
 <ArgsTable of={Video} />
 
 ## Stories
+
 <Story name="Basic" />
 
 ### **Video with minimum configurations**
+
 <Canvas>
-    <Story name="Video with minimum configurations">
-        <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" />
-    </Story>
+	<Story name="Video with minimum configurations">
+		<Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" />
+	</Story>
 </Canvas>
 
 ### **Video with autoplay**
+
 <Canvas>
-    <Story name="Video with autoplay">
-        <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" autoplay />
-    </Story>
+	<Story name="Video with autoplay">
+		<Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" autoplay />
+	</Story>
 </Canvas>
 
 ### **Video with playthrough**
+
 <Canvas>
-    <Story name="Video with playthrough">
-        <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" playthrough />
-    </Story>
+	<Story name="Video with playthrough">
+		<Video
+			uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d"
+			org="corecomponents"
+			env="prod"
+			playthrough
+		/>
+	</Story>
 </Canvas>
 
 ### **Video with customized aspect ratio**
+
 <Canvas>
-    <Story name="Video with customized aspect ratio">
-        <Video uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" org="corecomponents" env="prod" aspectRatio={0.75} />
-    </Story>
+	<Story name="Video with customized aspect ratio">
+		<Video
+			uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d"
+			org="corecomponents"
+			env="prod"
+			aspectRatio={0.75}
+		/>
+	</Story>
+</Canvas>
+
+### **Video with caption, subtitle and credits enabled **
+
+<Canvas>
+	<Story name="Video with caption, subtitle and credits enabled">
+		<Video
+			uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d"
+			org="corecomponents"
+			env="prod"
+			credits={{
+				affiliation: [
+					{
+						name: "Death to Stock Photo",
+						type: "author",
+					},
+				],
+				by: [
+					{
+						name: "John Doe",
+					},
+				],
+			}}
+			subtitle={"Lovely Nature Scene"}
+			caption={"Water flows over rocks"}
+			displayCredits
+			displayCaption
+			displayTitle
+		/>
+	</Story>
+</Canvas>
+
+### **Video with caption and credits enabled **
+
+<Canvas>
+	<Story name="Video with caption and credits enabled">
+		<Video
+			uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d"
+			org="corecomponents"
+			env="prod"
+			credits={{
+				affiliation: [
+					{
+						name: "Death to Stock Photo",
+						type: "author",
+					},
+				],
+				by: [
+					{
+						name: "John Doe",
+					},
+				],
+			}}
+			subtitle={"Lovely Nature Scene"}
+			caption={"Water flows over rocks"}
+			displayCredits
+			displayCaption
+			displayTitle={false}
+		/>
+	</Story>
+</Canvas>
+
+### **Video with caption only enabled **
+
+<Canvas>
+	<Story name="Video with caption only enabled">
+		<Video
+			uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d"
+			org="corecomponents"
+			env="prod"
+			credits={{
+				affiliation: [
+					{
+						name: "Death to Stock Photo",
+						type: "author",
+					},
+				],
+				by: [
+					{
+						name: "John Doe",
+					},
+				],
+			}}
+			subtitle={"Lovely Nature Scene"}
+			caption={"Water flows over rocks"}
+			displayCredits={false}
+			displayCaption
+			displayTitle={false}
+		/>
+	</Story>
+</Canvas>
+
+### **Video with multiple credits **
+
+<Canvas>
+	<Story name="Video with multiple credits">
+		<Video
+			uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d"
+			org="corecomponents"
+			env="prod"
+			credits={{
+				affiliation: [
+					{
+						name: "Death to Stock Photo",
+					},
+					{
+						name: "Another Stock Photo",
+					},
+				],
+				by: [
+					{
+						name: "John Doe",
+					},
+					{
+						name: "Jane Doe",
+					},
+				],
+			}}
+			subtitle={"Lovely Nature Scene"}
+			caption={"Water flows over rocks"}
+			displayCredits
+			displayCaption
+			displayTitle
+		/>
+	</Story>
 </Canvas>

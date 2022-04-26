@@ -1,4 +1,4 @@
-name: Themes version branch build
+name: Themes version sync branch build with canary
 
 on:
   push:
@@ -19,21 +19,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Cache NPM files
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Cache Node Modules
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('package-lock.json') }}
-
       # Sets up Node v12
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -41,23 +26,37 @@ jobs:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
 
-      - name: Clean install dependencies if lockfile changed
+      - name: Cache NPM files
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Clean install (CI) dependencies if lockfile (above) changed
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Git config
-      - run: git config --global user.email "beltran.caliz@washpost.com" && git config --global user.name "beltrancaliz"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
+      - name: Format branch name . to - for preid version compatibility
+        id: format_branch_step
+        run: |
+          new_branch_name="${SYNCED_RELEASE_TAG//./-}"
 
-      # Prerelease (tests and lint)
-      - run: npm version prerelease --preid=${{ env.SYNCED_RELEASE_TAG }}
+          echo $new_branch_name
+
+          echo "::set-output name=formatted_branch_name::$new_branch_name"
+
+      - name: Version with preid for branch name
+        run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npm version prerelease --preid=${{ steps.format_branch_step.outputs.formatted_branch_name }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Publish to branch name 
+      # Publish to branch name
       - run: npm publish --tag ${{ env.SYNCED_RELEASE_TAG }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -89,8 +88,13 @@ jobs:
       - name: Setup Node and NPM
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
 
-      - name: Tag 1.x release with canary 
-        run: npm dist-tag add @wpmedia/engine-theme-sdk@$(npm view @wpmedia/engine-theme-sdk@${{ env.SYNCED_RELEASE_TAG }} version) canary        
+      - name: Tag 1.x release with canary
+        run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npm dist-tag add @wpmedia/engine-theme-sdk@$(npm view @wpmedia/engine-theme-sdk@${{ env.SYNCED_RELEASE_TAG }} version) canary
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

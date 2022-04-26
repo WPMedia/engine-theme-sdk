@@ -8,14 +8,14 @@
 // should pass:
 // '%dffff' can have anything after matching %{letter}
 function isValidDateFormatString(potentiallyDateString: unknown): boolean {
-  // is not null (returns typeof object)
-  // is a string
-  if (typeof potentiallyDateString !== 'string') {
-    return false;
-  }
-  // contains at least one % sign
-  // contains at least one %{letter}
-  return /%[a-zA-Z]/.test(potentiallyDateString);
+	// is not null (returns typeof object)
+	// is a string
+	if (typeof potentiallyDateString !== "string") {
+		return false;
+	}
+	// contains at least one % sign
+	// contains at least one %{letter}
+	return /%[a-zA-Z]/.test(potentiallyDateString);
 }
 
 export default isValidDateFormatString;
