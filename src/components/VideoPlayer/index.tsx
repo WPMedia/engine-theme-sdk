@@ -59,7 +59,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 	const hasCaption =
 		(subtitle && displayTitle) ||
 		(caption && displayCaption) ||
-		((credits?.affiliation.length > 0 || credits?.by.length > 0) && displayCredits);
+		((credits?.affiliation?.length > 0 || credits?.by?.length > 0) && displayCredits);
 
 	// migration from video component
 	// will fallback to uuid if id is undefined with defaulting to falsy ''
