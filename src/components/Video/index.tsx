@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
 import { VideoContainer, VideoWrap } from "./styled";
+import ImageMetadata from "../ImageMetadata";
+import { CreditData, CreditOptions } from "../../../types/shared";
 
 declare global {
 	interface Window {
@@ -9,7 +11,7 @@ declare global {
 	}
 }
 
-interface VideoProps {
+interface VideoProps extends CreditOptions, CreditData {
 	uuid: string;
 	org: string;
 	env: string;
@@ -30,6 +32,12 @@ const Video: React.FC<VideoProps> = (props) => {
 		viewportPercentage = 65,
 		shrinkToFit = true,
 		aspectRatio: overrideAspectRatio,
+		displayTitle,
+		displayCaption,
+		displayCredits,
+		subtitle,
+		caption,
+		credits,
 	} = props;
 	const muted = autoplay;
 	const containerRef = useRef();
@@ -75,26 +83,33 @@ const Video: React.FC<VideoProps> = (props) => {
 	}, []);
 
 	return (
-		<VideoContainer ref={containerRef} className="video-container">
-			<VideoWrap
-				aspectRatio={overrideAspectRatio || aspectRatio}
-				viewportPercentage={viewportPercentage}
-				shrinkToFit={shrinkToFit}
-				videoLoaded={!videoShadowDom}
-			>
-				<div
-					className="powa"
-					id={`powa-${uuid}`}
-					data-org={org}
-					data-env={env}
-					data-uuid={uuid}
-					data-autoplay={autoplay}
-					data-playthrough={playthrough}
-					data-muted={muted}
-					data-aspect-ratio={overrideAspectRatio || aspectRatio}
-				/>
-			</VideoWrap>
-		</VideoContainer>
+		<>
+			<VideoContainer ref={containerRef} className="video-container">
+				<VideoWrap
+					aspectRatio={overrideAspectRatio || aspectRatio}
+					viewportPercentage={viewportPercentage}
+					shrinkToFit={shrinkToFit}
+					videoLoaded={!videoShadowDom}
+				>
+					<div
+						className="powa"
+						id={`powa-${uuid}`}
+						data-org={org}
+						data-env={env}
+						data-uuid={uuid}
+						data-autoplay={autoplay}
+						data-playthrough={playthrough}
+						data-muted={muted}
+						data-aspect-ratio={overrideAspectRatio || aspectRatio}
+					/>
+				</VideoWrap>
+			</VideoContainer>
+			<ImageMetadata
+				subtitle={displayTitle ? subtitle : null}
+				caption={displayCaption ? caption : null}
+				credits={displayCredits ? credits : null}
+			/>
+		</>
 	);
 };
 
@@ -124,6 +139,23 @@ Video.propTypes = {
 		defaultValue: 65,
 		hidden: true,
 		group: "Video Settings",
+	}),
+	/** Display Title */
+	displayTitle: PropTypes.bool,
+	/** Display Caption */
+	displayCaption: PropTypes.bool,
+	/** Display Credits */
+	displayCredits: PropTypes.bool,
+	/** Subtitle */
+	subtitle: PropTypes.string,
+	/** Caption */
+	caption: PropTypes.string,
+	/** Image author related data */
+	credits: PropTypes.shape({
+		// eslint-disable-next-line react/forbid-prop-types
+		by: PropTypes.array,
+		// eslint-disable-next-line react/forbid-prop-types
+		affiliation: PropTypes.array,
 	}),
 };
 
