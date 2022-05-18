@@ -69,7 +69,7 @@
     "@types/prop-types": "^15.7.4",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.2",
-    "@types/styled-components": "^4.4.1",
+    "@types/styled-components": "^5.1.25",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
@@ -107,7 +107,7 @@
     "react-oembed-container": "^1.0.1",
     "react-swipeable": "^6.2.0",
     "rimraf": "^3.0.2",
-    "styled-components": "^4.4.1",
+    "styled-components": "^5.3.5",
     "thumbor-lite": "^0.1.6"
   }
 }
