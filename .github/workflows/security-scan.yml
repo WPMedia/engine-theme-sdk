@@ -2,10 +2,19 @@ name: "Code security scanning"
 
 on:
   push:
-    branches: [stable, beta, canary, rc]
+    branches:
+      # only run on branch names that match:
+      # arc-themes-release-version-{numbers}.{numbers} per product
+      - arc-themes-release-version-[0-9]+\.[0-9]+
+      # arc-themes-release-version-{numbers}.{numbers}.{numbers} per product
+      - arc-themes-release-version-[0-9]+\.[0-9]+\.[0-9]+
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [stable, beta, canary, rc]
+    branches:
+      # only run on branch names that match:
+      # arc-themes-release-version-{numbers}.{numbers} per product
+      - arc-themes-release-version-[0-9]+\.[0-9]+
+      # arc-themes-release-version-{numbers}.{numbers}.{numbers} per product
+      - arc-themes-release-version-[0-9]+\.[0-9]+\.[0-9]+
 
 jobs:
   analyze:
