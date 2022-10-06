@@ -1,5 +1,4 @@
 import LazyLoad from "../src/components/LazyLoad";
-import Image from "../src/components/Image";
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 
 <Meta title="LazyLoad" component={LazyLoad} />
@@ -10,11 +9,9 @@ The `LazyLoad` component is used to add lazy-loading functionality to any valid 
 
 ## Lazy Loading
 
-This component uses [`lazy-child`](https://www.npmjs.com/package/lazy-child) which has a dependency on IntersectionObserver which is not supported in all browsers [see support](https://caniuse.com/#feat=intersectionobserver) - if you need to support browsers that do not have IntersectionObserver you will need to use a polyfill.
-The IntersectionObserver polyfill is already included with the theme blocks output types.
+This component uses [`lazy-child`](https://www.npmjs.com/package/lazy-child) which has a dependency on IntersectionObserver which is not supported in all browsers [see support](https://caniuse.com/#feat=intersectionobserver) - if you need to support browsers that do not have IntersectionObserver you will need to use a polyfill. The IntersectionObserver polyfill is already included with the theme blocks output types.
 
-At this time, all images are lazy loaded, however the lazyOptions param
-object can be used to adjust when the image is loaded when it enters the viewport. The lazyOptions param object allows for checks against the bottom, left, right and top.
+The lazyOptions param object allows for checks against the bottom, left, right and top.
 The default is 0 for all 4 options. By adjusting those values, you can force an image to load sooner or later as it approaches the viewport. You also have an option of specifying a custom `throttle` prop that allows you to modify the rate at which the scroll value is recalculated.
 
 # Use
@@ -66,25 +63,17 @@ const ChildComponent = () => <div id="test-child-component" />;
 					marginBottom: "30px",
 				}}
 			>
-				Scroll down to view lazy-loaded image
+				Scroll down to view lazy-loaded red box
 			</div>
 			<LazyLoad enabled={true}>
-				<Image
-					url={
-						"https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
-					}
-					alt={"Aerial view of bridge"}
-					smallWidth={158}
-					smallHeight={89}
-					mediumWidth={274}
-					mediumHeight={154}
-					largeWidth={274}
-					largeHeight={154}
-					resizedImageOptions={{
-						"158x89": "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
-						"274x154": "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
+				<div
+					style={{
+						backgroundColor: "red",
+						padding: "30px",
+						height: "3000px",
+						borderRadius: "6px",
+						marginBottom: "30px",
 					}}
-					resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
 				/>
 			</LazyLoad>
 		</div>
@@ -108,7 +97,7 @@ const ChildComponent = () => <div id="test-child-component" />;
 					marginBottom: "30px",
 				}}
 			>
-				Scroll down to view lazy-loaded image
+				Scroll down to view lazy-loaded red box
 			</div>
 			<LazyLoad
 				enabled={true}
@@ -118,22 +107,14 @@ const ChildComponent = () => <div id="test-child-component" />;
 				offsetRight={0}
 				throttle={50}
 			>
-				<Image
-					url={
-						"https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/37UMUNYNOVCEJDZW5SBKBXNMO4.jpg"
-					}
-					alt={"Aerial view of bridge"}
-					smallWidth={158}
-					smallHeight={89}
-					mediumWidth={274}
-					mediumHeight={154}
-					largeWidth={274}
-					largeHeight={154}
-					resizedImageOptions={{
-						"158x89": "/r4YXPy4Eh2thx80bDTxRZM9Syhw=filters:format(jpg):quality(70)/",
-						"274x154": "/sDwhmVtwayjjDJww8CvlWjpydGM=filters:format(jpg):quality(70)/",
+				<div
+					style={{
+						backgroundColor: "red",
+						padding: "30px",
+						height: "3000px",
+						borderRadius: "6px",
+						marginBottom: "30px",
 					}}
-					resizerURL={"https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer"}
 				/>
 			</LazyLoad>
 		</div>

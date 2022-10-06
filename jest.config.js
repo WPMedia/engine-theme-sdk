@@ -15,11 +15,5 @@ module.exports = {
 			functions: 59,
 			lines: 52,
 		},
-		"src/components/Image": {
-			statements: 90,
-			branches: 74,
-			functions: 100,
-			lines: 90,
-		},
 	},
 };
