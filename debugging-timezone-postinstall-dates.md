@@ -276,4 +276,4 @@ it("support portuguese in portugal language and portugal lisbon timezone when se
 # Resources
 
 - To find available more IANA timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-- Original author documentation: https://bigeasy.github.io/timezone/
+- WPMedia Fork: https://github.com/WPMedia/timezone of original https://bigeasy.github.io/timezone/
