@@ -1,10 +1,10 @@
-# How to debug `Timezone` postinstall script
+# How to debug [`@wpmedia/timezone`](https://github.com/WPMedia/timezone) postinstall script
 
 A postinstall script runs after an install (see [more](https://docs.npmjs.com/cli/v7/using*npm/scripts)).
 
 ## If no src/blocks.json found
 
-In this postinstall script, if no `blocks.json` file is found, the script will infer some timezones and locales that are included. This is based off of preexisting usage. A timezone is a region that the user is in. A locale is a language that the user is using in that region. For example, a user in the United States might use `en_US` for their locale, and `America/Chicago` for their timezone. You can find the default timezones and locales here in the scripts/postinstall.js file:
+In this postinstall script, if no `blocks.json` file is found, the script will infer some timezones and locales that are included. This is based off of preexisting usage. A timezone is a region that the user is in. A locale is a language that the user is using in that region. For example, a user in the United States might use `en_US` for their locale, and `America/Chicago` for their timezone. You can find the default timezones and locales here in the [scripts/postinstall.js](./scripts/postinstall.js) file:
 
 ```js
 // scripts/postinstall.js
@@ -166,14 +166,14 @@ You may notice `"portugal*paper"` has a differently\*formatted `dateLocalization
 That's because it's using the full locale with language and region (`region + language = locale`). We're maintaining the mappings of "en", for example, due to preexisting usage:
 
 | `dateLocalization.language` | Output locale |
-| \***\*\*\*\*\*\*** | \***\*\*\*\*\*\*** |
-| sv | sv_SE |
-| fr | fr_FR |
-| no | nb_NO |
-| es | es_ES |
-| ja | ja_JP |
-| ko | ko_KR |
-| en | en_US |
+| --------------------------- | ------------- |
+| sv                          | sv_SE         |
+| fr                          | fr_FR         |
+| no                          | nb_NO         |
+| es                          | es_ES         |
+| ja                          | ja_JP         |
+| ko                          | ko_KR         |
+| en                          | en_US         |
 
 To see all locales supported:
 
@@ -276,4 +276,5 @@ it("support portuguese in portugal language and portugal lisbon timezone when se
 # Resources
 
 - To find available more IANA timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-- Original author documentation: https://bigeasy.github.io/timezone/
+- WPMedia Fork: https://github.com/WPMedia/timezone of original https://bigeasy.github.io/timezone/
+- See timezone library documentation https://bigeasy.github.io/timezone/
