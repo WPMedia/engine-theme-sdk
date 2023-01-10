@@ -1,7 +1,7 @@
 import localizeDateHelper from "./localizeDateHelper";
 import isValidDateFormatString from "./isValidDateFormatString";
 
-const DATE_TIME_FORMAT_FALLBACK = "%B %d, %Y at %l:%M %P %Z";
+const DATE_TIME_FORMAT_FALLBACK = "%B %d, %Y at %l:%M%p %Z";
 
 const localizeDateTime = (
 	date,
