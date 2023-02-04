@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import sanitizeANS from "./sanitizeANS";
 import { ANS_ITEM_SCHEMA, ANS_FEED_SCHEMA } from "./constants";
 

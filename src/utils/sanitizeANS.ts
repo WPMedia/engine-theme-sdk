@@ -1,6 +1,7 @@
 import { ANS_ITEM_SCHEMA, ANS_FEED_SCHEMA } from "./constants";
 
-const sanitizeANSItem = (data) => ({
+/* eslint-disable @typescript-eslint/camelcase */
+const sanitizeANSItem = (data): object => ({
 	...data,
 	editor_note: "",
 	planning: {
@@ -35,13 +36,13 @@ const sanitizeANSItem = (data) => ({
  * - content_elements.additional_properties.inline_comments
  */
 const sanitizeANS = (data, schema: string): object => {
-	if (schema == ANS_FEED_SCHEMA) {
+	if (schema === ANS_FEED_SCHEMA) {
 		return {
 			...data,
 			content_elements: data.content_elements.map((el) => sanitizeANSItem(el)),
 		};
 	}
-	if (schema == ANS_ITEM_SCHEMA) {
+	if (schema === ANS_ITEM_SCHEMA) {
 		return sanitizeANSItem(data);
 	}
 	return data;
