@@ -1,7 +1,7 @@
 import { ANS_ITEM_SCHEMA, ANS_FEED_SCHEMA } from "./constants";
 
 /* eslint-disable @typescript-eslint/camelcase */
-const sanitizeANSItem = (data): object => ({
+const sanitizeANSItem = (data) => ({
 	...data,
 	editor_note: "",
 	planning: {
@@ -35,7 +35,7 @@ const sanitizeANSItem = (data): object => ({
  * - content_elements.additional_properties.comments
  * - content_elements.additional_properties.inline_comments
  */
-const sanitizeANS = (data, schema: string): object => {
+const sanitizeANS = (data, schema: string) => {
 	if (schema === ANS_FEED_SCHEMA) {
 		return {
 			...data,
