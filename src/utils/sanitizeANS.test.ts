@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import sanitizeANS from "./sanitizeANS";
-import { ANS_ITEM_SCHEMA, ANS_FEED_SCHEMA } from "./constants";
+import { constants } from "./index";
 
 describe("sanitizeANS", () => {
 	const mockANSItem = {
@@ -222,7 +222,7 @@ describe("sanitizeANS", () => {
 	};
 
 	it("should return ans-item JSON with expected empty values", () => {
-		const result = sanitizeANS(mockANSItem, ANS_ITEM_SCHEMA);
+		const result = sanitizeANS(mockANSItem, constants.ANS_ITEM_SCHEMA);
 		// Expect value to be same
 		expect(result._id).toEqual(mockANSItem._id);
 		expect(result.canonical_url).toEqual(mockANSItem.canonical_url);
@@ -238,7 +238,7 @@ describe("sanitizeANS", () => {
 	});
 
 	it("should return ans-feed JSON with expected empty values", () => {
-		const result = sanitizeANS(mockANSFeed, ANS_FEED_SCHEMA);
+		const result = sanitizeANS(mockANSFeed, constants.ANS_FEED_SCHEMA);
 		const contentEls = result.content_elements;
 		expect(contentEls[0].editor_note).toEqual("");
 		expect(contentEls[0].planning.internal_note).toEqual("");
