@@ -24,7 +24,7 @@ const sanitizeANSItem = (data) => ({
 
 /**
  *
- * @param data {Object} ANS JSON
+ * @param data {object} ANS JSON
  * @param schema {string("ans-item" | "ans-feed") ANS schema
  * @returns {object} ANS data with empty values on the fields:
  * - editor_note
