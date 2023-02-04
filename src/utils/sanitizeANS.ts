@@ -1,4 +1,4 @@
-import { ANSSchema } from "./constants";
+import { ANS_ITEM_SCHEMA, ANS_FEED_SCHEMA } from "./constants";
 
 const sanitizeANSItem = (data) => ({
 	...data,
@@ -35,13 +35,13 @@ const sanitizeANSItem = (data) => ({
  * - content_elements.additional_properties.inline_comments
  */
 const sanitizeANS = (data, schema: string): object => {
-	if (schema == ANSSchema.ANSFeed) {
+	if (schema == ANS_FEED_SCHEMA) {
 		return {
 			...data,
 			content_elements: data.content_elements.map((el) => sanitizeANSItem(el)),
 		};
 	}
-	if (schema == ANSSchema.ANSItem) {
+	if (schema == ANS_ITEM_SCHEMA) {
 		return sanitizeANSItem(data);
 	}
 	return data;

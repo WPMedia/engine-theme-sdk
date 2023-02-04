@@ -1,5 +1,5 @@
 import sanitizeANS from "./sanitizeANS";
-import { ANSSchema } from "./constants";
+import { ANS_ITEM_SCHEMA, ANS_FEED_SCHEMA } from "./constants";
 
 describe("sanitizeANS", () => {
 	const mockANSItem = {
@@ -221,7 +221,7 @@ describe("sanitizeANS", () => {
 	};
 
 	it("should return ans-item JSON with expected empty values", () => {
-		const result = sanitizeANS(mockANSItem, ANSSchema.ANSItem);
+		const result = sanitizeANS(mockANSItem, ANS_ITEM_SCHEMA);
 		// Expect value to be same
 		expect(result._id).toEqual(mockANSItem._id);
 		expect(result.canonical_url).toEqual(mockANSItem.canonical_url);
@@ -237,7 +237,7 @@ describe("sanitizeANS", () => {
 	});
 
 	it("should return ans-feed JSON with expected empty values", () => {
-		const result = sanitizeANS(mockANSFeed, ANSSchema.ANSFeed);
+		const result = sanitizeANS(mockANSFeed, ANS_FEED_SCHEMA);
 		const contentEls = result.content_elements;
 		expect(contentEls[0].editor_note).toEqual("");
 		expect(contentEls[0].planning.internal_note).toEqual("");
@@ -251,5 +251,10 @@ describe("sanitizeANS", () => {
 		expect(contentEls[1].additional_properties.clipboard).toEqual({});
 		expect(contentEls[1].content_elements[3].additional_properties.inline_comments).toEqual([]);
 		expect(contentEls[1].content_elements[3].additional_properties.comments).toEqual([]);
+	});
+
+	it("should return unmodified ans JSON if schema is not ans-item || ans-feed", () => {
+		const result = sanitizeANS(mockANSItem, "ans-other");
+		expect(result).toEqual(mockANSItem);
 	});
 });
