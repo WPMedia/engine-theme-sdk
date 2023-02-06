@@ -8,14 +8,14 @@ const sanitizeANSItem = (data) => ({
 		planning: {
 			...data.planning,
 			...(data.planning?.internal_note ? { internal_note: "" } : {}),
-		}
-	}: {}),
+		},
+	} : {}),
 	...(data?.workflow ? { workflow: {} } : {}),
 	...(data?.additional_properties ? {
 		additional_properties: {
 			...data.additional_properties,
 			...(data.additional_properties?.clipboard ? { clipboard: {} } : {}),
-		}
+		},
 	} : {}),
 	...(data?.content_elements ? {
 		content_elements: data.content_elements.map((el) => ({
@@ -25,9 +25,9 @@ const sanitizeANSItem = (data) => ({
 					...el.additional_properties,
 					...(el.additional_properties?.inline_comments ? { inline_comments: [] } : {}),
 					...(el.additional_properties?.comments ? { comments: [] } : {}),
-				}
+				},
 			} : {}),
-		})
+		})),
 	} : {}),
 });
 
