@@ -227,7 +227,7 @@ describe("sanitizeANS", () => {
 		expect(result._id).toEqual(mockANSItem._id);
 		expect(result.canonical_url).toEqual(mockANSItem.canonical_url);
 		// Expect value to be empty
-		expect(result.editor_note).toEqual("");
+		expect(result.editor_note).not.toBeDefined();
 		expect(result.planning.internal_note).toEqual("");
 		expect(result.workflow).toEqual({});
 		expect(result.additional_properties.clipboard).toEqual({});
@@ -240,18 +240,114 @@ describe("sanitizeANS", () => {
 	it("should return ans-feed JSON with expected empty values", () => {
 		const result = sanitizeANS(mockANSFeed, constants.ANS_FEED_SCHEMA);
 		const contentEls = result.content_elements;
-		expect(contentEls[0].editor_note).toEqual("");
+		expect(contentEls[0].editor_note).not.toBeDefined();
 		expect(contentEls[0].planning.internal_note).toEqual("");
 		expect(contentEls[0].workflow).toEqual({});
 		expect(contentEls[0].additional_properties.clipboard).toEqual({});
 		expect(contentEls[0].content_elements[0].additional_properties.inline_comments).toEqual([]);
 		expect(contentEls[0].content_elements[0].additional_properties.comments).toEqual([]);
-		expect(contentEls[1].editor_note).toEqual("");
+		expect(contentEls[1].editor_note).not.toBeDefined();
 		expect(contentEls[1].planning.internal_note).toEqual("");
 		expect(contentEls[1].workflow).toEqual({});
 		expect(contentEls[1].additional_properties.clipboard).toEqual({});
 		expect(contentEls[1].content_elements[3].additional_properties.inline_comments).toEqual([]);
 		expect(contentEls[1].content_elements[3].additional_properties.comments).toEqual([]);
+	});
+
+	it("should properly scrub the editor_notes", () => {
+		const result = sanitizeANS(
+			{
+				someData: "data",
+			},
+			constants.ANS_FEED_SCHEMA
+		);
+		expect(result.content_elements).not.toBeDefined();
+	});
+
+	it("should not return content_elements if it does not exist", () => {
+		const result = sanitizeANS(
+			{
+				content_elements: [
+					{
+						editor_note: "this should not be passed along",
+					},
+				],
+			},
+			constants.ANS_FEED_SCHEMA
+		);
+		expect(result.content_elements[0].editor_note).toEqual("");
+	});
+
+	it("should not return the internal_note if it doesn't exist", () => {
+		const result = sanitizeANS(
+			{
+				content_elements: [
+					{
+						planning: {
+							someData: "data",
+						},
+					},
+				],
+			},
+			constants.ANS_FEED_SCHEMA
+		);
+		expect(result.content_elements[0].planning.internal_note).not.toBeDefined();
+	});
+
+	it("should not return the clipboard if it doesn't exist", () => {
+		const result = sanitizeANS(
+			{
+				content_elements: [
+					{
+						additional_properties: {
+							someData: "data",
+						},
+					},
+				],
+			},
+			constants.ANS_FEED_SCHEMA
+		);
+		expect(result.content_elements[0].additional_properties.clipboard).not.toBeDefined();
+	});
+
+	it("should not return the additional_properties if it doesn't exist", () => {
+		const result = sanitizeANS(
+			{
+				content_elements: [
+					{
+						content_elements: [
+							{
+								someData: "data",
+							},
+						],
+					},
+				],
+			},
+			constants.ANS_FEED_SCHEMA
+		);
+		expect(result.content_elements[0].content_elements[0].additional_properties).not.toBeDefined();
+	});
+
+	it("should not return the additional_properties.comments if it doesn't exist", () => {
+		const result = sanitizeANS(
+			{
+				content_elements: [
+					{
+						content_elements: [
+							{
+								additional_properties: {
+									someData: "data",
+								},
+							},
+						],
+					},
+				],
+			},
+			constants.ANS_FEED_SCHEMA
+		);
+		expect(
+			result.content_elements[0].content_elements[0].additional_properties.comments
+		).not.toBeDefined();
 	});
 
 	it("should return unmodified ans JSON if schema is not ans-item || ans-feed", () => {
