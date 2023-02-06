@@ -257,16 +257,6 @@ describe("sanitizeANS", () => {
 	it("should properly scrub the editor_notes", () => {
 		const result = sanitizeANS(
 			{
-				someData: "data",
-			},
-			constants.ANS_FEED_SCHEMA
-		);
-		expect(result.content_elements).not.toBeDefined();
-	});
-
-	it("should not return content_elements if it does not exist", () => {
-		const result = sanitizeANS(
-			{
 				content_elements: [
 					{
 						editor_note: "this should not be passed along",
@@ -276,6 +266,16 @@ describe("sanitizeANS", () => {
 			constants.ANS_FEED_SCHEMA
 		);
 		expect(result.content_elements[0].editor_note).toEqual("");
+	});
+
+	it("should not return content_elements if it does not exist", () => {
+		const result = sanitizeANS(
+			{
+				someData: "data",
+			},
+			constants.ANS_FEED_SCHEMA
+		);
+		expect(result.content_elements).not.toBeDefined();
 	});
 
 	it("should not return the internal_note if it doesn't exist", () => {
