@@ -92,6 +92,7 @@ interface GalleryProps extends CreditOptions {
 	previousImagePhrase?: string;
 	nextImagePhrase?: string;
 	controlsFont?: string;
+	eagerLoadFirstImage?: boolean;
 }
 
 declare interface EventOptionsInterface {
@@ -116,6 +117,7 @@ const Gallery: React.FC<GalleryProps> = ({
 	displayTitle = true,
 	displayCaption = true,
 	displayCredits = true,
+	eagerLoadFirstImage = false,
 }) => {
 	const galleryRef = useRef(null);
 	const carouselRef = useRef(null);
@@ -379,6 +381,7 @@ const Gallery: React.FC<GalleryProps> = ({
 					resizedImageOptions={imgContent.resized_params}
 					breakpoints={imgContent.breakpoints || {}}
 					resizerURL={resizerURL}
+					loading={eagerLoadFirstImage && index === 0 ? 'eager' : 'lazy'}
 				/>
 			)}
 		</ImageWrapper>
