@@ -1044,4 +1044,24 @@ describe("the gallery block", () => {
 			expect(wrapper.find("#gallery-pos-1 .ad-block").length).toBe(1);
 		});
 	});
+
+	describe("the eagerLoadFirstImage prop", () => {
+		it("sets the first image to load eager when true", () => {
+			const wrapper = mount(
+				<Gallery galleryElements={mockGallery} eagerLoadFirstImage />
+			);
+			const images = wrapper.find("Image");
+			expect(images.at(0).prop("loading")).toBe("eager");
+			expect(images.at(1).prop("loading")).toBe("lazy");
+		});
+		
+		it("sets the first image to load lazy when false", () => {
+			const wrapper = mount(
+				<Gallery galleryElements={mockGallery} eagerLoadFirstImage={false} />
+			);
+			const images = wrapper.find("Image");
+			expect(images.at(0).prop("loading")).toBe("lazy");
+			expect(images.at(1).prop("loading")).toBe("lazy");
+		});
+	})
 });
