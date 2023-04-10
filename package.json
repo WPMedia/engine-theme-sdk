@@ -96,7 +96,6 @@
   "dependencies": {
     "@wpmedia/timezone": "^1.1.1",
     "dom-parser": "^0.1.6",
-    "lazy-child": "^0.3.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
