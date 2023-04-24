@@ -2,8 +2,6 @@
 
 Based on V2 architecture, the repository will continue to contain the following functionality:
 
-- Date-handling utilities (more info in the [timezone debugging doc](./debugging-timezone-postinstall-dates.md))
-- LazyLoad
 - MetaData
 - EventEmitter
 
