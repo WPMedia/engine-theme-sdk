@@ -26,7 +26,6 @@
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "postinstall": "node scripts/postinstall.js",
     "format": "prettier --write ."
   },
   "lint-staged": {
@@ -94,12 +93,10 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
-    "@wpmedia/timezone": "^1.1.1",
     "dom-parser": "^0.1.6",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "rimraf": "^3.0.2",
     "thumbor-lite": "^0.1.6"
   }
 }
