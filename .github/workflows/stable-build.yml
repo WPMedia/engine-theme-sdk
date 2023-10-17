@@ -20,18 +20,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # Sets up Node v12
+      # Sets up Node
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: "12"
+          node-version: "16"
           registry-url: "https://npm.pkg.github.com"
 
       # Caches NPM files
       - name: Clean install (CI) dependencies if lockfile (above) changed
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: cache
         with:
           path: node_modules
