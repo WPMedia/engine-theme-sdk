@@ -22,7 +22,6 @@
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "prepublishOnly": "npm run build",
-    "preversion": "npm run lint",
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -55,13 +54,14 @@
     "@babel/plugin-transform-modules-commonjs": "^7.23.0",
     "@babel/preset-react": "^7.22.15",
     "@babel/preset-typescript": "^7.23.2",
+    "@cfaester/enzyme-adapter-react-18": "^0.7.1",
     "@storybook/addon-a11y": "^7.5.0",
     "@storybook/addon-console": "^2.0.0",
     "@storybook/addon-essentials": "^7.5.0",
     "@storybook/addon-knobs": "^7.0.2",
     "@storybook/addons": "^7.5.0",
     "@storybook/react": "^7.5.0",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/react": "^14.0.0",
     "@types/babel__core": "^7.20.2",
     "@types/enzyme": "^3.10.14",
     "@types/jest": "^29.5.5",
@@ -72,7 +72,6 @@
     "@types/styled-components": "^5.1.28",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.1.3",
     "babel-plugin-module-resolver": "^5.0.0",
@@ -101,13 +100,19 @@
     "lazy-child": "^0.3.1",
     "polished": "^4.2.2",
     "prop-types": "^15.8.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-modal": "^3.11.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
     "react-oembed-container": "^1.0.1",
-    "react-swipeable": "^6.2.0",
+    "react-swipeable": "^7.0.1",
     "rimraf": "^3.0.2",
     "styled-components": "^6.1.0",
     "thumbor-lite": "^0.1.8"
+  },
+  "overrides": {
+    "react-oembed-container": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }
