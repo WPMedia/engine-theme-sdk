@@ -22,7 +22,6 @@
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "prepublishOnly": "npm run build",
-    "preversion": "npm run lint",
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
