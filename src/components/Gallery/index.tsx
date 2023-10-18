@@ -88,7 +88,7 @@ interface GalleryProps extends CreditOptions {
 	pausePhrase?: string;
 	pageCountPhrase?: (current: number, total: number) => string;
 	interstitialClicks?: number;
-	adElement?: Function;
+	adElement?: any;
 	previousImagePhrase?: string;
 	nextImagePhrase?: string;
 	controlsFont?: string;
@@ -151,7 +151,7 @@ const Gallery: React.FC<GalleryProps> = ({
 		eventName: string,
 		pg: number,
 		ord: number,
-		options: EventOptionsInterface = {}
+		options: EventOptionsInterface = {},
 	): void => {
 		EventEmitter.dispatch(eventName, {
 			eventName,
@@ -285,7 +285,7 @@ const Gallery: React.FC<GalleryProps> = ({
 				lightboxHashString,
 				targetLightboxDimensions,
 				imageSourceWithoutProtocol,
-				resizerURL
+				resizerURL,
 			);
 			return imageSrc;
 		}
@@ -317,7 +317,6 @@ const Gallery: React.FC<GalleryProps> = ({
 				delta: -event.deltaX,
 			});
 		},
-		preventDefaultTouchmoveEvent: false,
 	});
 
 	const renderAd = (): React.ReactElement => {
@@ -345,7 +344,7 @@ const Gallery: React.FC<GalleryProps> = ({
 		imgContent: GalleryElement,
 		index: number,
 		showAd: boolean,
-		totalImages: number
+		totalImages: number,
 	): React.ReactElement => (
 		<ImageWrapper
 			key={`gallery-image-${imgContent._id}`}
@@ -381,7 +380,7 @@ const Gallery: React.FC<GalleryProps> = ({
 					resizedImageOptions={imgContent.resized_params}
 					breakpoints={imgContent.breakpoints || {}}
 					resizerURL={resizerURL}
-					loading={eagerLoadFirstImage && index === 0 ? 'eager' : 'lazy'}
+					loading={eagerLoadFirstImage && index === 0 ? "eager" : "lazy"}
 				/>
 			)}
 		</ImageWrapper>
@@ -481,8 +480,8 @@ const Gallery: React.FC<GalleryProps> = ({
 							imgContent,
 							index,
 							isAdActive() && isAdInPage(index),
-							galleryElements.length
-						)
+							galleryElements.length,
+						),
 				)}
 				<CarouselButton
 					type="button"

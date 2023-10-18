@@ -158,7 +158,7 @@ function sleep(ms: number): Promise<void> {
 	return new Promise((resolve: Function) => setTimeout(resolve, ms));
 }
 
-function createClientXY(x: number, y: number, target: EventTarget): Touch {
+function createClientXY(x: number, y: number, target: EventTarget) {
 	return {
 		clientX: x,
 		clientY: y,
@@ -199,7 +199,7 @@ describe("the gallery block", () => {
 					.find("styled__ControlsButton")
 					.at(0)
 					.childAt(0)
-					.name()
+					.name(),
 			).toBe("FullscreenIcon");
 			expect(
 				wrapper
@@ -207,7 +207,7 @@ describe("the gallery block", () => {
 					.find("styled__ControlsButton")
 					.at(0)
 					.childAt(0)
-					.prop("fill")
+					.prop("fill"),
 			).toBe("#6B6B6B");
 			expect(
 				wrapper
@@ -215,7 +215,7 @@ describe("the gallery block", () => {
 					.find("styled__ControlsButton")
 					.at(0)
 					.childAt(1)
-					.name()
+					.name(),
 			).toBe("styled__PlaybackText");
 			expect(
 				wrapper
@@ -223,13 +223,13 @@ describe("the gallery block", () => {
 					.find("styled__ControlsButton")
 					.at(0)
 					.childAt(1)
-					.text()
+					.text(),
 			).toBe("Expand");
 		});
 
 		it("must emit events when enter/exit full screen mode", async () => {
 			const wrapper = mount(
-				<Gallery galleryElements={mockGallery} resizerURL="" ansId="fullScreen" />
+				<Gallery galleryElements={mockGallery} resizerURL="" ansId="fullScreen" />,
 			);
 			const fullScreenBtnWrapper = wrapper.find("styled__ControlContainer").find("button").at(0);
 			const ran: string[] = [];
@@ -241,10 +241,10 @@ describe("the gallery block", () => {
 			};
 
 			EventEmitter.subscribe("galleryExpandEnter", (event: GalleryEventData) =>
-				eventHandler(event, "start")
+				eventHandler(event, "start"),
 			);
 			EventEmitter.subscribe("galleryExpandExit", (event: GalleryEventData) =>
-				eventHandler(event, "stop")
+				eventHandler(event, "stop"),
 			);
 			fullScreenBtnWrapper.simulate("click");
 			await sleep(500);
@@ -267,7 +267,7 @@ describe("the gallery block", () => {
 					.find("styled__ControlsButton")
 					.at(1)
 					.childAt(0)
-					.name()
+					.name(),
 			).toBe("PlayIcon");
 			expect(
 				wrapper
@@ -275,7 +275,7 @@ describe("the gallery block", () => {
 					.find("styled__ControlsButton")
 					.at(1)
 					.childAt(0)
-					.prop("fill")
+					.prop("fill"),
 			).toBe("#6B6B6B");
 			expect(
 				wrapper
@@ -283,7 +283,7 @@ describe("the gallery block", () => {
 					.find("styled__ControlsButton")
 					.at(1)
 					.childAt(1)
-					.name()
+					.name(),
 			).toBe("styled__PlaybackText");
 			expect(
 				wrapper
@@ -291,7 +291,7 @@ describe("the gallery block", () => {
 					.find("styled__ControlsButton")
 					.at(1)
 					.childAt(1)
-					.text()
+					.text(),
 			).toBe("Autoplay");
 		});
 
@@ -332,7 +332,7 @@ describe("the gallery block", () => {
 					resizerURL=""
 					ansId={ansId}
 					ansHeadline={ansHeadline}
-				/>
+				/>,
 			);
 			const autoBtnWrapper = wrapper.find("styled__ControlContainer").find("button").at(1);
 			const ran: number[] = [];
@@ -349,10 +349,10 @@ describe("the gallery block", () => {
 			};
 
 			EventEmitter.subscribe("galleryAutoplayStart", (event: GalleryEventData) =>
-				eventHandler(event, 1)
+				eventHandler(event, 1),
 			);
 			EventEmitter.subscribe("galleryAutoplayStop", (event: GalleryEventData) =>
-				eventHandler(event, 2)
+				eventHandler(event, 2),
 			);
 			autoBtnWrapper.simulate("click");
 			autoBtnWrapper.simulate("click");
@@ -363,7 +363,7 @@ describe("the gallery block", () => {
 
 		it("must stop and the end of the gallery and generate the events", () => {
 			const wrapper = mount(
-				<Gallery galleryElements={mockGallery} resizerURL="" ansId="cybertruck" />
+				<Gallery galleryElements={mockGallery} resizerURL="" ansId="cybertruck" />,
 			);
 			const autoBtnWrapper = wrapper.find("styled__ControlContainer").find("button").at(1);
 			const ran: number[] = [];
@@ -376,10 +376,10 @@ describe("the gallery block", () => {
 			};
 
 			EventEmitter.subscribe("galleryAutoplayStart", (event: GalleryEventData) =>
-				eventHandler(event, 1)
+				eventHandler(event, 1),
 			);
 			EventEmitter.subscribe("galleryAutoplayStop", (event: GalleryEventData) =>
-				eventHandler(event, 2)
+				eventHandler(event, 2),
 			);
 			autoBtnWrapper.simulate("click");
 			sleep(5000).then(() => {
@@ -448,7 +448,7 @@ describe("the gallery block", () => {
 		it("should have aria label and roledescription on container", () => {
 			const ansHeadlineText = "Headline Text";
 			const wrapper = shallow(
-				<Gallery galleryElements={mockGallery} resizerURL="" ansHeadline={ansHeadlineText} />
+				<Gallery galleryElements={mockGallery} resizerURL="" ansHeadline={ansHeadlineText} />,
 			);
 
 			expect(wrapper.at(0).prop("aria-label")).toBe(ansHeadlineText);
@@ -459,10 +459,10 @@ describe("the gallery block", () => {
 			const wrapper = shallow(<Gallery galleryElements={mockGallery} resizerURL="" />);
 			const imagesWrapper = wrapper.find(".image-wrapper");
 			expect(
-				imagesWrapper.everyWhere((wrap) => wrap.prop("style").transform === "translate(0%, 0)")
+				imagesWrapper.everyWhere((wrap) => wrap.prop("style").transform === "translate(0%, 0)"),
 			).toBe(true);
 			expect(
-				imagesWrapper.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s")
+				imagesWrapper.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s"),
 			).toBe(true);
 		});
 
@@ -477,17 +477,17 @@ describe("the gallery block", () => {
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode))
+							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode)),
 						);
 				});
 				expect(wrapper.find("styled__ImageCountText").text()).toMatch("2 of 6");
@@ -503,24 +503,24 @@ describe("the gallery block", () => {
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 						);
 				});
 				wrapper.update();
 				expect(
 					wrapper
 						.find(".image-wrapper")
-						.everyWhere((wrap) => wrap.prop("style").transform === "translate(calc(0% - 50px), 0)")
+						.everyWhere((wrap) => wrap.prop("style").transform === "translate(calc(0% - 50px), 0)"),
 				).toBe(true);
 				expect(
 					wrapper
 						.find(".image-wrapper")
-						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "0s")
+						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "0s"),
 				).toBe(true);
 			});
 
@@ -534,29 +534,29 @@ describe("the gallery block", () => {
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode))
+							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode)),
 						);
 				});
 				wrapper.update();
 				expect(
 					wrapper
 						.find(".image-wrapper")
-						.everyWhere((wrap) => wrap.prop("style").transform === "translate(-100%, 0)")
+						.everyWhere((wrap) => wrap.prop("style").transform === "translate(-100%, 0)"),
 				).toBe(true);
 				expect(
 					wrapper
 						.find(".image-wrapper")
-						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s")
+						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s"),
 				).toBe(true);
 			});
 		});
@@ -572,17 +572,17 @@ describe("the gallery block", () => {
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 10 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 10 }, carouselNode))
+							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 10 }, carouselNode)),
 						);
 				});
 				expect(wrapper.find("styled__ImageCountText").text()).toMatch("2 of 6");
@@ -590,17 +590,17 @@ describe("the gallery block", () => {
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 10, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 10, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchend", createTouchEvent({ x: 100, y: 30 }, carouselNode))
+							new TouchEvent("touchend", createTouchEvent({ x: 100, y: 30 }, carouselNode)),
 						);
 				});
 				expect(wrapper.find("styled__ImageCountText").text()).toMatch("1 of 6");
@@ -616,27 +616,27 @@ describe("the gallery block", () => {
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode))
+							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 10, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 10, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 						);
 				});
 				wrapper.update();
@@ -644,13 +644,13 @@ describe("the gallery block", () => {
 					wrapper
 						.find("styled__ImageWrapper")
 						.everyWhere(
-							(wrap) => wrap.prop("style").transform === "translate(calc(-100% - -40px), 0)"
-						)
+							(wrap) => wrap.prop("style").transform === "translate(calc(-100% - -40px), 0)",
+						),
 				).toBe(true);
 				expect(
 					wrapper
 						.find("styled__ImageWrapper")
-						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "0s")
+						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "0s"),
 				).toBe(true);
 			});
 
@@ -664,57 +664,57 @@ describe("the gallery block", () => {
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode))
+							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode)),
 						);
 				});
 				wrapper.update();
 				expect(
 					wrapper
 						.find("styled__ImageWrapper")
-						.everyWhere((wrap) => wrap.prop("style").transform === "translate(-100%, 0)")
+						.everyWhere((wrap) => wrap.prop("style").transform === "translate(-100%, 0)"),
 				).toBe(true);
 				expect(
 					wrapper
 						.find("styled__ImageWrapper")
-						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s")
+						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s"),
 				).toBe(true);
 				act(() => {
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 10, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 10, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchend", createTouchEvent({ x: 100, y: 30 }, carouselNode))
+							new TouchEvent("touchend", createTouchEvent({ x: 100, y: 30 }, carouselNode)),
 						);
 				});
 				wrapper.update();
 				expect(
 					wrapper
 						.find("styled__ImageWrapper")
-						.everyWhere((wrap) => wrap.prop("style").transform === "translate(0%, 0)")
+						.everyWhere((wrap) => wrap.prop("style").transform === "translate(0%, 0)"),
 				).toBe(true);
 				expect(
 					wrapper
 						.find("styled__ImageWrapper")
-						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s")
+						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s"),
 				).toBe(true);
 			});
 		});
@@ -732,29 +732,29 @@ describe("the gallery block", () => {
 						carouselWrapper
 							.getDOMNode()
 							.dispatchEvent(
-								new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode))
+								new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode)),
 							);
 						carouselWrapper
 							.getDOMNode()
 							.dispatchEvent(
-								new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+								new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 							);
 						carouselWrapper
 							.getDOMNode()
 							.dispatchEvent(
-								new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode))
+								new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode)),
 							);
 					});
 					wrapper.update();
 					expect(
 						wrapper
 							.find("styled__ImageWrapper")
-							.everyWhere((wrap) => wrap.prop("style").transform === `translate(${i * -100}%, 0)`)
+							.everyWhere((wrap) => wrap.prop("style").transform === `translate(${i * -100}%, 0)`),
 					).toBe(true);
 					expect(
 						wrapper
 							.find("styled__ImageWrapper")
-							.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s")
+							.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s"),
 					).toBe(true);
 					expect(wrapper.find("styled__ImageCountText").text()).toMatch(`${i + 1} of 6`);
 				}
@@ -763,29 +763,29 @@ describe("the gallery block", () => {
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 100, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode))
+							new TouchEvent("touchend", createTouchEvent({ x: 10, y: 30 }, carouselNode)),
 						);
 				});
 				wrapper.update();
 				expect(
 					wrapper
 						.find("styled__ImageWrapper")
-						.everyWhere((wrap) => wrap.prop("style").transform === "translate(-500%, 0)")
+						.everyWhere((wrap) => wrap.prop("style").transform === "translate(-500%, 0)"),
 				).toBe(true);
 				expect(
 					wrapper
 						.find("styled__ImageWrapper")
-						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s")
+						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s"),
 				).toBe(true);
 				expect(wrapper.find("styled__ImageCountText").text()).toMatch("6 of 6");
 			});
@@ -802,29 +802,29 @@ describe("the gallery block", () => {
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchstart", createTouchEvent({ x: 10, y: 10 }, carouselNode))
+							new TouchEvent("touchstart", createTouchEvent({ x: 10, y: 10 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode))
+							new TouchEvent("touchmove", createTouchEvent({ x: 50, y: 20 }, carouselNode)),
 						);
 					carouselWrapper
 						.getDOMNode()
 						.dispatchEvent(
-							new TouchEvent("touchend", createTouchEvent({ x: 100, y: 30 }, carouselNode))
+							new TouchEvent("touchend", createTouchEvent({ x: 100, y: 30 }, carouselNode)),
 						);
 				});
 				wrapper.update();
 				expect(
 					wrapper
 						.find("styled__ImageWrapper")
-						.everyWhere((wrap) => wrap.prop("style").transform === "translate(0%, 0)")
+						.everyWhere((wrap) => wrap.prop("style").transform === "translate(0%, 0)"),
 				).toBe(true);
 				expect(
 					wrapper
 						.find("styled__ImageWrapper")
-						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s")
+						.everyWhere((wrap) => wrap.prop("style").transitionDuration === "1s"),
 				).toBe(true);
 				expect(wrapper.find("styled__ImageCountText").text()).toMatch("1 of 6");
 			});
@@ -855,7 +855,7 @@ describe("the gallery block", () => {
 			const wrapper = shallow(<Gallery galleryElements={mockGallery} resizerURL="" />);
 			wrapper.find("styled__ImageWrapper").forEach((imageWrapper, index) => {
 				expect(imageWrapper.find("Image").first().prop("url")).toStrictEqual(
-					mockGallery[index].url
+					mockGallery[index].url,
 				);
 			});
 		});
@@ -864,7 +864,7 @@ describe("the gallery block", () => {
 			const wrapper = shallow(<Gallery galleryElements={mockGallery} resizerURL="" />);
 			wrapper.find("styled__ImageWrapper").forEach((imageWrapper, index) => {
 				expect(imageWrapper.find("Image").first().prop("alt")).toStrictEqual(
-					mockGallery[index].alt_text
+					mockGallery[index].alt_text,
 				);
 			});
 		});
@@ -919,7 +919,7 @@ describe("the gallery block", () => {
 			it("should set the phrase text to the passed in string", () => {
 				const wrapper = mount(<Gallery galleryElements={mockGallery} expandPhrase="Förstora" />);
 				expect(
-					wrapper.find("styled__ControlsButton").at(0).find("styled__PlaybackText").text()
+					wrapper.find("styled__ControlsButton").at(0).find("styled__PlaybackText").text(),
 				).toEqual("Förstora");
 			});
 		});
@@ -928,7 +928,7 @@ describe("the gallery block", () => {
 			it("should set the phrase text to the default string", () => {
 				const wrapper = mount(<Gallery galleryElements={mockGallery} />);
 				expect(
-					wrapper.find("styled__ControlsButton").at(0).find("styled__PlaybackText").text()
+					wrapper.find("styled__ControlsButton").at(0).find("styled__PlaybackText").text(),
 				).toEqual("Expand");
 			});
 		});
@@ -939,7 +939,7 @@ describe("the gallery block", () => {
 			it("should set the phrase text to the passed in string", () => {
 				const wrapper = mount(<Gallery galleryElements={mockGallery} autoplayPhrase="Spela upp" />);
 				expect(
-					wrapper.find("styled__ControlsButton").at(1).find("styled__PlaybackText").text()
+					wrapper.find("styled__ControlsButton").at(1).find("styled__PlaybackText").text(),
 				).toEqual("Spela upp");
 			});
 		});
@@ -948,7 +948,7 @@ describe("the gallery block", () => {
 			it("should set the phrase text to the default string", () => {
 				const wrapper = mount(<Gallery galleryElements={mockGallery} />);
 				expect(
-					wrapper.find("styled__ControlsButton").at(1).find("styled__PlaybackText").text()
+					wrapper.find("styled__ControlsButton").at(1).find("styled__PlaybackText").text(),
 				).toEqual("Autoplay");
 			});
 		});
@@ -961,7 +961,7 @@ describe("the gallery block", () => {
 				const autoButtonWrapper = wrapper.find("styled__ControlContainer").find("button").at(1);
 				autoButtonWrapper.simulate("click");
 				expect(
-					wrapper.find("styled__ControlsButton").at(1).find("styled__PlaybackText").text()
+					wrapper.find("styled__ControlsButton").at(1).find("styled__PlaybackText").text(),
 				).toEqual("Pausa");
 			});
 		});
@@ -972,7 +972,7 @@ describe("the gallery block", () => {
 				const autoButtonWrapper = wrapper.find("styled__ControlContainer").find("button").at(1);
 				autoButtonWrapper.simulate("click");
 				expect(
-					wrapper.find("styled__ControlsButton").at(1).find("styled__PlaybackText").text()
+					wrapper.find("styled__ControlsButton").at(1).find("styled__PlaybackText").text(),
 				).toEqual("Pause autoplay");
 			});
 		});
@@ -985,7 +985,7 @@ describe("the gallery block", () => {
 					<Gallery
 						galleryElements={mockGallery}
 						pageCountPhrase={(current, total): string => `${current} av ${total}`}
-					/>
+					/>,
 				);
 				expect(wrapper.find("styled__ImageCountText").text()).toMatch("1 av 6");
 			});
@@ -1000,7 +1000,7 @@ describe("the gallery block", () => {
 	});
 
 	describe("the interstitialClicks prop", () => {
-		const AdBlock = (): React.ReactElement => (
+		const AdBlock = () => (
 			<div className="ad-block">
 				<p>AdBlock</p>
 			</div>
@@ -1008,7 +1008,7 @@ describe("the gallery block", () => {
 
 		it("should render an Ad at 2nd position when interstitialClick match", async () => {
 			const wrapper = mount(
-				<Gallery galleryElements={mockGallery} interstitialClicks={2} adElement={AdBlock} />
+				<Gallery galleryElements={mockGallery} interstitialClicks={2} adElement={AdBlock} />,
 			);
 			expect(wrapper.find(".ad-block").length).toBe(0);
 			const fowardButton = wrapper.find("button.next-button").at(0);
@@ -1025,7 +1025,7 @@ describe("the gallery block", () => {
 
 		it("should render an Ad at 1st position when interstitialClick match on any direction", async () => {
 			const wrapper = mount(
-				<Gallery galleryElements={mockGallery} interstitialClicks={3} adElement={AdBlock} />
+				<Gallery galleryElements={mockGallery} interstitialClicks={3} adElement={AdBlock} />,
 			);
 			expect(wrapper.find(".ad-block").length).toBe(0);
 			const fowardButton = wrapper.find("button.next-button").at(0);
@@ -1047,21 +1047,17 @@ describe("the gallery block", () => {
 
 	describe("the eagerLoadFirstImage prop", () => {
 		it("sets the first image to load eager when true", () => {
-			const wrapper = mount(
-				<Gallery galleryElements={mockGallery} eagerLoadFirstImage />
-			);
+			const wrapper = mount(<Gallery galleryElements={mockGallery} eagerLoadFirstImage />);
 			const images = wrapper.find("Image");
 			expect(images.at(0).prop("loading")).toBe("eager");
 			expect(images.at(1).prop("loading")).toBe("lazy");
 		});
-		
+
 		it("sets the first image to load lazy when false", () => {
-			const wrapper = mount(
-				<Gallery galleryElements={mockGallery} eagerLoadFirstImage={false} />
-			);
+			const wrapper = mount(<Gallery galleryElements={mockGallery} eagerLoadFirstImage={false} />);
 			const images = wrapper.find("Image");
 			expect(images.at(0).prop("loading")).toBe("lazy");
 			expect(images.at(1).prop("loading")).toBe("lazy");
 		});
-	})
+	});
 });
