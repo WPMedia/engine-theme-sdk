@@ -69,9 +69,9 @@ interface LightboxProps {
 	zoomInLabel: string;
 	zoomOutLabel: string;
 	closeLabel: string;
-	imageTitle: HTMLElement | string;
+	imageTitle: any;
 	discourageDownloads: boolean;
-	toolbarButtons: HTMLButtonElement[];
+	toolbarButtons: any[];
 	reactModalStyle: {
 		overlay: object;
 		content: object;
@@ -83,6 +83,7 @@ interface LightboxProps {
 	onMovePrevRequest(any): void;
 	onMoveNextRequest(any): void;
 	onAfterOpen(): void;
+	children: any;
 }
 
 interface LightboxState {
@@ -649,7 +650,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 			// Use full-size image if available
 			fitSizes = this.getFitSizes(
 				this.imageCache[imageSrc].width,
-				this.imageCache[imageSrc].height
+				this.imageCache[imageSrc].height,
 			);
 		} else if (this.isImageLoaded(this.props[`${srcType}Thumbnail`])) {
 			// Fall back to using thumbnail if the image has not been loaded
@@ -657,7 +658,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 			fitSizes = this.getFitSizes(
 				this.imageCache[imageSrc].width,
 				this.imageCache[imageSrc].height,
-				true
+				true,
 			);
 		} else {
 			return null;
@@ -1027,7 +1028,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 			this.changeZoom(
 				this.state.zoomLevel + ZOOM_BUTTON_INCREMENT_SIZE,
 				event.clientX,
-				event.clientY
+				event.clientY,
 			);
 		}
 	}
@@ -1123,7 +1124,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 			ReactImageLightbox.isTargetMatchImage(event.target)
 		) {
 			[].forEach.call(event.changedTouches, (eventTouch) =>
-				this.addPointer(ReactImageLightbox.parseTouchPointer(eventTouch))
+				this.addPointer(ReactImageLightbox.parseTouchPointer(eventTouch)),
 			);
 			this.multiPointerStart(event);
 		}
@@ -1134,8 +1135,8 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 			this.multiPointerMove(
 				event,
 				[].map.call(event.changedTouches, (eventTouch) =>
-					ReactImageLightbox.parseTouchPointer(eventTouch)
-				)
+					ReactImageLightbox.parseTouchPointer(eventTouch),
+				),
 			);
 		}
 	}
@@ -1143,7 +1144,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 	handleTouchEnd(event): void {
 		if (this.shouldHandleEvent(SOURCE_TOUCH)) {
 			[].map.call(event.changedTouches, (touch) =>
-				this.removePointer(ReactImageLightbox.parseTouchPointer(touch))
+				this.removePointer(ReactImageLightbox.parseTouchPointer(touch)),
 			);
 			this.multiPointerEnd(event);
 		}
@@ -1645,7 +1646,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 						<ErrorContainer className="errorContainer">
 							{this.props.imageLoadErrorMessage}
 						</ErrorContainer>
-					</LightboxImage>
+					</LightboxImage>,
 				);
 
 				return;
@@ -1671,7 +1672,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 						key={this.props[srcType] + keyEndings[srcType]}
 					>
 						<LoadingContainer className="loadingContainer">{loadingIcon}</LoadingContainer>
-					</LightboxImage>
+					</LightboxImage>,
 				);
 
 				return;
@@ -1690,7 +1691,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 						key={imageSrc + keyEndings[srcType]}
 					>
 						<div className="downloadBlocker" />
-					</LightboxImage>
+					</LightboxImage>,
 				);
 			} else {
 				displayItems.push(
@@ -1705,7 +1706,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 						key={imageSrc + keyEndings[srcType]}
 						alt={typeof imageTitle === "string" ? imageTitle : translate("Image")}
 						draggable={false}
-					/>
+					/>,
 				);
 			}
 		};
@@ -1732,7 +1733,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 					draggable={false}
 				>
 					{DisplayItem}
-				</LightboxImage>
+				</LightboxImage>,
 			);
 		};
 
@@ -1757,7 +1758,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 						<ErrorContainer className="errorContainer">
 							{this.props.imageLoadErrorMessage}
 						</ErrorContainer>
-					</LightboxImage>
+					</LightboxImage>,
 				);
 			} else if (typeof targetImage === "string") {
 				// addImage is a helper component that adds an image to displayItems
@@ -1818,7 +1819,7 @@ class ReactImageLightbox extends Component<LightboxProps, LightboxState> {
 					// Focus on the div with key handlers
 					if (this.outerEl) {
 						const lightBoxClose: HTMLElement = this.outerEl.querySelector(
-							"#lightbox-close"
+							"#lightbox-close",
 						) as HTMLElement;
 						lightBoxClose.focus();
 					}
