@@ -6,10 +6,9 @@ export const getImgURL = (metaValue, metaType = "og:image", globalContent, resiz
 			// eslint-disable-next-line @typescript-eslint/no-var-requires,global-require
 			const Thumbor = require("thumbor-lite");
 			const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerURL);
-			const imgSrc = _url
-				.replace(/^http[s]?:\/\//, "")
-				.replace(" ", "%20")
-				.replace("?", "%3F");
+			const imgSrc = new URL(_url)
+				.toString()
+				.replace(/^http[s]?:\/\//, "");
 			/*
         We need the focal point out of the resize options to use as a filter
         for the thumbor image being used here

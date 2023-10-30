@@ -44,7 +44,7 @@ const globalContentComplete = {
 	},
 	promo_items: {
 		basic: {
-			url: "awesome-url",
+			url: "https://awesome-url/image.jpg",
 			alt_text: "alt text",
 		},
 	},
@@ -73,7 +73,7 @@ const globalContentLeadArt = {
 	promo_items: {
 		lead_art: {
 			type: "image",
-			url: "awesome-url",
+			url: "https://awesome-url/image.jpg",
 		},
 	},
 };
@@ -85,7 +85,7 @@ const globalContentLeadArtWithResize = {
 				0x0: "I0HK-BD7QKeAN9drBwVrYoryXDE=filters:format(jpg):quality(70):focal(3699x534:3709x544)/",
 			},
 			type: "image",
-			url: "awesome-url",
+			url: "https://awesome-url/image.jpg",
 		},
 	},
 };
