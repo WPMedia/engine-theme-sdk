@@ -60,7 +60,7 @@
     "@storybook/addon-essentials": "^7.5.0",
     "@storybook/addon-knobs": "^7.0.2",
     "@storybook/addons": "^7.5.0",
-    "@storybook/react": "^7.5.0",
+    "@storybook/react": "^7.5.3",
     "@testing-library/react": "^14.0.0",
     "@types/babel__core": "^7.20.2",
     "@types/enzyme": "^3.10.14",
