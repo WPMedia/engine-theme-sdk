@@ -106,7 +106,7 @@
     "react-oembed-container": "^1.0.1",
     "react-swipeable": "^7.0.1",
     "rimraf": "^3.0.2",
-    "styled-components": "^6.1.0",
+    "styled-components": "^6.1.8",
     "thumbor-lite": "0.1.6"
   },
   "overrides": {
