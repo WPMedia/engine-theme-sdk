@@ -95,7 +95,7 @@
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/timezone": "^1.1.2",
-    "dom-parser": "^0.1.6",
+    "dom-parser": "^1.1.5",
     "is-react": "^1.5.4",
     "lazy-child": "^0.3.1",
     "polished": "^4.2.2",
