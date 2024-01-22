@@ -105,7 +105,7 @@
     "react-modal": "^3.16.1",
     "react-oembed-container": "^1.0.1",
     "react-swipeable": "^7.0.1",
-    "rimraf": "^3.0.2",
+    "rimraf": "^5.0.5",
     "styled-components": "^6.1.8",
     "thumbor-lite": "0.1.6"
   },
