@@ -46,7 +46,7 @@
   },
   "homepage": "https://github.com/WPMedia/engine-theme-sdk#readme",
   "devDependencies": {
-    "@babel/cli": "^7.23.0",
+    "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.2",
     "@babel/plugin-proposal-class-properties": "^7.12.13",
     "@babel/plugin-proposal-decorators": "^7.23.2",
